@@ -14,14 +14,12 @@ fi
 }
 
 
-function which_language{
-
-# Prompt the user for language choice
-
-LANG_OPTION=$(whiptail --title "Language Option" --menu "Select Language" 10 78 4 \
-    "1" "English  United Kingdom " \
-    "2" "Français   France " \
-    "3" "English  USA "  3>&1 1>&2 2>&3 )
+function which_language {
+    LANG_OPTION=$(whiptail --title "Language Option" --menu "Select Language" 10 78 4 \
+        "1" "English  United Kingdom en_GB" \
+        "2" "Français   France fr_FR" \
+        "3" "English  USA en_US" \
+         3>&1 1>&2 2>&3 )
 
 #   "4" "Spanish (Spain) - es_ES" 
 
@@ -44,8 +42,9 @@ case ${LANG_OPTION} in
         ;;
 esac
 
-    lang=$(echo $LANG | grep -o '^[a-zA-Z]*_[a-zA-Z]*')
-    echo "${GREEN} #### Language set to $LANG_OPTION $lang #### ${NORMAL}" | tee -a /var/log/install.log
+#    lang=$(echo $LANG | grep -o '^[a-zA-Z]*_[a-zA-Z]*')
+#    echo "${GREEN} #### Language set to $LANG_OPTION $lang #### ${NORMAL}" | tee -a /var/log/install.log
+    
     }
 
 
