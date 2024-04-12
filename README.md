@@ -25,9 +25,9 @@
 <p>The menus displayed will guide you through the installation, all the way to run-time. <b>You will need to know before you begin</b>, the status of your transceiver, whether the PTT and COS are Active High or Active Low, the status and type of your USB soundcard, modified, partly modified or unmodified. With a fully modified usb soundcard, there is no reason that would prevent this installation on another Linux based computer running Debian 12. It has to be Debian 12, or some of the features will fail. Decide also the callsign of your node. Do not use additional symbols or numbers at this stage. The callsign should be of standard notation. If you have decided to install EchoLink, then have ready your registration information. If you wish to use ModuleMetarInfo, the Airport Weather application, then read about the ICAO codes, and discover the major airports around you. It will not work for airports that do not provide a weather service in real time. If you wish to explore the ModulePropagationMonitor, then this can be installed later.</p>
 <p>Everything else will be constructed for you</p>
 <h2>Beginning the install</h2>
-<p>The script will compile the running configuration as you proceed. It can only be run once, due to the nature of the program. Allow yourself an uninterupted period of 1 hour, to answer the questions put to you, and the accompanying install. <b>Remember to note down any "usernames and passwords" that you provide</b>. A Raspberry Pi 3 or 4 will take less time, and a Raspberry Pi zero possibly longer than 90 minutes. However the Raspberry Pi Zero will present a challenge due to the lack of an external USB socket. Hopefully there should be no reported error. I have just completed a build on a raspberry pi 3A from card format to working node in 50 minutes, with no errors.</p>
+<p>The script will compile the running configuration as you proceed. It can only be run once, due to the nature of the program. Allow yourself an uninterupted period of 1 hour, to answer the questions put to you, and the accompanying install. <b>Remember to note down any "usernames and passwords" that you provide</b>. A Raspberry Pi 3 or 4 will take less time, and a Raspberry Pi zero possibly longer than 90 minutes. However the Raspberry Pi Zero will present a challenge due to the lack of an external USB socket. I have NOT included the installation of the waveshare sound system, if you are using a Pi-Hat interface. Hopefully there should be no reported error. I have just completed a build on a raspberry pi 3A from card format to working node in 50 minutes, with no errors.</p>
 
-<p>Type the following command at the current prompt: <b>./svxlink_install/preinstall.sh</b> The system will reboot so login again as before.</p>
+<p>Type the following command at the current prompt: <b>./svxlinkbuilder/preinstall.sh</b> The system will reboot so login again as before.</p>
 <p>Type the following command <b> ./svxlinkbuilder/install.sh</b> Special NOTE - <b>No sudo here in these commands.</b></p>
 
 <p>During the compilation, you will be notified of the Active IP Address of your node. Make a note of it. You will need it to proceed.</p>
@@ -38,11 +38,11 @@
 
 <h2> Troubleshooting </h2>
 
-<p>You will need to understand the svxlink.conf file and how to make adjustments for Simplex or Repeater operation. In any case you may need to refer to the svxlink.org main page, or svxlink amateur radio users page on facebook, or contact me. For further information also consult the svxlink pages on g4nab.co.uk. In the terminal type man svxlink.conf and the on-board documentation will be displayed.</p>
+<p>You will need to understand the svxlink.conf file and how to make adjustments for Simplex or Repeater operation. In any case you may need to refer to the svxlink.org main page, or svxlink amateur radio users page on facebook, or contact me. For further information also consult the svxlink pages on g4nab.co.uk. In the terminal, type 'man svxlink.conf' and the on-board documentation will be displayed.</p>
 
 <p>To stop svxlink running type in the terminal <b>sudo systemctl stop svxlink.service</b> and to restart it type <b>sudo systemctl restart svxlink.service</b> You can also do this if authorised in the Dashboard.</p>
 
-<p>If you wish to modify the Svxlink.conf, EchoLink, MetarInfo and NodeInfo files, you can do so, if authorised,from from the dashboard.</p>
+<p>If you wish to modify the Svxlink.conf, EchoLink, MetarInfo and NodeInfo files, you can do so, if authorised, from from the dashboard.</p>
 <p>Be careful whilst editing, as to change the structure, can cause the node to fail. However a copy of the last working configuration can be found in the /etc/svxlink folder with a time and date, or in the case of the EchoLink and MetarInfo in the /etc/svxlink/svxlink.d folder.</p>
 <p>To obtain information for the node_info.json go to a PC Browser and enter <b>http://svxportal-uk.ddns.net:81</b> where you will find a dashboard.</p>
 <p>Click <b>Register</b> at the top, completing the information. This information is held only to enable you to complete the next stage. Log in with the information you have just supplied, click on <b>My Stations</b>, and click on <b font=color blue>Generate node_info.json</f></b>
@@ -77,14 +77,14 @@
 <h2>La Compilation</h2>
 <p>Ce script installera également une carte son factice pour l'utilisation de Darkice et Icecast2.</p>
 <p>La première étape sera la commande suivante : <b>sudo apt-get install -y git</b> car sans cela, vous ne pouvez pas télécharger depuis GitHub.</p>
-<p>Maintenant, la commande suivante : <b>sudo git clone https://github.com/f5vmr/svxlink_install.git</b> .</p>
+<p>Maintenant, la commande suivante : <b>sudo git clone https://github.com/f5vmr/svxlinkbuilder.git</b> .</p>
 
 
 <p>Les menus affichés vous guideront tout au long de l'installation, jusqu'à l'exécution. Vous aurez besoin de comprendre avant de commencer l'état de votre émetteur-récepteur, si le PTT et le COS sont Active High ou Active Low, l'état et le type de votre carte son USB, modifiée ou non. Avec une carte son USB entièrement modifiée, il n'y a aucune raison qui empêcherait cette installation sur un autre ordinateur Linux exécutant Debian 12. Il doit s'agir de Debian 12, sinon certaines fonctionnalités échoueront.</p>
 <p>Vous devrez avoir décidé de l'indicatif de votre nœud avant l'installation. N'utilisez pas de symboles ou de chiffres supplémentaires à ce stade. L'indicatif doit être de notation standard. Si vous avez décidé d'installer EchoLink, préparez vos informations d'enregistrement. Si vous souhaitez utiliser ModuleMetarInfo, l'application Météo Aéroportuaire, alors renseignez-vous sur les codes OACI et découvrez les principaux aéroports autour de vous. Cela ne fonctionnera pas pour les aéroports qui ne fournissent pas de service météo en temps réel. Si vous souhaitez explorer ModulePropagationMonitor, celui-ci pourra être installé ultérieurement. </p>
 <p>Tout le reste aura été construit pour vous</p>
 <p>Le script compilera la configuration en cours au fur et à mesure. Il ne peut être exécuté qu'une seule fois, en raison de la nature du programme. Accordez-vous une période ininterrompue d'1 heure, pour répondre aux questions qui vous sont posées, et à l'installation qui l'accompagne. <b>N'oubliez pas de noter tous les « noms d'utilisateur et mots de passe » que vous fournissez</b>. Un Raspberry Pi 3 ou 4 prendra moins de temps, et un Raspberry Pi zéro peut-être plus de 90 minutes. Cependant, le Raspberry Pi Zero présentera un défi en raison de l'absence de prise USB externe. Espérons qu'aucune erreur ne soit signalée. Je viens de terminer une construction sur un Raspberry Pi 3A du format carte au nœud de travail en 50 minutes, sans erreur.</p>
-<p>Une fois installé, tapez la commande suivante : <b>./svxlink_install/install.sh</b></p>
+<p>Une fois installé, tapez la commande suivante : <b>./svxlinkbuilder/install.sh</b></p>
 <p>Lors de la compilation, vous serez informé de l'adresse IP active de votre nœud. Prenez-en note. Vous en aurez besoin pour continuer.</p>
 
 <p>À la fin de la compilation, le système redémarrera automatiquement, ce dont vous serez informé.</p>
