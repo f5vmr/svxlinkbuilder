@@ -13,7 +13,13 @@
 <p>A copy of the design can be found on g4nab.co.uk. There is also a page showing the modification instructions for a CM-108 USB Sound Card.</p>
 <h2>The programming of the SDCard</h2>
 
-<p>As discussed start with a download of <b>Raspberry OS Bookworm Lite</b> from RaspberryPi.org. Then use a 8 or 16 GB MicroSD Card and transfer the image to the card using the <b>Raspberry Pi Image builder</b> from the same source. <b> You MUST make the user 'pi' - please do not deviate from my advice above, as you will get issues. </b> You can however use your own password. There are versions of Raspberry Pi Imager for all operating systems. It allows for full WiFi usage. <b>Always check the SSH box on the second tab.</b> </p> 
+<p>As discussed start with a download of <b>Raspberry OS Bookworm Lite</b> from RaspberryPi.org. Then use a 8 or 16 GB MicroSD Card and transfer the image to the card using the <b>Raspberry Pi Image builder</b> from the same source. <b> You MUST make the user 'pi' - please do not deviate from my advice above, as you will get issues. </b> You can however use your own password. There are versions of Raspberry Pi Imager for all operating systems. It allows for full WiFi usage. 
+<p>In the first box <b>device</b> select 'No Filtering'</p>
+<p>In the second box <b>Choose OS</b> select 'Raspberry Pi OS (Other) then 'Raspberry Pi Os 32 Bit' under which you will see 'Debian Bookworm with no desktop environment'. Select this</p>
+<p>Now select 'Choose Storage' where you will be invited to select the sdcard.</p>
+<p>In 'Next' Complete the 'edit' box, but <b>pi</b> must be the user. If this is not correct, then your install will fail. You can have any password you like.</p>
+<p>You can set your Wi-Fi settings here if your wish.</p>
+<b>Always check the SSH box on the second tab of the next box, otherwise that will also cause your installation to fail.</b> </p> 
 
 <p>Once complete, eject the card and install it in the raspberry pi and power it up. Enter the user <b>pi</b> and your password.</p> 
 <h2>The compilation</h2>
