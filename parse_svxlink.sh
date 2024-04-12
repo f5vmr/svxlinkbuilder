@@ -13,7 +13,7 @@ while IFS= read -r line; do
         ## Write the first five lines as header without parsing them
         echo "$line" | tee -a   "$output_file"
         ((header_lines++))
-    elif [[ $line == \[*]* ]] 
+    elif [[ "$line" == "\"[*]* ]] 
     then
         category=${line:1:-1}
         ## Write header category without parameters if not already written
@@ -22,7 +22,7 @@ while IFS= read -r line; do
             echo "$category" | tee -a   "$output_file"
             header_written=true
         fi
-    elif [[ $line == \ ]] 
+    elif [[ "$line" == "\" ]] 
     then
         ## Parameter heading
         parameter_heading=$(echo "$line" | cut -d '=' -f 1 | sed 's/# *//')
