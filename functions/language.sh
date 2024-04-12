@@ -26,7 +26,7 @@ function which_language{
     "1" "English - United Kingdom - en_GB" \
     "2" "French  - France - fr_FR" \
     "3" "English - USA - en_US" \
-    )
+    3>&1 1>&2 2>&3)
 
     #"4" "Spanish (Spain) - es_ES" 
 
