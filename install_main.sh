@@ -9,6 +9,7 @@ if [ "$LANG_OPTION" == "2" ]
 then 
 sudo sh ./install_main_fr.sh
 fi
+exit
 #### Welcome Message ####
 source "${BASH_SOURCE%/*}/functions/welcome.sh"
 welcome
