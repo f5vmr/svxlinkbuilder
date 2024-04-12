@@ -44,9 +44,6 @@ install_locale "en_US"
 # Install es_ES.UTF-8 locale if not available
 install_locale "es_ES"
 
-# Set en_GB.UTF-8 as the default locale
-sudo localectl set-locale LANG=en_GB.UTF-8
-
 echo "Locale setup completed."
 
 
