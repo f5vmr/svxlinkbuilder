@@ -22,7 +22,7 @@ function which_language{
 # Prompt the user for language choice
 
 
-LANG_OPTION=$(whiptail --title "Language Option" --menu "Select Language" 10 78 3 \
+LANG_OPTION=$(whiptail --title "Language Option" --menu "Select Language" 10 78 4 \
     "1" "English - United Kingdom - en_GB" \
     "2" "Français  - France - fr_FR" \
     "3" "English - USA - en_US" 3>&1 1>&2 2>&3 )
