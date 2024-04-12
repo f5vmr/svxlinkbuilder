@@ -1,12 +1,27 @@
-Running from install_copy.sh
-Language
+Running from preinstall.sh
+SwapFileChange
+SoundcardManipulation
+InstallLocales
+Reboot
 Initialise
 check_os
-welcome_message
+usercheck
+Language
+welcome
 node_type
-sound_card
-####
+sound_card_setup
 update upgrade
-####
 callsign
 groups
+source
+compile
+voices
+svx_modifs
+dashboard
+ip_addresses
+node_setup
+ModuleMetar
+ModeulEchoLink
+ServiceStart
+Reboot
+Revert to Dashboard.
