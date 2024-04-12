@@ -20,7 +20,7 @@
 <p>This script will also install a dummy sound card for the use of Darkice and Icecast2.</p> 
 <p>The first step will be the following command: <b>sudo apt-get install -y git</b> as without this you cannot download from the GitHub.</p>  
 
-<p>Now the following command: <b>sudo git clone https://github.com/f5vmr/svxlink_install.git</b> .</p>
+<p>Now the following command: <b>sudo git clone https://github.com/f5vmr/svxlinkbuilder.git</b> .</p>
 
 <p>The menus displayed will guide you through the installation, all the way to run-time. You will <b>need to know before you begin</b>, the status of your transceiver, whether the PTT and COS are Active High or Active Low, the status and type of your USB soundcard, modified, partly modified or unmodified. With a fully modified usb soundcard, there is no reason that would prevent this installation on another Linux based computer running Debian 12. It has to be Debian 12, or some of the features will fail. Decide also the callsign of your node. Do not use additional symbols or numbers at this stage. The callsign should be of standard notation. If you have decided to install EchoLink, then have ready your registration information. If you wish to use ModuleMetarInfo, the Airport Weather application, then read about the ICAO codes, and discoverd the major airports around you. It will not work for airports that do not provide a weather service in real time. If you wish to explore the ModulePropagationMonitor, then this can be installed later.</p>
 <p>Everything else will have been constructed for you</p>
