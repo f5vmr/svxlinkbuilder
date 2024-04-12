@@ -30,19 +30,8 @@
     # installing locales.
  
 # Function to install locale if not already available
-install_locale() {
-    locale=$1.UTF-8
-    if ! locale -a | grep -q "^${locale}$"; then
-        sudo locale-gen ${locale}
-    fi
-}
-
-# Install fr_FR.UTF-8 locale if not available
-install_locale "fr_FR"
-# Install en_US.UTF-8 locale if not available
-install_locale "en_US"
-# Install es_ES.UTF-8 locale if not available
-install_locale "es_ES"
+    sudo cp -f /home/pi/svxlinkbuilder/addons/locale-gen /etc/
+    sudo locale-gen
 
 echo "Locale setup completed."
 
