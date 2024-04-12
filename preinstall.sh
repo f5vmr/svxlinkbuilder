@@ -30,7 +30,7 @@
     # installing locales.
  
 # Function to install locale if not already available
-    sudo cp -f /home/pi/svxlinkbuilder/addons/locale-gen /etc/
+    sudo cp -f /home/pi/svxlinkbuilder/addons/locale.gen /etc/
     sudo locale-gen
 
 echo "Locale setup completed."
