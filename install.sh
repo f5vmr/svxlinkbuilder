@@ -16,5 +16,5 @@ usercheck
 echo -e "${GREEN} #### OS = $operating_system and Current user = $logname #### ${NORMAL}" | tee -a  /var/log/install.log
 #### SuperUser Install ####
 
-sudo ./svxlink_raspberry/install_main.sh
+sudo ./svxlinkbuilder/install_main.sh
 

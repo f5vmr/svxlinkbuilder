@@ -28,7 +28,7 @@
 <p>The script will compile the running configuration as you proceed. It can only be run once, due to the nature of the program. Allow yourself an uninterupted period of 1 hour, to answer the questions put to you, and the accompanying install. <b>Remember to note down any "usernames and passwords" that you provide</b>. A Raspberry Pi 3 or 4 will take less time, and a Raspberry Pi zero possibly longer than 90 minutes. However the Raspberry Pi Zero will present a challenge due to the lack of an external USB socket. Hopefully there should be no reported error. I have just completed a build on a raspberry pi 3A from card format to working node in 50 minutes, with no errors.</p>
 
 <p>Type the following command at the current prompt: <b>./svxlink_install/preinstall.sh</b> The system will reboot so login again as before.</p>
-<p>Type the following command <b> ./svxlink_raspberry/install.sh</b> Special NOTE - <b>No sudo here in these commands.</b></p>
+<p>Type the following command <b> ./svxlinkbuilder/install.sh</b> Special NOTE - <b>No sudo here in these commands.</b></p>
 
 <p>During the compilation, you will be notified of the Active IP Address of your node. Make a note of it. You will need it to proceed.</p>
 

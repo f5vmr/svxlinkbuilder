@@ -1,5 +1,5 @@
 #/bin/bash
-    home="/home/pi/svxlink_raspberry"
+    home="/home/pi/svxlinkbuilder"
     
     ## Change swapfile size
     sudo dphys-swapfile swapoff 
@@ -19,10 +19,10 @@
     sudo sed -i 's/options snd-usb/\#options snd-usb/g' /lib/modprobe.d/aliases.conf
     echo "#### Disabling HMDI Sound - Not required for this build ####"| tee -a /var/log/install.log
     sudo sed -i 's/dtoverlay=vc4-kms-v3d/dtoverlay=vc4-kms-v3d,noaudio/g' /boot/firmware/config.txt
-    sudo cp -f /home/pi/svxlink_raspberry/configs/asound.conf /etc/modprobe.d/asound.conf
+    sudo cp -f /home/pi/svxlinkbuilder/configs/asound.conf /etc/modprobe.d/asound.conf
     echo "#### Setting up Loopback Soundcard ####" | tee -a /var/log/install.log
     echo snd-aloop > /etc/modules
-    sudo cp -f /home/pi/svxlink_raspberry/configs/loopback.conf /etc/asound.conf
+    sudo cp -f /home/pi/svxlinkbuilder/configs/loopback.conf /etc/asound.conf
     echo "#### Reseting alsa-state.service #### " | tee -a /var/log/install.log
     sudo mkdir /etc/alsa
     sudo touch /etc/alsa/state-daemon.conf

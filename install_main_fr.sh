@@ -69,11 +69,11 @@ source "${BASH_SOURCE%/*}/functions/source.sh"
  	cd /home/pi
  	echo -e "$(date)" "${RED} #### Téléchargement de Dossiers de configuration du scripts #### ${NORMAL}" | tee -a  /var/log/install.log
  	sudo mkdir /home/pi/scripts
- 	sudo cp -f /home/pi/svxlink_raspberry/addons/10-uname /etc/update-motd.d/
- 	sudo cp -f /home/pi/svxlink_raspberry/configs/svxlink.conf /etc/svxlink/
- 	sudo cp -f /home/pi/svxlink_raspberry/configs/gpio.conf /etc/svxlink/
- 	sudo cp -f /home/pi/svxlink_raspberry/addons/node_info.json /etc/svxlink/node_info.json
- 	sudo cp -f /home/pi/svxlink_raspberry/resetlog.sh /home/pi/scripts/resetlog.sh
+ 	sudo cp -f /home/pi/svxlinkbuilder/addons/10-uname /etc/update-motd.d/
+ 	sudo cp -f /home/pi/svxlinkbuilder/configs/svxlink.conf /etc/svxlink/
+ 	sudo cp -f /home/pi/svxlinkbuilder/configs/gpio.conf /etc/svxlink/
+ 	sudo cp -f /home/pi/svxlinkbuilder/addons/node_info.json /etc/svxlink/node_info.json
+ 	sudo cp -f /home/pi/svxlinkbuilder/resetlog.sh /home/pi/scripts/resetlog.sh
  	(sudo crontab -l 2>/dev/null; echo "59 23 * * * /home/pi/scripts/resetlog.sh ") | sudo crontab -
  # clear
 	echo -e "$(date)" "${GREEN} #### Définir l'indicatif d'appel sur $CALL #### ${NORMAL}" | tee -a  /var/log/install.log
