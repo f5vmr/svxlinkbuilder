@@ -4,14 +4,15 @@
 
 set_locale() {
     locale=$1.UTF-8
-    if [ $1 != en_GB ]
+if [ $1 != en_GB ]; then
     sudo localectl set-locale LANG=${locale}
-    else
+else
     echo 
     #already set
-    fi
+fi
     echo "Locale set to ${locale}"
 }
+
 
 function which_language{
 
