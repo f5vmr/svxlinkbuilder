@@ -2,7 +2,7 @@
 #### WHICH LANGUAGE ####
 ## lang_options en_GB or fr_FR or en_US ##
 
-set_locale() {
+function set_locale() {
     locale=$1.UTF-8
 if [ $1 != en_GB ]; then
     sudo localectl set-locale LANG=${locale}
@@ -16,16 +16,12 @@ fi
 
 function which_language{
 
-# Function to set locale based on user's choice
-
-
 # Prompt the user for language choice
 
-
 LANG_OPTION=$(whiptail --title "Language Option" --menu "Select Language" 10 78 4 \
-    "1" "English - United Kingdom - en_GB" \
-    "2" "Français  - France - fr_FR" \
-    "3" "English - USA - en_US" 3>&1 1>&2 2>&3 )
+    "1" "English  United Kingdom " \
+    "2" "Français   France " \
+    "3" "English  USA "  3>&1 1>&2 2>&3 )
 
 #   "4" "Spanish (Spain) - es_ES" 
 
