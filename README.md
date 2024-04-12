@@ -1,4 +1,4 @@
-# svxlink install 
+# SvxlinkBuilder 
 <h2>Menu build for Raspberry Pi - Repeater or Hotspot. Pour l'instruction en Français, voir en bas.</h2>
 
 <b>Your First Steps</b>
