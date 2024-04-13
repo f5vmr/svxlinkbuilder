@@ -33,15 +33,8 @@ function install_dash {
     ## permissions added
 
 ## Define the lines to add to sudoers
- LINES=("svxlink ALL=NOPASSWD: /usr/sbin/service" "svxlink ALL=NOPASSWD: /bin/cp" "svxlink ALL=NOPASSWD: /bin/chown" "svxlink ALL=NOPASSWD: /bin/chmod" "svxlink ALL=NOPASSWD: /bin/systemctl" "svxlink ALL=NOPASSWD: /bin/reboot" "svxlink ALL=NOPASSWD: /bin/shutdown" )
- 
- ## Backup sudoers file
- sudo touch /etc/sudoers.d/svxlink
- 
- ## Add each line to sudoers
- for line in "${LINES[@]}"; do
-     echo "$line" | sudo tee -a /etc/sudoers.d/svxlink >/dev/null
- done
+sudo mkdir /etc/sudoers.d/
+sudo cp -f /home/pi/svxlinkbuilder/addons/svxlink /etc/sudoers.d/
 sudo chmod 0440 /etc/sudoers.d/svxlink
 ## Check sudoers file syntax
  sudo visudo -c
