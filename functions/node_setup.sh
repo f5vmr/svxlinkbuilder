@@ -133,7 +133,7 @@ then
             "gpio 8" "as COS Pin" OFF 3>&1 1>&2 2>&3)
         
         cos_pin="${cos_pin#"gpio "}"
-        ##need to change the PTT to HID and COS to GPIOD and all the statements to reflect this modified SoundCard Unit - ask for GPIOD pins
+        # need to change the PTT to HID and COS to GPIOD and all the statements to reflect this modified SoundCard Unit - ask for GPIOD pins
             if [ "$cos_direction" == "High" ] 
             then
             echo "test"
@@ -147,7 +147,7 @@ then
                 sed -i's/\#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=!$cos_pin/g' /etc/svxlink/svxlink.conf
             else
             echo "test"
-            #no action
+        # no action
             fi
 elif [ "$HID" == "true" ] && [ "$GPIOD" == "false" ] && [ "$card" == "true" ] 
 then
@@ -163,11 +163,9 @@ then
         
         elif [ "$cos_direction" == "Low" ]
         then
-        echo "test"
-        ##leave it as it is.
+        # leave it as it is.
         else
-        echo "test"
-        #no operations
+        # no operations
         fi
         sed -i 's/DEFAULT_LANG=en_GB/DEFAULT_LANG=$lang/g' /etc/svxlink/svxlink.log
 fi
