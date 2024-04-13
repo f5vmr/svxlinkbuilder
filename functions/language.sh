@@ -7,7 +7,7 @@ function set_locale() {
 
     sudo localectl set-locale LANG=${locale}
 
-fi
+
     echo "Locale set to ${locale}"
 }
 
