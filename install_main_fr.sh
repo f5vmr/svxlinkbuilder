@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /home/pi
+
 #### Welcome Message ####
 source "${BASH_SOURCE%/*}/functions/welcome_fr.sh"
 welcome
