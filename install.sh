@@ -20,11 +20,9 @@ source "${BASH_SOURCE%/*}/functions/language.sh"
 which_language
 if [ "$LANG_OPTION" == "2" ] 
 then 
-echo $LANG_OPTION
-exit
+
 sudo sh ./svxlinkbuilder/install_main_fr.sh
 else
-echo $LANG_OPTION
-exit
+
 sudo ./svxlinkbuilder/install_main.sh
 fi
