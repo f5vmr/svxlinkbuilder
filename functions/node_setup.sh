@@ -100,14 +100,14 @@ if [ "$HID" == "false" ] && [ "$GPIOD" == "true" ] && [ "$card" == "false" ]
         cos_pin="${cos_pin#"gpio "}"
             if [ "$cos_direction" == "High" ] 
             then
-            echo "test"
+            
                  sed -i's/\#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
                  sed -i's/\#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=$cos_pin/g' /etc/svxlink/svxlink.conf
             
             elif [ "$cos_direction" == "Low" ] 
             then
-            echo "test"
-                sed -i's/\##SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
+            
+                sed -i's/\#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
                 sed -i's/\#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=!$cos_pin/g' /etc/svxlink/svxlink.conf
         
             else 

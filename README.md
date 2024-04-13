@@ -62,7 +62,13 @@
 <p>Check the content and importantly complete your location information near the bottom of the file. type <b>cntrl-o</b> and return then <b>cntrl-x</b> when finished to save your changes.</p>
 <p>To modify the Echolink information type <b>sudo nano svxlink.d/ModuleEchoLink.conf</b> and return. Make your changes to your EchoLink access here. then save the file as you did above with <b>svxlink.conf</b>. If you have not yet enabled svxlink in the <b>svxlink.conf</b> to may need to do this now, and remove the <b>#</b> comment header from the relevant lines.</p>
 <p>To incorporated the changes you will need to restart the svxlink.service</b></p>
-<p>You do not need to make changes to the <b>gpio.conf</b>. The old methods of adding the gpio configuration and setting a daemon start in /etc/rc.local are deprecated (no longer required). We are using GPIOD. If the version of the Dashboard does not show GPIO in the menu, then this has already been removed.</p> 
+<p>You do not need to make changes to the <b>gpio.conf</b>. The old methods of adding the gpio configuration and setting a daemon start in /etc/rc.local are deprecated (no longer required). We are using GPIOD. If the version of the Dashboard does not show GPIO in the menu, then this has already been removed.</p>
+<h2>EchoLink</h2>
+<p>The usual rules apply with the outgoing ports for your RaspberryPi IP address set in the Router to which you are connected</p>
+<p>You can only have one EchoLink set up on your own home IP Address.</p>
+<p>You will need to set up the callsign and password with which you registered in EchoLink. This is in the file /etc/svxlink/svxlink.d/ModuleEchoLink.conf. You edit the file with the command 'sudo nano' preceding the file name inclusive of the directory information.</p>
+<p>If you did not set up EchoLink during the building phase, then you will also need to modify two lines in /etc/svxlink/svxlink.conf again using 'sudo nano'. For the Simplex Node the first of the lines is within the [SimplexLogic] at MODULES= and you must include ModuleEchoLink within the line. For the Repeater user the same will apply except the MODULES= line will be in [RepeaterLogic]
+
 <p>Everything introduced here is directly from the original presentation by Tobias SM0SVX.</p>
 
 
