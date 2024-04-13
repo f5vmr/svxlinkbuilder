@@ -44,7 +44,7 @@ sudo visudo -c
     echo "Lines added to sudoers successfully."
 else
     echo "Error: Failed to add lines to sudoers. Restoring backup."
-    sudo cp /etc/sudoers.bak /etc/sudoers
+    
 fi
 ## Add permissions to Apache2
 
