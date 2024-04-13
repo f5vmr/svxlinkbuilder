@@ -15,6 +15,16 @@ source "${BASH_SOURCE%/*}/functions/check_user.sh"
 usercheck
 echo -e "${GREEN} #### OS = $operating_system and Current user = $logname #### ${NORMAL}" | tee -a  /var/log/install.log
 #### SuperUser Install ####
-
+#### LANGUAGE ####
+source "${BASH_SOURCE%/*}/functions/language.sh"
+which_language
+if [ "$LANG_OPTION" == "2" ] 
+then 
+echo $LANG_OPTION
+exit
+sudo sh ./svxlinkbuilder/install_main_fr.sh
+else
+echo $LANG_OPTION
+exit
 sudo ./svxlinkbuilder/install_main.sh
-
+fi
