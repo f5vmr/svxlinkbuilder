@@ -27,8 +27,7 @@ function nodeset {
      sed -i "s/AUTH_KEY=\"GET YOUR OWN KEY\"/AUTH_KEY=\"$auth_key\"/g" /etc/svxlink/svxlink.conf 
     else    
     node="unset"
-    fi
- ######### first if ##########   
+    fi  
 whiptail --title "Node" --msgbox "You have select node-type $node" 8 78
 ## Time to change the node
 
@@ -105,10 +104,8 @@ whiptail --title "Sound Card" --msgbox "The USB soundcard is located at card $ca
                 echo no action here
                 fi
     
-
 ##need to change the PTT and COS to GPIOD and all the statements to reflect this Unmodified SOundCard Unit - ask for GPIOD pins
-    elif [[ "$HID" == "true" ]] && [[ "$GPIOD" == "true" ]] && [[ "$card" == "true" ]]
-        then
+    elif [[ "$HID" == "true" ]] && [[ "$GPIOD" == "true" ]] && [[ "$card" == "true" ]]; then
             sed -i's/\#PTT_TYPE=Hidraw/PTT_TYPE=HID/g' /etc/svxlink/svxlink.conf
             sed -i's/\#HID_DEVICE=/HID_DEVICE=/g' /etc/svxlink/svxlink.conf
             sed -i's/\#HID_PTT_PIN=GPIO3/HID_PTT_PIN=GPIO3/g' /etc/svxlink/svxlink.conf
@@ -124,30 +121,25 @@ whiptail --title "Sound Card" --msgbox "The USB soundcard is located at card $ca
         
         cos_pin="${cos_pin#"gpio "}"
         # need to change the PTT to HID and COS to GPIOD and all the statements to reflect this modified SoundCard Unit - ask for GPIOD pins
-            if [[ "$cos_direction" == "High" ]] 
-            then
+            if [[ "$cos_direction" == "High" ]]; then
                 sed -i's/\#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
                 sed -i's/\#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=$cos_pin/g' /etc/svxlink/svxlink.conf
         
-            elif [[ "$cos_direction" == "Low" ]]
-            then
+            elif [[ "$cos_direction" == "Low" ]]; then
                 sed -i's/\#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
                 sed -i's/\#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=!$cos_pin/g' /etc/svxlink/svxlink.conf
             else
             echo no action here
             fi
-    elif [[ "$HID" == "true" ]] && [[ "$GPIOD" == "false" ]] && [[ "$card" == "true" ]] 
-        then
+    elif [[ "$HID" == "true" ]] && [[ "$GPIOD" == "false" ]] && [[ "$card" == "true" ]]; then
             sed -i's/\#PTT_TYPE=Hidraw/PTT_TYPE=HID/g' /etc/svxlink/svxlink.conf
             sed -i's/\#HID_DEVICE=/HID_DEVICE=/g' /etc/svxlink/svxlink.conf
             sed -i's/\#HID_PTT_PIN=GPIO3/HID_PTT_PIN=GPIO3/g' /etc/svxlink/svxlink.conf
             sed -i's/\#SQL_DET=GPIOD/SQL_TYPE=HIDRAW/g' /etc/svxlink/svxlink.conf
             sed -i's/\#HID_SQL_DET/HID_SQL_DET/g' /etc/svxlink/svxlink.conf
-                if [[ "$cos_direction" == "High" ]] 
-                then
+                if [[ "$cos_direction" == "High" ]]; then
                 sed -i's/=VOL_DN/=VOL_UP/g' /etc/svxlink/svxlink.conf
-                elif [[ "$cos_direction" == "Low" ]]
-                then
+                elif [[ "$cos_direction" == "Low" ]]; then
                 echo leave everything as it is
                 else
                 echo no action here   
