@@ -82,7 +82,7 @@ whiptail --title "Sound Card" --msgbox "The USB soundcard is located at card $ca
                     sed -i's/\#PTT_GPIOD_CHIP/PTT_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
                     sed -i's/\#PTT_GPIOD_LINE=!24/PTT_GPIOD_LINE=!$ptt_pin/g' /etc/svxlink/svxlink.conf
                 else
-                # noactions
+                echo no actions here.
                 fi
 
             cos_direction=$(whiptail --title "COS" --radiolist "Please select COS direction" 8 78 2 \
@@ -102,7 +102,7 @@ whiptail --title "Sound Card" --msgbox "The USB soundcard is located at card $ca
                     sed -i's/\#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
                     sed -i's/\#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=!$cos_pin/g' /etc/svxlink/svxlink.conf
                 else
-                #no action
+                echo no action here
                 fi
     
 
@@ -134,7 +134,7 @@ whiptail --title "Sound Card" --msgbox "The USB soundcard is located at card $ca
                 sed -i's/\#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
                 sed -i's/\#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=!$cos_pin/g' /etc/svxlink/svxlink.conf
             else
-            # no action
+            echo no action here
             fi
     elif [[ "$HID" == "true" ]] && [[ "$GPIOD" == "false" ]] && [[ "$card" == "true" ]] 
         then
@@ -150,10 +150,10 @@ whiptail --title "Sound Card" --msgbox "The USB soundcard is located at card $ca
                 then
                 # leave it as it is.
                 else
-                # no action     
+                echo no action here   
                 fi
     else
-    # no further interaction.    
+    echo no action here    
     fi
     sed -i 's/DEFAULT_LANG=en_GB/DEFAULT_LANG=$lang/g' /etc/svxlink/svxlink.log
 ##need to change the PTT and COS to HID and all the statements to reflect this modified SoundCard Unit - ask for GPIOD pins
