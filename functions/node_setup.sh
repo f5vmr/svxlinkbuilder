@@ -84,8 +84,8 @@ whiptail --title "Sound Card" --msgbox "The USB soundcard is located at card $ca
                     sed -i's/\#PTT_TYPE=Hidraw/PTT_TYPE=GPIOD/g' /etc/svxlink/svxlink.conf
                     sed -i's/\#PTT_GPIOD_CHIP/PTT_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
                     sed -i's/\#PTT_GPIOD_LINE=!24/PTT_GPIOD_LINE=!$ptt_pin/g' /etc/svxlink/svxlink.conf
-
-
+                else
+                # noactions
                 fi
 
             cos_direction=$(whiptail --title "COS" --radiolist "Please select COS direction" 8 78 2 \
@@ -96,7 +96,7 @@ whiptail --title "Sound Card" --msgbox "The USB soundcard is located at card $ca
                 "gpio 17" "as COS Pin" OFF \
                 "gpio 8" "as COS Pin" OFF 3>&1 1>&2 2>&3)
 
-            cos_pin="${cos_pin#"gpio "}"
+                cos_pin="${cos_pin#"gpio "}"
                 if [[ "$cos_direction" == "High" ]] 
                 then
 
@@ -108,8 +108,7 @@ whiptail --title "Sound Card" --msgbox "The USB soundcard is located at card $ca
 
                     sed -i's/\#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
                     sed -i's/\#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=!$cos_pin/g' /etc/svxlink/svxlink.conf
-
-
+                else
                 #no action
                 fi
     
@@ -141,7 +140,8 @@ whiptail --title "Sound Card" --msgbox "The USB soundcard is located at card $ca
             then
                 sed -i's/\#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
                 sed -i's/\#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=!$cos_pin/g' /etc/svxlink/svxlink.conf
-            
+            else
+            # no action
             fi
     elif [[ "$HID" == "true" ]] && [[ "$GPIOD" == "false" ]] && [[ "$card" == "true" ]] 
         then
@@ -155,7 +155,9 @@ whiptail --title "Sound Card" --msgbox "The USB soundcard is located at card $ca
                 sed -i's/=VOL_DN/=VOL_UP/g' /etc/svxlink/svxlink.conf
                 elif [[ "$cos_direction" == "Low" ]]
                 then
-            # leave it as it is.       
+                # leave it as it is.
+                else
+                # no action     
                 fi
         
     fi
