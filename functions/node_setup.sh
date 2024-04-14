@@ -148,7 +148,7 @@ whiptail --title "Sound Card" --msgbox "The USB soundcard is located at card $ca
                 sed -i's/=VOL_DN/=VOL_UP/g' /etc/svxlink/svxlink.conf
                 elif [[ "$cos_direction" == "Low" ]]
                 then
-                # leave it as it is.
+                echo leave everything as it is
                 else
                 echo no action here   
                 fi
