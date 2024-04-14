@@ -165,7 +165,7 @@ then
         then
         # leave it as it is.
         else
-        # no operations
+        cos_direction="unset" # no operations
         fi
         sed -i 's/DEFAULT_LANG=en_GB/DEFAULT_LANG=$lang/g' /etc/svxlink/svxlink.log
 fi
