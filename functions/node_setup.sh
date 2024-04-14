@@ -1,23 +1,23 @@
 #!/bin/bash
 #### Recall options
 function nodeset {
-    if [ $NODE_OPTION  == "1" ] 
+    if [[ $NODE_OPTION  == "1" ]] 
     then 
     node="Simplex without Svxreflector"
      sed -i 's/LOGICS=SimplexLogic,ReflectorLogic/LOGICS=SimplexLogic/g' /etc/svxlink/svxlink.conf
      sed -i 's/LINKS=/\#LINKS=/g' /etc/svxlink/svxlink.conf
-    elif [ $NODE_OPTION  == "2" ] 
+    elif [[ $NODE_OPTION  == "2" ]] 
     then
     node="Simplex with UK Svxreflector"
     auth_key=$(whiptail --passwordbox "Please enter your SvxReflector Key" 8 78 --title "password dialog" 3>&1 1>&2 2>&3)
      sed -i "s/AUTH_KEY=\"GET YOUR OWN KEY\"/AUTH_KEY=\"$auth_key\"/g" /etc/svxlink/svxlink.conf 
-    elif [ $NODE_OPTION  == "3" ] 
+    elif [[ $NODE_OPTION  == "3" ]] 
     then
     node="Repeater without Svxreflector"
      sed -i 's/set for SimplexLogic/set for RepeaterLogic/g' /etc/svxlink/svxlink.conf
      sed -i 's/LOGICS=SimplexLogic,ReflectorLogic/LOGICS=RepeaterLogic/g' /etc/svxlink/svxlink.conf
      sed -i 's/LINKS=/\#LINKS=/g' /etc/svxlink/svxlink.conf
-    elif [ $NODE_OPTION  == "4" ] 
+    elif [[ $NODE_OPTION  == "4" ]] 
     then
     node="Repeater with UK Svxreflector"
     auth_key=$(whiptail --passwordbox "Please enter your SvxReflector Key" 8 78 --title "password dialog" 3>&1 1>&2 2>&3)
