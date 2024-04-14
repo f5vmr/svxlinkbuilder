@@ -72,21 +72,19 @@ if [[ "$HID" == "false" ]] && [[ "$GPIOD" == "true" ]] && [[ "$card" == "false" 
         ptt_pin="${ptt_pin#"gpio "}"
             if [[ "$ptt_direction" == "High" ]] 
                 then
-            echo "test"
+            
                  sed -i's/\#PTT_TYPE=Hidraw/PTT_TYPE=GPIOD/g' /etc/svxlink/svxlink.conf
                  sed -i's/\#PTT_GPIOD_CHIP/PTT_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
                  sed -i's/\#PTT_GPIOD_LINE=!24/PTT_GPIOD_LINE=$ptt_pin/g' /etc/svxlink/svxlink.conf
             
             elif [[ "$ptt_direction" == "Low" ]] 
                 then
-            echo "test"
+           
                 sed -i's/\#PTT_TYPE=Hidraw/PTT_TYPE=GPIOD/g' /etc/svxlink/svxlink.conf
                 sed -i's/\#PTT_GPIOD_CHIP/PTT_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
                 sed -i's/\#PTT_GPIOD_LINE=!24/PTT_GPIOD_LINE=!$ptt_pin/g' /etc/svxlink/svxlink.conf
                 
-            else 
-                echo "test"
-                #noaction
+           
             fi
 
         cos_direction=$(whiptail --title "COS" --radiolist "Please select COS direction" 8 78 2 \
@@ -110,9 +108,7 @@ if [[ "$HID" == "false" ]] && [[ "$GPIOD" == "true" ]] && [[ "$card" == "false" 
                 sed -i's/\#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
                 sed -i's/\#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=!$cos_pin/g' /etc/svxlink/svxlink.conf
         
-            else 
-
-            
+    
             #no action
             fi
     
@@ -137,13 +133,11 @@ then
         # need to change the PTT to HID and COS to GPIOD and all the statements to reflect this modified SoundCard Unit - ask for GPIOD pins
             if [[ "$cos_direction" == "High" ]] 
             then
-            echo "test"
                 sed -i's/\#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
                 sed -i's/\#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=$cos_pin/g' /etc/svxlink/svxlink.conf
         
             elif [[ "$cos_direction" == "Low" ]]
             then
-            echo "test"
                 sed -i's/\#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
                 sed -i's/\#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=!$cos_pin/g' /etc/svxlink/svxlink.conf
             
