@@ -25,7 +25,7 @@ function install_dash {
     if [ $? -eq "0" ] 
     then
     ## add permissions to the dashboard
-    sudo chmod -R 777 /var/www/html/config.inc.php
+    sudo chmod -R 777 /var/www/html/include/config.inc.php
     dashboard_user=$(whiptail --title "Dashboard User" --inputbox "Selectionner le username du tableau - unique" 8 78 svxlink 3>&1 1>&2 2>&3)
     dashboard_pass=$(whiptail --title "Dashboard Password" --passwordbox "Fait Entrer le mot-pass de l'utilisateur du tableau" 8 78 3>&1 1>&2 2>&3)
     sudo sed -i "s/\"svxlink\"/\"$dashboard_user\"/g" /var/www/html/include/config.inc.php
@@ -33,7 +33,7 @@ function install_dash {
     ## permissions added
 
 ## Define the lines to add to sudoers
-sudo mkdir /etc/sudoers.d/
+#sudo mkdir /etc/sudoers.d/
 sudo cp -f /home/pi/svxlinkbuilder/addons/svxlink /etc/sudoers.d/
 sudo chmod 0440 /etc/sudoers.d/svxlink
 ## Check sudoers file syntax

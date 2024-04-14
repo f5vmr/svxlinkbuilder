@@ -30,9 +30,9 @@ selected=$(whiptail --title "Metar Info" --checklist "choose which Airports:" 27
         "LFBE" "Bergerac" OFF 3>&1 1>&2 2>&3)
         selected=$(echo "$selected" | sed 's/"//g')
         selected=$(echo "$selected" | tr ' ' ',')
-     sed -i 's/AIRPORTS/\#AIRPORTS=/g' /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
-    echo "AIRPORTS=$selected" >> /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
-    specific_airport=$(whiptail --title "Metar Info" --radiolist "Please specify the airport ICAO code for a default airport: " ${#airports} 27 78 20 \
+        sed -i "s/AIRPORTS=/\AIRPORTS=$selected\#/g" /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
+     
+        specific_airport=$(whiptail --title "Metar Info" --radiolist "Please specify the airport ICAO code for a default airport: " ${#airports} 27 78 20 \
         "LFPG" "Paris Charles de Gaulle" OFF \
         "LFPO" "Paris Orly" OFF \
         "LFOB" "Paris Beauvais" OFF \
@@ -55,8 +55,8 @@ selected=$(whiptail --title "Metar Info" --checklist "choose which Airports:" 27
         "LFSL" "Brive Souillac" OFF \
         "LFBE" "Bergerac" OFF 3>&1 1>&2 2>&3)
         specific_airport=$(echo "$specific_airport" | sed's/"//g')
-        echo "STARTDEFAULT=$specific_airport" >> /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
-        sed -i 's/DEFAULT_LANG=en_US/DEFAULT_LANG=fr_FR/g' /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
+        sed -i "s/\#STARTDEFAULT=EDDP/STARTDEFAULT=$specific_airport/g" >> /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
+        sed -i "s/DEFAULT_LANG=en_US/DEFAULT_LANG=$lang/g" /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
         echo -e "$(date)" "${GREEN} $selected Aèroports inclu avec le défaut Aèroport $specific_airport ${NORMAL}" | tee -a /var/log/install.log
    
     else

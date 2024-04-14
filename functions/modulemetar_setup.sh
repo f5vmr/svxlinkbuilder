@@ -30,9 +30,8 @@ whiptail --title "Metar Info" --yesno "Do you wish to configure this module?" 8 
         "EGBD" "Belfast City" OFF 3>&1 1>&2 2>&3)
         selected=$(echo "$selected" | sed 's/"//g')
         selected=$(echo "$selected" | tr ' ' ',')
-     sed -i 's/AIRPORTS/\#AIRPORTS=/g' /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
-     sudo sh -c 'echo "AIRPORTS=$selected"' >> /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
-        sleep 1
+        sed -i "s/AIRPORTS=/\AIRPORTS=$selected\#/g" /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
+        
         specific_airport=$(whiptail --title "Metar Info" --radiolist "Please specify the airport ICAO code for a default airport: " 27 78 20 \
         "EGLL" "London Heathrow" OFF \
         "EGKK" "London Gatwick" OFF \
@@ -55,8 +54,8 @@ whiptail --title "Metar Info" --yesno "Do you wish to configure this module?" 8 
         "EGAA" "Belfast Aldergrove" OFF \
         "EGBD" "Belfast City" OFF 3>&1 1>&2 2>&3)
         specific_airport=$(echo "$specific_airport" | sed 's/"//g')
-         echo "STARTDEFAULT=$specific_airport" >> /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
-         sed -i 's/DEFAULT_LANG=en_US/DEFAULT_LANG=$lang/g' /etc/svxlink/svxlink.d/ModuleMetarInfo.conf    
+         sed -i "s/\#STARTDEFAULT=EDDP/STARTDEFAULT=$specific_airport/g" >> /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
+         sed -i "s/DEFAULT_LANG=en_US/DEFAULT_LANG=$lang/g" /etc/svxlink/svxlink.d/ModuleMetarInfo.conf    
         echo -e "$(date)" "${GREEN} $selected Airports included with default Airport $specific_airport ${NORMAL}" | tee -a /var/log/install.log
    
     else

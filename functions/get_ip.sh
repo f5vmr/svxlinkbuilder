@@ -10,7 +10,8 @@ device=$(ip -4 route get 1 | grep -oP 'dev \K\S+')
 
 
 ## Update /etc/dhcpcd.conf with fixed IP addresses
-sudo touch /etc/dhcpcd.conf | sudo chmod 777 /etc/dhcpcd.conf
+sudo touch /etc/dhcpcd.conf
+sudo chmod 0777 /etc/dhcpcd.conf
 sudo sh -c "echo 'interface $device' | tee -a /etc/dhcpcd.conf > /dev/nul"
 sudo sh -c "echo 'static ip_address=$ip_address/24' | tee -a /etc/dhcpcd.conf > /dev/nul"
 

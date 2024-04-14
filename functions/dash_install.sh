@@ -33,7 +33,7 @@ function install_dash {
     ## permissions added
 
 ## Define the lines to add to sudoers
-sudo mkdir /etc/sudoers.d/
+# sudo mkdir /etc/sudoers.d/
 sudo cp -f /home/pi/svxlinkbuilder/addons/svxlink /etc/sudoers.d/
 sudo chmod 0440 /etc/sudoers.d/svxlink
 ## Check sudoers file syntax

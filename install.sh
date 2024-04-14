@@ -18,10 +18,12 @@ echo -e "${GREEN} #### OS = $operating_system and Current user = $logname #### $
 #### LANGUAGE ####
 source "${BASH_SOURCE%/*}/functions/language.sh"
 which_language
+
+
 if [ "$LANG_OPTION" == "2" ] 
 then 
 
-sudo sh ./svxlinkbuilder/install_main_fr.sh
+sudo ./svxlinkbuilder/install_main_fr.sh
 else
 
 sudo ./svxlinkbuilder/install_main.sh
