@@ -154,12 +154,11 @@ elif [[ "$HID" == "true" ]] && [[ "$GPIOD" == "false" ]] && [[ "$card" == "true"
         
             sed -i's/=VOL_DN/=VOL_UP/g' /etc/svxlink/svxlink.conf
         
-        elif [[ "$cos_direction" == "Low" ]]
-        then
+            elif [[ "$cos_direction" == "Low" ]]
+            then
         # leave it as it is.
-        
-        # no operations
-        fi
+       
+            fi
         sed -i 's/DEFAULT_LANG=en_GB/DEFAULT_LANG=$lang/g' /etc/svxlink/svxlink.log
 fi
 ##need to change the PTT and COS to HID and all the statements to reflect this modified SoundCard Unit - ask for GPIOD pins
