@@ -112,9 +112,10 @@ if [[ "$HID" == "false" ]] && [[ "$GPIOD" == "true" ]] && [[ "$card" == "false" 
         
             else 
 
-            echo "test"
+            
             #no action
             fi
+    
 
 ##need to change the PTT and COS to GPIOD and all the statements to reflect this Unmodified SOundCard Unit - ask for GPIOD pins
 elif [[ "$HID" == "true" ]] && [[ "$GPIOD" == "true" ]] && [[ "$card" == "true" ]]
@@ -145,27 +146,25 @@ then
             echo "test"
                 sed -i's/\#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
                 sed -i's/\#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=!$cos_pin/g' /etc/svxlink/svxlink.conf
-            else
-            echo "test"
-        # no action
+            
             fi
 elif [[ "$HID" == "true" ]] && [[ "$GPIOD" == "false" ]] && [[ "$card" == "true" ]] 
-then
+        then
         sed -i's/\#PTT_TYPE=Hidraw/PTT_TYPE=HID/g' /etc/svxlink/svxlink.conf
         sed -i's/\#HID_DEVICE=/HID_DEVICE=/g' /etc/svxlink/svxlink.conf
         sed -i's/\#HID_PTT_PIN=GPIO3/HID_PTT_PIN=GPIO3/g' /etc/svxlink/svxlink.conf
         sed -i's/\#SQL_DET=GPIOD/SQL_TYPE=HIDRAW/g' /etc/svxlink/svxlink.conf
         sed -i's/\#HID_SQL_DET/HID_SQL_DET/g' /etc/svxlink/svxlink.conf
-        if [[ "$cos_direction" == "High" ]] 
-        then
+            if [[ "$cos_direction" == "High" ]] 
+            then
         
             sed -i's/=VOL_DN/=VOL_UP/g' /etc/svxlink/svxlink.conf
         
         elif [[ "$cos_direction" == "Low" ]]
         then
         # leave it as it is.
-        else
-        cos_direction="unset" # no operations
+        
+        # no operations
         fi
         sed -i 's/DEFAULT_LANG=en_GB/DEFAULT_LANG=$lang/g' /etc/svxlink/svxlink.log
 fi
