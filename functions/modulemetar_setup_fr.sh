@@ -59,7 +59,7 @@ selected=$(whiptail --title "Metar Info" --checklist "choose which Airports:" 27
         echo -e "$(date)" "${GREEN} $selected Aèroports inclu avec le défaut Aèroport $specific_airport ${NORMAL}" | tee -a /var/log/install.log
    
     else
-    echo "test"
-    #no action
+     sed -i 's/,ModuleMetarInfo//' /etc/svxlink/svxlink.conf
+    # removing MetarInfo from the MODULES= line in both SImplex and Duplex
     fi
 }
