@@ -9,7 +9,7 @@
     usercheck    
     ## Change swapfile size
     sudo dphys-swapfile swapoff 
-    sudo sed -i 's/CONF_SWAPSIZE=100/CONF_SWAPSIZE=256/g' /etc/dphys-swapfile
+    sudo sed -i 's/CONF_SWAPSIZE=100/CONF_SWAPSIZE=150/g' /etc/dphys-swapfile
     sudo dphys-swapfile swapon
     ## Install file manipulation pkg
     sudo apt-get install -y acl
