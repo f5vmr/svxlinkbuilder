@@ -1,25 +1,26 @@
 # SvxlinkBuilder 
-<h2>Menu build for Raspberry Pi - Repeater or Hotspot. Pour l'instruction en Français, voir en bas.</h2>
-
+<h2>Menu build for Raspberry Pi - Repeater or Hotspot node. Pour l'instruction en Français, voir en bas.</h2>
+<h3>This SVXLink build presently contains a connection only to the <b>svxportal-uk (SvxReflector)</b> only . If this changes then so will this introduction.</p>
+<p>The connection to the svxreflector provided connectivity using pseudo-talkgroups to other nodes and repeaters on the network. for more information select this link http://svxportal-uk.ddns.net:81.</p>
 <b>Your First Steps</b>
-<p>Requirements: Raspberry Pi of any mark. USB Soundcard, and an interface card (or a modified USB Soundcard and no interface). One or two transceivers. An experience with Shell Commands will help, but is not essential.</p>
+<p>The Requirements: A Raspberry Pi of any mark, a USB Soundcard, and an interface card (or a modified USB Soundcard and no interface). One or two transceivers. An experience with Shell Commands will help, but is not essential.</p>
 <p>If your are suitably experienced, you will be able to modify the installation once it is complete. But this system will provide you with a working system, and you can then modify it to your own needs.</p>
-<p>There are very few raspberry images that work succesfully for this type of build, where there is a potential for using the eventual application in several directions.</p>
+<p>There are very few other raspberry images that work succesfully for this type of build, where there is a potential for using the application in several directions.</p>
 <p>Whilst this in itself is not an image, it will take the hard work out of the physical compilation, although it may leave you a little work to do, if you need to change your immediate specification.</p>
-<h2><p>Always use Raspberry OS Bookworm Lite (Debian 12) 32 Bit then you won't go wrong.</p></h2>
+<h2>Always use Raspberry OS Bookworm Lite (Debian 12) 32 Bit then you won't go wrong.</h2>
 <p>There are a number of available interface boards that have a variety of uses, either as a hotspot or a repeater, or even a fill-in receiver/transceiver for an existing SVXLink repeater. The settings in this build are for a homebrew interface board using GPIOD 23/17/8 for the Receive COS and GPIOD 24/18/7 for the PTT controller, or alternative a fully modified CM-108 that can use 'udev' and drive the PTT and COS from the modification components. There is an also intermediate version for the CM-108 where only the transmit modification has been done that will you use 'udev' for the transmit, and give you options for the receive GPIOD 23/17/8.</p>
 <p>When using the GPIO and GPIOD Pins, an earth pin is also require, so using this combination, pins 14,16 and 18 are all adjacent and ideally placed for these functions. Pin 14 is the Earth, Pin 16 is GPIO 23 and Pin 18 is GPIO 24.</p>
 <p>For a second set of transceivers, you can consider GPIO 17 and 18 as COS & PTT for those.</p> 
 <p>A copy of the design can be found on g4nab.co.uk. There is also a page showing the modification instructions for a CM-108 USB Sound Card.</p>
 <h2>The programming of the SDCard</h2>
 
-<p>As discussed start with a download of <b>Raspberry OS Bookworm Lite</b> from RaspberryPi.org. Then use a 8 or 16 GB MicroSD Card and transfer the image to the card using the <b>Raspberry Pi Image builder</b> from the same source. <b> You MUST make the user 'pi' - please do not deviate from my advice above, as you will get issues. </b> You can however use your own password. There are versions of Raspberry Pi Imager for all operating systems. It allows for full WiFi usage. 
+<p>As discussed start with a download of <b>Raspberry OS Bookworm Lite</b> from RaspberryPi.org. Then use a 8 or 16 GB MicroSD Card and transfer the image to the card, best using the <b>Raspberry Pi Image builder</b> from the same source. <b> You MUST make the user 'pi' - please do not deviate from my advice above, as you will get issues. </b> You can however use your own password. There are versions of Raspberry Pi Imager for all operating systems. It allows for full WiFi usage.</p> 
 <p>In the first box <b>device</b> select 'No Filtering'</p>
-<p>In the second box <b>Choose OS</b> select 'Raspberry Pi OS (Other) then 'Raspberry Pi Os 32 Bit' under which you will see 'Debian Bookworm with no desktop environment'. Select this</p>
+<p>In the second box <b>Choose OS</b> select 'Raspberry Pi OS (Other)' then 'Raspberry Pi Os 32 Bit' under which you will see 'Debian Bookworm with no desktop environment'. Select this</p>
 <p>Now select <b>Choose Storage</b> where you will be invited to select the sdcard.</p>
 <p>In <b>Next</b> Complete the 'edit' box, but <b>pi</b> must be the user. If this is not correct, then your install will fail. You can have any password you like.</p>
 <p>You can set your Wi-Fi settings here if your wish.</p>
-<b>Always check the SSH box on the second tab of the next box, otherwise that will also cause your installation to fail.</b> </p> 
+<b>Always check the SSH box on the second tab of the next box, otherwise that will also cause your installation to fail.</b>  you can use a password or set a key if you wish.</p> 
 
 <p>Once complete, eject the card and install it in the raspberry pi and power it up. Enter the user <b>pi</b> and your password.</p> 
 <h2>The compilation</h2>
