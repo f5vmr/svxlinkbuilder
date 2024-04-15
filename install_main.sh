@@ -38,7 +38,7 @@ svxlink_source
 #### COMPILING ####
  # clear
 	echo -e "$(date)" "${YELLOW} #### Compiling #### ${NORMAL}" | tee -a  /var/log/install.log
-sleep 1
+
  	cd svxlink/src/build
  	sudo cmake -DUSE_QT=OFF -DCMAKE_INSTALL_PREFIX=/usr -DSYSCONF_INSTALL_DIR=/etc -DLOCAL_STATE_DIR=/var -DWITH_SYSTEMD=ON  ..
  	sudo make

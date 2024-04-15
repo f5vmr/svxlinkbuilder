@@ -31,7 +31,7 @@ source "${BASH_SOURCE%/*}/functions/source.sh"
  svxlink_source	
 #### INSTALLATION ####
  # clear
- NEWVERSION=$(sudo grep -r "SVXLINK=" "svxlink"/* | awk -F= '{print $2}')
+ 	NEWVERSION=$(sudo grep -r "SVXLINK=" "svxlink"/* | awk -F= '{print $2}')
 	echo -e "$(date)" "${GREEN} #### New Version: $NEWVERSION #### ${NORMAL}" | tee -a  /var/log/install.log
 
 	
@@ -127,8 +127,8 @@ modulemetar
 	
 	 # clear
 	echo -e "$(date)" "${RED} #### Changement du ModuleEchoLink #### ${NORMAL}" | tee -a  /var/log/install.log
-source "${BASH_SOURCE%/*}/functions/echolink_setup.sh"
-echolink_setup
+source "${BASH_SOURCE%/*}/functions/echolink_setup_fr.sh"
+echolinksetup
 	
 	 # clear
 #	echo -e "$(date)" "${RED} #### Changement du ModulePropagationMonitor #### ${NORMAL}" | tee -a  /var/log/install.log
