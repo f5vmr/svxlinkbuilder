@@ -59,6 +59,6 @@ whiptail --title "Metar Info" --yesno "Do you wish to configure this module?" 8 
    
     else
      sed -i 's/,ModuleMetarInfo//' /etc/svxlink/svxlink.conf
-    # removing MetarInfo from the MODULES= line in both SImplex and Duplex
+    # removing MetarInfo from the MODULES= line in both Simplex and Duplex
     fi
 }
