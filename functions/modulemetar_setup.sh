@@ -54,12 +54,11 @@ whiptail --title "Metar Info" --yesno "Do you wish to configure this module?" 8 
         "EGAA" "Belfast Aldergrove" OFF \
         "EGBD" "Belfast City" OFF 3>&1 1>&2 2>&3)
         specific_airport=$(echo "$specific_airport" | sed 's/"//g')
-         sed -i "s/\#STARTDEFAULT=EDDP/STARTDEFAULT=$specific_airport/g" >> /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
-         sed -i "s/DEFAULT_LANG=en_US/DEFAULT_LANG=$lang/g" /etc/svxlink/svxlink.d/ModuleMetarInfo.conf    
+        sed -i "s/\#STARTDEFAULT=EDDP/STARTDEFAULT=$specific_airport/g" /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
         echo -e "$(date)" "${GREEN} $selected Airports included with default Airport $specific_airport ${NORMAL}" | tee -a /var/log/install.log
    
     else
-    echo "test"
-    #no changes
+     sed -i 's/,ModuleMetarInfo//' /etc/svxlink/svxlink.conf
+    # removing MetarInfo from the MODULES= line in both SImplex and Duplex
     fi
 }

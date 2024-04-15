@@ -44,8 +44,7 @@ sudo chmod 0440 /etc/sudoers.d/svxlink
     echo "Lines added to sudoers successfully."
 else
     echo "Error: Failed to add lines to sudoers. Restoring backup."
-    sudo cp /etc/sudoers.bak /etc/sudoers
-fi
+ fi
 ## Add permissions to Apache2
 
 ## Determine IP address of eth0 and Wifi interface

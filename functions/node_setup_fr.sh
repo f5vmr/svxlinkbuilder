@@ -58,7 +58,7 @@ whiptail --title "Sound Card" --msgbox "La carte-son USB se trouve à carte $car
         ## 2. HID on Transmit and GPIOD on Receive determined by $HID=true $GPIOD=true $card=true
         ## 3. HID on Transmit and Receive determined by $HID=true $GPIOD=false $card=true
 
-if [ "$HID" == "false" ] && [ "$GPIOD" == "true" ] && [ "$card" == "false" ]; then
+if [[ "$HID" == "false" ]] && [[ "$GPIOD" == "true" ]] && [[ "$card" == "false" ]]; then
 
         ptt_direction=$(whiptail --title "PTT" --radiolist "Selectionner PTT direction" 8 78 3 \
         "High" "Transmit PTT is active-High" OFF \
@@ -98,7 +98,7 @@ if [ "$HID" == "false" ] && [ "$GPIOD" == "true" ] && [ "$card" == "false" ]; th
                  sed -i "s/\#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=$cos_pin/g" /etc/svxlink/svxlink.conf
             
             elif [[ "$cos_direction" == "Low" ]]; then
-                sed -i 's/\##SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
+                sed -i 's/\#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
                 sed -i "s/\#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=!$cos_pin/g" /etc/svxlink/svxlink.conf
             else 
             echo no action here
