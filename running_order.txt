@@ -1,11 +1,13 @@
-Running from preinstall.sh
-SwapFileChange
-SoundcardManipulation
-InstallLocales
-Reboot
-Initialise
+Running from ./svxlinkbuilder/preinstall.sh NB - NOT SUDO
 check_os
 usercheck
+SwapFileChange - Makes a bigger swap file.
+SoundcardManipulation - Removes the onboard soundcard, making the USBCard : 0
+Install Locales - Language possibities 
+Reboot for first pass
+Running from ./svxlinkbuilder/install.sh NB - NOT SUDO
+Initialise
+
 Language
 welcome
 node_type

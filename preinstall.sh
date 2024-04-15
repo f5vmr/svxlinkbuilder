@@ -1,6 +1,11 @@
 #/bin/bash
-    home="/home/pi/svxlinkbuilder"
-    
+    cd /home/pi
+    #### CHECK OS ####
+    source "${BASH_SOURCE%/*}/functions/check_os.sh"
+    check_os
+    #### CHECK USER ####
+    source "${BASH_SOURCE%/*}/functions/check_user.sh"
+    usercheck    
     ## Change swapfile size
     sudo dphys-swapfile swapoff 
     sudo sed -i 's/CONF_SWAPSIZE=100/CONF_SWAPSIZE=256/g' /etc/dphys-swapfile
