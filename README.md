@@ -32,7 +32,9 @@
 <p>Everything else will be constructed for you</p>
 <h2>Beginning the install</h2>
 <p>The script will compile the running configuration as you proceed. It can only be run once, due to the nature of the program. Allow yourself an uninterupted period of 1 hour, to answer the questions put to you, and the accompanying install. <b>Remember to note down any "usernames and passwords" that you provide</b>. A Raspberry Pi 3 or 4 will take less time, and a Raspberry Pi zero possibly longer than 90 minutes. However the Raspberry Pi Zero will present a challenge due to the lack of an external USB socket. I have NOT included the installation of the waveshare sound system, if you are using a Pi-Hat interface. Hopefully there should be no reported error. I have just completed a build on a raspberry pi 3A from card format to working node in 50 minutes, with no errors.</p>
-
+<p>For the American User, the en_US Voice files will be pulled if you select 'English - USA' from the menu.</p>
+<p>I hope that there will be someone out there that can add to the code for Spanish or Portuguese.</p>
+<h2>We begin</h2>
 <p>Type the following command at the current prompt: <b>./svxlinkbuilder/preinstall.sh</b> The system will reboot so login again as before.</p>
 <p>Type the following command <b> ./svxlinkbuilder/install.sh</b> Special NOTE - <b>No sudo here in these commands.</b></p>
 
