@@ -1,5 +1,6 @@
 #/bin/bash
     cd /home/pi
+    logname=$(whoami)
     #### CHECK OS ####
     source "${BASH_SOURCE%/*}/functions/check_os.sh"
     check_os
