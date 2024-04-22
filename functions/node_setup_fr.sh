@@ -137,7 +137,7 @@ elif [[ "$HID" == "true" ]] && [[ "$GPIOD" == "true" ]] && [[ "$card" == "true" 
             sed -i 's/\#PTT_TYPE=Hidraw/PTT_TYPE=Hidraw/g' /etc/svxlink/svxlink.conf
             sed -i 's/\#HID_DEVICE=/HID_DEVICE=/g' /etc/svxlink/svxlink.conf
             sed -i 's/\#HID_PTT_PIN=GPIO3/HID_PTT_PIN=GPIO3/g' /etc/svxlink/svxlink.conf
-            sed -i 's/\#SQL_DET=GPIOD/SQL_TYPE=HIDRAW/g' /etc/svxlink/svxlink.conf
+            sed -i 's/\#SQL_DET=GPIOD/SQL_DET=HIDRAW/g' /etc/svxlink/svxlink.conf
             sed -i 's/\#HID_SQL_DET/HID_SQL_DET/g' /etc/svxlink/svxlink.conf
                 if [[ "$cos_direction" == "High" ]]; then
                 sed -i's/=VOL_DN/=VOL_UP/g' /etc/svxlink/svxlink.conf       
