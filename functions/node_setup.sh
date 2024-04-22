@@ -144,8 +144,8 @@ whiptail --title "Sound Card" --msgbox "The USB soundcard is located at card $ca
             sed -i 's/\#PTT_TYPE=Hidraw/PTT_TYPE=Hidraw/g' /etc/svxlink/svxlink.conf
             sed -i 's/\#HID_DEVICE=/HID_DEVICE=/g' /etc/svxlink/svxlink.conf
             sed -i 's/\#HID_PTT_PIN=GPIO3/HID_PTT_PIN=GPIO3/g' /etc/svxlink/svxlink.conf
-            sed -i 's/\#SQL_DET=GPIOD/SQL_TYPE=HIDRAW/g' /etc/svxlink/svxlink.conf
-            sed -i 's/\#HID_SQL_DET/HID_SQL_DET/g' /etc/svxlink/svxlink.conf
+            sed -i 's/\#SQL_DET=GPIOD/SQL_DET=HIDRAW/g' /etc/svxlink/svxlink.conf
+            sed -i 's/\#HID_SQL_PIN/HID_SQL_PIN/g' /etc/svxlink/svxlink.conf
                 if [[ "$cos_direction" == "High" ]]; then
                 sed -i's/=VOL_DN/=VOL_UP/g' /etc/svxlink/svxlink.conf
                 elif [[ "$cos_direction" == "Low" ]]; then
