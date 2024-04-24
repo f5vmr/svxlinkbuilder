@@ -1,6 +1,6 @@
 # svxlinkbuilder - en Français
 <b><h2>Français - Mes Excuses, pour la vitesse, les pluparts sont grâce à Google Translate. </h2></b>
-<p>Cette version de SVXLink contient actuellement une connexion au <b>svxportal-uk (SvxReflector)</b> uniquement. Si cela change, cette introduction changera également.</p>
+<p>Cette version de SVXLink contient actuellement une connexion au <b>svxportal-uk (SvxReflector)</b> uniquement. Si cela change, cette introduction changera également. Le réseau RRF n'est pas compatible avec ce méthode. C'était construit avec l'ancien protocole. </p>
 <p>La connexion au svxreflector assure la connectivité à l'aide de pseudo-groupes de discussion vers d'autres nœuds et répéteurs du réseau. pour plus d'informations, sélectionnez ce lien http://svxportal-uk.ddns.net:81.</p>
 <b>Vos premiers pas</b>
 <p>Les exigences : un Raspberry Pi de n'importe quelle marque, une carte son USB et une carte d'interface (ou une carte son USB modifiée et sans interface). Un ou deux émetteurs-récepteurs. Une expérience avec les commandes Shell sera utile, mais n'est pas essentielle.</p>
