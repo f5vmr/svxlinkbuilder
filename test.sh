@@ -1,5 +1,5 @@
 #!/bin/bash
-LANG_OPTION=$(whiptail --title "Language Option" --menu "Select Language" 10 78 5 \
+LANG_OPTION=$(whiptail --title "Language Option" --menu "Select Language" 12 78 5 \
         "1" "English  United Kingdom en_GB" \
         "2" "Français   France fr_FR" \
         "3" "English  USA en_US" \
