@@ -9,10 +9,10 @@ lsusb_output=$(lsusb)
 ## Check if the USB sound card is present in the lsusb output
 if echo "$lsusb_output" | grep -q "C-Media"; 
 then
-    echo "USB carte-son est presente."
+    echo "La tarjeta de sonido USB está presente."
     USB_sound_card_present=true
 else
-    echo "USB carte-son n'est pas presente."
+    echo "La tarjeta de sonido USB no está presente."
     USB_sound_card_present=false
 fi
 
@@ -31,10 +31,10 @@ fi
 ## Print the assigned variable value
 echo "Variable assigned: $sound_card_variable"
 
-    SOUND_OPTION=$(whiptail --title "USB Soundcard" --menu "Selectionner des options dessous." 12 78 4 \
-        "1" "Modifié pour Tx et Rx" \
-        "2" "Modifié uniquement pour Tx" \
-        "3" "Sans modification (utiliser GPIOD contrôler le Squelch et PTT )" 3>&1 1>&2 2>&3)      
+    SOUND_OPTION=$(whiptail --title "Tarjeta de sonido USB" --menu "Seleccione las opciones a continuación." 12 78 4 \
+        "1" "Modificado para Tx y Rx" \
+        "2" "Modificado solo para Tx" \
+        "3" "Sin modificaciones (use GPIOD para controlar el Squelch y el PTT)" 3>&1 1>&2 2>&3)      
     if [ "$SOUND_OPTION" = "1" ] 
     then
     HID=true
@@ -63,7 +63,7 @@ echo "Variable assigned: $sound_card_variable"
 #### updates the udev rules for the USB sound card #####
     if [ "$card" = true ] 
     then
-    echo "Ok, allons y - changer les règles udev pour le USB sound card"
+    echo "Ok, vamos: cambia las reglas de udev para la tarjeta de sonido USB."
                sudo cp /home/pi/svxlinkbuilder/addons/cm-108.rules /etc/udev/rules.d/
                sudo udevadm control --reload-rules
                sudo udevadm trigger
@@ -71,6 +71,6 @@ echo "Variable assigned: $sound_card_variable"
     else
     echo "ok, donc, je ne fait pas de changements"           
     fi               
-    echo -e "$(date)" "${GREEN}Audio mis à jour, carte-son factice inclu pour Darkice complètés.${NORMAL}" | tee -a /var/log/install.log
+    echo -e "$(date)" "${GREEN}Audio actualizado, tarjeta de sonido ficticia incluida para Darkice completo.${NORMAL}" | tee -a /var/log/install.log
 				
 }
