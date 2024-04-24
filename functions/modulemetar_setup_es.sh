@@ -1,5 +1,12 @@
 #!/bin/bash
-selected=$(whiptail --title "Información del medidor" --scrolltext --checklist "Elija qué aeropuertos:" 24 78 13 \
+#### Metar Info ####
+function modulemetar {
+ 
+whiptail --title "Información del medidor" --yesno "¿Desea configurar este módulo?" 8 78  3>&1 1>&2 2>&3
+    if [ $? -eq "0" ] 
+    then
+        sleep 1
+    selected=$(whiptail --title "Información del medidor" --checklist "Elija qué aeropuertos:" 24 78 13 \
         "LECO"  "A Coruña " OFF \
         "LEAB"  "Albacete " OFF \
         "LEAL"  "Alicante-Elche " OFF \
@@ -46,7 +53,7 @@ selected=$(whiptail --title "Información del medidor" --scrolltext --checklist 
         selected=$(echo "$selected" | tr ' ' ',')
         sed -i "s/AIRPORTS=.*/AIRPORTS=$selected/g"  /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
         
-        specific_airport=$(whiptail --title "Información del medidor" --scrolltext --radiolist "Especifique el código OACI del aeropuerto para un aeropuerto predeterminado: " 24 78 13 \
+        specific_airport=$(whiptail --title "Información del medidor" --radiolist "Especifique el código OACI del aeropuerto para un aeropuerto predeterminado: " 24 78 13 \
         "LECO"  "A Coruña " OFF \
         "LEAB"  "Albacete " OFF \
         "LEAL"  "Alicante-Elche " OFF \
@@ -89,5 +96,12 @@ selected=$(whiptail --title "Información del medidor" --scrolltext --checklist 
         "GCTS"  "Tenerife Sud " OFF \
         "GCLA"  "La Palma " OFF \
         "GCHI"  "El Hierro " OFF 3>&1 1>&2 2>&3)
-
-## Setting up Reflector
+        specific_airport=$(echo "$specific_airport" | sed 's/"//g')
+        sed -i "s/\#STARTDEFAULT=EDDP/STARTDEFAULT=$specific_airport/g" /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
+        echo -e "$(date)" "${GREEN} $selected Aeropuertos incluidos con el aeropuerto predeterminado $specific_airport ${NORMAL}" | tee -a /var/log/install.log
+   
+    else
+     sed -i 's/,ModuleMetarInfo//' /etc/svxlink/svxlink.conf
+    # removing MetarInfo from the MODULES= line in both Simplex and Duplex
+    fi
+}

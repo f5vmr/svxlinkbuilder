@@ -1,24 +1,24 @@
 #!/bin/bash
 
 #### Welcome Message ####
-source "${BASH_SOURCE%/*}/functions/welcome.sh"
+source "${BASH_SOURCE%/*}/functions/welcome_es.sh"
 welcome
-source "${BASH_SOURCE%/*}/functions/configure.sh"
+source "${BASH_SOURCE%/*}/functions/configure_es.sh"
 configure
 #### NODE Selection ####
-source "${BASH_SOURCE%/*}/functions/node_type.sh"
+source "${BASH_SOURCE%/*}/functions/node_type_es.sh"
 nodeoption
 echo -e "$(date)" "${YELLOW} #### Node Type: $NODEOPTION #### ${NORMAL}" | tee -a  /var/log/install.log
 #### USB SOUND CARD ####
-source "${BASH_SOURCE%/*}/functions/sound_card.sh"
+source "${BASH_SOURCE%/*}/functions/sound_card_es.sh"
 soundcard
 echo -e "$(date)" "${YELLOW} #### Sound Card: $HID $GPIOD $card #### ${NORMAL}" | tee -a  /var/log/install.log	
 echo -e "$(date)" "${YELLOW} #### Checking Alsa #### ${NORMAL}" | tee -a  /var/log/install.log
 #### UPDATE ####
-source "${BASH_SOURCE%/*}/functions/update.sh"
+source "${BASH_SOURCE%/*}/functions/update_es.sh"
 update
 #### REQUEST CALLSIGN ####
-source "${BASH_SOURCE%/*}/functions/callsign.sh"
+source "${BASH_SOURCE%/*}/functions/callsign_es.sh"
 callsign
 #### GROUPS AND USERS ####
 clear
@@ -54,27 +54,20 @@ svxlink_source
 	echo -e "$(date)" "${GREEN} #### Installing Voice Files #### ${NORMAL}" | tee -a  /var/log/install.log
 
  	cd /usr/share/svxlink/sounds
-if [[ $LANG_OPTION == "3" ]]; then
-	sudo wget https://github.com/sm0svx/svxlink-sounds-en_US-heather/archive/refs/tags/24.02.tar.gz
- 	sudo tar -zxvf 24.02.tar.gz
-	sudo rm 24.02.tar.gz
 
-	else 
-	sudo wget https://g4nab.co.uk/wp-content/uploads/2023/08/en_GB.tar_.gz
- 	sudo tar -zxvf en_GB.tar_.gz
- 	sudo rm en_GB.tar_.gz
-	fi
+	sudo git clone https://github.com/ea5gvk/es_ES.git
+
   	cd /etc/svxlink
    sudo chmod 777 -R *
 
 #### BACKUP CONFIGURATION ####
  # clear
-	echo -e "$(date)" "${GREEN} #### Backing up configuration to : $CONF.bak #### ${NORMAL}"| tee -a  /var/log/install.log
+	echo -e "$(date)" "${GREEN} #### Copia de seguridad de la configuración en: $CONF.bak #### ${NORMAL}"| tee -a  /var/log/install.log
 
  	sudo cp -p $CONF $CONF.bak
 #
  	cd /home/pi/
- 	echo -e "$(date)" "${RED} #### Downloading prepared configuration files from the scripts #### ${NORMAL}" | tee -a  /var/log/install.log
+ 	echo -e "$(date)" "${RED} #### Descarga de archivos de configuración preparados desde los scripts #### ${NORMAL}" | tee -a  /var/log/install.log
  	sudo mkdir /home/pi/scripts
 	sudo cp -f /home/pi/svxlinkbuilder/addons/10-uname /etc/update-motd.d/
  	sudo cp -f /home/pi/svxlinkbuilder/configs/svxlink.conf /etc/svxlink/
@@ -83,62 +76,62 @@ if [[ $LANG_OPTION == "3" ]]; then
  	sudo cp -f /home/pi/svxlinkbuilder/resetlog.sh /home/pi/scripts/resetlog.sh
  	(sudo crontab -l 2>/dev/null; echo "59 23 * * * /home/pi/scripts/resetlog.sh ") | sudo crontab -
  # clear
-	echo -e "$(date)" "${GREEN} #### Setting Callsign to $CALL #### ${NORMAL}" | tee -a  /var/log/install.log
+	echo -e "$(date)" "${GREEN} #### Establecer indicativo en $CALL #### ${NORMAL}" | tee -a  /var/log/install.log
 
  	sudo sed -i "s/MYCALL/$CALL/g" $CONF
  	sudo sed -i "s/MYCALL/$CALL/g" /etc/svxlink/node_info.json
 
-	echo -e "$(date)" "${GREEN} #### Setting Squelch Hangtime to 10 mS ${NORMAL}" | tee -a  /var/log/install.log
+	echo -e "$(date)" "${GREEN} #### Configuración del tiempo de suspensión del silenciador en 10 mS ${NORMAL}" | tee -a  /var/log/install.log
  	sudo sed -i s/SQL_HANGTIME=2000/SQL_HANGTIME=10/g $CONF
  
  # clear	
-	echo -e "$(date)" "${YELLOW} #### Disabling audio distortion warning messages #### ${NORMAL}"| tee -a  /var/log/install.log
+	echo -e "$(date)" "${YELLOW} #### Desactivar mensajes de advertencia de distorsión de audio #### ${NORMAL}"| tee -a  /var/log/install.log
 
 
  	sudo sed -i 's/PEAK_METER=1/PEAK_METER=0/g' $CONF
 
  # clear
-	echo -e "$(date)" "${GREEN} #### Updating SplashScreen on startup #### ${NORMAL}" | tee -a  /var/log/install.log
+	echo -e "$(date)" "${GREEN} #### Actualización de SplashScreen al iniciar #### ${NORMAL}" | tee -a  /var/log/install.log
 
  	sudo sed -i "s/MYCALL/$CALL/g" /etc/update-motd.d/10-uname
  	sudo chmod 0755 /etc/update-motd.d/10-uname
 
  # clear
-	echo -e "$(date)" "${YELLOW} #### Changing Log file suffix ${NORMAL}" | tee -a  /var/log/install.log
+	echo -e "$(date)" "${YELLOW} #### Cambiar el sufijo del archivo de registro ${NORMAL}" | tee -a  /var/log/install.log
 
  	sudo sed -i 's/log\/svxlink/log\/svxlink.log/g' /etc/default/svxlink
 	#### INSTALLING DASHBOARD ####
  # clear
 	cd /home/pi
-	echo -e "$(date)" "${YELLOW} #### Checking IP Addresses #### ${NORMAL}" | tee -a  /var/log/install.log
+	echo -e "$(date)" "${YELLOW} #### Comprobación de direcciones IP #### ${NORMAL}" | tee -a  /var/log/install.log
 	
 	source "${BASH_SOURCE%/*}/functions/get_ip.sh"
 	ipaddress
  # clear
 	cd /home/pi
-	echo -e "$(date)" "${YELLOW} #### Installing Dashboard #### ${NORMAL}" | tee -a  /var/log/install.log
+	echo -e "$(date)" "${YELLOW} #### Instalación del panel #### ${NORMAL}" | tee -a  /var/log/install.log
 
-	source "${BASH_SOURCE%/*}/functions/dash_install.sh"
+	source "${BASH_SOURCE%/*}/functions/dash_install_es.sh"
 install_dash
  # clear
-	echo -e "$(date)" "${GREEN} #### Dashboard installed #### ${NORMAL}" | tee -a  /var/log/install.log
-	whiptail --title "IP Addresses" --msgbox "Dashboard installed. Please note your IP address is $ip_address on $device" 8 78
+	echo -e "$(date)" "${GREEN} #### Panel instalado #### ${NORMAL}" | tee -a  /var/log/install.log
+	whiptail --title "Adresses IP" --msgbox "Tablero instalado. Tenga en cuenta que su dirección IP es $ip_address en $device" 8 78
 	cd /home/pi/
 
 	 # clear
-	echo -e "$(date)" "${GREEN} #### Setting up Node #### ${NORMAL}" | tee -a  /var/log/install.log
-source "${BASH_SOURCE%/*}/functions/node_setup.sh"
+	echo -e "$(date)" "${GREEN} #### Configurando el nodo #### ${NORMAL}" | tee -a  /var/log/install.log
+source "${BASH_SOURCE%/*}/functions/node_setup_es.sh"
 nodeset
 	cd /home/pi
 	 # clear
- 	echo -e "$(date)" "${RED} #### Changing ModuleMetar Link #### ${NORMAL}" | tee -a  /var/log/install.log
-source "${BASH_SOURCE%/*}/functions/modulemetar_setup.sh"
+ 	echo -e "$(date)" "${RED} #### Cambiando el móduloMetar Link #### ${NORMAL}" | tee -a  /var/log/install.log
+source "${BASH_SOURCE%/*}/functions/modulemetar_setup_es.sh"
 modulemetar
 	
 	 # clear
 	 cd /home/pi/
-	echo -e "$(date)" "${RED} #### Changing ModuleEchoLink Link #### ${NORMAL}" | tee -a  /var/log/install.log
-source "${BASH_SOURCE%/*}/functions/echolink_setup.sh"
+	echo -e "$(date)" "${RED} #### Cambio de ModuleEchoLink  #### ${NORMAL}" | tee -a  /var/log/install.log
+source "${BASH_SOURCE%/*}/functions/echolink_setup_es.sh"
 echolinksetup
 	
 	 # clear
@@ -147,7 +140,7 @@ echolinksetup
 #	propagationmonitor
 	
 	 # clear
-	echo -e "$(date)" "${RED} #### Setting up svxlink.service #### ${NORMAL}" | tee -a  /var/log/install.log
+	echo -e "$(date)" "${RED} #### Configurando Svxlink.service #### ${NORMAL}" | tee -a  /var/log/install.log
 
  	sudo systemctl enable svxlink_gpio_setup
 	
@@ -158,9 +151,9 @@ echolinksetup
  	sudo systemctl start svxlink.service
 
 
-echo -e "$(date)" "${GREEN} #### Installation complete #### ${NORMAL}" | tee -a  /var/log/install.log
+echo -e "$(date)" "${GREEN} #### Instalación completa #### ${NORMAL}" | tee -a  /var/log/install.log
 
-echo -e "$(date)" "${RED} #### Rebooting SVXLink #### ${NORMAL}" | tee -a  /var/log/install.log
+echo -e "$(date)" "${RED} #### Reiniciar SvxLink #### ${NORMAL}" | tee -a  /var/log/install.log
 
 #exit
 

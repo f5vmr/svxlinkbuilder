@@ -1,12 +1,11 @@
 #!/bin/bash
-##### Metar Info #####
+#### Metar Info ####
 function modulemetar {
- airports=("LFPG" "LFPO" "LFOB" "LFBL" "LFMN" "LFML" "LFBD" "LFRK" "LFRN" "LFRB" "LFRS" "LFBO" "LFMT" "LFLC" "LFLS" "LFLY" "LFLB" "LFST" "LFOT" "LFSL" "LFBE")
  
-whiptail --title "Metar Info" --yesno "Do you wish to configure this module?" 8 78 3>&1 1>&2 2>&3
+whiptail --title "Metar Info" --yesno "Voulez-vous configurer ce module?" 8 78 3>&1 1>&2 2>&3
     if [ $? -eq "0" ] 
     then
-selected=$(whiptail --title "Metar Info" --checklist "choose which Airports:" 27 78 20 \
+selected=$(whiptail --title "Metar Info" --scrolltext --checklist "Choisir quels Aéroports:" 24 78 13 \
         "LFPG" "Paris Charles de Gaulle" OFF \
         "LFPO" "Paris Orly" OFF \
         "LFOB" "Paris Beauvais" OFF \
@@ -30,9 +29,9 @@ selected=$(whiptail --title "Metar Info" --checklist "choose which Airports:" 27
         "LFBE" "Bergerac" OFF 3>&1 1>&2 2>&3)
         selected=$(echo "$selected" | sed 's/"//g')
         selected=$(echo "$selected" | tr ' ' ',')
-        sed -i "s/AIRPORTS=.*/AIRPORTS=$airports/g"  /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
+        sed -i "s/AIRPORTS=.*/AIRPORTS=$selected/g"  /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
      
-        specific_airport=$(whiptail --title "Metar Info" --radiolist "Please specify the airport ICAO code for a default airport: " ${#airports} 27 78 20 \
+        specific_airport=$(whiptail --title "Metar Info" --radiolist "SVP un code ICAO unique pour un aéroport de défaut: " ${#airports} 24 78 17 \
         "LFPG" "Paris Charles de Gaulle" OFF \
         "LFPO" "Paris Orly" OFF \
         "LFOB" "Paris Beauvais" OFF \

@@ -9,7 +9,7 @@ configure_fr
 source "${BASH_SOURCE%/*}/functions/node_type_fr.sh"
 nodeoption
 echo -e "$(date)" "${YELLOW} #### Type du Noed: $NODEOPTION #### ${NORMAL}" | tee -a  /var/log/install.log
-##### USB SOUND CARD ####
+#### USB SOUND CARD ####
 source "${BASH_SOURCE%/*}/functions/sound_card_fr.sh"
 soundcard
 echo -e "$(date)" "${YELLOW} #### Carte de son : $HID $GPIOD $card #### ${NORMAL}" | tee -a  /var/log/install.log	
@@ -23,7 +23,7 @@ callsign
 #### GROUPS AND USERS ####
 clear
 echo -e "$(date)" "${YELLOW} #### Creation des Groupes and Users #### ${NORMAL}" | tee -a  /var/log/install.log
-source "${BASH_SOURCE%/*}/functions/groups_fr.sh"
+source "${BASH_SOURCE%/*}/functions/groups.sh"
  make_groups
 #### DOWNLOADING SOURCE CODE ####
 echo -e "$(date)" "${YELLOW} #### Téléchargement du code source du SVXLink #### ${NORMAL}" | tee -a  /var/log/install.log
@@ -49,7 +49,7 @@ source "${BASH_SOURCE%/*}/functions/source.sh"
  	sudo mkdir local
  	sudo cp *.tcl ./local
  	sudo ldconfig
-##### CONFIGURATION VOICES ####
+#### CONFIGURATION VOICES ####
  # clear
 	echo -e "$(date)" "${GREEN} #### Installation des dossiers de Voix  #### ${NORMAL}" | tee -a  /var/log/install.log
 
@@ -60,7 +60,7 @@ source "${BASH_SOURCE%/*}/functions/source.sh"
   	cd /etc/svxlink
    sudo chmod 777 -R *
 
-##### BACKUP CONFIGURATION ####
+#### BACKUP CONFIGURATION ####
  # clear
 	echo -e "$(date)" "${GREEN} #### Sauvegarder la configuration à : $CONF.bak #### ${NORMAL}"| tee -a  /var/log/install.log
 

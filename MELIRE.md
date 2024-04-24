@@ -1,5 +1,5 @@
 # svxlinkbuilder - en Français
-<b><h2>Français - Mes Excuses, pour la parole, les pluparts sont grâce à Google Translate. </h2></b>
+<b><h2>Français - Mes Excuses, pour la vitesse, les pluparts sont grâce à Google Translate. </h2></b>
 <b><h2>Vos premiers pas</h2></b>
 <h3>Cette version de SVXLink contient actuellement une connexion au <b>svxportal-uk (SvxReflector)</b> uniquement. Si cela change, cette introduction changera également.</p>
 <p>La connexion au svxreflector assurait la connectivité à l'aide de pseudo-groupes de discussion vers d'autres nœuds et répéteurs du réseau. pour plus d'informations, sélectionnez ce lien http://svxportal-uk.ddns.net:81.</p>

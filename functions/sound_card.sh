@@ -17,7 +17,7 @@ else
 fi
 
 ## Assign the presence of the USB sound card to a variable
-if [ "$USB_sound_card_present" = true ] 
+if [[ "$USB_sound_card_present" = true ]] 
 then
     ## If USB sound card is present, assign some value to a variable
     sound_card_variable="C-Media USB Sound Device"
@@ -35,19 +35,19 @@ echo "Variable assigned: $sound_card_variable"
         "1" "Fully Modified for Transmit and Receive" \
         "2" "Fully Modified for Transmit Only" \
         "3" "Unmodified (use the GPIOD to control Squelch and PTT )" 3>&1 1>&2 2>&3)      
-    if [ "$SOUND_OPTION" = "1" ] 
+    if [[ "$SOUND_OPTION" = "1" ]] 
     then
     HID=true
     GPIOD=false
     card=true
     ## No need to play with the GPIOD
-    elif [ "$SOUND_OPTION" = "2" ] 
+    elif [[ "$SOUND_OPTION" = "2" ]] 
     then
     HID=true
     GPIOD=true
     card=true
     ## still need to set the HID for Transmit
-    elif [ "$SOUND_OPTION" = "3" ] 
+    elif [[ "$SOUND_OPTION" = "3" ]] 
     then
     HID=false
     GPIOD=true
@@ -58,10 +58,10 @@ echo "Variable assigned: $sound_card_variable"
     fi
     echo "HID is set to $HID"
     echo "GPIOD is set to $GPIOD"
-    if [ "$HID" = true ] 
+    if [[ "$HID" = true ]] 
     then 
-#### updates the udev rules for the USB sound card #####
-    if [ "$card" = true ] 
+#### updates the udev rules for the USB sound card ####
+    if [[ "$card" = true ]] 
     then
     echo "Ok, Let's add the updated rules"
                sudo cp /home/pi/svxlinkbuilder/addons/cm-108.rules /etc/udev/rules.d/

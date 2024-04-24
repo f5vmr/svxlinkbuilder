@@ -15,11 +15,12 @@ source "${BASH_SOURCE%/*}/functions/language.sh"
 which_language
 
 
-if [ "$LANG_OPTION" == "2" ] 
+if  [[ "$LANG_OPTION" == "2" ]] 
 then 
-
 sudo ./svxlinkbuilder/install_main_fr.sh
+elif  [[ "$LANG_OPTION" == "4" ]] 
+then
+sudo ./svxlinkbuilder/install_main_es.sh
 else
-
 sudo ./svxlinkbuilder/install_main.sh
 fi
