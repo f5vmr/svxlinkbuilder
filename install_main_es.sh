@@ -54,6 +54,7 @@ svxlink_source
 	echo -e "$(date)" "${GREEN} #### Installing Voice Files #### ${NORMAL}" | tee -a  /var/log/install.log
 
  	cd /usr/share/svxlink/sounds
+	
 if [[ $LANG_OPTION == "3" ]]; then
 	sudo wget https://github.com/sm0svx/svxlink-sounds-en_US-heather/archive/refs/tags/24.02.tar.gz
  	sudo tar -zxvf 24.02.tar.gz
