@@ -6,7 +6,7 @@ whiptail --title "Metar Info" --yesno "Do you wish to configure this module?" 8 
     if [ $? -eq "0" ] 
     then
         sleep 1
-    selected=$(whiptail --title "Metar Info" --checklist "choose which Airports:" 27 78 20 \
+    selected=$(whiptail --title "Metar Info" --checklist "Choose which Airports:" 24 78 17 \
         "EGLL" "London Heathrow" OFF \
         "EGKK" "London Gatwick" OFF \
         "EGCC" "Manchester" OFF \
@@ -31,7 +31,7 @@ whiptail --title "Metar Info" --yesno "Do you wish to configure this module?" 8 
         selected=$(echo "$selected" | tr ' ' ',')
         sed -i "s/AIRPORTS=.*/AIRPORTS=$selected/g"  /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
         
-        specific_airport=$(whiptail --title "Metar Info" --radiolist "Please specify the airport ICAO code for a default airport: " 27 78 20 \
+        specific_airport=$(whiptail --title "Metar Info" --radiolist "Please specify an ICAO code for a default airport: " 24 78 17 \
         "EGLL" "London Heathrow" OFF \
         "EGKK" "London Gatwick" OFF \
         "EGCC" "Manchester" OFF \

@@ -6,7 +6,7 @@ whiptail --title "Información del medidor" --yesno "¿Desea configurar este mó
     if [ $? -eq "0" ] 
     then
         sleep 1
-    selected=$(whiptail --title "Información del medidor" --checklist "Elija qué aeropuertos:" 43 78 20 \
+    selected=$(whiptail --title "Información del medidor" --checklist "Elija qué aeropuertos:" 24 78 13 \
         "LECO"  "A Coruña " OFF \
         "LEAB"  "Albacete " OFF \
         "LEAL"  "Alicante-Elche " OFF \
@@ -53,7 +53,7 @@ whiptail --title "Información del medidor" --yesno "¿Desea configurar este mó
         selected=$(echo "$selected" | tr ' ' ',')
         sed -i "s/AIRPORTS=.*/AIRPORTS=$selected/g"  /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
         
-        specific_airport=$(whiptail --title "Información del medidor" --radiolist "Especifique el código OACI del aeropuerto para un aeropuerto predeterminado: " 43 78 20 \
+        specific_airport=$(whiptail --title "Información del medidor" --radiolist "Especifique el código OACI del aeropuerto para un aeropuerto predeterminado: " 24 78 13 \
         "LECO"  "A Coruña " OFF \
         "LEAB"  "Albacete " OFF \
         "LEAL"  "Alicante-Elche " OFF \
