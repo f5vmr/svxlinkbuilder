@@ -12,7 +12,7 @@
 <p>Lors de l'utilisation des broches GPIO et GPIOD, une broche de terre est également requise. Ainsi, en utilisant cette combinaison, les broches 14, 16 et 18 sont toutes adjacentes et idéalement placées pour ces fonctions. La broche 14 est la Terre, la broche 16 est le GPIO 23 et la broche 18 est le GPIO 24.</p>
 <p>Pour un deuxième ensemble d'émetteurs-récepteurs, vous pouvez considérer les GPIO 17 et 18 comme COS et PTT pour ceux-ci.</p>
 <p>Une copie du design peut être trouvée sur g4nab.co.uk. Il existe également une page montrant les instructions de modification pour une carte son USB CM-108.</p>
-<h2>La programmation de la SDCard</h2>
+<h2>La programmation de la Carte SD</h2>
 
 <p>Comme indiqué, commencez par télécharger <b>Raspberry OS Bookworm Lite</b> depuis RaspberryPi.org. Utilisez ensuite une carte MicroSD de 8 ou 16 Go et transférez l'image sur la carte, de préférence en utilisant le <b>Raspberry Pi Image builder</b> de la même source. <b> Vous DEVEZ définir l'utilisateur « pi » - veuillez ne pas vous écarter de mes conseils ci-dessus, car vous rencontrerez des problèmes. </b> Vous pouvez cependant utiliser votre propre mot de passe. Il existe des versions de Raspberry Pi Imager pour tous les systèmes d'exploitation. Il permet une utilisation complète du WiFi.</p>
 <p>Dans la première case <b>périphérique</b>, sélectionnez « Aucun filtrage »</p>
