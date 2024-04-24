@@ -7,16 +7,16 @@ function nodeoption {
             "3" "Nodo repetidor sin SvxReflector" \
             "4" "Nodo repetidor con SvxReflector" 3>&1 1>&2 2>&3)
 
-    if [ "$NODE_OPTION" -eq "1" ] 
+    if [[ "$NODE_OPTION" -eq "1" ]] 
     then
         echo "Elija Nodo Simplex sin SvxReflector" | tee -a /var/log/install.log
-    elif [ "$NODE_OPTION" -eq "2" ] 
+    elif [[ "$NODE_OPTION" -eq "2" ]] 
     then
         echo "Elija Nodo Simplex con SvxReflector" | tee -a /var/log/install.log
-    elif [ "$NODE_OPTION" -eq "3" ] 
+    elif [[ "$NODE_OPTION" -eq "3" ]] 
     then
         echo "Elija Nodo repetidor sin SvxReflector" | tee -a /var/log/install.log
-    elif [ "$NODE_OPTION" -eq "4" ] 
+    elif [[ "$NODE_OPTION" -eq "4" ]] 
     then
         echo "Elija Nodo repetidor con SvxReflector" | tee -a /var/log/install.log
     else 
