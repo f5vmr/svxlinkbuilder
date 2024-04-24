@@ -47,7 +47,7 @@ echo "Variable assigned: $sound_card_variable"
     GPIOD=true
     card=true
     ## still need to set the HID for Transmit
-    elif [ "$SOUND_OPTION" = "3" ] 
+    elif [[ "$SOUND_OPTION" = "3" ]] 
     then
     HID=false
     GPIOD=true
@@ -71,6 +71,7 @@ echo "Variable assigned: $sound_card_variable"
     else
     echo "ok, donc, je ne fait pas de changements"           
     fi               
+fi
     echo -e "$(date)" "${GREEN}Audio mis à jour, carte-son factice inclu pour Darkice complètés.${NORMAL}" | tee -a /var/log/install.log
 				
 }
