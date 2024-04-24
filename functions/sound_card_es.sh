@@ -35,19 +35,19 @@ echo "Variable assigned: $sound_card_variable"
         "1" "Modificado para Tx y Rx" \
         "2" "Modificado solo para Tx" \
         "3" "Sin modificaciones (use GPIOD para controlar el Squelch y el PTT)" 3>&1 1>&2 2>&3)      
-    if [ "$SOUND_OPTION" = "1" ] 
+    if [[ "$SOUND_OPTION" = "1" ]] 
     then
     HID=true
     GPIOD=false
     card=true
     ## No need to play with the GPIOD
-    elif [ "$SOUND_OPTION" = "2" ] 
+    elif [[ "$SOUND_OPTION" = "2" ]] 
     then
     HID=false
     GPIOD=true
     card=true
     ## still need to set the HID for Transmit
-    elif [ "$SOUND_OPTION" = "3" ] 
+    elif [[ "$SOUND_OPTION" = "3" ]] 
     then
     HID=false
     GPIOD=true
@@ -70,7 +70,8 @@ echo "Variable assigned: $sound_card_variable"
                 
     else
     echo "Ok, entonces no haré ningún cambio."           
-    fi               
+    fi                    
+fi
     echo -e "$(date)" "${GREEN}Audio actualizado, tarjeta de sonido ficticia incluida para Darkice completo.${NORMAL}" | tee -a /var/log/install.log
 				
 }

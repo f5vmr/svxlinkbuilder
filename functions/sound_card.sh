@@ -35,19 +35,19 @@ echo "Variable assigned: $sound_card_variable"
         "1" "Fully Modified for Transmit and Receive" \
         "2" "Fully Modified for Transmit Only" \
         "3" "Unmodified (use the GPIOD to control Squelch and PTT )" 3>&1 1>&2 2>&3)      
-    if [ "$SOUND_OPTION" = "1" ] 
+    if [[ "$SOUND_OPTION" = "1" ]] 
     then
     HID=true
     GPIOD=false
     card=true
     ## No need to play with the GPIOD
-    elif [ "$SOUND_OPTION" = "2" ] 
+    elif [[ "$SOUND_OPTION" = "2" ]] 
     then
     HID=true
     GPIOD=true
     card=true
     ## still need to set the HID for Transmit
-    elif [ "$SOUND_OPTION" = "3" ] 
+    elif [[ "$SOUND_OPTION" = "3" ]] 
     then
     HID=false
     GPIOD=true
