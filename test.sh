@@ -1,5 +1,5 @@
 #!/bin/bash
-selected=$(whiptail --title "Información del medidor" --checklist "Elija qué aeropuertos:" 43 78 43 \
+selected=$(whiptail --title "Información del medidor" --checklist "Elija qué aeropuertos:" 47 78 47 \
         "LECO"  "A Coruña " OFF \
         "LEAB"  "Albacete " OFF \
         "LEAL"  "Alicante-Elche " OFF \
