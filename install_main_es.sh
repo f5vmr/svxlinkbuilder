@@ -54,19 +54,9 @@ svxlink_source
 	echo -e "$(date)" "${GREEN} #### Installing Voice Files #### ${NORMAL}" | tee -a  /var/log/install.log
 
  	cd /usr/share/svxlink/sounds
-	
-if [[ $LANG_OPTION == "3" ]]; then
-	sudo wget https://github.com/sm0svx/svxlink-sounds-en_US-heather/archive/refs/tags/24.02.tar.gz
- 	sudo tar -zxvf 24.02.tar.gz
-	sudo rm 24.02.tar.gz
-	elif [[ $LANG_OPTION == "4" ]]; then
-	cd /usr/share/svxlink/sounds
+
 	sudo git clone https://github.com/ea5gvk/es_ES.git
-	else 
-	sudo wget https://g4nab.co.uk/wp-content/uploads/2023/08/en_GB.tar_.gz
- 	sudo tar -zxvf en_GB.tar_.gz
- 	sudo rm en_GB.tar_.gz
-	fi
+
   	cd /etc/svxlink
    sudo chmod 777 -R *
 
