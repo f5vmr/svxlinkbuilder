@@ -30,7 +30,7 @@ selected=$(whiptail --title "Metar Info" --checklist "choose which Airports:" 27
         "LFBE" "Bergerac" OFF 3>&1 1>&2 2>&3)
         selected=$(echo "$selected" | sed 's/"//g')
         selected=$(echo "$selected" | tr ' ' ',')
-        sed -i "s/AIRPORTS=.*/AIRPORTS=$airports/g"  /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
+        sed -i "s/AIRPORTS=.*/AIRPORTS=$selected/g"  /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
      
         specific_airport=$(whiptail --title "Metar Info" --radiolist "Please specify the airport ICAO code for a default airport: " ${#airports} 27 78 20 \
         "LFPG" "Paris Charles de Gaulle" OFF \

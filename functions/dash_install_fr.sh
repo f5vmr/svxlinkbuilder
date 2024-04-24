@@ -41,7 +41,7 @@ sudo chmod 0440 /etc/sudoers.d/svxlink
 
 ## Check if syntax check passed
 
-    echo "Lines added to sudoers successfully."
+    echo "Lignes ajoutées aux sudoers avec succès."
 else
     echo "Error: Failed to add lines to sudoers. Restoring backup."
  fi

@@ -52,7 +52,7 @@ whiptail --title "Información del medidor" --yesno "¿Desea configurar este mó
 “GCHI” “El Hierro” OFF 3>&1 1>&2 2>&3)
         selected=$(echo "$selected" | sed 's/"//g')
         selected=$(echo "$selected" | tr ' ' ',')
-        sed -i "s/AIRPORTS=.*/AIRPORTS=$airports/g"  /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
+        sed -i "s/AIRPORTS=.*/AIRPORTS=$selected/g"  /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
         
         specific_airport=$(whiptail --title "Información del medidor" --radiolist "Especifique el código OACI del aeropuerto para un aeropuerto predeterminado: " 27 78 20 \
         “LECO” “A Coruña” OFF \

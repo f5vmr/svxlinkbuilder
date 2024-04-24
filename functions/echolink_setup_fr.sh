@@ -9,10 +9,10 @@ then
         echocall=$(whiptail --title "Indicatif F2ABC-L or -R?" --inputbox "Selectionner l'indicatif (-L or -R) comme enregisteré" 8 60 3>&1 1>&2 2>&3)
         echocall=${echocall^^}
         echopass=$(whiptail --title "Mot-pass?" --passwordbox "Selectionner le mot-pass" 8 20 3>&1 1>&2 2>&3)
-        echosysop=$(whiptail --title "PreNom du System Operateur?" --inputbox "Selectionner ton prenom SYSOP" 8 20 3>&1 1>&2 2>&3)
+        echosysop=$(whiptail --title "Prenom du System-Operateur?" --inputbox "Selectionner ton prenom SYSOP" 8 20 3>&1 1>&2 2>&3)
         echosysop=${echosysop^}
         echofreq=$(whiptail --title "Frequence" --inputbox "Selectionner La frequence sortie en MHz eg 145.2375" 8 20 3>&1 1>&2 2>&3)
-        echolocation=$(whiptail --title "Location" --inputbox "Selectionner le Ville ou Dept." 8 20 3>&1 1>&2 2>&3)
+        echolocation=$(whiptail --title "Endroit" --inputbox "Selectionner le Ville ou Dept." 8 20 3>&1 1>&2 2>&3)
         echolocation=${echolocation^}
     sed -i "s/CALLSIGN=MYCALL-L/CALLSIGN=$echocall/g" /etc/svxlink/svxlink.d/ModuleEchoLink.conf
     sed -i "s/PASSWORD=MyPass/PASSWORD=$echopass/g" /etc/svxlink/svxlink.d/ModuleEchoLink.conf
