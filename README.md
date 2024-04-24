@@ -1,5 +1,6 @@
-# SvxlinkBuilder 
-<h2>Menu build for Raspberry Pi - Repeater or Hotspot node. Pour l'instruction en Français, MELIRE.md. Para instrucción en español LÉAME.md.</h2>
+# SvxlinkBuilder
+<h1>Menu build for Raspberry Pi - Repeater or Hotspot node. EchoLink MetarInfo and SVXReflector Options</h1>
+<h2> Pour l'instruction en Français, MELIRE.md. Para instrucción en español LÉAME.md.</h2>
 <h3>This SVXLink build presently contains a connection only to the <b>svxportal-uk (SvxReflector)</b> only . If this changes then so will this introduction.</p>
 <p>The connection to the svxreflector provided connectivity using pseudo-talkgroups to other nodes and repeaters on the network. for more information select this link http://svxportal-uk.ddns.net:81.</p>
 <b>Your First Steps</b>

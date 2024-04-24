@@ -1,5 +1,6 @@
 # svxlinkbuilder
 <h1>Introducción</h1>
+<h2>Para mayor velocidad, he utilizado el traductor de Google. Mis disculpas si el sentido es incorrecto.</h2>
 <h2>Creación de menú para Raspberry Pi: nodo repetidor o punto de acceso. Para instrucciones en francés, MELIRE.md.</h2>
 <h3>Esta compilación de SVXLink actualmente contiene una conexión solo al <b>svxportal-uk (SvxReflector)</b> únicamente. Si esto cambia, también lo hará esta introducción.</p>
 <p>La conexión al svxreflector proporcionó conectividad mediante pseudogrupos de conversación a otros nodos y repetidores de la red. Para obtener más información, seleccione este enlace http://svxportal-uk.ddns.net:81.</p>
