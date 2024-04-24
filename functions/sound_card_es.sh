@@ -69,7 +69,7 @@ echo "Variable assigned: $sound_card_variable"
                sudo udevadm trigger
                 
     else
-    echo "ok, donc, je ne fait pas de changements"           
+    echo "Ok, entonces no haré ningún cambio."           
     fi               
     echo -e "$(date)" "${GREEN}Audio actualizado, tarjeta de sonido ficticia incluida para Darkice completo.${NORMAL}" | tee -a /var/log/install.log
 				
