@@ -58,6 +58,9 @@ if [[ $LANG_OPTION == "3" ]]; then
 	sudo wget https://github.com/sm0svx/svxlink-sounds-en_US-heather/archive/refs/tags/24.02.tar.gz
  	sudo tar -zxvf 24.02.tar.gz
 	sudo rm 24.02.tar.gz
+	elif [[ $LANG_OPTION == "4" ]]; then
+	cd /usr/share/svxlink/sounds
+	sudo git clone https://github.com/eagvk/es_ES.git
 	else 
 	sudo wget https://g4nab.co.uk/wp-content/uploads/2023/08/en_GB.tar_.gz
  	sudo tar -zxvf en_GB.tar_.gz
