@@ -16,7 +16,7 @@ whiptail --title "Actualizado" --msgbox "Directorios actualizados para nodo js y
 ###### BUILD ESSENTIALS ####
 	whiptail --title "Construir elementos esenciales" --msgbox "Agregue todos los paquetes necesarios para Svxlink. Escribe OK para continuar" 8 78
 
-	echo -e "$(date)" "${YELLOW} ### Installation des paquets ### ${NORMAL}" | tee -a  /var/log/install.log
+	echo -e "$(date)" "${YELLOW} ### Instalación de paquetes ### ${NORMAL}" | tee -a  /var/log/install.log
  	sudo apt-get install build-essential g++ make cmake libsigc++-2.0-dev php8.2 nodejs libgsm1-dev libudev-dev libpopt-dev tcl-dev libgpiod-dev gpiod libgcrypt20-dev libspeex-dev libasound2-dev alsa-utils libjsoncpp-dev libopus-dev rtl-sdr libcurl4-openssl-dev libogg-dev librtlsdr-dev groff doxygen graphviz python3-serial sqlite3 php8.2-sqlite3 toilet -y
 
 }

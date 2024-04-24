@@ -23,7 +23,7 @@ callsign
 #### GROUPS AND USERS ####
 clear
 echo -e "$(date)" "${YELLOW} #### Creation des Groupes and Users #### ${NORMAL}" | tee -a  /var/log/install.log
-source "${BASH_SOURCE%/*}/functions/groups_fr.sh"
+source "${BASH_SOURCE%/*}/functions/groups.sh"
  make_groups
 #### DOWNLOADING SOURCE CODE ####
 echo -e "$(date)" "${YELLOW} #### Téléchargement du code source du SVXLink #### ${NORMAL}" | tee -a  /var/log/install.log

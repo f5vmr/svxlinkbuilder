@@ -1,24 +1,24 @@
 #!/bin/bash
 
 #### Welcome Message ####
-source "${BASH_SOURCE%/*}/functions/welcome.sh"
+source "${BASH_SOURCE%/*}/functions/welcome_es.sh"
 welcome
-source "${BASH_SOURCE%/*}/functions/configure.sh"
+source "${BASH_SOURCE%/*}/functions/configure_es.sh"
 configure
 #### NODE Selection ####
-source "${BASH_SOURCE%/*}/functions/node_type.sh"
+source "${BASH_SOURCE%/*}/functions/node_type_es.sh"
 nodeoption
 echo -e "$(date)" "${YELLOW} #### Node Type: $NODEOPTION #### ${NORMAL}" | tee -a  /var/log/install.log
 ##### USB SOUND CARD ####
-source "${BASH_SOURCE%/*}/functions/sound_card.sh"
+source "${BASH_SOURCE%/*}/functions/sound_card_es.sh"
 soundcard
 echo -e "$(date)" "${YELLOW} #### Sound Card: $HID $GPIOD $card #### ${NORMAL}" | tee -a  /var/log/install.log	
 echo -e "$(date)" "${YELLOW} #### Checking Alsa #### ${NORMAL}" | tee -a  /var/log/install.log
 #### UPDATE ####
-source "${BASH_SOURCE%/*}/functions/update.sh"
+source "${BASH_SOURCE%/*}/functions/update_es.sh"
 update
 #### REQUEST CALLSIGN ####
-source "${BASH_SOURCE%/*}/functions/callsign.sh"
+source "${BASH_SOURCE%/*}/functions/callsign_es.sh"
 callsign
 #### GROUPS AND USERS ####
 clear
@@ -120,7 +120,7 @@ if [[ $LANG_OPTION == "3" ]]; then
 	cd /home/pi
 	echo -e "$(date)" "${YELLOW} #### Installing Dashboard #### ${NORMAL}" | tee -a  /var/log/install.log
 
-	source "${BASH_SOURCE%/*}/functions/dash_install.sh"
+	source "${BASH_SOURCE%/*}/functions/dash_install_es.sh"
 install_dash
  # clear
 	echo -e "$(date)" "${GREEN} #### Dashboard installed #### ${NORMAL}" | tee -a  /var/log/install.log
