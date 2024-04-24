@@ -5,7 +5,7 @@ function welcome_message {
     WELCOME="Welcome to the SVXLink Build Script.\n\nThis script will install a build of SVXLink with user pi and password raspberry"
 whiptail --title "$TITLE" --msgbox "$WELCOME\n\n Hit OK to continue" 8 78
 }
-###### install ######
+#### install ####
 
 function install_dependencies {
 export LANGUAGE=en_GB.UTF-8

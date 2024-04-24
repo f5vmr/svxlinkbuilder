@@ -6,14 +6,14 @@ OP=/etc/svxlink
 
 whiptail --title "Actualizado" --msgbox "Directorios actualizados para nodo js y expansión para el futuro. Escribe OK para continuar" 8 78
 
-	echo -e "$(date)" "${YELLOW}  #### updates and upgrades #### ${NORMAL}" | tee -a  /var/log/install.log
+	echo -e "$(date)" "${YELLOW} #### updates and upgrades #### ${NORMAL}" | tee -a  /var/log/install.log
 
  	sudo apt-get update
  	sudo apt-get upgrade -y
 	VERSIONS=svxlink/src/versions | tee -a   /var/log/install.log   
 
-	echo -e "$(date)" "${YELLOW}  #### commence build #### ${NORMAL}" | tee -a  /var/log/install.log
-###### BUILD ESSENTIALS ####
+	echo -e "$(date)" "${YELLOW} #### commence build #### ${NORMAL}" | tee -a  /var/log/install.log
+#### BUILD ESSENTIALS ####
 	whiptail --title "Construir elementos esenciales" --msgbox "Agregue todos los paquetes necesarios para Svxlink. Escribe OK para continuar" 8 78
 
 	echo -e "$(date)" "${YELLOW} ### Instalación de paquetes ### ${NORMAL}" | tee -a  /var/log/install.log

@@ -6,14 +6,14 @@ OP=/etc/svxlink
 
 whiptail --title "Updates" --msgbox "Updating and Upgrading OS" 8 78
 
-	echo -e "$(date)" "${YELLOW}  #### updates and upgrades #### ${NORMAL}" | tee -a  /var/log/install.log
+	echo -e "$(date)" "${YELLOW} #### updates and upgrades #### ${NORMAL}" | tee -a  /var/log/install.log
 	
  	sudo apt-get update
  	sudo apt-get upgrade -y
 	VERSIONS=svxlink/src/versions | tee -a   /var/log/install.log   
 
-	echo -e "$(date)" "${YELLOW}  #### commence build #### ${NORMAL}" | tee -a  /var/log/install.log
-###### BUILD ESSENTIALS ####
+	echo -e "$(date)" "${YELLOW} #### commence build #### ${NORMAL}" | tee -a  /var/log/install.log
+#### BUILD ESSENTIALS ####
 	whiptail --title "Build Essentials" --msgbox "Adding all required packages. Type OK to continue." 8 78
 
 	echo -e "$(date)" "${YELLOW} ### Installation of Packages ### ${NORMAL}" | tee -a  /var/log/install.log

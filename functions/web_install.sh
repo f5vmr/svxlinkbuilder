@@ -1,5 +1,5 @@
 #!/bin/bash
-###### Apache2 Server ######
+#### Apache2 Server ####
 function install_apache2_server {
     sudo apt-get install apache2 php8.2-common php8.2-fpm php8.2-curl php8.2-dev php8.2-gd php-imagick \
         php-memcached php8.2-pspell php8.2-snmp php8.2-sqlite3 php8.2-xmlrpc \

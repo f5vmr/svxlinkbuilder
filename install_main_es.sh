@@ -9,7 +9,7 @@ configure
 source "${BASH_SOURCE%/*}/functions/node_type_es.sh"
 nodeoption
 echo -e "$(date)" "${YELLOW} #### Node Type: $NODEOPTION #### ${NORMAL}" | tee -a  /var/log/install.log
-##### USB SOUND CARD ####
+#### USB SOUND CARD ####
 source "${BASH_SOURCE%/*}/functions/sound_card_es.sh"
 soundcard
 echo -e "$(date)" "${YELLOW} #### Sound Card: $HID $GPIOD $card #### ${NORMAL}" | tee -a  /var/log/install.log	
@@ -49,7 +49,7 @@ svxlink_source
  	sudo mkdir local
  	sudo cp *.tcl ./local
  	sudo ldconfig
-##### CONFIGURATION VOICES ####
+#### CONFIGURATION VOICES ####
  # clear
 	echo -e "$(date)" "${GREEN} #### Installing Voice Files #### ${NORMAL}" | tee -a  /var/log/install.log
 
@@ -69,7 +69,7 @@ if [[ $LANG_OPTION == "3" ]]; then
   	cd /etc/svxlink
    sudo chmod 777 -R *
 
-##### BACKUP CONFIGURATION ####
+#### BACKUP CONFIGURATION ####
  # clear
 	echo -e "$(date)" "${GREEN} #### Copia de seguridad de la configuración en: $CONF.bak #### ${NORMAL}"| tee -a  /var/log/install.log
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-##### Metar Info #####
+#### Metar Info ####
 function modulemetar {
  
 whiptail --title "Metar Info" --yesno "Do you wish to configure this module?" 8 78 3>&1 1>&2 2>&3

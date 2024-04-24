@@ -1,5 +1,5 @@
 #!/bin/bash
-##### Metar Info #####
+#### Metar Info ####
 function modulemetar {
  
 whiptail --title "Información del medidor" --yesno "¿Desea configurar este módulo?" 8 78  3>&1 1>&2 2>&3
