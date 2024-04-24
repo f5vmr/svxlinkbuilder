@@ -156,7 +156,7 @@ whiptail --title "Tarjeta de sonido" --msgbox "La tarjeta de sonido USB se encue
             else
     echo no action here    
     fi
-    sed -i "s/DEFAULT_LANG=en_GB/DEFAULT_LANG=$(echo $LANG | grep -o '^[a-zA-Z]*_[a-zA-Z]*')/g" /etc/svxlink/svxlink.conf
+    sed -i "s/DEFAULT_LANG=en_GB/DEFAULT_LANG=$(echo $lang)/g" /etc/svxlink/svxlink.conf
 
 ##need to change the PTT and COS to HID and all the statements to reflect this modified SoundCard Unit - ask for GPIOD pins
 

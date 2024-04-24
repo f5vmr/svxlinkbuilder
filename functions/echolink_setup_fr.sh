@@ -19,7 +19,7 @@ then
     sed -i "s/MyName/$echosysop/g" /etc/svxlink/svxlink.d/ModuleEchoLink.conf
     sed -i "s/Fq,/$echofreq/g" /etc/svxlink/svxlink.d/ModuleEchoLink.conf
     sed -i "s/MyTown/$echolocation/g" /etc/svxlink/svxlink.d/ModuleEchoLink.conf
-    sed -i "s/\#DEFAULT_LANG=en_US/DEFAULT_LANG=$(echo $LANG | grep -o '^[a-zA-Z]*_[a-zA-Z]*')/g" /etc/svxlink/svxlink.d/ModuleEchoLink.conf
+    sed -i "s/\#DEFAULT_LANG=en_US/DEFAULT_LANG=$(echo $lang)/g" /etc/svxlink/svxlink.d/ModuleEchoLink.conf
     sed -i 's/DESCRIPTION/\#DESCRIPTION/g' /etc/svxlink/svxlink.d/ModuleEchoLink.conf
     sed -i 's/\#STATUS_SERVER_LIST/STATUS_SERVER_LIST/g' /etc/svxlink/svxlink.d/ModuleEchoLink.conf
  echo -e "$(date)" "${GREEN} Echolink est disponible. ${NORMAL}" | tee -a /var/log/install.log
