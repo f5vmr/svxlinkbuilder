@@ -17,7 +17,7 @@ else
 fi
 
 ## Assign the presence of the USB sound card to a variable
-if [ "$USB_sound_card_present" = true ] 
+if [[ "$USB_sound_card_present" = true ]] 
 then
     ## If USB sound card is present, assign some value to a variable
     sound_card_variable="C-Media USB Sound Device"
@@ -58,10 +58,10 @@ echo "Variable assigned: $sound_card_variable"
     fi
     echo "HID is set to $HID"
     echo "GPIOD is set to $GPIOD"
-    if [ "$HID" = true ] 
+    if [[ "$HID" = true ]]
     then 
 #### updates the udev rules for the USB sound card #####
-    if [ "$card" = true ] 
+    if [[ "$card" = true ]] 
     then
     echo "Ok, vamos: cambia las reglas de udev para la tarjeta de sonido USB."
                sudo cp /home/pi/svxlinkbuilder/addons/cm-108.rules /etc/udev/rules.d/
