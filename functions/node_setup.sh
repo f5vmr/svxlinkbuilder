@@ -64,7 +64,7 @@ whiptail --title "Sound Card" --msgbox "The USB soundcard is located at card $ca
             "High" "Transmit PTT is active-High" OFF \
             "Low" "Transmit PTT is active-Low" OFF 3>&1 1>&2 2>&3)
 
-            ptt_pin=$(whiptail --title "PTT Pin" --radiolist "Please enter PTT Pin (gpio #)" 8 78 7\
+            ptt_pin=$(whiptail --title "PTT Pin" --radiolist "Please enter PTT Pin (gpio #)" 14 78 7\
                 "gpio 24" "as PTT Pin" ON \
                 "gpio 18" "as PTT Pin" OFF \
                 "gpio 7" "spotnik PTT Pin" OFF \
@@ -90,7 +90,7 @@ whiptail --title "Sound Card" --msgbox "The USB soundcard is located at card $ca
             cos_direction=$(whiptail --title "COS" --radiolist "Please select COS direction" 8 78 2 \
             "High" "Receive COS is active-High" OFF \
             "Low" "Receive COS is active-Low" OFF 3>&1 1>&2 2>&3)
-            cos_pin=$(whiptail --title "COS Pin" --radiolist "Please enter COS Pin (gpio #)" 8 78 5 \
+            cos_pin=$(whiptail --title "COS Pin" --radiolist "Please enter COS Pin (gpio #)" 14 78 5 \
                 "gpio 23" "as COS Pin" ON \
                 "gpio 17" "as COS Pin" OFF \
                 "gpio 8" "as COS Pin" OFF \
@@ -120,7 +120,7 @@ whiptail --title "Sound Card" --msgbox "The USB soundcard is located at card $ca
         cos_direction=$(whiptail --title "COS" --radiolist "Please select COS direction" 10 78 3 \
         "High" "Receive COS is active-High" OFF \
         "Low" "Receive COS is active-Low" OFF 3>&1 1>&2 2>&3)
-        cos_pin=$(whiptail --title "COS Pin" --radiolist "Please enter COS Pin (gpio #)" 8 78 5\
+        cos_pin=$(whiptail --title "COS Pin" --radiolist "Please enter COS Pin (gpio #)" 14 78 7\
             "gpio 23" "as COS Pin" ON \
             "gpio 17" "as COS Pin" OFF \
             "gpio 8" "as COS Pin" OFF \
