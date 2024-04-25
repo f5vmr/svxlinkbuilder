@@ -108,7 +108,7 @@ source "${BASH_SOURCE%/*}/functions/source.sh"
 	cd /home/pi
 	echo -e "$(date)" "${YELLOW} #### Installing Tableau de Bord #### ${NORMAL}" | tee -a  /var/log/install.log
 
-	source "${BASH_SOURCE%/*}/functions/dash_install.sh"
+	source "${BASH_SOURCE%/*}/functions/dash_install_fr.sh"
 install_dash
  # clear
 	echo -e "$(date)" "${GREEN} #### Tableau installé #### ${NORMAL}" | tee -a  /var/log/install.log
