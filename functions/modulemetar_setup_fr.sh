@@ -31,7 +31,7 @@ selected=$(whiptail --title "Metar Info" --scrolltext --checklist "Choisir quels
         selected=$(echo "$selected" | tr ' ' ',')
         sed -i "s/AIRPORTS=.*/AIRPORTS=$selected/g"  /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
      
-        specific_airport=$(whiptail --title "Metar Info" --radiolist "SVP un code ICAO unique pour un aéroport de défaut: " ${#airports} 24 78 17 \
+specific_airport=$(whiptail --title "Metar Info" --radiolist "SVP un code ICAO unique pour un aéroport de défaut: " ${#airports} 24 78 13 \
         "LFPG" "Paris Charles de Gaulle" OFF \
         "LFPO" "Paris Orly" OFF \
         "LFOB" "Paris Beauvais" OFF \
@@ -59,6 +59,6 @@ selected=$(whiptail --title "Metar Info" --scrolltext --checklist "Choisir quels
    
     else
      sed -i 's/,ModuleMetarInfo//' /etc/svxlink/svxlink.conf
-    # removing MetarInfo from the MODULES= line in both SImplex and Duplex
+    # removing MetarInfo from the MODULES= line in both Simplex and Duplex
     fi
 }
