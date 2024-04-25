@@ -112,7 +112,7 @@ elif [[ "$HID" == "true" ]] && [[ "$GPIOD" == "true" ]] && [[ "$card" == "true" 
                 sed -i 's/\#HID_PTT_PIN=GPIO3/HID_PTT_PIN=GPIO3/g' /etc/svxlink/svxlink.conf
 
 
-        cos_direction=$(whiptail --title "COS" --radiolist "Selectionner COS direction" 10 78 3 \
+        cos_direction=$(whiptail --title "COS" --radiolist "Selectionner le sens COS " 10 78 3 \
         "High" "Receive COS is active-High" OFF \
         "Low" "Receive COS is active-Low" OFF 3>&1 1>&2 2>&3)
         cos_pin=$(whiptail --title "COS Pin" --radiolist "Selectionner broche COS (gpio #)" 8 78 3\
