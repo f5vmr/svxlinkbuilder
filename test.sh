@@ -1,11 +1,11 @@
 #!/bin/bash
-if [ "$NODE_OPTION" -eq 3 ] || [ "$NODE_OPTION" -eq 4 ]; then
+#if [ "$NODE_OPTION" -eq 3 ] || [ "$NODE_OPTION" -eq 4 ]; then
 RepeaterLogic="RepeaterLogic.tcl"
 logicfile="$LOGIC_DIR/$RepeaterLogic"
-    # Code to execute if NODE_OPTION is equal to 3 or 4
-    echo "NODE_OPTION is 3 or 4. Executing code..."
-    # Add your code here
-    #!/bin/bash
+#    # Code to execute if NODE_OPTION is equal to 3 or 4
+#    echo "NODE_OPTION is 3 or 4. Executing code..."
+#    # Add your code here
+
 
 # Define the options for the whiptail menu
 options=(
