@@ -1,5 +1,6 @@
 #!/bin/bash
-$LOGIC_DIR="/usr/share/svxlink/events.d/local"
+CONF_DIR="/etc/svxlink"
+LOGIC_DIR="/usr/share/svxlink/events.d/local"
 svxfile="svxlink.conf"
 logictcl="Logic.tcl"
 logicfile="$LOGIC_DIR/$logictcl"
