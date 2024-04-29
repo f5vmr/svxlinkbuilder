@@ -18,8 +18,8 @@ new_short_ident_interval=$(echo "$new_values" | awk '{print $1}')
 new_long_ident_interval=$(echo "$new_values" | awk '{print $2}')
 
 # Update svxlink.conf with new values
-sed -i "s/^SHORT_IDENT_INTERVAL=.*/SHORT_IDENT_INTERVAL=$new_short_ident_interval/" "$svxconf_file"
-sed -i "s/^LONG_IDENT_INTERVAL=.*/LONG_IDENT_INTERVAL=$new_long_ident_interval/" "$svxconf_file"
+sed -i "s/^SHORT_IDENT_INTERVAL=.*/SHORT_IDENT_INTERVAL=$new_short_ident_interval/g" "$svxconf_file"
+sed -i "s/^LONG_IDENT_INTERVAL=.*/LONG_IDENT_INTERVAL=$new_long_ident_interval/g" "$svxconf_file"
 
 
 # Extract current values of the variables
