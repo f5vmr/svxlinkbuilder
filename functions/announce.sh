@@ -20,10 +20,6 @@ sed -i "s/^SHORT_IDENT_INTERVAL=.*/SHORT_IDENT_INTERVAL=$new_short_ident_interva
 sed -i "s/^LONG_IDENT_INTERVAL=.*/LONG_IDENT_INTERVAL=$new_long_ident_interval/" $svxconf_file
 
 
-
-# Define the file path
-
-
 # Extract current values of the variables
 short_voice_id_enable=$(grep "variable short_voice_id_enable" "$logicfile" | awk '{print $3}')
 short_cw_id_enable=$(grep "variable short_cw_id_enable" "$logicfile" | awk '{print $3}')
@@ -31,7 +27,7 @@ long_voice_id_enable=$(grep "variable long_voice_id_enable" "$logicfile" | awk '
 long_cw_id_enable=$(grep "variable long_cw_id_enable" "$logicfile" | awk '{print $3}')
 
 # Display current values and prompt for new values using whiptail
-new_values=$(whiptail --title "Toggle Variables" --checklist "Toggle Variables" 15 60 4 \
+new_values=$(whiptail --title "Toggle ID Variables" --checklist "Toggle Variables" 15 60 4 \
     "short_voice_id_enable" "SHORT_VOICE_ID_ENABLE: $short_voice_id_enable" $short_voice_id_enable \
     "short_cw_id_enable" "SHORT_CW_ID_ENABLE: $short_cw_id_enable" $short_cw_id_enable \
     "long_voice_id_enable" "LONG_VOICE_ID_ENABLE: $long_voice_id_enable" $long_voice_id_enable \
@@ -52,10 +48,8 @@ sed -i "s/variable long_cw_id_enable $long_cw_id_enable/variable long_cw_id_enab
 
 
 
-
-
 # Extract the content of the send_rgr_sound procedure
-send_rgr_sound_content=$(sed -n '/proc send_rgr_sound/,/}/p' "$svxconf_file" | sed '1d;$d' | sed -n '/else/,/}/p' | sed '1d;$d')
+send_rgr_sound_content=$(sed -n '/proc send_rgr_sound/,/}/p' "$logicfile" | sed '1d;$d' | sed -n '/else/,/}/p' | sed '1d;$d')
 
 # Default settings
 default_option="Beep"
