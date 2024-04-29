@@ -133,6 +133,10 @@ nodeset
 	echo -e "$(date)" "${GREEN} #### Identification setup  #### ${NORMAL}" | tee -a  /var/log/install.log
 source "${BASH_SOURCE%/*}/functions/announce.sh"
 announce
+	echo -e "$(date)" "${GREEN} #### Announcement setup complete  #### ${NORMAL}" | tee -a  /var/log/install.log
+source "${BASH_SOURCE%/*}/functions/tones.sh"
+tones
+	echo -e "$(date)" "${GREEN} #### Tones setup complete  #### ${NORMAL}" | tee -a  /var/log/install.log	
 	cd /home/pi
 	 # clear
  	echo -e "$(date)" "${RED} #### Changing ModuleMetar Link #### ${NORMAL}" | tee -a  /var/log/install.log
