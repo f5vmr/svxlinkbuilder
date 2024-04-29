@@ -3,7 +3,6 @@
 function announce {
 logicfile=$LOGIC_DIR/Logic.tcl
 svxconf_file=$CONF_DIR/svxlink.conf
-#!/bin/bash
 
 # Extract current values of SHORT_IDENT_INTERVAL and LONG_IDENT_INTERVAL from svxlink.conf
 short_ident_interval=$(grep "^SHORT_IDENT_INTERVAL" $svxconf_file | awk -F '=' '{print $2}' | tr -d ' ')
@@ -21,6 +20,7 @@ sed -i "s/^SHORT_IDENT_INTERVAL=.*/SHORT_IDENT_INTERVAL=$new_short_ident_interva
 sed -i "s/^LONG_IDENT_INTERVAL=.*/LONG_IDENT_INTERVAL=$new_long_ident_interval/" $svxconf_file
 
 
+
 # Define the file path
 
 
@@ -31,7 +31,7 @@ long_voice_id_enable=$(grep "variable long_voice_id_enable" "$logicfile" | awk '
 long_cw_id_enable=$(grep "variable long_cw_id_enable" "$logicfile" | awk '{print $3}')
 
 # Display current values and prompt for new values using whiptail
-new_values=$(whiptail --title "Ident Methods" --checklist "Change as required" 15 78 4 \
+new_values=$(whiptail --title "Toggle Variables" --checklist "Toggle Variables" 15 60 4 \
     "short_voice_id_enable" "SHORT_VOICE_ID_ENABLE: $short_voice_id_enable" $short_voice_id_enable \
     "short_cw_id_enable" "SHORT_CW_ID_ENABLE: $short_cw_id_enable" $short_cw_id_enable \
     "long_voice_id_enable" "LONG_VOICE_ID_ENABLE: $long_voice_id_enable" $long_voice_id_enable \
@@ -49,6 +49,8 @@ sed -i "s/variable short_voice_id_enable $short_voice_id_enable/variable short_v
 sed -i "s/variable short_cw_id_enable $short_cw_id_enable/variable short_cw_id_enable $new_short_cw_id_enable/" "$logicfile"
 sed -i "s/variable long_voice_id_enable $long_voice_id_enable/variable long_voice_id_enable $new_long_voice_id_enable/" "$logicfile"
 sed -i "s/variable long_cw_id_enable $long_cw_id_enable/variable long_cw_id_enable $new_long_cw_id_enable/" "$logicfile"
+
+
 
 
 
