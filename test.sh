@@ -53,7 +53,7 @@ get_idle_timeout() {
 
 # Function to update the IDLE_TIMEOUT value in svxlink.conf
 update_idle_timeout() {
-    sed -i "s/^RepeaterLogic:IDLE_TIMEOUT=.*/RepeaterLogic:IDLE_TIMEOUT=$1/" /etc/svxlink/svxlink.conf
+    sed -i "s/^RepeaterLogic:IDLE_TIMEOUT=.*/RepeaterLogic:IDLE_TIMEOUT=$1/g" /etc/svxlink/svxlink.conf
 }
 
 # Get the current IDLE_TIMEOUT value
@@ -78,7 +78,7 @@ cwfile="$LOGIC_DIR/$CWLogic"
 sed -i '/\"=\" \"-\.\.\.-\"/a \"-\" \"...-.-\"' "$cwfile"
 sed -i "s/playTone 400 900/\#playTone 400 900/g" "$logicfile"
 sed -i "s/playTone 360 900/\#playTone 360 900/g" "$logicfile"
-sed -i '/#playTone 360 900 /a CW::play "-";' "$logicfile"
+sed -i '/#playTone 360 900 /a CW::play \"-\"\;' "$logicfile"
 
 
 
