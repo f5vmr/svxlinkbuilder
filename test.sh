@@ -17,7 +17,7 @@ options=(
 )
 
 # Display the whiptail menu and store the selected option in a variable
-selected_option=$(whiptail --title "Select Repeater Sound Option" --menu "Choose a sound option:" 15 60 4 "${options[@]}" 3>&1 1>&2 2>&3)
+selected_option=$(whiptail --title "Select Repeater Sound Option" --menu "Choose a sound option:" 15 60 4 "${options[@]}" / 3>&1 1>&2 2>&3)
 
 # Check if the user canceled or selected an option
 if [ $? -eq 0 ]; then
