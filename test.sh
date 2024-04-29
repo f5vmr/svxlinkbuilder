@@ -43,10 +43,10 @@ new_long_voice_id_enable=$(echo "$new_values" | grep "long_voice_id_enable" | wc
 new_long_cw_id_enable=$(echo "$new_values" | grep "long_cw_id_enable" | wc -l)
 
 # Update Logic.tcl with the new values
-sed -i "s/variable short_voice_id_enable $short_voice_id_enable/variable short_voice_id_enable $new_short_voice_id_enable/" "$logicfile"
-sed -i "s/variable short_cw_id_enable $short_cw_id_enable/variable short_cw_id_enable $new_short_cw_id_enable/" "$logicfile"
-sed -i "s/variable long_voice_id_enable $long_voice_id_enable/variable long_voice_id_enable $new_long_voice_id_enable/" "$logicfile"
-sed -i "s/variable long_cw_id_enable $long_cw_id_enable/variable long_cw_id_enable $new_long_cw_id_enable/" "$logicfile"
+sed -i "s/variable short_voice_id_enable $short_voice_id_enable/variable short_voice_id_enable $new_short_voice_id_enable/g" "$logicfile"
+sed -i "s/variable short_cw_id_enable $short_cw_id_enable/variable short_cw_id_enable $new_short_cw_id_enable/g" "$logicfile"
+sed -i "s/variable long_voice_id_enable $long_voice_id_enable/variable long_voice_id_enable $new_long_voice_id_enable/g" "$logicfile"
+sed -i "s/variable long_cw_id_enable $long_cw_id_enable/variable long_cw_id_enable $new_long_cw_id_enable/g" "$logicfile"
 
 
 
