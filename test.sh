@@ -1,6 +1,9 @@
 #!/bin/bash
-logicfile="$LOGIC_DIR/Logic.tcl"
-svxconf_file="$CONF_DIR/svxlink.conf"
+$LOGIC_DIR=/usr/share/svxlink/events.d/local
+svxfile="svxlink.conf"
+logictcl="Logic.tcl"
+logicfile="$LOGIC_DIR/$logictcl"
+svxconf_file="$CONF_DIR/$svxfile"
 
 # Extract current values of SHORT_IDENT_INTERVAL and LONG_IDENT_INTERVAL from svxlink.conf
 short_ident_interval=$(grep "^SHORT_IDENT_INTERVAL" $svxconf_file | awk -F '=' '{print $2}' | tr -d ' ')
