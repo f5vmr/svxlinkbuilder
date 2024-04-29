@@ -16,8 +16,8 @@ new_short_ident_interval=$(echo "$new_values" | awk '{print $1}')
 new_long_ident_interval=$(echo "$new_values" | awk '{print $2}')
 
 # Update svxlink.conf with new values
-sed -i "s/^SHORT_IDENT_INTERVAL=.*/SHORT_IDENT_INTERVAL=$new_short_ident_interval/" $svxconf_file
-sed -i "s/^LONG_IDENT_INTERVAL=.*/LONG_IDENT_INTERVAL=$new_long_ident_interval/" $svxconf_file
+sed -i "s/^SHORT_IDENT_INTERVAL=.*/SHORT_IDENT_INTERVAL=$new_short_ident_interval/" "$svxconf_file"
+sed -i "s/^LONG_IDENT_INTERVAL=.*/LONG_IDENT_INTERVAL=$new_long_ident_interval/" "$svxconf_file"
 
 
 # Extract current values of the variables
@@ -119,6 +119,8 @@ selected_cw_cpm=$(whiptail --title "CW Pitch and Speed" --inputbox "Enter Speed 
 sed -i "s/^CW_AMP=.*/CW_AMP=$selected_cw_amp/" "$svxconf_file"
 sed -i "s/^CW_PITCH=.*/CW_PITCH=$selected_cw_pitch/" "$svxconf_file"
 sed -i "s/^CW_CPM=.*/CW_CPM=$selected_cw_cpm/" "$svxconf_file"
+
+
 
 
 }
