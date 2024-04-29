@@ -26,18 +26,18 @@ if [ $? -eq 0 ]; then
             ;;
         "Chime")
             echo "You selected Chime."
-            sed -i's/playTone 1100/playTone 1180/g' "$logicfile"
+            sed -i 's/playTone 1100/playTone 1180/g' "$logicfile"
             ;;
         "Pip")
             echo "You selected Pip."
-            sed -i's/playTone 1100/\#playTone 1100/g' "$logicfile"
-            sed -i's/playTone 1200/\#playTone 1200/g' "$logicfile"
+            sed -i 's/playTone 1100/\#playTone 1100/g' "$logicfile"
+            sed -i 's/playTone 1200/\#playTone 1200/g' "$logicfile"
             sed -i '/#playTone 1200 \[expr {round(pow(\$base, \$i) \* 150 \/ \$max)}\] 100;/a\with CW::play "E";' "$logicfile"
             ;;
         "Silence")
             echo "You selected Silence."
-            sed -i's/playTone 1100/\#playTone 1100/g' "$logicfile"
-            sed -i's/playTone 1200/\#playTone 1200/g' "$logicfile"
+            sed -i 's/playTone 1100/\#playTone 1100/g' "$logicfile"
+            sed -i 's/playTone 1200/\#playTone 1200/g' "$logicfile"
             ;;
     esac
 else
