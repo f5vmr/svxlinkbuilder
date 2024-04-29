@@ -1,6 +1,6 @@
 #!/bin/bash
 function tones {
-if [ "$NODE_OPTION" -eq 3 ] || [ "$NODE_OPTION" -eq 4 ]; then
+if [ "$NODE_OPTION" -eq "3" ] || [ "$NODE_OPTION" -eq "4" ]; then
 LOGIC_DIR=/usr/share/svxlink/events.d/local
 RepeaterLogic="RepeaterLogic.tcl"
 logicfile="$LOGIC_DIR/$RepeaterLogic"
