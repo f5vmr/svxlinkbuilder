@@ -118,9 +118,9 @@ selected_cw_pitch=$(whiptail --title "CW Pitch and Speed" --inputbox "Enter Tone
 selected_cw_cpm=$(whiptail --title "CW Pitch and Speed" --inputbox "Enter Speed (75-200):" 15 78 "$cw_cpm" 3>&1 1>&2 2>&3)
 
 # Update svxlink.conf with the selected values
-sed -i "s/^CW_AMP=.*/CW_AMP=$selected_cw_amp/" "$svxconf_file"
-sed -i "s/^CW_PITCH=.*/CW_PITCH=$selected_cw_pitch/" "$svxconf_file"
-sed -i "s/^CW_CPM=.*/CW_CPM=$selected_cw_cpm/" "$svxconf_file"
+sed -i "s/^CW_AMP=.*/CW_AMP=$selected_cw_amp/g" "$svxconf_file"
+sed -i "s/^CW_PITCH=.*/CW_PITCH=$selected_cw_pitch/g" "$svxconf_file"
+sed -i "s/^CW_CPM=.*/CW_CPM=$selected_cw_cpm/g" "$svxconf_file"
 
 
 
