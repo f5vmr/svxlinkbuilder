@@ -1,8 +1,8 @@
 #!/bin/bash
 #### CW/Voice Announcements
 function announce {
-logicfile=$LOGIC_DIR/Logic.tcl
-svxconf_file=$CONF_DIR/svxlink.conf
+logicfile="$LOGIC_DIR/Logic.tcl"
+svxconf_file="$CONF_DIR/svxlink.conf"
 
 # Extract current values of SHORT_IDENT_INTERVAL and LONG_IDENT_INTERVAL from svxlink.conf
 short_ident_interval=$(grep "^SHORT_IDENT_INTERVAL" $svxconf_file | awk -F '=' '{print $2}' | tr -d ' ')
