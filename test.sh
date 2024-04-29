@@ -9,15 +9,13 @@ logicfile="$LOGIC_DIR/$RepeaterLogic"
 
 
 # Define the options for the whiptail menu
-options=(
-    "Bell Tone"
-    "Chime"
-    "Pip"
-    "Silence"
-)
-
 # Display the whiptail menu and store the selected option in a variable
-selected_option=$(whiptail --title "Select Repeater Sound Option" --menu "Choose a sound option:" 15 60 4 --separate-output "${options[@]}"  3>&1 1>&2 2>&3)
+selected_option=$(whiptail --title "Select Repeater Sound Option" --menu "Choose a sound option:" 15 60 4 \
+    "Bell Tone" "Select this option for Bell Tone" \
+    "Chime" "Select this option for Chime" \
+    "Pip" "Select this option for Pip" \
+    "Silence" "Select this option for Silence" \
+    3>&1 1>&2 2>&3)
 
 # Check if the user canceled or selected an option
 if [ $? -eq 0 ]; then
