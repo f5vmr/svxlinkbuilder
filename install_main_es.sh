@@ -1,5 +1,5 @@
 #!/bin/bash
-
+lang=$(echo $LANG | grep -o '^[a-zA-Z]*_[a-zA-Z]*')
 #### Welcome Message ####
 source "${BASH_SOURCE%/*}/functions/welcome_es.sh"
 welcome

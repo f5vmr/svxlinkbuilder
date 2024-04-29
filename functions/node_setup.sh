@@ -1,5 +1,6 @@
 #!/bin/bash
 #### Recall options
+
 function nodeset {
     if [[ $NODE_OPTION  == "1" ]] 
     then 
