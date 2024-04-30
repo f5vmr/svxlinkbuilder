@@ -13,7 +13,7 @@ cw_cpm=$(grep -E "CW_CPM" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
 idle_timeout=$(grep -E "IDLE_TIMEOUT" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
 short_ident_interval=$(grep -E "SHORT_IDENT_INTERVAL" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
 long_ident_interval=$(grep -E "LONG_IDENT_INTERVAL" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
-echo "Value of CW_AMP: $cw_amp"
+
 # Ensure cw_amp is within the specified range
 #if [[ "$cw_amp" -gt 0 && "$cw_amp" -lt -10 ]]; then
 #    echo "Error: CW_AMP value is not within the specified range (0 to -10 dB)"
