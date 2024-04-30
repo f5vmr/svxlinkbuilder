@@ -63,7 +63,6 @@ short_voice_id_enable=$(head -n 40 "$logicfile" | awk '/^variable short_voice_id
 short_cw_id_enable=$(head -n 40 "$logicfile" | awk '/^variable short_cw_id_enable/{print $NF; exit}')
 long_voice_id_enable=$(head -n 40 "$logicfile" | awk '/^variable long_voice_id_enable/{print $NF; exit}')
 long_cw_id_enable=$$(head -n 40 "$logicfile" | awk '/^variable long_cw_id_enable/{print $NF; exit}')
-echo "$short_voice_id_enable"
 
 
 #
