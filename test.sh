@@ -59,7 +59,7 @@ sed -i "s/^LONG_IDENT_INTERVAL=.*/LONG_IDENT_INTERVAL=$new_long_ident_interval/g
 
 #### LOGIC CHANGES ####
 ## Extract the values of the text indicators from Logic.tcl
-short_voice_id_enable=$(grep -oP 'variable short_voice_id_enable\s*\K\d' /usr/share/svxlink/events.d/local/Logic.tcl)
+short_voice_id_enable=$(grep -oP 'variable short_voice_id_enable\s*\K\d' "$logicfile")
 short_cw_id_enable=$(grep -oP '/variable short_cw_id_enable\s*\K\d' "$logicfile")
 long_voice_id_enable=$(grep -oP '/variable long_voice_id_enable\s*\K\d' "$logicfile")
 long_cw_id_enable=$(grep -oP '/variable long_cw_id_enable\s*\K\d' "$logicfile")
