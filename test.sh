@@ -21,11 +21,11 @@ echo "Value of CW_AMP: $cw_amp"
 #fi
 
 # Prompt the user to input new values for each parameter using whiptail
-new_cw_amp=$(whiptail --title "CW AMP" --inputbox "Enter new value for CW AMP (0 to -10 dB):" 10 60 "$cw_amp" 3>&1 1>&2 2>&3)
-
-new_cw_pitch=$(whiptail --title "CW PITCH" --inputbox "Enter value for CW PITCH (440 to 2200 Hz):" 10 60 "$cw_pitch" --rangebox 440 2200 100)
-new_cw_cpm=$(whiptail --title "CW CPM" --inputbox "Enter value CW chars per min (60 to 200 Characters Per Minute):" 10 60 "$cw_cpm" --rangebox 60 200 10)
-new_idle_timeout=$(whiptail --title "IDLE TIMEOUT" --inputbox "Enter value for IDLE TIMEOUT (0 to 15 seconds):" 10 60 "$idle_timeout" --rangebox 0 15 1)
+# Prompt the user to input new values for each parameter using whiptail
+new_cw_amp=$(whiptail --title "CW AMP" --inputbox "Current CW AMP: $cw_amp dB\nEnter new value for CW AMP (0 to -10 dB):" 10 60 "$cw_amp" 3>&1 1>&2 2>&3)
+new_cw_pitch=$(whiptail --title "CW PITCH" --inputbox "Current CW PITCH: $cw_pitch Hz\nEnter new value for CW PITCH (440 to 2200 Hz):" 10 60 "$cw_pitch" 3>&1 1>&2 2>&3)
+new_cw_cpm=$(whiptail --title "CW CPM" --inputbox "Current CW CPM: $cw_cpm Characters Per Minute\nEnter new value for CW CPM (60 to 200 Characters Per Minute):" 10 60 "$cw_cpm" 3>&1 1>&2 2>&3)
+new_idle_timeout=$(whiptail --title "IDLE TIMEOUT" --inputbox "Current IDLE TIMEOUT: $idle_timeout seconds\nEnter new value for IDLE TIMEOUT (0 to 15 seconds):" 10 60 "$idle_timeout" 3>&1 1>&2 2>&3)
 new_short_ident_interval=$(whiptail --title "SHORT IDENT INTERVAL" --menu "Select SHORT IDENT INTERVAL:" 15 60 4 5 "5 minutes" 10 "10 minutes" 15 "15 minutes" 20 "20 minutes" 3>&1 1>&2 2>&3)
 new_long_ident_interval=$(whiptail --title "LONG IDENT INTERVAL" --menu "Select LONG IDENT INTERVAL:" 15 60 3 30 "30 minutes" 60 "60 minutes" 120 "120 minutes" 3>&1 1>&2 2>&3)
 
