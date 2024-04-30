@@ -89,12 +89,6 @@ sed -i "s/^LONG_IDENT_INTERVAL=.*/LONG_IDENT_INTERVAL=$new_long_ident_interval/g
 #sed -i "s/variable long_cw_id_enable $long_cw_id_enable/variable long_cw_id_enable $new_long_cw_id_enable/g" "$logicfile"
 #
 #
-# Extract the current values
-short_voice_id_enable=$(grep "variable short_voice_id_enable" "$logicfile" | awk '{print $3}')
-short_cw_id_enable=$(grep "variable short_cw_id_enable" "$logicfile" | awk '{print $3}')
-long_voice_id_enable=$(grep "variable long_voice_id_enable" "$logicfile" | awk '{print $3}')
-long_cw_id_enable=$(grep "variable long_cw_id_enable" "$logicfile" | awk '{print $3}')
-
 # Prompt the user to toggle the values using whiptail
 new_values=$(whiptail --title "Toggle ID Variables" --checklist "Toggle Variables" 15 60 4 \
     "short_voice_id_enable" "SHORT_VOICE_ID_ENABLE: $short_voice_id_enable" $short_voice_id_enable \
@@ -104,26 +98,29 @@ new_values=$(whiptail --title "Toggle ID Variables" --checklist "Toggle Variable
     3>&1 1>&2 2>&3)
 
 # Update Logic.tcl with the new values
-# Note: The new values will be in the form of "tag: state", e.g., "short_voice_id_enable: ON"
-# We need to extract the state (ON or OFF) and update the corresponding variable accordingly
-for new_value in $new_values; do
-    tag=$(echo "$new_value" | cut -d: -f1)
-    state=$(echo "$new_value" | cut -d: -f2)
-    case $tag in
-        "short_voice_id_enable")
-            sed -i "s/variable short_voice_id_enable $short_voice_id_enable/variable short_voice_id_enable $state/g" "$logicfile"
-            ;;
-        "short_cw_id_enable")
-            sed -i "s/variable short_cw_id_enable $short_cw_id_enable/variable short_cw_id_enable $state/g" "$logicfile"
-            ;;
-        "long_voice_id_enable")
-            sed -i "s/variable long_voice_id_enable $long_voice_id_enable/variable long_voice_id_enable $state/g" "$logicfile"
-            ;;
-        "long_cw_id_enable")
-            sed -i "s/variable long_cw_id_enable $long_cw_id_enable/variable long_cw_id_enable $state/g" "$logicfile"
-            ;;
-    esac
-done
+# Iterate over each line in the Logic.tcl file
+while IFS= read -r line; do
+    # Check if the line contains one of the variables we want to update
+    if [[ $line == *"variable short_voice_id_enable"* ]]; then
+        # Replace the entire line with the new value
+        echo "variable short_voice_id_enable $short_voice_id_enable" >> temp_logic.tcl
+    elif [[ $line == *"variable short_cw_id_enable"* ]]; then
+        # Replace the entire line with the new value
+        echo "variable short_cw_id_enable $short_cw_id_enable" >> temp_logic.tcl
+    elif [[ $line == *"variable long_voice_id_enable"* ]]; then
+        # Replace the entire line with the new value
+        echo "variable long_voice_id_enable $long_voice_id_enable" >> temp_logic.tcl
+    elif [[ $line == *"variable long_cw_id_enable"* ]]; then
+        # Replace the entire line with the new value
+        echo "variable long_cw_id_enable $long_cw_id_enable" >> temp_logic.tcl
+    else
+        # Otherwise, keep the line unchanged
+        echo "$line" >> temp_logic.tcl
+    fi
+done < "$logicfile"
+
+# Overwrite the original Logic.tcl with the modified content
+mv temp_logic.tcl "$logicfile"
 
 # Extract the content of the send_rgr_sound procedure
 send_rgr_sound_content=$(sed -n '/proc send_rgr_sound/,/}/p' "$logicfile" | sed '1d;$d' | sed -n '/else/,/}/p' | sed '1d;$d')
