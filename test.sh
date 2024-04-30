@@ -92,10 +92,10 @@ sed -i "s/^LONG_IDENT_INTERVAL=.*/LONG_IDENT_INTERVAL=$new_long_ident_interval/g
 # Prompt the user to toggle the values using whiptail
 echo Toggle ID Variables
 new_values=$(whiptail --title "Toggle ID Variables" --checklist "Toggle Variables" 15 60 4 \
-    "short_voice_id_enable" "ENABLE: $short_voice_id_enable" $short_voice_id_enable \
-    "short_cw_id_enable" "ENABLE: $short_cw_id_enable" $short_cw_id_enable \
-    "long_voice_id_enable" "ENABLE: $long_voice_id_enable" $long_voice_id_enable \
-    "long_cw_id_enable" "ENABLE: $long_cw_id_enable" $long_cw_id_enable \
+    "short_voice_id_enable" "ENABLE" $short_voice_id_enable \
+    "short_cw_id_enable" "ENABLE" $short_cw_id_enable \
+    "long_voice_id_enable" "ENABLE" $long_voice_id_enable \
+    "long_cw_id_enable" "ENABLE:" $long_cw_id_enable \
     3>&1 1>&2 2>&3)
 echo Exit Toggle ID Variables
 
