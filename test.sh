@@ -24,6 +24,13 @@ echo "Current CW_AMP: $cw_amp"
 # Prompt the user to input new values for each parameter using whiptail
 #new_cw_amp=$(whiptail --title "CW AMP" --inputbox "Current CW Amplitude: $cw_amp dB\nEnter new value for CW AMP (0 to -10 dB):" 10 60 "$cw_amp" 3>&1 1>&2 2>&3)
 # Prompt the user for input within the specified range
+# Validate the current CW AMP value
+if [[ "$cw_amp" -lt -10 || "$cw_amp" -gt 0 ]]; then
+    echo "Error: Current CW AMP value is not within the specified range (0 to -10 dB)"
+    exit 1
+fi
+
+# Prompt the user for input within the specified range
 input_valid=false
 while [[ "$input_valid" == false ]]; do
     new_cw_amp=$(whiptail --title "CW AMP" --inputbox "Enter new value for CW AMP (0 to -10 dB):" 10 60 "$cw_amp" 3>&1 1>&2 2>&3)
@@ -35,6 +42,7 @@ while [[ "$input_valid" == false ]]; do
         whiptail --title "Error" --msgbox "Invalid input for CW AMP. Please enter a value between 0 and -10 dB." 10 60
     fi
 done
+
 
 
 new_cw_pitch=$(whiptail --title "CW PITCH" --inputbox "Current CW PITCH: $cw_pitch Hz\nEnter new value for CW PITCH (440 to 2200 Hz):" 10 60 "$cw_pitch" 3>&1 1>&2 2>&3)
