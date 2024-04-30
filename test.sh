@@ -97,37 +97,17 @@ new_values=$(whiptail --title "Toggle ID Variables" --checklist "Toggle Variable
     "long_cw_id_enable" "LONG_CW_ID_ENABLE: $long_cw_id_enable" $long_cw_id_enable \
     3>&1 1>&2 2>&3)
 
-echo "New values: $new_values"
+# Extract the new values
+new_short_voice_id_enable=$(echo "$new_values" | grep "short_voice_id_enable" | wc -l)
+new_short_cw_id_enable=$(echo "$new_values" | grep "short_cw_id_enable" | wc -l)
+new_long_voice_id_enable=$(echo "$new_values" | grep "long_voice_id_enable" | wc -l)
+new_long_cw_id_enable=$(echo "$new_values" | grep "long_cw_id_enable" | wc -l)
 
 # Update Logic.tcl with the new values
-# Iterate over each line in the Logic.tcl file
-while IFS= read -r line; do
-    # Check if the line contains one of the variables we want to update
-    if [[ $line == *"variable short_voice_id_enable"* ]]; then
-        # Replace the entire line with the new value
-        echo "Replacing line with short_voice_id_enable"
-        echo "variable short_voice_id_enable $short_voice_id_enable" >> temp_logic.tcl
-    elif [[ $line == *"variable short_cw_id_enable"* ]]; then
-        # Replace the entire line with the new value
-        echo "Replacing line with short_cw_id_enable"
-        echo "variable short_cw_id_enable $short_cw_id_enable" >> temp_logic.tcl
-    elif [[ $line == *"variable long_voice_id_enable"* ]]; then
-        # Replace the entire line with the new value
-        echo "Replacing line with long_voice_id_enable"
-        echo "variable long_voice_id_enable $long_voice_id_enable" >> temp_logic.tcl
-    elif [[ $line == *"variable long_cw_id_enable"* ]]; then
-        # Replace the entire line with the new value
-        echo "Replacing line with long_cw_id_enable"
-        echo "variable long_cw_id_enable $long_cw_id_enable" >> temp_logic.tcl
-    else
-        # Otherwise, keep the line unchanged
-        echo "Keeping line unchanged: $line"
-        echo "$line" >> temp_logic.tcl
-    fi
-done < "$logicfile"
-
-# Overwrite the original Logic.tcl with the modified content
-mv temp_logic.tcl "$logicfile"
+sed -i "s/variable short_voice_id_enable [01]/variable short_voice_id_enable $new_short_voice_id_enable/g" "$logicfile"
+sed -i "s/variable short_cw_id_enable [01]/variable short_cw_id_enable $new_short_cw_id_enable/g" "$logicfile"
+sed -i "s/variable long_voice_id_enable [01]/variable long_voice_id_enable $new_long_voice_id_enable/g" "$logicfile"
+sed -i "s/variable long_cw_id_enable [01]/variable long_cw_id_enable $new_long_cw_id_enable/g" "$logicfile"
 
 # Extract the content of the send_rgr_sound procedure
 send_rgr_sound_content=$(sed -n '/proc send_rgr_sound/,/}/p' "$logicfile" | sed '1d;$d' | sed -n '/else/,/}/p' | sed '1d;$d')
