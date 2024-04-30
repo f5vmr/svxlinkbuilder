@@ -59,9 +59,13 @@ new_long_voice_id_enable=$(echo "$new_values" | grep "long_voice_id_enable" | wc
 new_long_cw_id_enable=$(echo "$new_values" | grep "long_cw_id_enable" | wc -l)
 
 # Update Logic.tcl with the new values
+echo "1"
 sed -i "s/variable short_voice_id_enable $short_voice_id_enable/variable short_voice_id_enable $new_short_voice_id_enable/g" "$logicfile"
+echo "2"
 sed -i "s/variable short_cw_id_enable $short_cw_id_enable/variable short_cw_id_enable $new_short_cw_id_enable/g" "$logicfile"
+echo "3"
 sed -i "s/variable long_voice_id_enable $long_voice_id_enable/variable long_voice_id_enable $new_long_voice_id_enable/g" "$logicfile"
+echo "4"
 sed -i "s/variable long_cw_id_enable $long_cw_id_enable/variable long_cw_id_enable $new_long_cw_id_enable/g" "$logicfile"
 
 
@@ -102,12 +106,15 @@ case $selected_option in
         volume=$(whiptail --title "Volume" --inputbox "Enter volume (0-100):" 10 50 "100" 3>&1 1>&2 2>&3)
         duration=$(whiptail --title "Duration" --inputbox "Enter duration (ms):" 10 50 "$default_duration" 3>&1 1>&2 2>&3)
         # Update Logic.tcl with the entered frequency, volume, and duration
+        echo "beep"
         sed -i "s/playTone [0-9]\+ [0-9]\+ [0-9]\+/playTone $frequency $volume $duration/g" "$svxconf_file"
         ;;
     "Morse K")
+        echo "K"
         sed -i "s/playTone [0-9]\+ [0-9]\+ [0-9]\+/CW::play \" K\"/g" "$svxconf_file"
         ;;
     "Morse T")
+        echo "T"
         sed -i "s/playTone [0-9]\+ [0-9]\+ [0-9]\+/CW::play \" T\"/g" "$svxconf_file"
         ;;
 esac
