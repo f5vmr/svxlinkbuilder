@@ -59,10 +59,10 @@ sed -i "s/^LONG_IDENT_INTERVAL=.*/LONG_IDENT_INTERVAL=$new_long_ident_interval/g
 
 #### LOGIC CHANGES ####
 ## Extract the values of the text indicators from Logic.tcl
-#short_voice_id_enable=$(grep "variable short_voice_id_enable" "$logicfile" | awk '{print $3}')
-#short_cw_id_enable=$(grep "variable short_cw_id_enable" "$logicfile" | awk '{print $3}')
-#long_voice_id_enable=$(grep "variable long_voice_id_enable" "$logicfile" | awk '{print $3}')
-#long_cw_id_enable=$(grep "variable long_cw_id_enable" "$logicfile" | awk '{print $3}')
+short_voice_id_enable=$(grep "variable short_voice_id_enable" "$logicfile" | awk '{print $3}')
+short_cw_id_enable=$(grep "variable short_cw_id_enable" "$logicfile" | awk '{print $3}')
+long_voice_id_enable=$(grep "variable long_voice_id_enable" "$logicfile" | awk '{print $3}')
+long_cw_id_enable=$(grep "variable long_cw_id_enable" "$logicfile" | awk '{print $3}')
 #
 ## Prompt the user to toggle the values using whiptail
 #new_values=$(whiptail --title "Toggle ID Variables" --checklist "Toggle Variables" 15 60 4 \
@@ -98,10 +98,10 @@ echo Toggle ID Variables
     #"long_cw_id_enable" "ENABLE:" $long_cw_id_enable \
     #3>&1 1>&2 2>&3)
     new_values=$(whiptail --title "Toggle ID Variables" --checklist 15 60 4 \
-    "SHORT VOICE ID" " setup" $short_voice_id_enable ON \
-    "SHORT CW ID   " " setup" $short_cw_id_enable OFF \
-    "LONG VOICE ID " " setup" $long_voice_id_enable ON \
-    "LONG CW ID    " " setup" $long_cw_id_enable OFF 3>&1 1>&2 2>&3)
+    "SHORT VOICE ID" " setup" $short_voice_id_enable  \
+    "SHORT CW ID   " " setup" $short_cw_id_enable  \
+    "LONG VOICE ID " " setup" $long_voice_id_enable  \
+    "LONG CW ID    " " setup" $long_cw_id_enable  3>&1 1>&2 2>&3)
 echo Exit Toggle ID Variables
 
 
