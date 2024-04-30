@@ -40,8 +40,7 @@ new_cw_amp_escaped=$(echo "$new_cw_amp" | sed 's/-/\\-/g')
 # Update svxlink.conf with the new values for CW_AMP with the replacement value enclosed in double quotes
 #sed -i "s/^CW_AMP=.*/CW_AMP=\"$new_cw_amp\"/g" -- "$svxconf_file"
 # Update svxlink.conf with the new value for CW_AMP using awk
-awk -v new_cw_amp="$new_cw_amp" '/^CW_AMP=/ {$0 = "CW_AMP=" new_cw_amp} 1' "$svxconf_file" > temp && mv temp "$svxconf_file"
-
+sed -i "s/^CW_AMP=.*/CW_AMP='$new_cw_amp'/g" "$svxconf_file"
 echo "Replacing CW_PITCH with $new_cw_pitch"
 sed -i "s/^CW_PITCH=.*/CW_PITCH=$new_cw_pitch/g" "$svxconf_file"
 echo "Replacing CW_CPM with $new_cw_cpm"
