@@ -63,10 +63,10 @@ short_voice_id_enable=$(awk '/variable short_voice_id_enable/{print $NF}' "$logi
 short_cw_id_enable=$(awk '/variable short_cw_id_enable/{print $NF}' "$logicfile")
 long_voice_id_enable=$(awk '/variable long_voice_id_enable/{print $NF}' "$logicfile")
 long_cw_id_enable=$(awk '/variable long_cw_id_enable/{print $NF}' "$logicfile")
-    echo "short_voice_id_enable: $short_voice_id_enable"
-    echo "short_cw_id_enable: $short_cw_id_enable"  
-    echo "long_voice_id_enable: $long_voice_id_enable"
-    echo "long_cw_id_enable: $long_cw_id_enable"
+    echo "short_voice_id_enable: "$short_voice_id_enable
+    echo "short_cw_id_enable: "$short_cw_id_enable  
+    echo "long_voice_id_enable: " $long_voice_id_enable
+    echo "long_cw_id_enable: "$long_cw_id_enable
     exit
 
 #
