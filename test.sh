@@ -105,10 +105,10 @@ case $selected_option in
         sed -i "s/playTone [0-9]\+ [0-9]\+ [0-9]\+/playTone $frequency $volume $duration/g" "$svxconf_file"
         ;;
     "Morse K")
-        sed -i 's/playTone [0-9]\+ [0-9]\+ [0-9]\+/CW::play " K"/g' "$svxconf_file"
+        sed -i "s/playTone [0-9]\+ [0-9]\+ [0-9]\+/CW::play \" K\"/g" "$svxconf_file"
         ;;
     "Morse T")
-        sed -i 's/playTone [0-9]\+ [0-9]\+ [0-9]\+/CW::play " T"/g' "$svxconf_file"
+        sed -i "s/playTone [0-9]\+ [0-9]\+ [0-9]\+/CW::play \" T\"/g" "$svxconf_file"
         ;;
 esac
 
