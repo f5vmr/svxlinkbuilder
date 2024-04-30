@@ -67,17 +67,20 @@ echo "Short Voice ID Enable: $short_voice_id_enable"
 echo "Short CW ID Enable: $short_cw_id_enable"
 echo "Long Voice ID Enable: $long_voice_id_enable"
 echo "Long CW ID Enable: $long_cw_id_enable"
-exit
+
 
 #
 ## Prompt the user to toggle the values using whiptail
 # Prompt the user to toggle the values using whiptail
 new_values=$(whiptail --title "Toggle ID Variables" --checklist "Toggle Variables" 15 60 4 \
-    "short_voice_id_enable" "Toggle Short Voice ID Enable" $short_voice_id_enable \
-    "short_cw_id_enable" "Toggle Short CW ID Enable" $short_cw_id_enable \
-    "long_voice_id_enable" "Toggle Long Voice ID Enable" $long_voice_id_enable \
-    "long_cw_id_enable" "Toggle Long CW ID Enable" $long_cw_id_enable \
+    "Short Voice ID Enable" "Toggle Short Voice ID Enable" ON \
+    "Short CW ID Enable" "Toggle Short CW ID Enable" OFF \
+    "Long Voice ID Enable" "Toggle Long Voice ID Enable" ON \
+    "Long CW ID Enable" "Toggle Long CW ID Enable" OFF \
     3>&1 1>&2 2>&3)
+
+echo "Selected values: $new_values"
+exit
 
 # Extract the new values
 new_short_voice_id_enable=$(echo "$new_values" | grep "short_voice_id_enable" | wc -l)
