@@ -18,8 +18,8 @@ new_short_ident_interval=$(echo "$new_values" | awk '{print $1}')
 new_long_ident_interval=$(echo "$new_values" | awk '{print $2}')
 
 # Update svxlink.conf with new values
-sed -i "s/^SHORT_IDENT_INTERVAL=.*/SHORT_IDENT_INTERVAL=$new_short_ident_interval/g" "$svxconf_file"
-sed -i "s/^LONG_IDENT_INTERVAL=.*/LONG_IDENT_INTERVAL=$new_long_ident_interval/g" "$svxconf_file"
+sed -i "s#^SHORT_IDENT_INTERVAL=.*#SHORT_IDENT_INTERVAL=$new_short_ident_interval#g" "$svxconf_file"
+sed -i "s#^LONG_IDENT_INTERVAL=.*#LONG_IDENT_INTERVAL=$new_long_ident_interval#g" "$svxconf_file"
 
 
 # Extract current values of the variables
@@ -43,10 +43,10 @@ new_long_voice_id_enable=$(echo "$new_values" | grep "long_voice_id_enable" | wc
 new_long_cw_id_enable=$(echo "$new_values" | grep "long_cw_id_enable" | wc -l)
 
 # Update Logic.tcl with the new values
-sed -i "s/variable short_voice_id_enable $short_voice_id_enable/variable short_voice_id_enable $new_short_voice_id_enable/g" "$logicfile"
-sed -i "s/variable short_cw_id_enable $short_cw_id_enable/variable short_cw_id_enable $new_short_cw_id_enable/g" "$logicfile"
-sed -i "s/variable long_voice_id_enable $long_voice_id_enable/variable long_voice_id_enable $new_long_voice_id_enable/g" "$logicfile"
-sed -i "s/variable long_cw_id_enable $long_cw_id_enable/variable long_cw_id_enable $new_long_cw_id_enable/g" "$logicfile"
+sed -i "s#variable short_voice_id_enable $short_voice_id_enable#variable short_voice_id_enable $new_short_voice_id_enable#g" "$logicfile"
+sed -i "s#variable short_cw_id_enable $short_cw_id_enable#variable short_cw_id_enable $new_short_cw_id_enable#g" "$logicfile"
+sed -i "s#variable long_voice_id_enable $long_voice_id_enable#variable long_voice_id_enable $new_long_voice_id_enable#g" "$logicfile"
+sed -i "s#variable long_cw_id_enable $long_cw_id_enable#variable long_cw_id_enable $new_long_cw_id_enable#g" "$logicfile"
 
 
 
@@ -118,9 +118,9 @@ selected_cw_pitch=$(whiptail --title "CW Pitch and Speed" --inputbox "Enter Tone
 selected_cw_cpm=$(whiptail --title "CW Pitch and Speed" --inputbox "Enter Speed (75-200):" 15 78 "$cw_cpm" 3>&1 1>&2 2>&3)
 
 # Update svxlink.conf with the selected values
-sed -i "s/^CW_AMP=.*/CW_AMP=$selected_cw_amp/g" "$svxconf_file"
-sed -i "s/^CW_PITCH=.*/CW_PITCH=$selected_cw_pitch/g" "$svxconf_file"
-sed -i "s/^CW_CPM=.*/CW_CPM=$selected_cw_cpm/g" "$svxconf_file"
+sed -i "s#^CW_AMP=.*#CW_AMP=$selected_cw_amp#g" "$svxconf_file"
+sed -i "s#^CW_PITCH=.*#CW_PITCH=$selected_cw_pitch#g" "$svxconf_file"
+sed -i "s#^CW_CPM=.*#CW_CPM=$selected_cw_cpm#g" "$svxconf_file"
 
 
 
