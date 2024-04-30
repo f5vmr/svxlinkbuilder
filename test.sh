@@ -97,24 +97,31 @@ new_values=$(whiptail --title "Toggle ID Variables" --checklist "Toggle Variable
     "long_cw_id_enable" "LONG_CW_ID_ENABLE: $long_cw_id_enable" $long_cw_id_enable \
     3>&1 1>&2 2>&3)
 
+echo "New values: $new_values"
+
 # Update Logic.tcl with the new values
 # Iterate over each line in the Logic.tcl file
 while IFS= read -r line; do
     # Check if the line contains one of the variables we want to update
     if [[ $line == *"variable short_voice_id_enable"* ]]; then
         # Replace the entire line with the new value
+        echo "Replacing line with short_voice_id_enable"
         echo "variable short_voice_id_enable $short_voice_id_enable" >> temp_logic.tcl
     elif [[ $line == *"variable short_cw_id_enable"* ]]; then
         # Replace the entire line with the new value
+        echo "Replacing line with short_cw_id_enable"
         echo "variable short_cw_id_enable $short_cw_id_enable" >> temp_logic.tcl
     elif [[ $line == *"variable long_voice_id_enable"* ]]; then
         # Replace the entire line with the new value
+        echo "Replacing line with long_voice_id_enable"
         echo "variable long_voice_id_enable $long_voice_id_enable" >> temp_logic.tcl
     elif [[ $line == *"variable long_cw_id_enable"* ]]; then
         # Replace the entire line with the new value
+        echo "Replacing line with long_cw_id_enable"
         echo "variable long_cw_id_enable $long_cw_id_enable" >> temp_logic.tcl
     else
         # Otherwise, keep the line unchanged
+        echo "Keeping line unchanged: $line"
         echo "$line" >> temp_logic.tcl
     fi
 done < "$logicfile"
