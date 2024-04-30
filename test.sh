@@ -98,10 +98,10 @@ echo Toggle ID Variables
     #"long_cw_id_enable" "ENABLE:" $long_cw_id_enable \
     #3>&1 1>&2 2>&3)
     new_values=$(whiptail --title "Toggle ID Variables" --checklist 15 60 4 \
-    "SHORT VOICE ID" " setup" $short_voice_id_enable  \
-    "SHORT CW ID   " " setup" $short_cw_id_enable  \
-    "LONG VOICE ID " " setup" $long_voice_id_enable  \
-    "LONG CW ID    " " setup" $long_cw_id_enable  3>&1 1>&2 2>&3)
+    "SHORT VOICE ID" " setup" "$short_voice_id_enable"  \
+    "SHORT CW ID   " " setup" "$short_cw_id_enable"  \
+    "LONG VOICE ID " " setup" "$long_voice_id_enable"  \
+    "LONG CW ID    " " setup" "$long_cw_id_enable"  3>&1 1>&2 2>&3)
 echo Exit Toggle ID Variables
 
 
