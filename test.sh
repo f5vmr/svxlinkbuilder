@@ -67,7 +67,7 @@ long_cw_id_enable=$(grep -oP '/variable long_cw_id_enable \K\d' "$logicfile")
 
 #
 ## Prompt the user to toggle the values using whiptail
-new_values=$(whiptail --title "Toggle ID Variables" --checklist "Toggle Variables" 17 78 4 \
+new_values=$(whiptail --title "Toggle ID Variables" --checklist "Toggle Variables" 15 78 4 \
     "short_voice_id_enable" "Toggle Short Voice ID Enable" $short_voice_id_enable \
     "short_cw_id_enable" "Toggle Short CW ID Enable" $short_cw_id_enable \
     "long_voice_id_enable" "Toggle Long Voice ID Enable" $long_voice_id_enable \
