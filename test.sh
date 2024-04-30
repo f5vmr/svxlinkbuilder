@@ -59,18 +59,21 @@ sed -i "s/^LONG_IDENT_INTERVAL=.*/LONG_IDENT_INTERVAL=$new_long_ident_interval/g
 
 #### LOGIC CHANGES ####
 ## Extract the values of the text indicators from Logic.tcl
-short_voice_id_enable=$(grep "variable short_voice_id_enable" "$logicfile" | awk '{print $3}')
-short_cw_id_enable=$(grep "variable short_cw_id_enable" "$logicfile" | awk '{print $3}')
-long_voice_id_enable=$(grep "variable long_voice_id_enable" "$logicfile" | awk '{print $3}')
-long_cw_id_enable=$(grep "variable long_cw_id_enable" "$logicfile" | awk '{print $3}')
+short_voice_id_enable=$(awk '/variable short_voice_id_enable/{print $NF}' "$logicfile")
+short_cw_id_enable=$(awk '/variable short_cw_id_enable/{print $NF}' "$logicfile")
+long_voice_id_enable=$(awk '/variable long_voice_id_enable/{print $NF}' "$logicfile")
+long_cw_id_enable=$(awk '/variable long_cw_id_enable/{print $NF}' "$logicfile")
+
 #
 ## Prompt the user to toggle the values using whiptail
-#new_values=$(whiptail --title "Toggle ID Variables" --checklist "Toggle Variables" 15 60 4 \
-#    "short_voice_id_enable" "SHORT_VOICE_ID_ENABLE: $short_voice_id_enable" $short_voice_id_enable \
-#    "short_cw_id_enable" "SHORT_CW_ID_ENABLE: $short_cw_id_enable" $short_cw_id_enable \
-#    "long_voice_id_enable" "LONG_VOICE_ID_ENABLE: $long_voice_id_enable" $long_voice_id_enable \
-#    "long_cw_id_enable" "LONG_CW_ID_ENABLE: $long_cw_id_enable" $long_cw_id_enable \
-#    3>&1 1>&2 2>&3)
+new_values=$(whiptail --title "Toggle ID Variables" --checklist "Toggle Variables" 15 60 4 \
+    "short_voice_id_enable" "SHORT_VOICE_ID_ENABLE: $short_voice_id_enable" $short_voice_id_enable \
+    "short_cw_id_enable" "SHORT_CW_ID_ENABLE: $short_cw_id_enable" $short_cw_id_enable \
+    "long_voice_id_enable" "LONG_VOICE_ID_ENABLE: $long_voice_id_enable" $long_voice_id_enable \
+    "long_cw_id_enable" "LONG_CW_ID_ENABLE: $long_cw_id_enable" $long_cw_id_enable \
+    3>&1 1>&2 2>&3)
+    echo "$new_values"
+    exit
 #
 ## Extract the new values
 #new_short_voice_id_enable=$(echo "$new_values" | grep "short_voice_id_enable" | wc -l)
@@ -90,35 +93,15 @@ long_cw_id_enable=$(grep "variable long_cw_id_enable" "$logicfile" | awk '{print
 #
 #
 # Prompt the user to toggle the values using whiptail
-echo Toggle ID Variables
-    #new_values=$(whiptail --title "Toggle ID Variables" --checklist "Toggle Variables" 15 60 4 \
-    #"short_voice_id_enable" "ENABLE" $short_voice_id_enable \
-    #"short_cw_id_enable" "ENABLE" $short_cw_id_enable \
-    #"long_voice_id_enable" "ENABLE" $long_voice_id_enable \
-    #"long_cw_id_enable" "ENABLE:" $long_cw_id_enable \
-    #3>&1 1>&2 2>&3)
-    new_values=$(whiptail --title "Toggle ID Variables" --checklist 15 60 4 \
-    "SHORT VOICE ID" " setup" "$short_voice_id_enable"  \
-    "SHORT CW ID   " " setup" "$short_cw_id_enable"  \
-    "LONG VOICE ID " " setup" "$long_voice_id_enable"  \
-    "LONG CW ID    " " setup" "$long_cw_id_enable"  3>&1 1>&2 2>&3)
-echo Exit Toggle ID Variables
-
-
-# Extract the new values
-new_short_voice_id_enable=$(echo "$new_values" | grep "short_voice_id_enable" | wc -l)
-new_short_cw_id_enable=$(echo "$new_values" | grep "short_cw_id_enable" | wc -l)
-new_long_voice_id_enable=$(echo "$new_values" | grep "long_voice_id_enable" | wc -l)
-new_long_cw_id_enable=$(echo "$new_values" | grep "long_cw_id_enable" | wc -l)
 
 # Update Logic.tcl with the new values
 
 
-sed -i "s/variable short_voice_id_enable [0-1]/variable short_voice_id_enable $new_short_voice_id_enable/g" "$logicfile"
-sed -i "s/variable short_cw_id_enable [0-1]/variable short_cw_id_enable $new_short_cw_id_enable/g" "$logicfile"
-
-sed -i "s/variable long_voice_id_enable [0-1]/variable long_voice_id_enable $new_long_voice_id_enable/g" "$logicfile"
-sed -i "s/variable long_cw_id_enable [0-1]/variable long_cw_id_enable $new_long_cw_id_enable/g" "$logicfile"
+#sed -i "s/variable short_voice_id_enable [0-1]/variable short_voice_id_enable $new_short_voice_id_enable/g" "$logicfile"
+#sed -i "s/variable short_cw_id_enable [0-1]/variable short_cw_id_enable $new_short_cw_id_enable/g" "$logicfile"
+#
+#sed -i "s/variable long_voice_id_enable [0-1]/variable long_voice_id_enable $new_long_voice_id_enable/g" "$logicfile"
+#sed -i "s/variable long_cw_id_enable [0-1]/variable long_cw_id_enable $new_long_cw_id_enable/g" "$logicfile"
 
 # Extract the content of the send_rgr_sound procedure
 send_rgr_sound_content=$(sed -n '/proc send_rgr_sound/,/}/p' "$logicfile" | sed '1d;$d' | sed -n '/else/,/}/p' | sed '1d;$d')
