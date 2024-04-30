@@ -30,11 +30,17 @@ new_short_ident_interval=$(whiptail --title "SHORT IDENT INTERVAL" --menu "Selec
 new_long_ident_interval=$(whiptail --title "LONG IDENT INTERVAL" --menu "Select LONG IDENT INTERVAL:" 15 60 3 30 "30 minutes" 60 "60 minutes" 120 "120 minutes" 3>&1 1>&2 2>&3)
 
 # Replace the existing parameters with the user's new values using sed with double quotes as delimiters
+echo "Replacing CW_AMP with $new_cw_amp"
 sed -i "s/^CW_AMP=.*/CW_AMP=$new_cw_amp/g" "$svxconf_file"
+echo "Replacing CW_PITCH with $new_cw_pitch"
 sed -i "s/^CW_PITCH=.*/CW_PITCH=$new_cw_pitch/g" "$svxconf_file"
+echo "Replacing CW_CPM with $new_cw_cpm"
 sed -i "s/^CW_CPM=.*/CW_CPM=$new_cw_cpm/g" "$svxconf_file"
+echo "Replacing IDLE_TIMEOUT with $new_idle_timeout"
 sed -i "s/^IDLE_TIMEOUT=.*/IDLE_TIMEOUT=$new_idle_timeout/g" "$svxconf_file"
+echo "Replacing SHORT_IDENT_INTERVAL with $new_short_ident_interval"
 sed -i "s/^SHORT_IDENT_INTERVAL=.*/SHORT_IDENT_INTERVAL=$new_short_ident_interval/g" "$svxconf_file"
+echo "Replacing LONG_IDENT_INTERVAL with $new_long_ident_interval"
 sed -i "s/^LONG_IDENT_INTERVAL=.*/LONG_IDENT_INTERVAL=$new_long_ident_interval/g" "$svxconf_file"
 
 #### LOGIC CHANGES ####
