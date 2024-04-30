@@ -15,13 +15,14 @@ short_ident_interval=$(grep -E "SHORT_IDENT_INTERVAL" "$svxconf_file" | awk -F '
 long_ident_interval=$(grep -E "LONG_IDENT_INTERVAL" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
 echo "Value of CW_AMP: $cw_amp"
 # Ensure cw_amp is within the specified range
-if [[ "$cw_amp" -gt 0 && "$cw_amp" -lt -10 ]]; then
-    echo "Error: CW_AMP value is not within the specified range (0 to -10 dB)"
-    exit 1
-fi
+#if [[ "$cw_amp" -gt 0 && "$cw_amp" -lt -10 ]]; then
+#    echo "Error: CW_AMP value is not within the specified range (0 to -10 dB)"
+#    exit 1
+#fi
 
 # Prompt the user to input new values for each parameter using whiptail
-new_cw_amp=$(whiptail --title "CW AMP" --inputbox "Enter value for CW Amplitude (0 to -10 dB):" 10 60 "$cw_amp" --rangebox -10 0 1)
+new_cw_amp=$(whiptail --title "CW AMP" --inputbox "Enter new value for CW AMP (0 to -10 dB):" 10 60 "$cw_amp" 3>&1 1>&2 2>&3)
+
 new_cw_pitch=$(whiptail --title "CW PITCH" --inputbox "Enter value for CW PITCH (440 to 2200 Hz):" 10 60 "$cw_pitch" --rangebox 440 2200 100)
 new_cw_cpm=$(whiptail --title "CW CPM" --inputbox "Enter value CW chars per min (60 to 200 Characters Per Minute):" 10 60 "$cw_cpm" --rangebox 60 200 10)
 new_idle_timeout=$(whiptail --title "IDLE TIMEOUT" --inputbox "Enter value for IDLE TIMEOUT (0 to 15 seconds):" 10 60 "$idle_timeout" --rangebox 0 15 1)
