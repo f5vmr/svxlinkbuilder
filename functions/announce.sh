@@ -4,48 +4,103 @@ function announce {
 logicfile="$LOGIC_DIR/Logic.tcl"
 svxconf_file="$CONF_DIR/svxlink.conf"
 
-# Extract current values of SHORT_IDENT_INTERVAL and LONG_IDENT_INTERVAL from svxlink.conf
-short_ident_interval=$(grep "^SHORT_IDENT_INTERVAL" $svxconf_file | awk -F '=' '{print $2}' | tr -d ' ')
-long_ident_interval=$(grep "^LONG_IDENT_INTERVAL" $svxconf_file | awk -F '=' '{print $2}' | tr -d ' ')
+#### CW TONE VARIABLES #### IDENTS ####
+# Extract numerical variables from svxlink.conf
+cw_amp=$(grep -E "CW_AMP" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
+cw_pitch=$(grep -E "CW_PITCH" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
+cw_cpm=$(grep -E "CW_CPM" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
+idle_timeout=$(grep -E "IDLE_TIMEOUT" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
+short_ident_interval=$(grep -E "SHORT_IDENT_INTERVAL" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
+long_ident_interval=$(grep -E "LONG_IDENT_INTERVAL" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
 
-# Display current values and prompt for new values using whiptail
-new_values=$(whiptail --title "Ident Intervals" --inputbox "Current SHORT_IDENT_INTERVAL: $short_ident_interval\nCurrent LONG_IDENT_INTERVAL: $long_ident_interval\n\nEnter new values for both parameters separated by space:" 15 78 "$short_ident_interval $long_ident_interval" 3>&1 1>&2 2>&3)
+# Ensure cw_amp is within the specified range
+#if [[ "$cw_amp" -gt 0 && "$cw_amp" -lt -10 ]]; then
+#    echo "Error: CW_AMP value is not within the specified range (0 to -10 dB)"
+#    exit 1
+#fi
+echo "Current CW_AMP: $cw_amp"
+# Prompt the user to input new values for each parameter using whiptail
+# Prompt the user to input new values for each parameter using whiptail
+#new_cw_amp=$(whiptail --title "CW AMP" --inputbox "Current CW Amplitude: $cw_amp dB\nEnter new value for CW AMP (0 to -10 dB):" 10 60 "$cw_amp" 3>&1 1>&2 2>&3)
+# Prompt the user for input within the specified range
+# Validate the current CW AMP value
+# Validate the current CW AMP value
+new_cw_amp=$(whiptail --title "CW AMP" --inputbox "Current CW AMP: $cw_amp dB\nEnter new value for CW AMP (0 to -10 dB):" 10 60 -- "$cw_amp" 3>&1 1>&2 2>&3)
 
-# Extract new values
-new_short_ident_interval=$(echo "$new_values" | awk '{print $1}')
-new_long_ident_interval=$(echo "$new_values" | awk '{print $2}')
+new_cw_pitch=$(whiptail --title "CW PITCH" --inputbox "Current CW PITCH: $cw_pitch Hz\nEnter new value for CW PITCH (440 to 2200 Hz):" 10 60 "$cw_pitch" 3>&1 1>&2 2>&3)
+new_cw_cpm=$(whiptail --title "CW CPM" --inputbox "Current CW CPM: $cw_cpm Characters Per Minute\nEnter new value for CW CPM (60 to 200 Characters Per Minute):" 10 60 "$cw_cpm" 3>&1 1>&2 2>&3)
+new_idle_timeout=$(whiptail --title "IDLE TIMEOUT" --inputbox "Current IDLE TIMEOUT: $idle_timeout seconds\nEnter new value for IDLE TIMEOUT (0 to 15 seconds):" 10 60 "$idle_timeout" 3>&1 1>&2 2>&3)
+new_short_ident_interval=$(whiptail --title "SHORT IDENT INTERVAL" --menu "Select SHORT IDENT INTERVAL:" 15 60 4 5 "5 minutes" 10 "10 minutes" 15 "15 minutes" 20 "20 minutes" 3>&1 1>&2 2>&3)
+new_long_ident_interval=$(whiptail --title "LONG IDENT INTERVAL" --menu "Select LONG IDENT INTERVAL:" 15 60 3 30 "30 minutes" 60 "60 minutes" 120 "120 minutes" 3>&1 1>&2 2>&3)
 
-# Update svxlink.conf with new values
-sed -i 's/^SHORT_IDENT_INTERVAL=.*/SHORT_IDENT_INTERVAL=$new_short_ident_interval/g' "$svxconf_file"
-sed -i 's/^LONG_IDENT_INTERVAL=.*/LONG_IDENT_INTERVAL=$new_long_ident_interval/g' "$svxconf_file"
+# Replace the existing parameters with the user's new values using sed with double quotes as delimiters
+echo "Replacing CW_AMP with $new_cw_amp"
+# Escape the minus sign in $new_cw_amp
 
 
-# Extract current values of the variables
-short_voice_id_enable=$(grep "variable short_voice_id_enable" "$logicfile" | awk '{print $3}')
-short_cw_id_enable=$(grep "variable short_cw_id_enable" "$logicfile" | awk '{print $3}')
-long_voice_id_enable=$(grep "variable long_voice_id_enable" "$logicfile" | awk '{print $3}')
-long_cw_id_enable=$(grep "variable long_cw_id_enable" "$logicfile" | awk '{print $3}')
+# Update svxlink.conf with the new values for CW_AMP
+# Update svxlink.conf with the new values for CW_AMP
+# Update svxlink.conf with the new values for CW_AMP using a different delimiter
+# Update svxlink.conf with the new values for CW_AMP with the replacement value enclosed in double quotes
+#sed -i "s/^CW_AMP=.*/CW_AMP=\"$new_cw_amp\"/g" -- "$svxconf_file"
+# Update svxlink.conf with the new value for CW_AMP using awk
+sed -i "s/^CW_AMP=.*/CW_AMP=$new_cw_amp/g" "$svxconf_file"
+echo "Replacing CW_PITCH with $new_cw_pitch"
+sed -i "s/^CW_PITCH=.*/CW_PITCH=$new_cw_pitch/g" "$svxconf_file"
+echo "Replacing CW_CPM with $new_cw_cpm"
+sed -i "s/^CW_CPM=.*/CW_CPM=$new_cw_cpm/g" "$svxconf_file"
+echo "Replacing IDLE_TIMEOUT with $new_idle_timeout"
+sed -i "s/^IDLE_TIMEOUT=.*/IDLE_TIMEOUT=$new_idle_timeout/g" "$svxconf_file"
+echo "Replacing SHORT_IDENT_INTERVAL with $new_short_ident_interval"
+sed -i "s/^SHORT_IDENT_INTERVAL=.*/SHORT_IDENT_INTERVAL=$new_short_ident_interval/g" "$svxconf_file"
+echo "Replacing LONG_IDENT_INTERVAL with $new_long_ident_interval"
+sed -i "s/^LONG_IDENT_INTERVAL=.*/LONG_IDENT_INTERVAL=$new_long_ident_interval/g" "$svxconf_file"
+echo standby for logic changes
+#### LOGIC CHANGES ####
+## Extract the values of the text indicators from Logic.tcl
+# Retrieve the current values of the variables
+short_voice_id_enable=$(head -n 40 "$logicfile" | awk '/^variable short_voice_id_enable/{print $NF; exit}')
+short_cw_id_enable=$(head -n 40 "$logicfile" | awk '/^variable short_cw_id_enable/{print $NF; exit}')
+long_voice_id_enable=$(head -n 40 "$logicfile" | awk '/^variable long_voice_id_enable/{print $NF; exit}')
+long_cw_id_enable=$(head -n 40 "$logicfile" | awk '/^variable long_cw_id_enable/{print $NF; exit}')
 
-# Display current values and prompt for new values using whiptail
-new_values=$(whiptail --title "Toggle ID Variables" --checklist "Toggle Variables" 15 60 4 \
-    "short_voice_id_enable" "SHORT_VOICE_ID_ENABLE: $short_voice_id_enable" $short_voice_id_enable \
-    "short_cw_id_enable" "SHORT_CW_ID_ENABLE: $short_cw_id_enable" $short_cw_id_enable \
-    "long_voice_id_enable" "LONG_VOICE_ID_ENABLE: $long_voice_id_enable" $long_voice_id_enable \
-    "long_cw_id_enable" "LONG_CW_ID_ENABLE: $long_cw_id_enable" $long_cw_id_enable \
-    3>&1 1>&2 2>&3)
+# Define the options for the checklist dialog
+options=(
+    "Short Voice ID Enable" "$short_voice_id_enable" ""  # Empty description for now
+    "Short CW ID Enable" "$short_cw_id_enable" ""        # Empty description for now
+    "Long Voice ID Enable" "$long_voice_id_enable" ""    # Empty description for now
+    "Long CW ID Enable" "$long_cw_id_enable" ""          # Empty description for now
+)
 
-# Extract new values
-new_short_voice_id_enable=$(echo "$new_values" | grep "short_voice_id_enable" | wc -l)
-new_short_cw_id_enable=$(echo "$new_values" | grep "short_cw_id_enable" | wc -l)
-new_long_voice_id_enable=$(echo "$new_values" | grep "long_voice_id_enable" | wc -l)
-new_long_cw_id_enable=$(echo "$new_values" | grep "long_cw_id_enable" | wc -l)
+# Add descriptions to the options based on their current values
+for ((i = 0; i < ${#options[@]}; i+=3)); do
+    value="${options[i+1]}"
+    if [ "$value" == "1" ]; then
+        options[i+2]="Enabled"
+    else
+        options[i+2]="Disabled"
+    fi
+done
 
-# Update Logic.tcl with the new values
-sed -i 's/variable short_voice_id_enable $short_voice_id_enable/variable short_voice_id_enable $new_short_voice_id_enable/g' "$logicfile"
-sed -i 's/variable short_cw_id_enable $short_cw_id_enable/variable short_cw_id_enable $new_short_cw_id_enable/g' "$logicfile"
-sed -i 's/variable long_voice_id_enable $long_voice_id_enable/variable long_voice_id_enable $new_long_voice_id_enable/g' "$logicfile"
-sed -i 's/variable long_cw_id_enable $long_cw_id_enable/variable long_cw_id_enable $new_long_cw_id_enable/g' "$logicfile"
+# Prompt the user to toggle the variables using a checklist dialog
+new_values=$(whiptail --title "Toggle ID Variables" --checklist "Toggle Variables" 15 78 4 "${options[@]}" 3>&1 1>&2 2>&3)
 
+# Extract the new values from the checklist dialog
+new_short_voice_id_enable=$(echo "$new_values" | grep -o "Short Voice ID Enable" | wc -l)
+new_short_cw_id_enable=$(echo "$new_values" | grep -o "Short CW ID Enable" | wc -l)
+new_long_voice_id_enable=$(echo "$new_values" | grep -o "Long Voice ID Enable" | wc -l)
+new_long_cw_id_enable=$(echo "$new_values" | grep -o "Long CW ID Enable" | wc -l)
+echo "Short Voice ID Enable: $new_short_voice_id_enable"
+echo "Short CW ID Enable: $new_short_cw_id_enable"
+echo "Long Voice ID Enable: $new_long_voice_id_enable"
+echo "Long CW ID Enable: $new_long_cw_id_enable"
+
+
+# Update the Logic.tcl file with the new values
+sed -i "s/^\(variable short_voice_id_enable\s*\)[0-9].*/\1$new_short_voice_id_enable/g" "$logicfile"
+sed -i "s/^\(variable short_cw_id_enable\s*\)[0-9].*/\1$new_short_cw_id_enable/g" "$logicfile"
+sed -i "s/^\(variable long_voice_id_enable\s*\)[0-9].*/\1$new_long_voice_id_enable/g" "$logicfile"
+sed -i "s/^\(variable long_cw_id_enable\s*\)[0-9].*/\1$new_long_cw_id_enable/g" "$logicfile"
 
 
 # Extract the content of the send_rgr_sound procedure
@@ -84,43 +139,19 @@ case $selected_option in
         volume=$(whiptail --title "Volume" --inputbox "Enter volume (0-100):" 10 50 "100" 3>&1 1>&2 2>&3)
         duration=$(whiptail --title "Duration" --inputbox "Enter duration (ms):" 10 50 "$default_duration" 3>&1 1>&2 2>&3)
         # Update Logic.tcl with the entered frequency, volume, and duration
-        sed -i "s/playTone [0-9]\+ [0-9]\+ [0-9]\+/playTone $frequency $volume $duration/g" "$svxconf_file"
+        echo "beep"
+        sed -i "s/playTone [0-9]\+ [0-9]\+ [0-9]\+/playTone $frequency $volume $duration/g" "$logicfile"
         ;;
     "Morse K")
-        sed -i 's/playTone [0-9]\+ [0-9]\+ [0-9]\+/CW::play " K"/g' "$svxconf_file"
+        # Replace playTone with CW::play " K" or CW::play " T"
+        sed -i 's/playTone [0-9]\+ [0-9]\+ [0-9]\+/CW::play \" K\"/g' "$logicfile"
+
         ;;
     "Morse T")
-        sed -i 's/playTone [0-9]\+ [0-9]\+ [0-9]\+/CW::play " T"/g' "$svxconf_file"
-        ;;
+        echo "T"
+        # Replace playTone with CW::play " K" or CW::play " T"
+        sed -i 's/playTone [0-9]\+ [0-9]\+ [0-9]\+/CW::play \" T\"/g' "$logicfile"
+;;
 esac
-#### now the Morse tone and speed.
- # Extract current values of CW_AMP, CW_PITCH, and CW_CPS
-
-cw_amp=$(grep -E "^CW_AMP" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
-cw_pitch=$(grep -E "^CW_PITCH" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
-cw_cpm=$(grep -E "^CW_CPM" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
-
-# Calculate display volume as positive integer
-display_cw_amp=$(( 0 - cw_amp ))
-
-# Default values
-default_cw_amp=0
-default_cw_pitch=650
-default_cw_cpm=95
-
-# Display options and prompt for selection using whiptail
-selected_cw_amp=$(whiptail --title "CW Pitch and Speed" --inputbox "Enter Volume (0 to 10 dB):" 15 78 "$display_cw_amp" 3>&1 1>&2 2>&3)
-selected_cw_amp=$(( 0 - selected_cw_amp ))  # Convert back to negative integer
-
-selected_cw_pitch=$(whiptail --title "CW Pitch and Speed" --inputbox "Enter Tone (600-1800 Hz):" 15 78 "$cw_pitch" 3>&1 1>&2 2>&3)
-selected_cw_cpm=$(whiptail --title "CW Pitch and Speed" --inputbox "Enter Speed (75-200):" 15 78 "$cw_cpm" 3>&1 1>&2 2>&3)
-
-# Update svxlink.conf with the selected values
-sed -i 's/^CW_AMP=.*/CW_AMP=$selected_cw_amp/g' "$svxconf_file"
-sed -i 's/^CW_PITCH=.*/CW_PITCH=$selected_cw_pitch/g' "$svxconf_file"
-sed -i 's/^CW_CPM=.*/CW_CPM=$selected_cw_cpm/g' "$svxconf_file"
-
-
-
 
 }
