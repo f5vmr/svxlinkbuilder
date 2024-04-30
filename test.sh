@@ -95,7 +95,8 @@ echo "Short Voice ID Enable: $new_short_voice_id_enable"
 echo "Short CW ID Enable: $new_short_cw_id_enable"
 echo "Long Voice ID Enable: $new_long_voice_id_enable"
 echo "Long CW ID Enable: $new_long_cw_id_enable"
-exit
+
+
 # Update the Logic.tcl file with the new values
 sed -i "s/variable short_voice_id_enable\s*\K.*/$new_short_voice_id_enable/g" "$logicfile"
 sed -i "s/variable short_cw_id_enable\s*\K.*/$new_short_cw_id_enable/g" "$logicfile"
