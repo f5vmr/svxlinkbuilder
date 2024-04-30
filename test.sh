@@ -31,7 +31,12 @@ new_long_ident_interval=$(whiptail --title "LONG IDENT INTERVAL" --menu "Select 
 
 # Replace the existing parameters with the user's new values using sed with double quotes as delimiters
 echo "Replacing CW_AMP with $new_cw_amp"
-sed -i "s/^CW_AMP=.*/CW_AMP=$new_cw_amp/g" -- "$svxconf_file"
+# Escape the minus sign in $new_cw_amp
+new_cw_amp_escaped=$(echo "$new_cw_amp" | sed 's/-/\\-/g')
+
+# Update svxlink.conf with the new values for CW_AMP
+sed -i "s/^CW_AMP=.*/CW_AMP=$new_cw_amp_escaped/g" -- "$svxconf_file"
+
 echo "Replacing CW_PITCH with $new_cw_pitch"
 sed -i "s/^CW_PITCH=.*/CW_PITCH=$new_cw_pitch/g" "$svxconf_file"
 echo "Replacing CW_CPM with $new_cw_cpm"
