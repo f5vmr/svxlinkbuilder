@@ -59,10 +59,11 @@ sed -i "s/^LONG_IDENT_INTERVAL=.*/LONG_IDENT_INTERVAL=$new_long_ident_interval/g
 
 #### LOGIC CHANGES ####
 ## Extract the values of the text indicators from Logic.tcl
-short_voice_id_enable=$(awk '/variable short_voice_id_enable/{print $NF}' "$logicfile")
-short_cw_id_enable=$(awk '/variable short_cw_id_enable/{print $NF}' "$logicfile")
-long_voice_id_enable=$(awk '/variable long_voice_id_enable/{print $NF}' "$logicfile")
-long_cw_id_enable=$(awk '/variable long_cw_id_enable/{print $NF}' "$logicfile")
+short_voice_id_enable=$(grep -oP 'variable short_voice_id_enable \K\d' "$logicfile")
+short_cw_id_enable=$(grep -oP '/variable short_cw_id_enable \K\d' "$logicfile")
+long_voice_id_enable=$(grep -oP '/variable long_voice_id_enable \K\d' "$logicfile")
+long_cw_id_enable=$(grep -oP '/variable long_cw_id_enable \K\d' "$logicfile")
+
 
 #
 ## Prompt the user to toggle the values using whiptail
