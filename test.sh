@@ -99,7 +99,10 @@ echo "Long CW ID Enable: $new_long_cw_id_enable"
 
 # Update the Logic.tcl file with the new values
 echo "sed command for short_voice_id_enable:"
-echo "sed -i \"s/variable short_voice_id_enable\\s*\\K.*/$new_short_voice_id_enable/g\" $logicfile"
+echo "Pattern: variable short_voice_id_enable\s*\K.*"
+echo "Replacement: $new_short_voice_id_enable"
+sudo sed -i "s/variable short_voice_id_enable\s*\K.*/$new_short_voice_id_enable/g" "$logicfile"
+echo "Command executed"
 
 echo "sed command for short_cw_id_enable:"
 echo "sed -i \"s/variable short_cw_id_enable\\s*\\K.*/$new_short_cw_id_enable/g\" $logicfile"
