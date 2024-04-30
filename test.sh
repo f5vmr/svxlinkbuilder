@@ -22,7 +22,15 @@ long_ident_interval=$(grep -E "LONG_IDENT_INTERVAL" "$svxconf_file" | awk -F '='
 echo "Current CW_AMP: $cw_amp"
 # Prompt the user to input new values for each parameter using whiptail
 # Prompt the user to input new values for each parameter using whiptail
-new_cw_amp=$(whiptail --title "CW AMP" --inputbox "Current CW Amplitude: $cw_amp dB\nEnter new value for CW AMP (0 to -10 dB):" 10 60 "$cw_amp" 3>&1 1>&2 2>&3)
+#new_cw_amp=$(whiptail --title "CW AMP" --inputbox "Current CW Amplitude: $cw_amp dB\nEnter new value for CW AMP (0 to -10 dB):" 10 60 "$cw_amp" 3>&1 1>&2 2>&3)
+new_cw_amp=$(whiptail --title "CW AMP" --inputbox "Current CW AMP: $cw_amp dB\nEnter new value for CW AMP (0 to -10 dB):" 10 60 "$cw_amp" 3>&1 1>&2 2>&3)
+
+# Check if the input value is numeric and within the specified range
+if ! [[ "$new_cw_amp" =~ ^-?[0-9]+$ ]] || (( new_cw_amp < -10 )); then
+    echo "Error: Invalid input for CW AMP"
+    exit 1
+fi
+
 new_cw_pitch=$(whiptail --title "CW PITCH" --inputbox "Current CW PITCH: $cw_pitch Hz\nEnter new value for CW PITCH (440 to 2200 Hz):" 10 60 "$cw_pitch" 3>&1 1>&2 2>&3)
 new_cw_cpm=$(whiptail --title "CW CPM" --inputbox "Current CW CPM: $cw_cpm Characters Per Minute\nEnter new value for CW CPM (60 to 200 Characters Per Minute):" 10 60 "$cw_cpm" 3>&1 1>&2 2>&3)
 new_idle_timeout=$(whiptail --title "IDLE TIMEOUT" --inputbox "Current IDLE TIMEOUT: $idle_timeout seconds\nEnter new value for IDLE TIMEOUT (0 to 15 seconds):" 10 60 "$idle_timeout" 3>&1 1>&2 2>&3)
@@ -32,7 +40,7 @@ new_long_ident_interval=$(whiptail --title "LONG IDENT INTERVAL" --menu "Select 
 # Replace the existing parameters with the user's new values using sed with double quotes as delimiters
 echo "Replacing CW_AMP with $new_cw_amp"
 # Escape the minus sign in $new_cw_amp
-new_cw_amp_escaped=$(echo "$new_cw_amp" | sed 's/-/\\-/g')
+
 
 # Update svxlink.conf with the new values for CW_AMP
 # Update svxlink.conf with the new values for CW_AMP
