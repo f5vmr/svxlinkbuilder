@@ -74,6 +74,9 @@ new_values=$(whiptail --title "Toggle ID Variables" --checklist "Toggle Variable
     "long_cw_id_enable" "Toggle Long CW ID Enable" $long_cw_id_enable \
     3>&1 1>&2 2>&3)
 
+    echo "New values: $new_values"
+    exit
+
 # Process the selected values and update the logic file
 # Example of how to process the new values:
 # For each value, extract the state (0 or 1) and update the logic file accordingly
