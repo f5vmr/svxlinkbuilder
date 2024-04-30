@@ -22,7 +22,7 @@ long_ident_interval=$(grep -E "LONG_IDENT_INTERVAL" "$svxconf_file" | awk -F '='
 echo "Current CW_AMP: $cw_amp"
 # Prompt the user to input new values for each parameter using whiptail
 # Prompt the user to input new values for each parameter using whiptail
-new_cw_amp=$(whiptail --title "CW AMP" --inputbox "Current CW AMP: $cw_amp dB\nEnter new value for CW AMP (0 to -10 dB):" 10 60 "$cw_amp" 3>&1 1>&2 2>&3)
+new_cw_amp=$(whiptail --title "CW AMP" --inputbox "Current CW Amplitude: $cw_amp dB\nEnter new value for CW AMP (0 to -10 dB):" 10 60 "$cw_amp" 3>&1 1>&2 2>&3)
 new_cw_pitch=$(whiptail --title "CW PITCH" --inputbox "Current CW PITCH: $cw_pitch Hz\nEnter new value for CW PITCH (440 to 2200 Hz):" 10 60 "$cw_pitch" 3>&1 1>&2 2>&3)
 new_cw_cpm=$(whiptail --title "CW CPM" --inputbox "Current CW CPM: $cw_cpm Characters Per Minute\nEnter new value for CW CPM (60 to 200 Characters Per Minute):" 10 60 "$cw_cpm" 3>&1 1>&2 2>&3)
 new_idle_timeout=$(whiptail --title "IDLE TIMEOUT" --inputbox "Current IDLE TIMEOUT: $idle_timeout seconds\nEnter new value for IDLE TIMEOUT (0 to 15 seconds):" 10 60 "$idle_timeout" 3>&1 1>&2 2>&3)
@@ -38,7 +38,10 @@ new_cw_amp_escaped=$(echo "$new_cw_amp" | sed 's/-/\\-/g')
 # Update svxlink.conf with the new values for CW_AMP
 # Update svxlink.conf with the new values for CW_AMP using a different delimiter
 # Update svxlink.conf with the new values for CW_AMP with the replacement value enclosed in double quotes
-sed -i "s/^CW_AMP=.*/CW_AMP=\"$new_cw_amp\"/g" -- "$svxconf_file"
+#sed -i "s/^CW_AMP=.*/CW_AMP=\"$new_cw_amp\"/g" -- "$svxconf_file"
+# Update svxlink.conf with the new value for CW_AMP using awk
+awk -v new_cw_amp="$new_cw_amp" '/^CW_AMP=/ {$0 = "CW_AMP=" new_cw_amp} 1' "$svxconf_file" > temp && mv temp "$svxconf_file"
+
 echo "Replacing CW_PITCH with $new_cw_pitch"
 sed -i "s/^CW_PITCH=.*/CW_PITCH=$new_cw_pitch/g" "$svxconf_file"
 echo "Replacing CW_CPM with $new_cw_cpm"
