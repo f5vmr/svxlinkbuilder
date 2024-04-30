@@ -56,7 +56,7 @@ echo "Replacing SHORT_IDENT_INTERVAL with $new_short_ident_interval"
 sed -i "s/^SHORT_IDENT_INTERVAL=.*/SHORT_IDENT_INTERVAL=$new_short_ident_interval/g" "$svxconf_file"
 echo "Replacing LONG_IDENT_INTERVAL with $new_long_ident_interval"
 sed -i "s/^LONG_IDENT_INTERVAL=.*/LONG_IDENT_INTERVAL=$new_long_ident_interval/g" "$svxconf_file"
-
+echo standby for logic changes
 #### LOGIC CHANGES ####
 ## Extract the values of the text indicators from Logic.tcl
 short_voice_id_enable=$(grep -oP 'variable short_voice_id_enable\s*\K\d' "$logicfile")
