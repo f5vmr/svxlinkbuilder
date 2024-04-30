@@ -63,6 +63,7 @@ short_voice_id_enable=$(grep -oP 'variable short_voice_id_enable\s*\K\d' "$logic
 short_cw_id_enable=$(grep -oP '/variable short_cw_id_enable\s*\K\d' "$logicfile")
 long_voice_id_enable=$(grep -oP '/variable long_voice_id_enable\s*\K\d' "$logicfile")
 long_cw_id_enable=$(grep -oP '/variable long_cw_id_enable\s*\K\d' "$logicfile")
+echo "$short_voice_id_enable"
 
 
 #
