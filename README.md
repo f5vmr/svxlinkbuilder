@@ -44,7 +44,7 @@
 
 <p>At the end of the compilation, the system will automatically reboot, about which you will be notified.</p>
 
-<p>The next step will be to open an internet browser such as 'Chrome' and type in the IP Address and enter. The dashboard will be displayed. If your USB soundcard is flashing then the node should be fully operational. If it isn't, log in to 'Authorise' on the dashboard, then click on 'Power and use the top button to restart the node. If this fails then we'll need to investigate.</p>
+<p>The next step will be to open an internet browser such as 'Chrome' and type in the IP Address and enter. The dashboard will be displayed. If your USB soundcard is flashing then the node should be fully operational. If it isn't, log in to 'Authorise' on the dashboard, then click on 'Power' and use the top button to restart the node. If this fails then we'll need to investigate.</p>
 
 <h2> Troubleshooting </h2>
 
