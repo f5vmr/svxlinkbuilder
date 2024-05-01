@@ -26,7 +26,7 @@
 <p>Once complete, eject the card and install it in the raspberry pi and power it up. Enter the user <b>pi</b> and your password. <b>DO NOT DO ANY UPDATES/UPGRADES</b> as they will be done in the following script.</p> 
 <h2>The compilation</h2>
 <p>This script will also install a dummy sound card for the use of Darkice and Icecast2.</p> 
-<p>The first step will be the following command: <b>sudo apt-get install -y git</b> as without this you cannot download from the GitHub.</p>  
+<p>The first step will be the following command: <b>sudo apt-get install -y git</b> as without this you cannot download from the GitHub. I have learned also that apt-get is more bash-efficient the apt.</p>  
 
 <p>Now the following command: <b>sudo git clone https://github.com/f5vmr/svxlinkbuilder.git</b> .</p>
 
@@ -37,8 +37,8 @@
 <p>For the American User, the en_US Voice files will be pulled if you select 'English - USA' from the menu.</p>
 <p>I hope that there will be someone out there that can add to the code for Spanish or Portuguese.</p>
 <h2>We begin</h2>
-<p>Type the following command at the current prompt: <b>./svxlinkbuilder/preinstall.sh</b> The system will reboot so login again as before.</p>
-<p>Type the following command <b> ./svxlinkbuilder/install.sh</b> Special NOTE - <b>No sudo here in these commands.</b></p>
+<p>Type the following command at the current prompt: <b>./svxlinkbuilder/preinstall.sh</b> The system will reboot so login again as before.<b>NOTE - do not use sudo here. </b></p>
+<p>Type the following command <b> ./svxlinkbuilder/install.sh</b> <b>Special NOTE - No sudo here either in this command.</b></p>
 <p>Follow the menus, and enter the required information, which should should have noted, to assist you prior to running the program.</p>
 <p>During the compilation, you will be notified of the Active IP Address of your node. Make a note of it. You will need it to proceed.</p>
 
