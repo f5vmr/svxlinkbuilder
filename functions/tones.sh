@@ -48,7 +48,7 @@ fi
 
 # Function to get the current IDLE_TIMEOUT value from svxlink.conf
 get_idle_timeout() {
-    idle_timeout=$(grep -Po '(?<=^RepeaterLogic:IDLE_TIMEOUT=).*' /etc/svxlink/svxlink.conf)
+    idle_timeout=$(grep -Po '(?>IDLE_TIMEOUT=).*' /etc/svxlink/svxlink.conf)
     echo "$idle_timeout"
 }
 
