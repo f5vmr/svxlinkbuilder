@@ -9,7 +9,6 @@ svxconf_file="$CONF_DIR/svxlink.conf"
 cw_amp=$(grep -E "CW_AMP" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
 cw_pitch=$(grep -E "CW_PITCH" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
 cw_cpm=$(grep -E "CW_CPM" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
-idle_timeout=$(grep -E "IDLE_TIMEOUT" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
 short_ident_interval=$(grep -E "SHORT_IDENT_INTERVAL" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
 long_ident_interval=$(grep -E "LONG_IDENT_INTERVAL" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
 
@@ -29,7 +28,6 @@ new_cw_amp=$(whiptail --title "CW AMP" --inputbox "Current CW AMP: $cw_amp dB\nE
 
 new_cw_pitch=$(whiptail --title "CW PITCH" --inputbox "Current CW PITCH: $cw_pitch Hz\nEnter new value for CW PITCH (440 to 2200 Hz):" 10 60 "$cw_pitch" 3>&1 1>&2 2>&3)
 new_cw_cpm=$(whiptail --title "CW CPM" --inputbox "Current CW CPM: $cw_cpm Characters Per Minute\nEnter new value for CW CPM (60 to 200 Characters Per Minute):" 10 60 "$cw_cpm" 3>&1 1>&2 2>&3)
-new_idle_timeout=$(whiptail --title "IDLE TIMEOUT" --inputbox "Current IDLE TIMEOUT: $idle_timeout seconds\nEnter new value for IDLE TIMEOUT (0 to 15 seconds):" 10 60 "$idle_timeout" 3>&1 1>&2 2>&3)
 new_short_ident_interval=$(whiptail --title "SHORT IDENT INTERVAL" --menu "Select SHORT IDENT INTERVAL:" 15 60 4 5 "5 minutes" 10 "10 minutes" 15 "15 minutes" 20 "20 minutes" 3>&1 1>&2 2>&3)
 new_long_ident_interval=$(whiptail --title "LONG IDENT INTERVAL" --menu "Select LONG IDENT INTERVAL:" 15 60 3 30 "30 minutes" 60 "60 minutes" 120 "120 minutes" 3>&1 1>&2 2>&3)
 
