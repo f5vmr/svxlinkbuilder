@@ -23,7 +23,7 @@
 <p>You can set your Wi-Fi settings here if your wish.</p>
 <b>Always check the SSH box on the second tab of the next box, otherwise that will also cause your installation to fail.</b>  you can use a password or set a key if you wish.</p> 
 
-<p>Once complete, eject the card and install it in the raspberry pi and power it up. Enter the user <b>pi</b> and your password.</p> 
+<p>Once complete, eject the card and install it in the raspberry pi and power it up. Enter the user <b>pi</b> and your password. <b>DO NOT DO ANY UPDATES/UPGRADES</b></p> 
 <h2>The compilation</h2>
 <p>This script will also install a dummy sound card for the use of Darkice and Icecast2.</p> 
 <p>The first step will be the following command: <b>sudo apt-get install -y git</b> as without this you cannot download from the GitHub.</p>  
