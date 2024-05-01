@@ -39,7 +39,7 @@
 <h2>We begin</h2>
 <p>Type the following command at the current prompt: <b>./svxlinkbuilder/preinstall.sh</b> The system will reboot so login again as before.<b> NOTE - do not use sudo here. </b></p>
 <p>Type the following command <b> ./svxlinkbuilder/install.sh</b> <b>Special NOTE - No sudo here either in this command.</b></p>
-<p>Follow the menus, and enter the required information, which should should have noted, to assist you prior to running the program.</p>
+<p>Follow the menus, and enter the required information, which you should have noted, to assist you prior to running the program.</p>
 <p>During the compilation, you will be notified of the Active IP Address of your node. Make a note of it. You will need it to proceed.</p>
 
 <p>At the end of the compilation, the system will automatically reboot, about which you will be notified.</p>
