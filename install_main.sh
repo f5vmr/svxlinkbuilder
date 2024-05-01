@@ -1,5 +1,5 @@
 #!/bin/bash
-
+lang=$(echo $LANG | grep -o '^[a-zA-Z]*_[a-zA-Z]*')
 #### Welcome Message ####
 source "${BASH_SOURCE%/*}/functions/welcome.sh"
 welcome
@@ -107,6 +107,7 @@ if [[ $LANG_OPTION == "3" ]]; then
 	echo -e "$(date)" "${YELLOW} #### Changing Log file suffix ${NORMAL}" | tee -a  /var/log/install.log
 
  	sudo sed -i 's/log\/svxlink/log\/svxlink.log/g' /etc/default/svxlink
+	
 	#### INSTALLING DASHBOARD ####
  # clear
 	cd /home/pi
@@ -119,7 +120,7 @@ if [[ $LANG_OPTION == "3" ]]; then
 	echo -e "$(date)" "${YELLOW} #### Installing Dashboard #### ${NORMAL}" | tee -a  /var/log/install.log
 
 	source "${BASH_SOURCE%/*}/functions/dash_install.sh"
-install_dash
+	install_dash
  # clear
 	echo -e "$(date)" "${GREEN} #### Dashboard installed #### ${NORMAL}" | tee -a  /var/log/install.log
 	whiptail --title "IP Addresses" --msgbox "Dashboard installed. Please note your IP address is $ip_address on $device" 8 78
@@ -127,8 +128,20 @@ install_dash
 
 	 # clear
 	echo -e "$(date)" "${GREEN} #### Setting up Node #### ${NORMAL}" | tee -a  /var/log/install.log
-source "${BASH_SOURCE%/*}/functions/node_setup.sh"
-nodeset
+	source "${BASH_SOURCE%/*}/functions/node_setup.sh"
+	nodeset
+	#### Removal of unwanted files ####
+	echo -e "$(date)" "${YELLOW} #### Removing unwanted files #### ${NORMAL}" | tee -a  /var/log/install.log
+	source "${BASH_SOURCE%/*}/functions/deletion.sh"
+	delete
+	#### Identification setup ####
+	echo -e "$(date)" "${GREEN} #### Identification setup  #### ${NORMAL}" | tee -a  /var/log/install.log
+	source "${BASH_SOURCE%/*}/functions/announce.sh"
+	announce
+	echo -e "$(date)" "${GREEN} #### Announcement setup complete  #### ${NORMAL}" | tee -a  /var/log/install.log
+	source "${BASH_SOURCE%/*}/functions/tones.sh"
+	tones
+	echo -e "$(date)" "${GREEN} #### Tones setup complete  #### ${NORMAL}" | tee -a  /var/log/install.log	
 	cd /home/pi
 	 # clear
  	echo -e "$(date)" "${RED} #### Changing ModuleMetar Link #### ${NORMAL}" | tee -a  /var/log/install.log
@@ -159,7 +172,7 @@ echolinksetup
 
 
 echo -e "$(date)" "${GREEN} #### Installation complete #### ${NORMAL}" | tee -a  /var/log/install.log
-
+whiptail --title "Installation Complete" --msgbox "Installation complete. Reboot in progress" 8 78
 echo -e "$(date)" "${RED} #### Rebooting SVXLink #### ${NORMAL}" | tee -a  /var/log/install.log
 
 #exit

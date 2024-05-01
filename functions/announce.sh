@@ -1,10 +1,9 @@
 #!/bin/bash
-CONF_DIR="/etc/svxlink"
-LOGIC_DIR="/usr/share/svxlink/events.d/local"
-svxfile="svxlink.conf"
-logictcl="Logic.tcl"
-logicfile="$LOGIC_DIR/$logictcl"
-svxconf_file="$CONF_DIR/$svxfile"
+#### CW/Voice Announcements
+function announce {
+logicfile="$LOGIC_DIR/Logic.tcl"
+svxconf_file="$CONF_DIR/svxlink.conf"
+
 #### CW TONE VARIABLES #### IDENTS ####
 # Extract numerical variables from svxlink.conf
 cw_amp=$(grep -E "CW_AMP" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
@@ -155,6 +154,4 @@ case $selected_option in
 ;;
 esac
 
-
-
-
+}
