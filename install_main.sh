@@ -107,6 +107,7 @@ if [[ $LANG_OPTION == "3" ]]; then
 	echo -e "$(date)" "${YELLOW} #### Changing Log file suffix ${NORMAL}" | tee -a  /var/log/install.log
 
  	sudo sed -i 's/log\/svxlink/log\/svxlink.log/g' /etc/default/svxlink
+	
 	#### INSTALLING DASHBOARD ####
  # clear
 	cd /home/pi
@@ -129,7 +130,11 @@ if [[ $LANG_OPTION == "3" ]]; then
 	echo -e "$(date)" "${GREEN} #### Setting up Node #### ${NORMAL}" | tee -a  /var/log/install.log
 	source "${BASH_SOURCE%/*}/functions/node_setup.sh"
 	nodeset
-
+	#### Removal of unwanted files ####
+	echo -e "$(date)" "${YELLOW} #### Removing unwanted files #### ${NORMAL}" | tee -a  /var/log/install.log
+	source "${BASH_SOURCE%/*}/functions/deletion.sh"
+	delete
+	#### Identification setup ####
 	echo -e "$(date)" "${GREEN} #### Identification setup  #### ${NORMAL}" | tee -a  /var/log/install.log
 	source "${BASH_SOURCE%/*}/functions/announce.sh"
 	announce

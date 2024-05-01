@@ -76,18 +76,12 @@ fi
 CWLogic="CW.tcl"
 cwfile="$LOGIC_DIR/$CWLogic"
 # Adding the VA Bar code to CW.tcl
-sed -i '/\"=\" \"-\.\.\.-\"/a \"-\" \"...-.-\"' "$cwfile"
-sed -i "s/playTone 400 900/\#playTone 400 900/g" "$logicfile"
-sed -i "s/playTone 360 900/\#playTone 360 900/g" "$logicfile"
-sed -i '/#playTone 360 900 /a CW::play \"-\"\;' "$logicfile"
-
-
-
-
+sed -i 's/\"=\" \"-\.\.\.-\"/a \"-\" \"...-.-\"' "$cwfile"
+sed -i 's/playTone 400 900/\#playTone 400 900/g' "$logicfile"
+sed -i 's/playTone 360 900/\#playTone 360 900/g' "$logicfile"
+sed -i 's/\#playTone 360 900 /a CW::play \"-\"\;' "$logicfile"
 
 #### 
-
-
 else
     # Code to execute if NODE_OPTION is not equal to 3 or 4
     echo "NODE_OPTION is not 3 or 4. Skipping code..."
