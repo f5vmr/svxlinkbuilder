@@ -1,7 +1,7 @@
 #!/bin/bash
 ## Set up echolink
 function echolinksetup {
-whiptail --title "Para configurar-EchoLink?" --yesno "Esto instalará EchoLink y lo configurará." 8 87 
+whiptail --title "Para configurar-EchoLink?" --yesno "Esto instalará EchoLink y lo configurará." 8 70 
 if [ $? -eq "0" ] 
 then
     ## "Installing echolink"
