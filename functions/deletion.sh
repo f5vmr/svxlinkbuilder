@@ -3,9 +3,9 @@ function delete {
 #### Test for Simplex or Repeater ####
 
 # Define the section name to be removed
-if [ "$NODE_OPTION" -eq "1" ] || [ "$NODE_OPTION" -eq "2" ]; then
+if [[ "$NODE_OPTION" == "1" ]] || [[ "$NODE_OPTION" == "2" ]]; then
 section_name="SimplexLogic"
-elif [ "$NODE_OPTION" -eq "3" ] || [ "$NODE_OPTION" -eq "4" ]; then
+elif [[ "$NODE_OPTION" == "3" ]] || [[ "$NODE_OPTION" == "4" ]]; then
 section_name="RepeaterLogic"
 
 fi
