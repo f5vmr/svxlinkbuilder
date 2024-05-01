@@ -172,7 +172,7 @@ echolinksetup
 
 
 echo -e "$(date)" "${GREEN} #### Installation complete #### ${NORMAL}" | tee -a  /var/log/install.log
-
+whiptail --title "Installation Complete" --msgbox "Installation complete. Reboot in progress" 8 78
 echo -e "$(date)" "${RED} #### Rebooting SVXLink #### ${NORMAL}" | tee -a  /var/log/install.log
 
 #exit
