@@ -6,7 +6,7 @@ function nodeset {
     then 
     node="Simplex without Svxreflector"
      sed -i 's/LOGICS=SimplexLogic,ReflectorLogic/LOGICS=SimplexLogic/g' /etc/svxlink/svxlink.conf
-     sed -i 's/LINKS=/\#LINKS=/g' /etc/svxlink/svxlink.conf
+     sed -i 's/LINKS=/#LINKS=/g' /etc/svxlink/svxlink.conf
     elif [[ $NODE_OPTION  == "2" ]] 
     then
     node="Simplex with UK Svxreflector"
@@ -17,7 +17,7 @@ function nodeset {
     node="Repeater without Svxreflector"
      sed -i 's/set for SimplexLogic/set for RepeaterLogic/g' /etc/svxlink/svxlink.conf
      sed -i 's/LOGICS=SimplexLogic,ReflectorLogic/LOGICS=RepeaterLogic/g' /etc/svxlink/svxlink.conf
-     sed -i 's/LINKS=/\#LINKS=/g' /etc/svxlink/svxlink.conf
+     sed -i 's/LINKS=/#LINKS=/g' /etc/svxlink/svxlink.conf
     elif [[ $NODE_OPTION  == "4" ]] 
     then
     node="Repeater with UK Svxreflector"
@@ -76,14 +76,14 @@ whiptail --title "Sound Card" --msgbox "The USB soundcard is located at card $ca
             ptt_pin="${ptt_pin#"gpio "}"
 
                 if [[ "$ptt_direction" == "High" ]]; then
-                     sed -i 's/\#PTT_TYPE=Hidraw/PTT_TYPE=GPIOD/g' /etc/svxlink/svxlink.conf
-                     sed -i 's/\#PTT_GPIOD_CHIP/PTT_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
-                     sed -i "s/\#PTT_GPIOD_LINE=!24/PTT_GPIOD_LINE=$ptt_pin/g" /etc/svxlink/svxlink.conf
+                     sed -i 's/#PTT_TYPE=Hidraw/PTT_TYPE=GPIOD/g' /etc/svxlink/svxlink.conf
+                     sed -i 's/#PTT_GPIOD_CHIP/PTT_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
+                     sed -i "s/#PTT_GPIOD_LINE=!24/PTT_GPIOD_LINE=$ptt_pin/g" /etc/svxlink/svxlink.conf
 
                 elif [[ "$ptt_direction" == "Low" ]]; then
-                    sed -i 's/\#PTT_TYPE=Hidraw/PTT_TYPE=GPIOD/g' /etc/svxlink/svxlink.conf
-                    sed -i 's/\#PTT_GPIOD_CHIP/PTT_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
-                    sed -i "s/\#PTT_GPIOD_LINE=!24/PTT_GPIOD_LINE=!$ptt_pin/g" /etc/svxlink/svxlink.conf
+                    sed -i 's/#PTT_TYPE=Hidraw/PTT_TYPE=GPIOD/g' /etc/svxlink/svxlink.conf
+                    sed -i 's/#PTT_GPIOD_CHIP/PTT_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
+                    sed -i "s/#PTT_GPIOD_LINE=!24/PTT_GPIOD_LINE=!$ptt_pin/g" /etc/svxlink/svxlink.conf
                 else
                 echo no actions here.
                 fi
@@ -99,23 +99,23 @@ whiptail --title "Sound Card" --msgbox "The USB soundcard is located at card $ca
                 "gpio 12" "rf-guru COS" OFF 3>&1 1>&2 2>&3)
                     
                 cos_pin="${cos_pin#"gpio "}"
-                    sed -i 's/\#SQL_DET=GPIOD/SQL_DET=GPIOD/g' /etc/svxlink/svxlink.conf
+                    sed -i 's/#SQL_DET=GPIOD/SQL_DET=GPIOD/g' /etc/svxlink/svxlink.conf
                 if [[ "$cos_direction" == "High" ]]; then
-                    sed -i 's/\#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
-                    sed -i "s/\#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=$cos_pin/g" /etc/svxlink/svxlink.conf
+                    sed -i 's/#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
+                    sed -i "s/#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=$cos_pin/g" /etc/svxlink/svxlink.conf
 
                 elif [[ "$cos_direction" == "Low" ]]; then
-                    sed -i 's/\#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
-                    sed -i "s/\#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=!$cos_pin/g" /etc/svxlink/svxlink.conf
+                    sed -i 's/#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
+                    sed -i "s/#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=!$cos_pin/g" /etc/svxlink/svxlink.conf
                 else
                 echo no action here
                 fi
     
 ##need to change the PTT and COS to GPIOD and all the statements to reflect this Unmodified SOundCard Unit - ask for GPIOD pins
     elif [[ "$HID" == "true" ]] && [[ "$GPIOD" == "true" ]] && [[ "$card" == "true" ]]; then
-            sed -i 's/\#PTT_TYPE=Hidraw/PTT_TYPE=Hidraw/g' /etc/svxlink/svxlink.conf
+            sed -i 's/#PTT_TYPE=Hidraw/PTT_TYPE=Hidraw/g' /etc/svxlink/svxlink.conf
             sed -i '/^\[Tx1\]$/,/^\[/{ /#HID_DEVICE/ s/#HID_DEVICE/HID_DEVICE/ }' /etc/svxlink/svxlink.conf
-            sed -i 's/\#HID_PTT_PIN=GPIO3/HID_PTT_PIN=GPIO3/g' /etc/svxlink/svxlink.conf
+            sed -i 's/#HID_PTT_PIN=GPIO3/HID_PTT_PIN=GPIO3/g' /etc/svxlink/svxlink.conf
 
 
         cos_direction=$(whiptail --title "COS" --radiolist "Please select COS direction" 10 78 3 \
@@ -130,23 +130,23 @@ whiptail --title "Sound Card" --msgbox "The USB soundcard is located at card $ca
         
         cos_pin="${cos_pin#"gpio "}"
         # need to change the PTT to HID and COS to GPIOD and all the statements to reflect this modified SoundCard Unit - ask for GPIOD pins
-                sed -i 's/\#SQL_DET=GPIOD/SQL_DET=GPIOD/g' /etc/svxlink/svxlink.conf
+                sed -i 's/#SQL_DET=GPIOD/SQL_DET=GPIOD/g' /etc/svxlink/svxlink.conf
             if [[ "$cos_direction" == "High" ]]; then
-                sed -i 's/\#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
-                sed -i "s/\#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=$cos_pin/g" /etc/svxlink/svxlink.conf
+                sed -i 's/#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
+                sed -i "s/#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=$cos_pin/g" /etc/svxlink/svxlink.conf
         
             elif [[ "$cos_direction" == "Low" ]]; then
-                sed -i 's/\#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
-                sed -i "s/\#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=!$cos_pin/g" /etc/svxlink/svxlink.conf
+                sed -i 's/#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
+                sed -i "s/#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=!$cos_pin/g" /etc/svxlink/svxlink.conf
             else
             echo no action here
             fi
     elif [[ "$HID" == "true" ]] && [[ "$GPIOD" == "false" ]] && [[ "$card" == "true" ]]; then
-            sed -i 's/\#PTT_TYPE=Hidraw/PTT_TYPE=Hidraw/g' /etc/svxlink/svxlink.conf
-            sed -i 's/\#HID_DEVICE=/HID_DEVICE=/g' /etc/svxlink/svxlink.conf
-            sed -i 's/\#HID_PTT_PIN=GPIO3/HID_PTT_PIN=GPIO3/g' /etc/svxlink/svxlink.conf
-            sed -i 's/\#SQL_DET=GPIOD/SQL_DET=HIDRAW/g' /etc/svxlink/svxlink.conf
-            sed -i 's/\#HID_SQL_PIN/HID_SQL_PIN/g' /etc/svxlink/svxlink.conf
+            sed -i 's/#PTT_TYPE=Hidraw/PTT_TYPE=Hidraw/g' /etc/svxlink/svxlink.conf
+            sed -i 's/#HID_DEVICE=/HID_DEVICE=/g' /etc/svxlink/svxlink.conf
+            sed -i 's/#HID_PTT_PIN=GPIO3/HID_PTT_PIN=GPIO3/g' /etc/svxlink/svxlink.conf
+            sed -i 's/#SQL_DET=GPIOD/SQL_DET=HIDRAW/g' /etc/svxlink/svxlink.conf
+            sed -i 's/#HID_SQL_PIN/HID_SQL_PIN/g' /etc/svxlink/svxlink.conf
                 if [[ "$cos_direction" == "High" ]]; then
                 sed -i's/=VOL_DN/=VOL_UP/g' /etc/svxlink/svxlink.conf
                 elif [[ "$cos_direction" == "Low" ]]; then

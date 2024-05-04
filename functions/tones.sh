@@ -31,14 +31,14 @@ if [ $? -eq 0 ]; then
             ;;
         "Pip")
             echo "You selected Pip."
-            sed -i 's/playTone 1100/\#playTone 1100/g' "$logicfile"
-            sed -i 's/playTone 1200/\#playTone 1200/g' "$logicfile"
+            sed -i 's/playTone 1100/#playTone 1100/g' "$logicfile"
+            sed -i 's/playTone 1200/#playTone 1200/g' "$logicfile"
             sed -i '/#playTone 1200 \[expr {round(pow(\$base, \$i) \* 150 \/ \$max)}\] 100;/a\with CW::play "E";' "$logicfile"
             ;;
         "Silence")
             echo "You selected Silence."
-            sed -i 's/playTone 1100/\#playTone 1100/g' "$logicfile"
-            sed -i 's/playTone 1200/\#playTone 1200/g' "$logicfile"
+            sed -i 's/playTone 1100/#playTone 1100/g' "$logicfile"
+            sed -i 's/playTone 1200/#playTone 1200/g' "$logicfile"
             ;;
     esac
 else
@@ -78,9 +78,9 @@ CWLogic="CW.tcl"
 cwfile="$LOGIC_DIR/$CWLogic"
 # Adding the VA Bar code to CW.tcl
 sed -i 's/\"=\" \"-\.\.\.-\"/a \"-\" \"...-.-\"' "$cwfile"
-sed -i 's/playTone 400 900/\#playTone 400 900/g' "$logicfile"
-sed -i 's/playTone 360 900/\#playTone 360 900/g' "$logicfile"
-sed -i 's/\#playTone 360 900 /a CW::play \"-\"\;' "$logicfile"
+sed -i 's/playTone 400 900/#playTone 400 900/g' "$logicfile"
+sed -i 's/playTone 360 900/#playTone 360 900/g' "$logicfile"
+sed -i 's/#playTone 360 900 /a CW::play \"-\"\;' "$logicfile"
 
 #### 
 else

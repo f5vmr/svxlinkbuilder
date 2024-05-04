@@ -54,7 +54,7 @@ specific_airport=$(whiptail --title "Metar Info" --radiolist "SVP un code ICAO u
         "LFSL" "Brive Souillac" OFF \
         "LFBE" "Bergerac" OFF 3>&1 1>&2 2>&3)
         specific_airport=$(echo "$specific_airport" | sed's/"//g')
-        sed -i "s/\#STARTDEFAULT=EDDP/STARTDEFAULT=$specific_airport/g" /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
+        sed -i "s/#STARTDEFAULT=EDDP/STARTDEFAULT=$specific_airport/g" /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
         echo -e "$(date)" "${GREEN} $selected Aèroports inclu avec le défaut Aèroport $specific_airport ${NORMAL}" | tee -a /var/log/install.log
    
     else
