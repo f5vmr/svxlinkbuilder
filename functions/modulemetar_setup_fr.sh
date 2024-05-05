@@ -5,7 +5,7 @@ function modulemetar {
 whiptail --title "Metar Info" --yesno "Voulez-vous configurer ce module?" 8 78 3>&1 1>&2 2>&3
     if [ $? -eq "0" ] 
     then
-selected=$(whiptail --title "Metar Info" --scrolltext --checklist "Choisir quels Aéroports:" 24 78 13 \
+selected=$(whiptail --title "Metar Info" --scrolltext --checklist "Choisir les Aéroports :" 24 78 13 \
         "LFPG" "Paris Charles de Gaulle" OFF \
         "LFPO" "Paris Orly" OFF \
         "LFOB" "Paris Beauvais" OFF \
@@ -55,7 +55,7 @@ specific_airport=$(whiptail --title "Metar Info" --radiolist "SVP un code ICAO u
         "LFBE" "Bergerac" OFF 3>&1 1>&2 2>&3)
         specific_airport=$(echo "$specific_airport" | sed's/"//g')
         sed -i "s/#STARTDEFAULT=EDDP/STARTDEFAULT=$specific_airport/g" /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
-        echo -e "$(date)" "${GREEN} $selected Aèroports inclu avec le défaut Aèroport $specific_airport ${NORMAL}" | tee -a /var/log/install.log
+        echo -e "$(date)" "${GREEN} $selected Aèroports inclu avec l'Aèroport par défaut $specific_airport ${NORMAL}" | tee -a /var/log/install.log
    
     else
      sed -i 's/,ModuleMetarInfo//' /etc/svxlink/svxlink.conf
