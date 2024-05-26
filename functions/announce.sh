@@ -136,17 +136,17 @@ case $selected_option in
         duration=$(whiptail --title "Duration" --inputbox "Enter duration (ms):" 10 50 "$default_duration" 3>&1 1>&2 2>&3)
         # Update Logic.tcl with the entered frequency, volume, and duration
         echo "beep"
-        sed -i "s/playTone [0-9]\+ [0-9]\+ [0-9]\+/playTone $frequency $volume $duration/g" "$logicfile"
+        sed -i "s/playTone 440 500 100/playTone $frequency $volume $duration/g" "$logicfile"
         ;;
     "Morse K")
         # Replace playTone with CW::play " K" or CW::play " T"
-        sed -i 's/playTone [0-9]\+ [0-9]\+ [0-9]\+/CW::play \" K\"/g' "$logicfile"
+        sed -i 's/playTone 440 500 100/CW::play \" K\"/g' "$logicfile"
 
         ;;
     "Morse T")
         echo "T"
         # Replace playTone with CW::play " K" or CW::play " T"
-        sed -i 's/playTone [0-9]\+ [0-9]\+ [0-9]\+/CW::play \" T\"/g' "$logicfile"
+        sed -i 's/playTone 440 500 100/CW::play \" T\"/g' "$logicfile"
 ;;
 esac
 
