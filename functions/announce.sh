@@ -42,11 +42,11 @@ echo "Replacing CW_AMP with $new_cw_amp"
 # Update svxlink.conf with the new values for CW_AMP with the replacement value enclosed in double quotes
 #sed -i "s/^CW_AMP=.*/CW_AMP=\"$new_cw_amp\"/g" -- "$svxconf_file"
 # Update svxlink.conf with the new value for CW_AMP using awk
-sed -i "s/^CW_AMP=.*/CW_AMP=$new_cw_amp/g" "$svxconf_file"
+sed -i "s/CW_AMP=.*/CW_AMP=$new_cw_amp/g" "$svxconf_file"
 echo "Replacing CW_PITCH with $new_cw_pitch"
-sed -i "s/^CW_PITCH=.*/CW_PITCH=$new_cw_pitch/g" "$svxconf_file"
+sed -i "s/CW_PITCH=.*/CW_PITCH=$new_cw_pitch/g" "$svxconf_file"
 echo "Replacing CW_CPM with $new_cw_cpm"
-sed -i "s/^CW_CPM=.*/CW_CPM=$new_cw_cpm/g" "$svxconf_file"
+sed -i "s/CW_CPM=.*/CW_CPM=$new_cw_cpm/g" "$svxconf_file"
 echo "Replacing IDLE_TIMEOUT with $new_idle_timeout"
 sed -i "s/^SHORT_IDENT_INTERVAL=.*/SHORT_IDENT_INTERVAL=$new_short_ident_interval/g" "$svxconf_file"
 echo "Replacing LONG_IDENT_INTERVAL with $new_long_ident_interval"
@@ -55,10 +55,10 @@ echo standby for logic changes
 #### LOGIC CHANGES ####
 ## Extract the values of the text indicators from Logic.tcl
 # Retrieve the current values of the variables
-short_voice_id_enable=$(head -n 40 "$logicfile" | awk '/^variable short_voice_id_enable/{print $NF; exit}')
-short_cw_id_enable=$(head -n 40 "$logicfile" | awk '/^variable short_cw_id_enable/{print $NF; exit}')
-long_voice_id_enable=$(head -n 40 "$logicfile" | awk '/^variable long_voice_id_enable/{print $NF; exit}')
-long_cw_id_enable=$(head -n 40 "$logicfile" | awk '/^variable long_cw_id_enable/{print $NF; exit}')
+short_voice_id_enable=$(head -n 40 "$logicfile" | awk '/variable short_voice_id_enable/{print $NF; exit}')
+short_cw_id_enable=$(head -n 40 "$logicfile" | awk '/variable short_cw_id_enable/{print $NF; exit}')
+long_voice_id_enable=$(head -n 40 "$logicfile" | awk '/variable long_voice_id_enable/{print $NF; exit}')
+long_cw_id_enable=$(head -n 40 "$logicfile" | awk '/variable long_cw_id_enable/{print $NF; exit}')
 
 # Define the options for the checklist dialog
 options=(
