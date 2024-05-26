@@ -93,11 +93,13 @@ echo "Long CW ID Enable: $new_long_cw_id_enable"
 
 
 # Update the Logic.tcl file with the new values
-sed -i "s/^\(variable short_voice_id_enable\s*\)[0-9].*/\1$new_short_voice_id_enable/g" "$logicfile"
-sed -i "s/^\(variable short_cw_id_enable\s*\)[0-9].*/\1$new_short_cw_id_enable/g" "$logicfile"
-sed -i "s/^\(variable long_voice_id_enable\s*\)[0-9].*/\1$new_long_voice_id_enable/g" "$logicfile"
-sed -i "s/^\(variable long_cw_id_enable\s*\)[0-9].*/\1$new_long_cw_id_enable/g" "$logicfile"
+sed -i "s/\(variable short_voice_id_enable *\)[01]/\1$new_short_voice_id_enable/g" "$logicfile"
+sed -i "s/\(variable short_cw_id_enable *\)[01]/\1$new_short_cw_id_enable/g" "$logicfile"
+sed -i "s/\(variable long_voice_id_enable *\)[01]/\1$new_long_voice_id_enable/g" "$logicfile"
+sed -i "s/\(variable long_cw_id_enable *\)[01]/\1$new_long_cw_id_enable/g" "$logicfile"
 
+#new_value=0  # or 1
+# sed -i "s/\(variable short_voice_id_enable *\)[01]/\1$new_value/" filename
 
 # Extract the content of the send_rgr_sound procedure
 send_rgr_sound_content=$(sed -n '/proc send_rgr_sound/,/}/p' "$logicfile" | sed '1d;$d' | sed -n '/else/,/}/p' | sed '1d;$d')
