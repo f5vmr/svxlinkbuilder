@@ -46,7 +46,8 @@ prompt_for_value() {
 
 # Function to confirm the new value with the user using whiptail
 confirm_value() {
-    whiptail --yesno "Is this value correct? $1" 10 60
+    local value=$1
+    whiptail --yesno "Is this value correct? $value" 10 60
     return $?
 }
 
@@ -74,6 +75,21 @@ update_field_value() {
     ' "$svxconf_file" > "${svxconf_file}.tmp" && mv "${svxconf_file}.tmp" "$svxconf_file"
 }
 
+# Function to prompt for and confirm a value, allowing retries
+prompt_and_confirm_value() {
+    local field_name=$1
+    local current_value=$2
+    local new_value
+    while true; do
+        new_value=$(prompt_for_value "$field_name" "$current_value")
+        confirm_value "$new_value"
+        if [ $? == 0 ]; then
+            break
+        fi
+    done
+    echo "$new_value"
+}
+
 # Check if the section already exists
 if grep -q "\[${section_name}\]" "$svxconf_file"; then
     echo "Section $section_name already exists in $svxconf_file" | tee -a /var/log/install.log
@@ -83,27 +99,10 @@ if grep -q "\[${section_name}\]" "$svxconf_file"; then
     current_callsign=$(get_current_value "$section_name" "CALLSIGN")
     current_auth_key=$(get_current_value "$section_name" "AUTH_KEY")
 
-    # Prompt for new values
-    new_hosts=$(prompt_for_value "HOSTS" "$current_hosts")
-    new_callsign=$(prompt_for_value "CALLSIGN" "$current_callsign")
-    new_auth_key=$(prompt_for_value "AUTH_KEY" "$current_auth_key")
-
-    # Confirm the new values
-    confirm_value "$new_hosts"
-    if [ $? != 0 ]; then
-        echo "URL confirmation failed. Exiting."
-        exit 1
-    fi
-    confirm_value "$new_callsign"
-    if [ $? != 0 ]; then
-        echo "CALLSIGN confirmation failed. Exiting."
-        exit 1
-    fi
-    confirm_value "$new_auth_key"
-    if [ $? != 0 ]; then
-        echo "AUTH_KEY confirmation failed. Exiting."
-        exit 1
-    fi
+    # Prompt for new values with confirmation
+    new_hosts=$(prompt_and_confirm_value "HOSTS" "$current_hosts")
+    new_callsign=$(prompt_and_confirm_value "CALLSIGN" "$current_callsign")
+    new_auth_key=$(prompt_and_confirm_value "AUTH_KEY" "$current_auth_key")
 
     # Update the configuration file with the new values
     update_field_value "$section_name" "HOSTS" "$new_hosts"
@@ -115,27 +114,10 @@ else
     # Optionally, add the section to the configuration file
     echo "Adding section $section_name to $svxconf_file" | tee -a /var/log/install.log
     
-    # Prompt for new values
-    new_hosts=$(prompt_for_value "HOSTS" "svxportal-uk.ddns.net")
-    new_callsign=$(prompt_for_value "CALLSIGN" "G4NAB-R")
-    new_auth_key=$(prompt_for_value "AUTH_KEY" "NE639NR")
-
-    # Confirm the new values
-    confirm_value "$new_hosts"
-    if [ $? != 0 ]; then
-        echo "URL confirmation failed. Exiting."
-        exit 1
-    fi
-    confirm_value "$new_callsign"
-    if [ $? != 0 ]; then
-        echo "CALLSIGN confirmation failed. Exiting."
-        exit 1
-    fi
-    confirm_value "$new_auth_key"
-    if [ $? != 0 ]; then
-        echo "AUTH_KEY confirmation failed. Exiting."
-        exit 1
-    fi
+    # Prompt for new values with confirmation
+    new_hosts=$(prompt_and_confirm_value "HOSTS" "svxportal-uk.ddns.net")
+    new_callsign=$(prompt_and_confirm_value "CALLSIGN" "G4NAB-R")
+    new_auth_key=$(prompt_and_confirm_value "AUTH_KEY" "NE639NR")
 
     # Add the section and configuration lines to the file
     {
