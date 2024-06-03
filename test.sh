@@ -23,29 +23,19 @@
 
 # Define directories and files
 CONF_DIR="/etc/svxlink"
-LOGIC_DIR="/usr/share/svxlink/events.d/local"
 svxfile="svxlink.conf"
-logictcl="Logic.tcl"
-logicfile="$LOGIC_DIR/$logictcl"
 svxconf_file="$CONF_DIR/$svxfile"
 
 section_name="ReflectorLogic"
 
 # Function to prompt the user for a new HOSTS URL using whiptail
 prompt_for_hosts() {
-    while true; do
-        new_url=$(whiptail --inputbox "Enter the new URL for HOSTS:" 10 60 "svxportal-uk.ddns.net" 3>&1 1>&2 2>&3)
-        exitstatus=$?
-        if [ $exitstatus != 0 ]; then
-            echo "User canceled the input. Exiting."
-            exit 1
-        fi
-        if [ -z "$new_url" ]; then
-            whiptail --msgbox "Please enter a valid URL." 10 60
-        else
-            break
-        fi
-    done
+    new_url=$(whiptail --inputbox "Enter the new URL for HOSTS:" 10 60 "svxportal-uk.ddns.net" 3>&1 1>&2 2>&3)
+    exitstatus=$?
+    if [ $exitstatus != 0 ]; then
+        echo "User canceled the input. Exiting."
+        exit 1
+    fi
     echo "$new_url"
 }
 
