@@ -9,6 +9,7 @@ svxconf_file="$CONF_DIR/svxlink.conf"
 cw_amp=$(grep -E "CW_AMP" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
 cw_pitch=$(grep -E "CW_PITCH" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
 cw_cpm=$(grep -E "CW_CPM" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
+idle_timeout=$(grep -E "IDLE_TIMEOUT" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
 short_ident_interval=$(grep -E "SHORT_IDENT_INTERVAL" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
 long_ident_interval=$(grep -E "LONG_IDENT_INTERVAL" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
 
@@ -19,17 +20,16 @@ long_ident_interval=$(grep -E "LONG_IDENT_INTERVAL" "$svxconf_file" | awk -F '='
 #fi
 echo "Current CW_AMP: $cw_amp"
 # Prompt the user to input new values for each parameter using whiptail
-# Prompt the user to input new values for each parameter using whiptail
-#new_cw_amp=$(whiptail --title "CW AMP" --inputbox "Current CW Amplitude: $cw_amp dB\nEnter new value for CW AMP (0 to -10 dB):" 10 60 "$cw_amp" 3>&1 1>&2 2>&3)
+# new_cw_amp=$(whiptail --title "CW AMP" --inputbox "Current CW Amplitude: $cw_amp dB\nEnter new value for CW AMP (0 to -10 dB):" 10 60 "$cw_amp" 3>&1 1>&2 2>&3)
 # Prompt the user for input within the specified range
 # Validate the current CW AMP value
 # Validate the current CW AMP value
-new_cw_amp=$(whiptail --title "CW AMP" --inputbox "Current CW AMP: $cw_amp dB\nEnter new value for CW AMP (0 to -10 dB):" 10 60 -- "$cw_amp" 3>&1 1>&2 2>&3)
-
-new_cw_pitch=$(whiptail --title "CW PITCH" --inputbox "Current CW PITCH: $cw_pitch Hz\nEnter new value for CW PITCH (440 to 2200 Hz):" 10 60 "$cw_pitch" 3>&1 1>&2 2>&3)
-new_cw_cpm=$(whiptail --title "CW CPM" --inputbox "Current CW CPM: $cw_cpm Characters Per Minute\nEnter new value for CW CPM (60 to 200 Characters Per Minute):" 10 60 "$cw_cpm" 3>&1 1>&2 2>&3)
-new_short_ident_interval=$(whiptail --title "SHORT IDENT INTERVAL" --menu "Select SHORT IDENT INTERVAL:" 15 60 4 5 "5 minutes" 10 "10 minutes" 15 "15 minutes" 20 "20 minutes" 3>&1 1>&2 2>&3)
-new_long_ident_interval=$(whiptail --title "LONG IDENT INTERVAL" --menu "Select LONG IDENT INTERVAL:" 15 60 3 30 "30 minutes" 60 "60 minutes" 120 "120 minutes" 3>&1 1>&2 2>&3)
+new_cw_amp=$(whiptail --title "CW AMP" --inputbox "Current CW Amplitude: $cw_amp dB\nEnter new value for CW AMP (0 to -10 dB):" 10 60 -- "$cw_amp" 3>&1 1>&2 2>&3)
+new_cw_pitch=$(whiptail --title "CW PITCH" --inputbox "Current CW Tone Pitch: $cw_pitch Hz\nEnter new value for CW PITCH (440 to 2200 Hz):" 10 60 "$cw_pitch" 3>&1 1>&2 2>&3)
+new_cw_cpm=$(whiptail --title "CW CPM" --inputbox "Current CW characters per minute: $cw_cpm Characters Per Minute\nEnter new value for CW CPM (60 to 200 Characters Per Minute):" 10 60 "$cw_cpm" 3>&1 1>&2 2>&3)
+new_idle_timeout=$(whiptail --title "IDLE TIMEOUT" --inputbox "Current IDLE TIMEOUT - Repeater Idle Time: $idle_timeout seconds\nEnter new value for IDLE TIMEOUT (0 to 15 seconds):" 10 60 "$idle_timeout" 3>&1 1>&2 2>&3)
+new_short_ident_interval=$(whiptail --title "SHORT IDENT INTERVAL" --menu "Select SHORT Periodic  Ident Interval:" 15 60 5 0 "None" 5 "5 minutes" 10 "10 minutes" 15 "15 minutes" 20 "20 minutes" 30 "30 Minutes" 3>&1 1>&2 2>&3)
+new_long_ident_interval=$(whiptail --title "LONG IDENT INTERVAL" --menu "Select LONG Periodic Ident Interval:" 15 60 4 0 "None" 30 "30 minutes" 60 "60 minutes" 120 "120 minutes" 3>&1 1>&2 2>&3)
 
 # Replace the existing parameters with the user's new values using sed with double quotes as delimiters
 echo "Replacing CW_AMP with $new_cw_amp"
@@ -48,6 +48,8 @@ sed -i "s/^CW_PITCH=.*/CW_PITCH=$new_cw_pitch/g" "$svxconf_file"
 echo "Replacing CW_CPM with $new_cw_cpm"
 sed -i "s/^CW_CPM=.*/CW_CPM=$new_cw_cpm/g" "$svxconf_file"
 echo "Replacing IDLE_TIMEOUT with $new_idle_timeout"
+sed -i "s/^IDLE_TIMEOUT=.*/IDLE_TIMEOUT=$new_idle_timeout/g" "$svxconf_file"
+echo "Replacing SHORT_IDENT_INTERVAL with $new_short_ident_interval"
 sed -i "s/^SHORT_IDENT_INTERVAL=.*/SHORT_IDENT_INTERVAL=$new_short_ident_interval/g" "$svxconf_file"
 echo "Replacing LONG_IDENT_INTERVAL with $new_long_ident_interval"
 sed -i "s/^LONG_IDENT_INTERVAL=.*/LONG_IDENT_INTERVAL=$new_long_ident_interval/g" "$svxconf_file"
@@ -79,7 +81,7 @@ for ((i = 0; i < ${#options[@]}; i+=3)); do
 done
 
 # Prompt the user to toggle the variables using a checklist dialog
-new_values=$(whiptail --title "Toggle ID Variables" --checklist "Toggle Variables" 15 78 4 "${options[@]}" 3>&1 1>&2 2>&3)
+new_values=$(whiptail --title "Toggle Logic Timing Variables" --checklist "Toggle Variables" 15 78 4 "${options[@]}" 3>&1 1>&2 2>&3)
 
 # Extract the new values from the checklist dialog
 new_short_voice_id_enable=$(echo "$new_values" | grep -o "Short Voice ID Enable" | wc -l)
@@ -118,13 +120,17 @@ elif echo "$send_rgr_sound_content" | grep -q "CW::play \"K\""; then
 elif echo "$send_rgr_sound_content" | grep -q "CW::play \"T\""; then
     # Default setting is Morse "T"
     default_option="Morse T"
+elif echo "$send_rgr_sound_content" | grep -q "CW::play \"\""; then
+    # Default setting is Morse ""
+    default_option="None"
 fi
 
 # Display options and prompt for selection using whiptail
-selected_option=$(whiptail --title "Select Roger-beep Sound" --menu "Choose Roger-beep Sound:" 15 78 3 \
+selected_option=$(whiptail --title "Select Roger-beep Sound" --menu "Choose Roger-beep Sound:" 15 78 4 \
     "Beep" "Default beep" \
     "Morse K" "Morse 'K' sound" \
     "Morse T" "Morse 'T' sound" \
+    "None" "No sound" \
     3>&1 1>&2 2>&3)
 
 # Update Logic.tcl with the selected option
@@ -147,7 +153,12 @@ case $selected_option in
         echo "T"
         # Replace playTone with CW::play " K" or CW::play " T"
         sed -i 's/playTone [0-9]\+ [0-9]\+ [0-9]\+/CW::play \" T\"/g' "$logicfile"
-;;
+        ;;
+    "None")
+        echo "None"
+    # Replace playTone with CW::play ""
+    sed -i 's/playTone [0-9]\+ [0-9]\+ [0-9]\+/CW::play \"\"/g' "$logicfile"
+        ;;
 esac
 
 }

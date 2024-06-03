@@ -26,16 +26,15 @@ echo "Current CW_AMP: $cw_amp"
 # Prompt the user for input within the specified range
 # Validate the current CW AMP value
 # Validate the current CW AMP value
-new_cw_amp=$(whiptail --title "CW AMP" --inputbox "Current CW AMP: $cw_amp dB\nEnter new value for CW AMP (0 to -10 dB):" 10 60 -- "$cw_amp" 3>&1 1>&2 2>&3)
-
-new_cw_pitch=$(whiptail --title "CW PITCH" --inputbox "Current CW PITCH: $cw_pitch Hz\nEnter new value for CW PITCH (440 to 2200 Hz):" 10 60 "$cw_pitch" 3>&1 1>&2 2>&3)
-new_cw_cpm=$(whiptail --title "CW CPM" --inputbox "Current CW CPM: $cw_cpm Characters Per Minute\nEnter new value for CW CPM (60 to 200 Characters Per Minute):" 10 60 "$cw_cpm" 3>&1 1>&2 2>&3)
-new_idle_timeout=$(whiptail --title "IDLE TIMEOUT" --inputbox "Current IDLE TIMEOUT: $idle_timeout seconds\nEnter new value for IDLE TIMEOUT (0 to 15 seconds):" 10 60 "$idle_timeout" 3>&1 1>&2 2>&3)
-new_short_ident_interval=$(whiptail --title "SHORT IDENT INTERVAL" --menu "Select SHORT IDENT INTERVAL:" 15 60 5 0 "None" 5 "5 minutes" 10 "10 minutes" 15 "15 minutes" 20 "20 minutes" 30 "30 Minutes" 3>&1 1>&2 2>&3)
-new_long_ident_interval=$(whiptail --title "LONG IDENT INTERVAL" --menu "Select LONG IDENT INTERVAL:" 15 60 4 0 "None" 30 "30 minutes" 60 "60 minutes" 120 "120 minutes" 3>&1 1>&2 2>&3)
+new_cw_amp=$(whiptail --title "CW AMP" --inputbox "Current CW Amplitude: $cw_amp dB\nEnter new value for CW AMP (0 to -10 dB):" 10 60 -- "$cw_amp" 3>&1 1>&2 2>&3)
+new_cw_pitch=$(whiptail --title "CW PITCH" --inputbox "Current CW Tone Pitch: $cw_pitch Hz\nEnter new value for CW PITCH (440 to 2200 Hz):" 10 60 "$cw_pitch" 3>&1 1>&2 2>&3)
+new_cw_cpm=$(whiptail --title "CW CPM" --inputbox "Current CW characters per minute: $cw_cpm Characters Per Minute\nEnter new value for CW CPM (60 to 200 Characters Per Minute):" 10 60 "$cw_cpm" 3>&1 1>&2 2>&3)
+new_idle_timeout=$(whiptail --title "IDLE TIMEOUT" --inputbox "Current IDLE TIMEOUT - Repeater Idle Time: $idle_timeout seconds\nEnter new value for IDLE TIMEOUT (0 to 15 seconds):" 10 60 "$idle_timeout" 3>&1 1>&2 2>&3)
+new_short_ident_interval=$(whiptail --title "SHORT IDENT INTERVAL" --menu "Select SHORT Periodic  Ident Interval:" 15 60 5 0 "None" 5 "5 minutes" 10 "10 minutes" 15 "15 minutes" 20 "20 minutes" 30 "30 Minutes" 3>&1 1>&2 2>&3)
+new_long_ident_interval=$(whiptail --title "LONG IDENT INTERVAL" --menu "Select LONG Periodic Ident Interval:" 15 60 4 0 "None" 30 "30 minutes" 60 "60 minutes" 120 "120 minutes" 3>&1 1>&2 2>&3)
 
 # Replace the existing parameters with the user's new values using sed with double quotes as delimiters
-echo "Replacing CW_AMP with $new_cw_amp"
+echo "Replacing CW Amplitude with $new_cw_amp"
 # Escape the minus sign in $new_cw_amp
 
 
@@ -84,7 +83,7 @@ for ((i = 0; i < ${#options[@]}; i+=3)); do
 done
 
 # Prompt the user to toggle the variables using a checklist dialog
-new_values=$(whiptail --title "Toggle ID Variables" --checklist "Toggle Variables" 15 78 4 "${options[@]}" 3>&1 1>&2 2>&3)
+new_values=$(whiptail --title "Toggle Logic Timing Variables" --checklist "Toggle Variables" 15 78 4 "${options[@]}" 3>&1 1>&2 2>&3)
 
 # Extract the new values from the checklist dialog
 new_short_voice_id_enable=$(echo "$new_values" | grep -o "Short Voice ID Enable" | wc -l)
@@ -140,7 +139,7 @@ selected_option=$(whiptail --title "Select Roger-beep Sound" --menu "Choose Roge
 case $selected_option in
     "Beep")
         # Prompt for frequency, volume, and duration if "Beep" is selected
-        frequency=$(whiptail --title "Frequency" --inputbox "Enter frequency (Hz):" 10 50 "$frequency" 3>&1 1>&2 2>&3)
+        frequency=$(whiptail --title "Tone Frequency" --inputbox "Enter frequency (Hz):" 10 50 "$frequency" 3>&1 1>&2 2>&3)
         volume=$(whiptail --title "Volume" --inputbox "Enter volume (0-100):" 10 50 "100" 3>&1 1>&2 2>&3)
         duration=$(whiptail --title "Duration" --inputbox "Enter duration (ms):" 10 50 "$default_duration" 3>&1 1>&2 2>&3)
         # Update Logic.tcl with the entered frequency, volume, and duration
@@ -161,6 +160,7 @@ case $selected_option in
         echo "None"
     # Replace playTone with CW::play ""
     sed -i 's/playTone [0-9]\+ [0-9]\+ [0-9]\+/CW::play \"\"/g' "$logicfile"
+    ;;
 esac
 
 
