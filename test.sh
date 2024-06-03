@@ -23,10 +23,7 @@
 
 # Define directories and files
 CONF_DIR="/etc/svxlink"
-LOGIC_DIR="/usr/share/svxlink/events.d/local"
 svxfile="svxlink.conf"
-logictcl="Logic.tcl"
-logicfile="$LOGIC_DIR/$logictcl"
 svxconf_file="$CONF_DIR/$svxfile"
 
 section_name="ReflectorLogic"
@@ -45,7 +42,7 @@ confirm_value() {
     local value=$1
     echo "Is this value correct? $value (yes/no)"
     read answer
-    if [ "$answer" == "yes" ]; then
+    if [ "$answer" = "yes" ]; then
         return 0
     else
         return 1
@@ -136,7 +133,3 @@ else
     echo "TMP_MONITOR_TIMEOUT=0"
     } >> "$svxconf_file"
 fi
-
-
-
-
