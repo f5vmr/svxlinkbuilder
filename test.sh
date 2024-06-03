@@ -18,3 +18,4 @@ echo "Section $section_name already exists in $svxconf_file" | tee -a /var/log/i
     echo "no valid option"
 
     fi
+    fi
