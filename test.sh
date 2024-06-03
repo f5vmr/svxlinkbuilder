@@ -35,8 +35,10 @@ section_name="ReflectorLogic"
 prompt_for_value() {
     local field_name=$1
     local current_value=$2
+    echo "Prompting for $field_name..." # Debug statement
     new_value=$(whiptail --inputbox "Enter the new value for $field_name (current value: $current_value):" 10 60 "$current_value" 3>&1 1>&2 2>&3)
     exitstatus=$?
+    echo "Exit status for inputbox: $exitstatus" # Debug statement
     if [ $exitstatus != 0 ]; then
         echo "User canceled the input. Exiting."
         exit 1
@@ -47,6 +49,7 @@ prompt_for_value() {
 # Function to confirm the new value with the user using whiptail
 confirm_value() {
     local value=$1
+    echo "Confirming value: $value..." # Debug statement
     whiptail --yesno "Is this value correct? $value" 10 60
     return $?
 }
@@ -55,6 +58,7 @@ confirm_value() {
 get_current_value() {
     local section=$1
     local field_name=$2
+    echo "Getting current value for $field_name in section $section..." # Debug statement
     awk -v section="$section" -v field="$field_name" '
     $0 == "[" section "]" { in_section = 1; next }
     in_section && $0 ~ /^\[/ { in_section = 0 }
@@ -67,6 +71,7 @@ update_field_value() {
     local section=$1
     local field_name=$2
     local new_value=$3
+    echo "Updating $field_name to $new_value in section $section..." # Debug statement
     awk -v section="$section" -v field="$field_name" -v new_val="$new_value" '
     $0 == "[" section "]" { in_section = 1; print; next }
     in_section && $0 ~ /^\[/ { in_section = 0 }
@@ -97,9 +102,11 @@ if grep -q "\[${section_name}\]" "$svxconf_file"; then
     
     # Get current value for HOSTS
     current_hosts=$(get_current_value "$section_name" "HOSTS")
+    echo "Current HOSTS value: $current_hosts" # Debug statement
 
     # Prompt for new value with confirmation
     new_hosts=$(prompt_and_confirm_value "HOSTS" "$current_hosts")
+    echo "New HOSTS value: $new_hosts" # Debug statement
 
     # Update the configuration file with the new value
     update_field_value "$section_name" "HOSTS" "$new_hosts"
@@ -133,5 +140,6 @@ else
     echo "TMP_MONITOR_TIMEOUT=0"
     } >> "$svxconf_file"
 fi
+
 
 
