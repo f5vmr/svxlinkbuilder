@@ -57,17 +57,21 @@ else
     echo "Adding section $section_name to $svxconf_file" | tee -a /var/log/install.log
 fi   
     # Prompt for new HOSTS URL
-    while true; do
-        new_hosts_url=$(prompt_for_hosts)
-        
-        # Confirm the new HOSTS URL
-        confirm_hosts "$new_hosts_url"
-        if [ $? == 0 ]; then
-            break
-        else
-            echo "URL confirmation failed. Please re-enter." | tee -a /var/log/install.log
-        fi
-    done
+   # Prompt for new HOSTS URL
+while true; do
+    echo "Entering while loop" # Debug statement
+    new_hosts_url=$(prompt_for_hosts)
+    
+    # Confirm the new HOSTS URL
+    confirm_hosts "$new_hosts_url"
+    if [ $? == 0 ]; then
+        echo "URL confirmation succeeded. Exiting loop." # Debug statement
+        break
+    else
+        echo "URL confirmation failed. Please re-enter." | tee -a /var/log/install.log
+    fi
+done
+
 
     # Add the section and configuration lines to the file
     echo "" >> "$svxconf_file"
