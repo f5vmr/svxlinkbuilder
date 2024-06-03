@@ -113,3 +113,27 @@ else
     # Optionally, add the section to the configuration file
     echo "Adding section $section_name to $svxconf_file" | tee -a /var/log/install.log
     
+    # Prompt for new value with confirmation
+    new_hosts=$(prompt_and_confirm_value "HOSTS" "svxportal-uk.ddns.net")
+
+    # Add the section and configuration lines to the file
+    {
+    echo ""
+    echo "[$section_name]"
+    echo "TYPE=Reflector"
+    echo "HOSTS=$new_hosts"
+    echo "FMNET=$new_hosts"
+    echo "HOST_PORT=5300"
+    echo "DEFAULT_LANG=en_GB"
+    echo "JITTER_BUFFER_DELAY=0"
+    echo "DEFAULT_TG=0"
+    echo "MONITOR_TGS=235,2350,23561"
+    echo "TG_SELECT_TIMEOUT=360"
+    echo "ANNOUNCE_REMOTE_MIN_INTERVAL=300"
+    echo "EVENT_HANDLER=/usr/share/svxlink/events.tcl"
+    echo "NODE_INFO_FILE=/etc/svxlink/node_info.json"
+    echo "MUTE_FIRST_TX_LOC=0"
+    echo "MUTE_FIRST_TX_REM=0"
+    echo "TMP_MONITOR_TIMEOUT=0"
+    } >> "$svxconf_file"
+fi
