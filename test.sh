@@ -95,30 +95,22 @@ prompt_and_confirm_value() {
 if grep -q "\[${section_name}\]" "$svxconf_file"; then
     echo "Section $section_name already exists in $svxconf_file" | tee -a /var/log/install.log
     
-    # Get current values for HOSTS, CALLSIGN, and AUTH_KEY
+    # Get current value for HOSTS
     current_hosts=$(get_current_value "$section_name" "HOSTS")
-    current_callsign=$(get_current_value "$section_name" "CALLSIGN")
-    current_auth_key=$(get_current_value "$section_name" "AUTH_KEY")
 
-    # Prompt for new values with confirmation
+    # Prompt for new value with confirmation
     new_hosts=$(prompt_and_confirm_value "HOSTS" "$current_hosts")
-    new_callsign=$(prompt_and_confirm_value "CALLSIGN" "$current_callsign")
-    new_auth_key=$(prompt_and_confirm_value "AUTH_KEY" "$current_auth_key")
 
-    # Update the configuration file with the new values
+    # Update the configuration file with the new value
     update_field_value "$section_name" "HOSTS" "$new_hosts"
-    update_field_value "$section_name" "CALLSIGN" "$new_callsign"
-    update_field_value "$section_name" "AUTH_KEY" "\"$new_auth_key\""
 
 else
     echo "Section $section_name does not exist in $svxconf_file" | tee -a /var/log/install.log
     # Optionally, add the section to the configuration file
     echo "Adding section $section_name to $svxconf_file" | tee -a /var/log/install.log
     
-    # Prompt for new values with confirmation
+    # Prompt for new value with confirmation
     new_hosts=$(prompt_and_confirm_value "HOSTS" "svxportal-uk.ddns.net")
-    new_callsign=$(prompt_and_confirm_value "CALLSIGN" "G4NAB-R")
-    new_auth_key=$(prompt_and_confirm_value "AUTH_KEY" "NE639NR")
 
     # Add the section and configuration lines to the file
     {
@@ -128,8 +120,6 @@ else
     echo "HOSTS=$new_hosts"
     echo "FMNET=$new_hosts"
     echo "HOST_PORT=5300"
-    echo "CALLSIGN=$new_callsign"
-    echo "AUTH_KEY=\"$new_auth_key\""
     echo "DEFAULT_LANG=en_GB"
     echo "JITTER_BUFFER_DELAY=0"
     echo "DEFAULT_TG=0"
@@ -143,4 +133,5 @@ else
     echo "TMP_MONITOR_TIMEOUT=0"
     } >> "$svxconf_file"
 fi
+
 
