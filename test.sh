@@ -79,12 +79,13 @@ update_field_value() {
 prompt_and_confirm_value() {
     local field_name=$1
     local current_value=$2
-    local new_value
-    while true; do
+    local new_value=""
+    local confirmed=false
+    while ! $confirmed; do
         new_value=$(prompt_for_value "$field_name" "$current_value")
         confirm_value "$new_value"
         if [ $? -eq 0 ]; then
-            break
+            confirmed=true
         fi
     done
     echo "$new_value"
@@ -142,3 +143,4 @@ else
     echo "TMP_MONITOR_TIMEOUT=0"
     } >> "$svxconf_file"
 fi
+
