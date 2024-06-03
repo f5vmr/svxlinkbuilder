@@ -54,6 +54,7 @@ confirm_value() {
 get_current_value() {
     local section=$1
     local field_name=$2
+    echo "Getting current value for $field_name in section $section" # Debug statement
     awk -v section="$section" -v field="$field_name" '
     $0 == "[" section "]" { in_section = 1; next }
     in_section && $0 ~ /^\[/ { in_section = 0 }
@@ -66,6 +67,7 @@ update_field_value() {
     local section=$1
     local field_name=$2
     local new_value=$3
+    echo "Updating $field_name to $new_value in section $section" # Debug statement
     awk -v section="$section" -v field="$field_name" -v new_val="$new_value" '
     $0 == "[" section "]" { in_section = 1; print; next }
     in_section && $0 ~ /^\[/ { in_section = 0 }
