@@ -26,7 +26,7 @@
 <p>Once complete, eject the card and install it in the raspberry pi and power it up. Enter the user <b>pi</b> and your password. <b>DO NOT DO ANY UPDATES/UPGRADES</b> as they will be done in the following script.</p> 
 <h2>The compilation</h2>
 <p>This script will also install a dummy sound card for the use of Darkice and Icecast2.</p> 
-<p>The first step will be the following command: <b>sudo apt-get install -y git</b> as without this you cannot download from the GitHub. I have learned also that apt-get is more bash-efficient the apt.</p>  
+<p>The first step will be the following command: <b>sudo apt-get install -y git</b> as without this you cannot download from the GitHub. I have learned also that apt-get is more bash-efficient than apt.</p>  
 
 <p>Now the following command: <b>sudo git clone https://github.com/f5vmr/svxlinkbuilder.git</b> .</p>
 
