@@ -55,7 +55,7 @@ else
     echo "Section $section_name does not exist in $svxconf_file" | tee -a /var/log/install.log
     # Optionally, add the section to the configuration file
     echo "Adding section $section_name to $svxconf_file" | tee -a /var/log/install.log
-    
+fi   
     # Prompt for new HOSTS URL
     while true; do
         new_hosts_url=$(prompt_for_hosts)
