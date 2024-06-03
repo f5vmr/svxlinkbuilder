@@ -82,10 +82,7 @@ prompt_and_confirm_value() {
     local new_value
     while true; do
         new_value=$(prompt_for_value "$field_name" "$current_value")
-        confirm_value "$new_value"
-        if [ $? == 0 ]; then
-            break
-        fi
+        confirm_value "$new_value" && break
     done
     echo "$new_value"
 }
@@ -135,10 +132,4 @@ else
     echo "MONITOR_TGS=235,2350,23561"
     echo "TG_SELECT_TIMEOUT=360"
     echo "ANNOUNCE_REMOTE_MIN_INTERVAL=300"
-    echo "EVENT_HANDLER=/usr/share/svxlink/events.tcl"
-    echo "NODE_INFO_FILE=/etc/svxlink/node_info.json"
-    echo "MUTE_FIRST_TX_LOC=0"
-    echo "MUTE_FIRST_TX_REM=0"
-    echo "TMP_MONITOR_TIMEOUT=0"
-    } >> "$svxconf_file"
-fi
+    echo "EVENT_HANDLER=/usr/share/svxlink/events.tcl
