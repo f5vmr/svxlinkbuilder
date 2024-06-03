@@ -1,4 +1,4 @@
-##!/bin/bash
+########!/bin/bash
 #CONF_DIR="/etc/svxlink"
 #LOGIC_DIR="/usr/share/svxlink/events.d/local"
 #svxfile="svxlink.conf"
