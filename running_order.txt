@@ -1,29 +1,35 @@
-Running from ./svxlinkbuilder/preinstall.sh NB - NOT SUDO
-check_os
-usercheck
-SwapFileChange - Makes a bigger swap file.
+Having made the OS Card with Bookworm Lite on the Raspberry Pi Writer. Ensure SSH and Wifi is set if required.
+1.issue command at the prompt No sudo
+./svxlinkbuilder/preinstall.sh
+check_os  #### ensures that the OS is Bookworm.
+usercheck #### ensures that the user is pi.
+SwapFileChange - Makes a bigger swap file not that it seems to make much difference
 SoundcardManipulation - Removes the onboard soundcard, making the USBCard : 0
-Install Locales - Language possibities 
+Install Locales - Language possibities of currently 4
 Reboot for first pass
-Running from ./svxlinkbuilder/install.sh NB - NOT SUDO
-Initialise
-
-Language
-welcome
-node_type
-sound_card_setup
-update upgrade
-callsign
-groups
-source
-compile
-voices
-svx_modifs
-dashboard
-ip_addresses
-node_setup
-ModuleMetar
-ModeulEchoLink
-ServiceStart
+2.Login and issue command at the prompt - No sudo
+./svxlinkbuilder/install.sh
+Initialise #### Need to check the Variable Library
+Language #### User selects Language options from the list
+3. Calls with sudo ./svxlinkbuilder/install.sh #### according  to language
+welcome #### In the users language
+node_type #### In the users language Simp/Duplex Reflector/None
+sound_card_setup #### Modified / Unmodified / Other
+update upgrade #### Standard methods + Build essentials
+callsign #### User enters intended RF callsign
+groups #### OS Groups updated for svxlink etc.
+source #### Clones the git files
+compile #### Standard cmake line for compiling and installing
+voices #### Voice files installed language compliant.
+svx_modifs #### Import of svxlink .conf files from stock
+           #### /etc/default/svxlink modified for .log 
+           #### Splash screen modifier
+dashboard  #### sudo git clone Dashboard direct to /var/www/html
+           #### User sets up Dashboard user and password for edit purposes 
+ip_addresses #### check and verify ip addresses.
+node_setup #### all the node parameters
+ModuleMetar #### Standard for the UK Needs modifying for User
+ModuleEchoLink #### Yes or No for user.
+Services Started #### This is where the fun begins.
 Reboot
-Revert to Dashboard.
+Revert to Dashboard operations for further edits.
