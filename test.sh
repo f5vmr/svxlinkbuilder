@@ -19,7 +19,7 @@
 #
 #    fi
 # #   fi
- #!/bin/bash
+#!/bin/bash
 
 # Define directories and files
 CONF_DIR="/etc/svxlink"
@@ -50,10 +50,28 @@ confirm_value() {
     return $?
 }
 
-# Function to get the current value of a field from the configuration file
+# Function to get the current value of a field from a specific section in the configuration file
 get_current_value() {
-    local field_name=$1
-    grep -E "^${field_name}=" "$svxconf_file" | cut -d'=' -f2 | tr -d '"'
+    local section=$1
+    local field_name=$2
+    awk -v section="$section" -v field="$field_name" '
+    $0 == "[" section "]" { in_section = 1; next }
+    in_section && $0 ~ /^\[/ { in_section = 0 }
+    in_section && $0 ~ "^" field "=" { print substr($0, index($0, "=") + 1); exit }
+    ' "$svxconf_file" | tr -d '"'
+}
+
+# Function to update the value of a field in a specific section in the configuration file
+update_field_value() {
+    local section=$1
+    local field_name=$2
+    local new_value=$3
+    awk -v section="$section" -v field="$field_name" -v new_val="$new_value" '
+    $0 == "[" section "]" { in_section = 1; print; next }
+    in_section && $0 ~ /^\[/ { in_section = 0 }
+    in_section && $0 ~ "^" field "=" { print field "=" new_val; next }
+    { print }
+    ' "$svxconf_file" > "${svxconf_file}.tmp" && mv "${svxconf_file}.tmp" "$svxconf_file"
 }
 
 # Check if the section already exists
@@ -61,9 +79,9 @@ if grep -q "\[${section_name}\]" "$svxconf_file"; then
     echo "Section $section_name already exists in $svxconf_file" | tee -a /var/log/install.log
     
     # Get current values for HOSTS, CALLSIGN, and AUTH_KEY
-    current_hosts=$(get_current_value "HOSTS")
-    current_callsign=$(get_current_value "CALLSIGN")
-    current_auth_key=$(get_current_value "AUTH_KEY")
+    current_hosts=$(get_current_value "$section_name" "HOSTS")
+    current_callsign=$(get_current_value "$section_name" "CALLSIGN")
+    current_auth_key=$(get_current_value "$section_name" "AUTH_KEY")
 
     # Prompt for new values
     new_hosts=$(prompt_for_value "HOSTS" "$current_hosts")
@@ -88,9 +106,9 @@ if grep -q "\[${section_name}\]" "$svxconf_file"; then
     fi
 
     # Update the configuration file with the new values
-    sed -i "s|^HOSTS=.*|HOSTS=$new_hosts|" "$svxconf_file"
-    sed -i "s|^CALLSIGN=.*|CALLSIGN=$new_callsign|" "$svxconf_file"
-    sed -i "s|^AUTH_KEY=.*|AUTH_KEY=\"$new_auth_key\"|" "$svxconf_file"
+    update_field_value "$section_name" "HOSTS" "$new_hosts"
+    update_field_value "$section_name" "CALLSIGN" "$new_callsign"
+    update_field_value "$section_name" "AUTH_KEY" "\"$new_auth_key\""
 
 else
     echo "Section $section_name does not exist in $svxconf_file" | tee -a /var/log/install.log
@@ -120,23 +138,25 @@ else
     fi
 
     # Add the section and configuration lines to the file
-    echo "" >> "$svxconf_file"
-    echo "[$section_name]" >> "$svxconf_file"
-    echo "TYPE=Reflector" >> "$svxconf_file"
-    echo "HOSTS=$new_hosts" >> "$svxconf_file"
-    echo "FMNET=$new_hosts" >> "$svxconf_file"
-    echo "HOST_PORT=5300" >> "$svxconf_file"
-    echo "CALLSIGN=$new_callsign" >> "$svxconf_file"
-    echo "AUTH_KEY=\"$new_auth_key\"" >> "$svxconf_file"
-    echo "DEFAULT_LANG=en_GB" >> "$svxconf_file"
-    echo "JITTER_BUFFER_DELAY=0" >> "$svxconf_file"
-    echo "DEFAULT_TG=0" >> "$svxconf_file"
-    echo "MONITOR_TGS=235,2350,23561" >> "$svxconf_file"
-    echo "TG_SELECT_TIMEOUT=360" >> "$svxconf_file"
-    echo "ANNOUNCE_REMOTE_MIN_INTERVAL=300" >> "$svxconf_file"
-    echo "EVENT_HANDLER=/usr/share/svxlink/events.tcl" >> "$svxconf_file"
-    echo "NODE_INFO_FILE=/etc/svxlink/node_info.json" >> "$svxconf_file"
-    echo "MUTE_FIRST_TX_LOC=0" >> "$svxconf_file"
-    echo "MUTE_FIRST_TX_REM=0" >> "$svxconf_file"
-    echo "TMP_MONITOR_TIMEOUT=0" >> "$svxconf_file"
+    {
+    echo ""
+    echo "[$section_name]"
+    echo "TYPE=Reflector"
+    echo "HOSTS=$new_hosts"
+    echo "FMNET=$new_hosts"
+    echo "HOST_PORT=5300"
+    echo "CALLSIGN=$new_callsign"
+    echo "AUTH_KEY=\"$new_auth_key\""
+    echo "DEFAULT_LANG=en_GB"
+    echo "JITTER_BUFFER_DELAY=0"
+    echo "DEFAULT_TG=0"
+    echo "MONITOR_TGS=235,2350,23561"
+    echo "TG_SELECT_TIMEOUT=360"
+    echo "ANNOUNCE_REMOTE_MIN_INTERVAL=300"
+    echo "EVENT_HANDLER=/usr/share/svxlink/events.tcl"
+    echo "NODE_INFO_FILE=/etc/svxlink/node_info.json"
+    echo "MUTE_FIRST_TX_LOC=0"
+    echo "MUTE_FIRST_TX_REM=0"
+    echo "TMP_MONITOR_TIMEOUT=0"
+    } >> "$svxconf_file"
 fi
