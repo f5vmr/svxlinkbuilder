@@ -30,17 +30,20 @@ section_name="ReflectorLogic"
 
 # Function to prompt the user for a new HOSTS URL using whiptail
 prompt_for_hosts() {
+    echo "Prompting for new HOSTS URL..." # Debug statement
     new_url=$(whiptail --inputbox "Enter the new URL for HOSTS:" 10 60 "svxportal-uk.ddns.net" 3>&1 1>&2 2>&3)
     exitstatus=$?
     if [ $exitstatus != 0 ]; then
-        echo "User canceled the input. Exiting."
+        echo "User canceled the input. Exiting." # Debug statement
         exit 1
     fi
+    echo "New HOSTS URL: $new_url" # Debug statement
     echo "$new_url"
 }
 
 # Function to confirm the new HOSTS URL with the user using whiptail
 confirm_hosts() {
+    echo "Confirming new HOSTS URL: $1" # Debug statement
     whiptail --yesno "Is this URL correct? $1" 10 60
     return $?
 }
