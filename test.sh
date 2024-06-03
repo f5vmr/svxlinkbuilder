@@ -31,34 +31,31 @@ svxconf_file="$CONF_DIR/$svxfile"
 
 section_name="ReflectorLogic"
 
-# Function to prompt the user for a new value using whiptail
+# Function to prompt the user for a new value
 prompt_for_value() {
     local field_name=$1
     local current_value=$2
-    echo "Prompting for $field_name..." # Debug statement
-    new_value=$(whiptail --inputbox "Enter the new value for $field_name (current value: $current_value):" 10 60 "$current_value" 3>&1 1>&2 2>&3)
-    exitstatus=$?
-    echo "Exit status for inputbox: $exitstatus" # Debug statement
-    if [ $exitstatus != 0 ]; then
-        echo "User canceled the input. Exiting."
-        exit 1
-    fi
+    echo "Enter the new value for $field_name (current value: $current_value):"
+    read new_value
     echo "$new_value"
 }
 
-# Function to confirm the new value with the user using whiptail
+# Function to confirm the new value with the user
 confirm_value() {
     local value=$1
-    echo "Confirming value: $value..." # Debug statement
-    whiptail --yesno "Is this value correct? $value" 10 60
-    return $?
+    echo "Is this value correct? $value (yes/no)"
+    read answer
+    if [ "$answer" == "yes" ]; then
+        return 0
+    else
+        return 1
+    fi
 }
 
 # Function to get the current value of a field from a specific section in the configuration file
 get_current_value() {
     local section=$1
     local field_name=$2
-    echo "Getting current value for $field_name in section $section..." # Debug statement
     awk -v section="$section" -v field="$field_name" '
     $0 == "[" section "]" { in_section = 1; next }
     in_section && $0 ~ /^\[/ { in_section = 0 }
@@ -71,7 +68,6 @@ update_field_value() {
     local section=$1
     local field_name=$2
     local new_value=$3
-    echo "Updating $field_name to $new_value in section $section..." # Debug statement
     awk -v section="$section" -v field="$field_name" -v new_val="$new_value" '
     $0 == "[" section "]" { in_section = 1; print; next }
     in_section && $0 ~ /^\[/ { in_section = 0 }
@@ -140,6 +136,7 @@ else
     echo "TMP_MONITOR_TIMEOUT=0"
     } >> "$svxconf_file"
 fi
+
 
 
 
