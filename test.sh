@@ -81,6 +81,7 @@ prompt_and_confirm_value() {
     local new_value=""
     local confirmed=false
     while ! $confirmed; do
+        echo "Prompting for $field_name..." # Debug statement
         new_value=$(prompt_for_value "$field_name" "$current_value")
         echo "Confirming value: $new_value" # Debug statement
         confirm_value "$new_value"
@@ -93,9 +94,12 @@ prompt_and_confirm_value() {
     echo "$new_value"
 }
 
+# Main script execution
+echo "Starting script..."
+
 # Check if the section already exists
 if grep -q "\[${section_name}\]" "$svxconf_file"; then
-    echo "Section $section_name already exists in $svxconf_file" | tee -a /var/log/install.log
+    echo "Section $section_name already exists in $svxconf_file"
     
     # Get current value for HOSTS
     current_hosts=$(get_current_value "$section_name" "HOSTS")
@@ -109,9 +113,9 @@ if grep -q "\[${section_name}\]" "$svxconf_file"; then
     update_field_value "$section_name" "HOSTS" "$new_hosts"
 
 else
-    echo "Section $section_name does not exist in $svxconf_file" | tee -a /var/log/install.log
+    echo "Section $section_name does not exist in $svxconf_file"
     # Optionally, add the section to the configuration file
-    echo "Adding section $section_name to $svxconf_file" | tee -a /var/log/install.log
+    echo "Adding section $section_name to $svxconf_file"
     
     # Prompt for new value with confirmation
     new_hosts=$(prompt_and_confirm_value "HOSTS" "svxportal-uk.ddns.net")
@@ -137,3 +141,5 @@ else
     echo "TMP_MONITOR_TIMEOUT=0"
     } >> "$svxconf_file"
 fi
+
+echo "Script completed."
