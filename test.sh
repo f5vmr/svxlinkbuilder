@@ -11,9 +11,8 @@ if [ -f "$CLEANUP_SCRIPT" ]; then
     exit 0
 else
     # Create the cleanup.sh script with the specified content
-    cat << 'EOF' > "$CLEANUP_SCRIPT"
-
 #!/bin/bash
+
 # Directory to be cleaned
 DIR="/var/www/html/backups"
 
@@ -24,11 +23,27 @@ if [ -d "$DIR" ]; then
 else
     echo "Directory $DIR does not exist."
 fi
+
+# Here document to create the cleanup.sh script with the specified content
+cat << EOF > "$CLEANUP_SCRIPT"
+#!/bin/bash
+
+# Directory to be cleaned (this is redundant here, as it's already set above)
+DIR="/var/www/html/backups"
+
+# Check if directory exists
+if [ -d "\$DIR" ]; then
+    # Find and delete files older than 7 days
+    find "\$DIR" -type f -mtime +7 -exec rm -f {} \;
+else
+    echo "Directory \$DIR does not exist."
+fi
 EOF
 
-    # Make the cleanup.sh script executable
-    sudo chmod +x "$CLEANUP_SCRIPT"
-    show_info "Created and made $CLEANUP_SCRIPT executable."
+# Make the cleanup.sh script executable
+sudo chmod +x "$CLEANUP_SCRIPT"
+echo "Created and made $CLEANUP_SCRIPT executable."
+
 fi
 
 # Check and add the cleanup.sh script to the sudo crontab if not already present
