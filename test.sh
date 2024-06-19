@@ -13,7 +13,7 @@ else
     # Create the cleanup.sh script with the specified content
     cat << 'EOF' > "$CLEANUP_SCRIPT"
 
-
+#!/bin/bash
 # Directory to be cleaned
 DIR="/var/www/html/backups"
 
