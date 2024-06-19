@@ -36,7 +36,7 @@ make_groups
 	sudo git clone https://github.com/ea5gvk/es_ES.git
 
   	cd /etc/svxlink
-   sudo chmod 664 -R *
+   sudo chmod 775 -R *
 
 #### BACKUP CONFIGURATION ####
  # clear

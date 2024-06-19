@@ -35,7 +35,7 @@ source "${BASH_SOURCE%/*}/functions/groups.sh"
  	sudo tar -zxvf fr_FR.tar_.gz
  	sudo rm fr_FR.tar_.gz
   	cd /etc/svxlink
-   sudo chmod 664 -R *
+   sudo chmod 775 -R *
 
 #### BACKUP CONFIGURATION ####
  # clear
