@@ -12,6 +12,6 @@ OP=/etc/svxlink
 	whiptail --title "Build Essentials" --msgbox "Adding all required packages. Type OK to continue." 8 78
 
 	echo -e "$(date)" "${YELLOW} ### Installation of Packages ### ${NORMAL}" | tee -a  /var/log/install.log
- 	sudo apt-get install php8.2  python3-serial sqlite3 php8.2-sqlite3 toilet -y
+ 	sudo apt-get install apache2 apache2-bin apache2-data apache2-utils php8.2  python3-serial sqlite3 php8.2-sqlite3 toilet -y
 
 }
