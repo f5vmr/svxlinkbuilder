@@ -33,7 +33,7 @@
 <p>The menus displayed will guide you through the installation, all the way to run-time. <b>You will need to know before you begin</b>, the status of your transceiver, whether the PTT and COS are Active High or Active Low, the status and type of your USB soundcard, modified, partly modified or unmodified. With a fully modified usb soundcard, there is no reason that would prevent this installation on another Linux based computer running Debian 12. It has to be Debian 12, or some of the features will fail. Decide also the callsign of your node. Do not use additional symbols or numbers at this stage. The callsign should be of standard notation. If you have decided to install EchoLink, then have ready your registration information. If you wish to use ModuleMetarInfo, the Airport Weather application, then read about the ICAO codes, and discover the major airports around you. It will not work for airports that do not provide a weather service in real time. If you wish to explore the ModulePropagationMonitor, then this can be installed later. Remember note everything down before you proceed.</p>
 <p>Everything else will be constructed for you</p>
 <h2>Beginning the install</h2>
-<p>The script will compile the running configuration as you proceed. It can only be run once, due to the nature of the program. Allow yourself an uninterupted period of 1 hour, to answer the questions put to you, and the accompanying install. <b>Remember to note down any "usernames and passwords" that you provide</b>. A Raspberry Pi 3 or 4 will take less time, and a Raspberry Pi zero possibly longer than 90 minutes. However the Raspberry Pi Zero will present a challenge due to the lack of an external USB socket. I have NOT included the installation of the waveshare sound system, if you are using a Pi-Hat interface. Hopefully there should be no reported error. I have just completed a build on a raspberry pi 3A from card format to working node in 50 minutes, with no errors.</p>
+<p>The script will compile the running configuration as you proceed. It can only be run once, due to the nature of the program. Allow yourself an uninterupted period of 1 hour, to answer the questions put to you, and the accompanying install. <b>Remember to note down any "usernames and passwords" that you provide</b>. A Raspberry Pi 3 or 4 will take less time, and a Raspberry Pi zero possibly slightly longer. However the Raspberry Pi Zero will present a challenge due to the lack of an external USB socket. I have NOT included the installation of the waveshare sound system, if you are using a Pi-Hat interface. Hopefully there should be no reported error. I have just completed a build on a raspberry pi 3A from card format to working node in about 20 minutes, with no errors.</p>
 <p>For the American User, the en_US Voice files will be pulled if you select 'English - USA' from the menu.</p>
 <p>I hope that there will be someone out there that can add to the code for Spanish or Portuguese.</p>
 <h2>We begin</h2>
@@ -42,7 +42,7 @@
 <p>Follow the menus, and enter the required information, which should should have noted, to assist you prior to running the program.</p>
 <p>During the compilation, you will be notified of the Active IP Address of your node. Make a note of it. You will need it to proceed.</p>
 
-<p>At the end of the compilation, the system will automatically reboot, about which you will be notified.</p>
+<p>At the end of the compilation, the system will ready to use. You may now exit the terminal.</p>
 
 <p>The next step will be to open an internet browser such as 'Chrome' and type in the IP Address and enter. The dashboard will be displayed.If your USB soundcard is flashing then the node should be fully operational.</p>
 
@@ -50,10 +50,10 @@
 
 <p>You will need to understand the svxlink.conf file and how to make adjustments for Simplex or Repeater operation. In any case you may need to refer to the svxlink.org main page, or svxlink amateur radio users page on facebook, or contact me. For further information also consult the svxlink pages on g4nab.co.uk. In the terminal, type 'man svxlink.conf' and the on-board documentation will be displayed.</p>
 
-<p>To stop svxlink running type in the terminal <b>sudo systemctl stop svxlink.service</b> and to restart it type <b>sudo systemctl restart svxlink.service</b> You can also do this if authorised in the Dashboard.</p>
+<p>To stop svxlink running type in the terminal <b>sudo systemctl stop svxlink.service</b> and to restart it type <b>sudo systemctl restart svxlink.service</b> You can also do this if authorised in the Dashboard at the POWER menu button.</p>
 
-<p>If you wish to modify the Svxlink.conf, EchoLink, MetarInfo and NodeInfo files, you can do so, if authorised, from from the dashboard.</p>
-<p>Be careful whilst editing, as to change the structure, can cause the node to fail. However a copy of the last working configuration can be found in the /etc/svxlink folder with a time and date, or in the case of the EchoLink and MetarInfo in the /etc/svxlink/svxlink.d folder.</p>
+<p>If you wish to modify the Svxlink.conf, EchoLink, MetarInfo and NodeInfo files, you can do so, if authorised, from from the dashboard. Saving the changes immediately restarts the svxlink with the new setting, although they will appear not to have changed in the dashboard.</p>
+<p>Be careful whilst editing, as to change the structure, can cause the node to fail. However a copy of the last working configuration can be found in the /var/www/html/backups folder with a time and date.</p>
 <p>To obtain information for the node_info.json go to a PC Browser and enter <b>http://svxportal-uk.ddns.net:81</b> where you will find a dashboard.</p>
 <p>Click <b>Register</b> at the top, completing the information. This information is held only to enable you to complete the next stage. Log in with the information you have just supplied, click on <b>My Stations</b>, and click on <b>Generate node_info.json</f></b>
 <p>By completing all the information, <b>ignoring</b> any reference to CTCSS at this time, this will generate a file called node_info.json. Save it in a location in your computer. You can copy and paste from it later to the file in the node.</p>
@@ -61,20 +61,20 @@
 <p>In the Raspberry Terminal or in the Dashboard if you have opened the NodeInfo file there, and delete all the contents. Go to the Notepad or text Editor and select all the text there, and copy (cntrl-c). Highlight the terminal (or the dashboard window) and paste (cntrl-v). </p>
 <p>When the editing is complete type <b>cntrl-o</b> and return at the keyboard for the terminal followed by <b>cntrl-x</b>.</p>
 <p>In the Dashboard, simply use the save button. The new information will be saved to the file in the node.</p>
-<p>Next to incorporate the new information, type <b>sudo systemctl restart svxlink.service</b> and return if in the terminal, or if in the Dashboard click on Power and 'Restart SVXLink Service'</p>
-<p>The next stage is to check and edit where necessary the <b>svxlink.conf</b> file. Type <b>sudo nano svxlink.conf</b> followed by return.This will be necessary for the addition or removal of TalkGroups in [ReflectorLogic]. Discuss that with me.</p>
+
 <p>Check the content and importantly complete your location information near the bottom of the file. type <b>cntrl-o</b> and return then <b>cntrl-x</b> when finished to save your changes.</p>
-<p>To modify the Echolink information type <b>sudo nano svxlink.d/ModuleEchoLink.conf</b> and return. Make your changes to your EchoLink access here. then save the file as you did above with <b>svxlink.conf</b>. If you have not yet enabled svxlink in the <b>svxlink.conf</b> to may need to do this now, and remove the <b>#</b> comment header from the relevant lines.</p>
-<p>To incorporated the changes you will need to restart the svxlink.service</b></p>
+<p>If you have not yet enabled Echolink in the <b>svxlink.conf</b> to may need to do this now, and remove the <b>#</b> comment header from the relevant lines. You can do this in the Svxlink Configurator</p>
+<p>The restart of the svxlink.service is automatic on saving changes.</b></p>
 <p>You do not need to make changes to the <b>gpio.conf</b>. The old methods of adding the gpio configuration and setting a daemon start in /etc/rc.local are deprecated (no longer required). We are using GPIOD. If the version of the Dashboard does not show GPIO in the menu, then this has already been removed.</p>
 <h2>EchoLink</h2>
+<p>To modify the Echolink information, you can make your changes to your EchoLink Configurator here. then save the file as you did above with <b>svxlink.conf</b>.</p>
 <p>The usual rules apply with the outgoing ports for your RaspberryPi IP address set in the Router to which you are connected</p>
 <p>You can only have one EchoLink set up on your own home IP Address.</p>
-<p>You will need to set up the callsign and password with which you registered in EchoLink. This is in the file /etc/svxlink/svxlink.d/ModuleEchoLink.conf. You edit the file with the command 'sudo nano' preceding the file name inclusive of the directory information.</p>
-<p>If you did not set up EchoLink during the building phase, then you will also need to modify two lines in /etc/svxlink/svxlink.conf again using 'sudo nano'. For the Simplex Node the first of the lines is within the [SimplexLogic] at MODULES= and you must include ModuleEchoLink within the line. For the Repeater user the same will apply except the MODULES= line will be in [RepeaterLogic]</p>
-<p>Finally the important step is to set the correct level of audio. You must do this from the terminal, logging in to your node, and typing 'sudo alsamixer' at the prompt.<p>
-<p>By using function cntrl-f5 you shold display all inputs and outputs within the table. You should have 'Headphone', 'Mic', 'Mic with capture' and 'Auto Gain Control'.</p>
-<p> For best results, set 'Loudspeaker' to around 60, 'Mic' as 0 'Mic with Capture' at 19-25 and 'Autogain' should be muted. Highlight each with the arrow keys on the keyboard. Mute 'Autogain' using the 'M' key. </p>
+<p>You will need to set up the callsign and password with which you registered in EchoLink.</p>
+<p>If you did not set up EchoLink during the building phase, then you can add it the MODULES= line in the [SimplexLogic] section of the Svxlink Configurator and you must include ModuleEchoLink within the line. For the Repeater user the same will apply except the MODULES= line will be in [RepeaterLogic]</p>
+<p>Finally the important step is to set the correct level of audio. This is now set using amixer in the menu at the top.<p>
+<p>Alsamixer cannot be used so we address the amixer directly instead.</p>
+<p> For best results, set 'Loudspeaker' to around 75, 'Mic' as 0 'Mic with Capture' at 19-38 and 'Autogain' should be 'OFF'. Simply adjust the values in the Configurator. </p>
 <p>'Loudspeaker' is your transmitter volume, and 'Mic with capture' is the volume from the receiver. It is a little confusing.</p>
 <p>Everything introduced here is directly from the original presentation by Tobias SM0SVX.</p>
 
