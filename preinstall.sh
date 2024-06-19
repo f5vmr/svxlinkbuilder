@@ -36,11 +36,16 @@
     sudo systemctl daemon-reload
     sudo systemctl restart alsa-state.service
     ## Install svxlink-server
+    echo "#### Installing repository key ####" | sudo tee -a /var/log/install.log
     sudo wget -q https://online-amateur-radio-club-m0ouk.github.io/oarc-packages/hibby.key
     sudo mv hibby.key /etc/apt/trusted.gpg.d/hibby.asc
+    echo "#### Installing repository ####" | sudo tee -a /var/log/install.log
     echo "deb https://online-amateur-radio-club-m0ouk.github.io/oarc-packages bookworm main" | sudo tee -a /etc/apt/sources.list
+    echo "#### Updating apt ####" | sudo tee -a /var/log/install.log
     sudo apt update && sudo apt upgrade -y
+    echo "#### Installing svxlink-server ####" | sudo tee -a /var/log/install.log
     sudo apt install -y svxlink-server apache2 apache2-bin apache2-data apache2-utils php8.2  python3-serial sqlite3 php8.2-sqlite3 toilet -y
+    echo "#### Installing locales ####" | sudo tee -a /var/log/install.log
     # installing locales.
     # Function to install locale if not already available
     sudo cp -f /home/pi/svxlinkbuilder/addons/locale.gen /etc/
