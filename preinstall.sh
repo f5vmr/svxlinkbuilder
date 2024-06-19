@@ -33,20 +33,18 @@
     sudo mkdir /etc/alsa
     sudo touch /etc/alsa/state-daemon.conf
     sudo systemctl restart alsa-state.service
+    ## Install svxlink-server
+    curl https://online-amateur-radio-club-m0ouk.github.io/oarc-packages/hibby.key | sudo tee /etc/apt/trusted.gpg.d/hibby.asc
+    echo "deb https://online-amateur-radio-club-m0ouk.github.io/oarc-packages bookworm main" | sudo tee -a /etc/apt/sources.list
+    sudo apt update && sudo upgrade
+    sudo apt install -y svxlink-server
     # installing locales.
- 
-# Function to install locale if not already available
+    # Function to install locale if not already available
     sudo cp -f /home/pi/svxlinkbuilder/addons/locale.gen /etc/
     sudo locale-gen
-
-echo "Locale setup completed."
-
-
-# Set en_GB.UTF-8 as the default locale
-sudo localectl set-locale LANG=en_GB.UTF-8
-
     echo "Locale setup completed."
-
-echo "#### Rebooting after soundcard configuration ####" | tee -a /var/log/install.log
-
-sudo shutdown -r now
+    # Set en_GB.UTF-8 as the default locale
+    sudo localectl set-locale LANG=en_GB.UTF-8
+    echo "Locale setup completed."
+    echo "#### Rebooting after soundcard configuration ####" | tee -a /var/log/install.log
+    sudo shutdown -r now

@@ -14,9 +14,7 @@ source "${BASH_SOURCE%/*}/functions/sound_card.sh"
 soundcard
 echo -e "$(date)" "${YELLOW} #### Sound Card: $HID $GPIOD $card #### ${NORMAL}" | tee -a  /var/log/install.log	
 echo -e "$(date)" "${YELLOW} #### Checking Alsa #### ${NORMAL}" | tee -a  /var/log/install.log
-#### UPDATE ####
-source "${BASH_SOURCE%/*}/functions/update.sh"
-update
+
 #### REQUEST CALLSIGN ####
 source "${BASH_SOURCE%/*}/functions/callsign.sh"
 callsign
@@ -25,30 +23,8 @@ clear
 echo -e "$(date)" "${YELLOW} #### Creating Groups and Users #### ${NORMAL}" | tee -a  /var/log/install.log
 source "${BASH_SOURCE%/*}/functions/groups.sh"
 make_groups
-#### DOWNLOADING SOURCE CODE ####
-echo -e "$(date)" "${YELLOW} #### Downloading SVXLink source code #### ${NORMAL}" | tee -a  /var/log/install.log
-source "${BASH_SOURCE%/*}/functions/source.sh"
-svxlink_source
-#### INSTALLATION ####
- # clear
-	NEWVERSION=$(sudo grep -r "SVXLINK=" "svxlink"/* | awk -F= '{print $2}')
-	echo -e "$(date)" "${GREEN} #### New Version: $NEWVERSION #### ${NORMAL}" | tee -a  /var/log/install.log
 
-	
-#### COMPILING ####
- # clear
-	echo -e "$(date)" "${YELLOW} #### Compiling #### ${NORMAL}" | tee -a  /var/log/install.log
 
- 	cd svxlink/src/build
- 	sudo cmake -DUSE_QT=OFF -DCMAKE_INSTALL_PREFIX=/usr -DSYSCONF_INSTALL_DIR=/etc -DLOCAL_STATE_DIR=/var -DWITH_SYSTEMD=ON  ..
- 	sudo make
- 	sudo make doc
- 	echo -e "$(date)" "${GREEN} #### Installing SVXLink #### ${NORMAL}" | tee -a  /var/log/install.log
- 	sudo make install
- 	cd /usr/share/svxlink/events.d
- 	sudo mkdir local
- 	sudo cp *.tcl ./local
- 	sudo ldconfig
 #### CONFIGURATION VOICES ####
  # clear
 	echo -e "$(date)" "${GREEN} #### Installing Voice Files #### ${NORMAL}" | tee -a  /var/log/install.log
@@ -82,6 +58,8 @@ if [[ $LANG_OPTION == "3" ]]; then
  	sudo cp -f /home/pi/svxlinkbuilder/addons/node_info.json /etc/svxlink/node_info.json
  	sudo cp -f /home/pi/svxlinkbuilder/resetlog.sh /home/pi/scripts/resetlog.sh
  	(sudo crontab -l 2>/dev/null; echo "59 23 * * * /home/pi/scripts/resetlog.sh ") | sudo crontab -
+    sudo mkdir /usr/share/svxlink/events.d/local
+	sudo cp /usr/share/svxlink/events.d/*.tcl /usr/share/svxlink/events.d/local/
  # clear
 	echo -e "$(date)" "${GREEN} #### Setting Callsign to $CALL #### ${NORMAL}" | tee -a  /var/log/install.log
 

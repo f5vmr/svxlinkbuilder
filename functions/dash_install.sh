@@ -21,15 +21,38 @@ function install_dash {
     sudo systemctl daemon-reload
     sudo systemctl restart apache2.service
     ## Dashboard Permissions
-    whiptail --title "Dashboard Permissions" --yesno "Do you want to add permissions to the dashboard?" 8 78
-    if [ $? -eq "0" ] 
-    then
-    ## add permissions to the dashboard
-    sudo chmod -R 777 /var/www/html/include/config.inc.php
-    dashboard_user=$(whiptail --title "Dashboard User" --inputbox "Enter the username of the dashboard user" 8 78 svxlink 3>&1 1>&2 2>&3)
-    dashboard_pass=$(whiptail --title "Dashboard Password" --passwordbox "Enter the password of the dashboard user" 8 78 3>&1 1>&2 2>&3)
-    sudo sed -i "s/\"svxlink\"/\"$dashboard_user\"/g" /var/www/html/include/config.inc.php
-    sudo sed -i "s/\"password\"/\"$dashboard_pass\"/g" /var/www/html/include/config.inc.php
+    # Define the sudoers file, the source file, the script file, and the config file
+SUDOERS_FILE="/etc/sudoers.d/svxlink"
+SOURCE_FILE="www-data.sudoers"
+SCRIPT_FILE=$(basename "$0")
+CONFIG_FILE="include/config.inc.php"
+
+# Function to display an info message using whiptail
+show_info() {
+  whiptail --title "Information" --msgbox "$1" 8 78
+}
+
+# Prompt the user for their dashboard username
+DASHBOARD_USER=$(whiptail --title "Dashboard Username" --inputbox "Please enter your dashboard username:" 8 78 svxlink >
+
+# Prompt the user for their dashboard password
+DASHBOARD_PASSWORD=$(whiptail --title "Dashboard Password" --passwordbox "Please enter your dashboard password:" 8 78 3>
+
+# Update the config file with the provided username and password
+if [ -f "$CONFIG_FILE" ]; then
+  sed -i "s/define(\"PHP_AUTH_USER\", \".*\");/define(\"PHP_AUTH_USER\", \"$DASHBOARD_USER\");/" "$CONFIG_FILE"
+  sed -i "s/define(\"PHP_AUTH_PW\", \".*\");/define(\"PHP_AUTH_PW\", \"$DASHBOARD_PASSWORD\");/" "$CONFIG_FILE"
+  show_info "The config file $CONFIG_FILE has been updated with the new username and password."
+else
+  whiptail --title "Error" --msgbox "Config file $CONFIG_FILE does not exist. Exiting." 8 78
+  exit 1
+fi
+
+# Check if the source file exists
+if [ ! -f "$SOURCE_FILE" ]; then
+  whiptail --title "Error" --msgbox "Source file $SOURCE_FILE does not exist. Exiting." 8 78
+  exit 1
+fi
     ## permissions added
 
 ## Define the lines to add to sudoers
