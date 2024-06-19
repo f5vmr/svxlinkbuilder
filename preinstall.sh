@@ -11,13 +11,13 @@
     sudo dphys-swapfile swapoff 
     sudo sed -i 's/CONF_SWAPSIZE=100/CONF_SWAPSIZE=150/g' /etc/dphys-swapfile
     sudo dphys-swapfile swapon
-    ## Install file manipulation pkg
+    ## Install file manipulation pkg ##
     sudo apt-get install -y acl
-    ## Set /var/log/install.log
+    ## Set /var/log/install.log ##
     sudo touch /var/log/install.log
     sudo chmod 775 /var/log/install.log
     sudo setfacl -R -m u:pi:rwx /var/log/install.log
-    ## Manipulation of Soundcards
+    ## Manipulation of Soundcards ##
     echo "#### Moving USB Soundcard to Position Card:0 ####" | sudo tee -a /var/log/install.log
     sudo chmod 777 /etc/modules
     sudo sh -c 'echo "blacklist snd_bcm2835" > /etc/modprobe.d/raspi-blacklist.conf'
