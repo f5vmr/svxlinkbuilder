@@ -33,6 +33,7 @@
     echo "#### Reseting alsa-state.service #### " | sudo tee -a /var/log/install.log
     sudo mkdir /etc/alsa
     sudo touch /etc/alsa/state-daemon.conf
+    sudo systemctl daemon-reload
     sudo systemctl restart alsa-state.service
     ## Install svxlink-server
     sudo wget -q https://online-amateur-radio-club-m0ouk.github.io/oarc-packages/hibby.key
