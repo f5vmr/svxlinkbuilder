@@ -102,7 +102,7 @@ if [[ $LANG_OPTION == "3" ]]; then
 	echo -e "$(date)" "${YELLOW} #### Installing Dashboard #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
 	source "${BASH_SOURCE%/*}/functions/dash_install.sh"
-	install_dash
+	dash_install
  # clear
 	echo -e "$(date)" "${GREEN} #### Dashboard installed #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	whiptail --title "IP Addresses" --msgbox "Dashboard installed. Please note your IP address is $ip_address on $device" 8 78
