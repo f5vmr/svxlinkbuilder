@@ -54,8 +54,29 @@ if [[ $LANG_OPTION == "3" ]]; then
  	sudo cp -p $CONF $CONF.bak
 #
  	cd /home/pi/
+	SUDOERS_FILE="/etc/sudoers.d/svxlink"
+	SOURCE_FILE="www-data.sudoers"
+	if [ ! -f "$SOURCE_FILE" ]; then
+  whiptail --title "Error" --msgbox "Source file $SOURCE_FILE does not exist. Exiting." 8 78
+  exit 1
+fi
+
+# Check if the sudoers file exists
+if [ -f "$SUDOERS_FILE" ]; then
+  : > "$SUDOERS_FILE"
+else
+  touch "$SUDOERS_FILE"
+fi
+
+# Ensure the sudoers file has the correct permissions
+
+
+# Read the content from the source file into the sudoers file
+cat "$SOURCE_FILE" > "$SUDOERS_FILE"
+chmod 0440 "$SUDOERS_FILE"
  	echo -e "$(date)" "${RED} #### Downloading prepared configuration files from the scripts #### ${NORMAL}" | sudo tee -a  /var/log/install.log
- 	sudo mkdir /home/pi/scripts
+ 	sudo touch /etc/sudoers.d/svxlink
+	sudo mkdir /home/pi/scripts
 	sudo cp -f /home/pi/svxlinkbuilder/addons/10-uname /etc/update-motd.d/
  	sudo cp -f /home/pi/svxlinkbuilder/configs/svxlink.conf /etc/svxlink/
  	sudo cp -f /home/pi/svxlinkbuilder/configs/gpio.conf /etc/svxlink/
