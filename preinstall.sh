@@ -38,7 +38,7 @@
     sudo wget -q https://online-amateur-radio-club-m0ouk.github.io/oarc-packages/hibby.key
     sudo mv hibby.key /etc/apt/trusted.gpg.d/hibby.asc
     echo "deb https://online-amateur-radio-club-m0ouk.github.io/oarc-packages bookworm main" | sudo tee -a /etc/apt/sources.list
-    sudo apt update && sudo upgrade
+    sudo apt update && sudo apt upgrade
     sudo apt install -y svxlink-server
     # installing locales.
     # Function to install locale if not already available
