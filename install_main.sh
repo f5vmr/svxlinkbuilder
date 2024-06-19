@@ -1,7 +1,7 @@
 #!/bin/bash
 lang=$(echo $LANG | grep -o '^[a-zA-Z]*_[a-zA-Z]*')
 #### Define Variables ####
-CONF="/etc/svxlink/svxlink.conf"
+#CONF="/etc/svxlink/svxlink.conf"
 #GPIO="/etc/svxlink/gpio.conf"
 OP=/etc/svxlink
 #### Welcome Message ####
@@ -88,8 +88,8 @@ if [[ $LANG_OPTION == "3" ]]; then
  # clear
 	echo -e "$(date)" "${YELLOW} #### Changing Log file suffix ${NORMAL}" | sudo tee -a  /var/log/install.log
 
- 	sudo sed -i 's/log\/svxlink/log\/svxlink.log/g' /etc/default/svxlink
-	
+ 	sudo sed -i '/^LOGFILE=/ s/\(LOGFILE=.*\)\.log\>/\1.log/' /etc/default/svxlink
+
 	#### INSTALLING DASHBOARD ####
  # clear
 	cd /home/pi

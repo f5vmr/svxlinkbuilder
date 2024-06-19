@@ -1,12 +1,12 @@
 #### INSTALLATION SCRIPT ####
 # Setting non-superuser elements #
 #### INITIALISE ####
-home=/home/pi
-cd $home
+
 lang=$(echo $LANG | grep -o '^[a-zA-Z]*_[a-zA-Z]*')
  # clear
 source "${BASH_SOURCE%/*}/functions/initialise.sh"
 initialise
+cd $home 
 echo -e "${GREEN} #### OS = $operating_system and Current user = $logname #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 #### SuperUser Install ####
 #### LANGUAGE ####
