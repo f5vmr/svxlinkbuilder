@@ -72,10 +72,12 @@ else
   exit 1
 fi
 
-# Check if the source file exists
 # Change ownership of all files in /var/www/html 
 find /var/www/html -exec sudo chown svxlink:svxlink {} +
 
+show_info() {
+    echo "[INFO] $1"
+}
 # Inform the user that the ownership change was successful
 show_info "Ownership of files in /var/www/html has been changed to svxlink:svxlink, except for the script itself."
 
@@ -90,32 +92,28 @@ if [ ! -d "$SCRIPT_DIR" ]; then
 fi
 
 
+# Check if the cleanup.sh script does not exist
+if [ ! -f "$CLEANUP_SCRIPT" ]; then
 
-# Check if the cleanup.sh script exists
-if [ -f "$CLEANUP_SCRIPT" ]; then
-    show_info "Script $CLEANUP_SCRIPT already exists. Exiting."
-    exit 0
-else
-    # Create the cleanup.sh script with the specified content
-    cat << 'EOF' > "$CLEANUP_SCRIPT"
+# Here document to create the cleanup.sh script with the specified content
+cat << EOF > "$CLEANUP_SCRIPT"
 #!/bin/bash
 
-# Directory to be cleaned
+# Directory to be cleaned (this is redundant here, as it's already set above)
 DIR="/var/www/html/backups"
 
 # Check if directory exists
-if [ -d "$DIR" ]; then
+if [ -d "\$DIR" ]; then
     # Find and delete files older than 7 days
-    find "$DIR" -type f -mtime +7 -exec rm -f {} \;
+    find "\$DIR" -type f -mtime +7 -exec rm -f {} \;
 else
-    echo "Directory $DIR does not exist."
+    echo "Directory \$DIR does not exist."
 fi
-
 EOF
 
-    # Make the cleanup.sh script executable
-    sudo chmod +x "$CLEANUP_SCRIPT"
-    show_info "Created and made $CLEANUP_SCRIPT executable."
+# Make the cleanup.sh script executable
+sudo chmod +x "$CLEANUP_SCRIPT"
+echo "Created and made $CLEANUP_SCRIPT executable."
 fi
 
 # Check and add the cleanup.sh script to the sudo crontab if not already present

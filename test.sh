@@ -11,7 +11,7 @@ if [ -f "$CLEANUP_SCRIPT" ]; then
     exit 0
 else
     # Create the cleanup.sh script with the specified content
-#!/bin/bash
+
 
 # Directory to be cleaned
 DIR="/var/www/html/backups"
