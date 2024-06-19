@@ -1,14 +1,9 @@
 #!/bin/bash
-SCRIPT_DIR="/home/pi/scripts"
-CLEANUP_SCRIPT="$SCRIPT_DIR/cleanup.sh"
 
-# Check if the script directory exists, if not, create it
-if [ ! -d "$SCRIPT_DIR" ]; then
-    mkdir -p "$SCRIPT_DIR"
-    show_info "Created directory $SCRIPT_DIR"
-fi
-
-
+# Function to display informational messages
+show_info() {
+    echo "[INFO] $1"
+}
 
 # Check if the cleanup.sh script exists
 if [ -f "$CLEANUP_SCRIPT" ]; then
@@ -29,7 +24,6 @@ if [ -d "$DIR" ]; then
 else
     echo "Directory $DIR does not exist."
 fi
-
 EOF
 
     # Make the cleanup.sh script executable
