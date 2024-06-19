@@ -12,7 +12,7 @@
 #    # Check if the section already exists
 #
 #    if grep -q "\[${section_name}\]" "$svxconf_file"; then
-#echo "Section $section_name already exists in $svxconf_file" | tee -a /var/log/install.log
+#echo "Section $section_name already exists in $svxconf_file" | sudo tee -a /var/log/install.log
 #
 #    else
 #    echo "no valid option"

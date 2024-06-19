@@ -42,7 +42,7 @@ case ${LANG_OPTION} in
 esac
     locale=$(echo "$locale" | cut -d'.' -f1)
     lang=$(echo $LANG | grep -o '^[a-zA-Z]*_[a-zA-Z]*')
-    echo "${GREEN} #### Language set to $LANG_OPTION $locale #### ${NORMAL}" | tee -a /var/log/install.log
+    echo "${GREEN} #### Language set to $LANG_OPTION $locale #### ${NORMAL}" | sudo tee -a /var/log/install.log
     
     }
 

@@ -18,19 +18,19 @@
     sudo chmod 775 /var/log/install.log
     sudo setfacl -R -m u:pi:rwx /var/log/install.log
     ## Manipulation of Soundcards
-    echo "#### Moving USB Soundcard to Position Card:0 ####" | tee -a /var/log/install.log
+    echo "#### Moving USB Soundcard to Position Card:0 ####" | sudo tee -a /var/log/install.log
     sudo chmod 777 /etc/modules
     sudo sh -c 'echo "blacklist snd_bcm2835" > /etc/modprobe.d/raspi-blacklist.conf'
-    echo "#### Blacklisting snd_bcm 2835 ####" | tee -a /var/log/install.log
+    echo "#### Blacklisting snd_bcm 2835 ####" | sudo tee -a /var/log/install.log
     sudo sed -i 's/options snd-usb/\#options snd-usb/g' /lib/modprobe.d/aliases.conf
-    echo "#### Disabling HMDI Sound - Not required for this build ####"| tee -a /var/log/install.log
+    echo "#### Disabling HMDI Sound - Not required for this build ####"| sudo tee -a /var/log/install.log
     sudo sed -i 's/dtoverlay=vc4-kms-v3d/dtoverlay=vc4-kms-v3d,noaudio/g' /boot/firmware/config.txt
     sudo cp -f /home/pi/svxlinkbuilder/configs/asound.conf /etc/modprobe.d/asound.conf
-    echo "#### Setting up Loopback Soundcard ####" | tee -a /var/log/install.log
+    echo "#### Setting up Loopback Soundcard ####" | sudo tee -a /var/log/install.log
     echo snd-aloop > /etc/modules
     sudo chmod 775 /etc/modules
     sudo cp -f /home/pi/svxlinkbuilder/configs/loopback.conf /etc/asound.conf
-    echo "#### Reseting alsa-state.service #### " | tee -a /var/log/install.log
+    echo "#### Reseting alsa-state.service #### " | sudo tee -a /var/log/install.log
     sudo mkdir /etc/alsa
     sudo touch /etc/alsa/state-daemon.conf
     sudo systemctl restart alsa-state.service
@@ -48,5 +48,5 @@
     # Set en_GB.UTF-8 as the default locale
     sudo localectl set-locale LANG=en_GB.UTF-8
     echo "Locale setup completed."
-    echo "#### Rebooting after soundcard configuration ####" | tee -a /var/log/install.log
+    echo "#### Rebooting after soundcard configuration ####" | sudo tee -a /var/log/install.log
     sudo shutdown -r now

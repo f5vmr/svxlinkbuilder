@@ -72,6 +72,6 @@ echo "Variable assigned: $sound_card_variable"
     echo "ok, donc, je ne fait pas de changements"           
     fi               
 fi
-    echo -e "$(date)" "${GREEN}Audio mis à jour, carte-son factice inclu pour Darkice complètés.${NORMAL}" | tee -a /var/log/install.log
+    echo -e "$(date)" "${GREEN}Audio mis à jour, carte-son factice inclu pour Darkice complètés.${NORMAL}" | sudo tee -a /var/log/install.log
 				
 }

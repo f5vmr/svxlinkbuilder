@@ -9,18 +9,18 @@ function nodeoption {
 
     if [[ "$NODE_OPTION" -eq "1" ]] 
     then
-        echo "Choisi Noed Simplex sans SvxReflecteur" | tee -a /var/log/install.log
+        echo "Choisi Noed Simplex sans SvxReflecteur" | sudo tee -a /var/log/install.log
     elif [[ "$NODE_OPTION" -eq "2" ]] 
     then
-        echo "Choisi Noed Simplex avec SvxReflecteur" | tee -a /var/log/install.log
+        echo "Choisi Noed Simplex avec SvxReflecteur" | sudo tee -a /var/log/install.log
     elif [[ "$NODE_OPTION" -eq "3" ]] 
     then
-        echo "Choisi Noed Répéteur sans SvxReflecteur" | tee -a /var/log/install.log
+        echo "Choisi Noed Répéteur sans SvxReflecteur" | sudo tee -a /var/log/install.log
     elif [[ "$NODE_OPTION" -eq "4" ]] 
     then
-        echo "Choisi Noed Répéteur avec SvxReflecteur" | tee -a /var/log/install.log
+        echo "Choisi Noed Répéteur avec SvxReflecteur" | sudo tee -a /var/log/install.log
     else 
-        echo "N'aucune option choisie" | tee -a /var/log/install.log
+        echo "N'aucune option choisie" | sudo tee -a /var/log/install.log
 fi
 echo Node Option $NODE_OPTION
 }

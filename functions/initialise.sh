@@ -15,5 +15,5 @@ NORMAL="\033[0;39m"
 RED="\033[1;31m"
 YELLOW="\033[1;33m"
 home=/home/pi
-echo -e "$(date)" "${GREEN} #### Commencing initialisation #### ${NORMAL}" | tee -a /var/log/install.log
+echo -e "$(date)" "${GREEN} #### Commencing initialisation #### ${NORMAL}" | sudo tee -a /var/log/install.log
 }

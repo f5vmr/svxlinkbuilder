@@ -36,7 +36,7 @@ while true; do
     fi
 done
 CALL=${user_input^^} 
-echo date "#### Node Callsign $CALL ### "| tee -a   /var/log/install.log
+echo date "#### Node Callsign $CALL ### "| sudo tee -a   /var/log/install.log
 }
 
 

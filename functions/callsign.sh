@@ -21,5 +21,5 @@ done
 CALL=${user_input^^}
 ## Use the non-empty name
 
-	echo -e "$(date)" "${GREEN} #### Creating Node with Callsign " $CALL " #### ${NORMAL}" | tee -a  /var/log/install.log    
+	echo -e "$(date)" "${GREEN} #### Creating Node with Callsign " $CALL " #### ${NORMAL}" | sudo tee -a  /var/log/install.log    
 }
