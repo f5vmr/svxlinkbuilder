@@ -39,7 +39,7 @@
     sudo mv hibby.key /etc/apt/trusted.gpg.d/hibby.asc
     echo "deb https://online-amateur-radio-club-m0ouk.github.io/oarc-packages bookworm main" | sudo tee -a /etc/apt/sources.list
     sudo apt update && sudo apt upgrade
-    sudo apt install -y svxlink-server
+    sudo apt install -y svxlink-server apache2 apache2-bin apache2-data apache2-utils php8.2  python3-serial sqlite3 php8.2-sqlite3 toilet -y
     # installing locales.
     # Function to install locale if not already available
     sudo cp -f /home/pi/svxlinkbuilder/addons/locale.gen /etc/
