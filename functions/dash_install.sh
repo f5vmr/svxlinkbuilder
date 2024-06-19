@@ -33,10 +33,33 @@ show_info() {
 }
 
 # Prompt the user for their dashboard username
-DASHBOARD_USER=$(whiptail --title "Dashboard Username" --inputbox "Please enter your dashboard username:" 8 78 svxlink >
+#!/bin/bash
 
-# Prompt the user for their dashboard password
-DASHBOARD_PASSWORD=$(whiptail --title "Dashboard Password" --passwordbox "Please enter your dashboard password:" 8 78 3>
+# Prompt for the dashboard username using whiptail
+DASHBOARD_USER=$(whiptail --title "Dashboard Username" --inputbox "Please enter your dashboard username:" 8 78 svxlink 3>&1 1>&2 2>&3)
+
+# Check if the user pressed Cancel or entered an empty input
+if [ $? -eq 0 ]; then
+    echo "User entered username: $DASHBOARD_USER"
+else
+    echo "User cancelled the username input."
+    exit 1
+fi
+
+# Prompt for the dashboard password using whiptail
+DASHBOARD_PASSWORD=$(whiptail --title "Dashboard Password" --passwordbox "Please enter your dashboard password:" 8 78 3>&1 1>&2 2>&3)
+
+# Check if the user pressed Cancel or entered an empty input
+if [ $? -eq 0 ]; then
+    echo "User entered password: [hidden]"
+else
+    echo "User cancelled the password input."
+    exit 1
+fi
+
+# Continue with further processing
+echo "Username: $DASHBOARD_USER"
+# You typically wouldn't echo the password for security reasons
 
 # Update the config file with the provided username and password
 if [ -f "$CONFIG_FILE" ]; then
