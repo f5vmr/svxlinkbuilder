@@ -25,30 +25,8 @@ clear
 echo -e "$(date)" "${YELLOW} #### Creating Groups and Users #### ${NORMAL}" | tee -a  /var/log/install.log
 source "${BASH_SOURCE%/*}/functions/groups.sh"
 make_groups
-#### DOWNLOADING SOURCE CODE ####
-echo -e "$(date)" "${YELLOW} #### Downloading SVXLink source code #### ${NORMAL}" | tee -a  /var/log/install.log
-source "${BASH_SOURCE%/*}/functions/source.sh"
-svxlink_source
-#### INSTALLATION ####
- # clear
-	NEWVERSION=$(sudo grep -r "SVXLINK=" "svxlink"/* | awk -F= '{print $2}')
-	echo -e "$(date)" "${GREEN} #### New Version: $NEWVERSION #### ${NORMAL}" | tee -a  /var/log/install.log
 
-	
-#### COMPILING ####
- # clear
-	echo -e "$(date)" "${YELLOW} #### Compiling #### ${NORMAL}" | tee -a  /var/log/install.log
 
- 	cd svxlink/src/build
- 	sudo cmake -DUSE_QT=OFF -DCMAKE_INSTALL_PREFIX=/usr -DSYSCONF_INSTALL_DIR=/etc -DLOCAL_STATE_DIR=/var -DWITH_SYSTEMD=ON  ..
- 	sudo make
- 	sudo make doc
- 	echo -e "$(date)" "${GREEN} #### Installing SVXLink #### ${NORMAL}" | tee -a  /var/log/install.log
- 	sudo make install
- 	cd /usr/share/svxlink/events.d
- 	sudo mkdir local
- 	sudo cp *.tcl ./local
- 	sudo ldconfig
 #### CONFIGURATION VOICES ####
  # clear
 	echo -e "$(date)" "${GREEN} #### Installing Voice Files #### ${NORMAL}" | tee -a  /var/log/install.log
