@@ -1,71 +1,45 @@
-########!/bin/bash
-#CONF_DIR="/etc/svxlink"
-#LOGIC_DIR="/usr/share/svxlink/events.d/local"
-#svxfile="svxlink.conf"
-#logictcl="Logic.tcl"
-#logicfile="$LOGIC_DIR/$logictcl"
-#svxconf_file="$CONF_DIR/$svxfile"
-###### Adding a ReflectorLogic section to svxlink.conf #####
-##if [[ "$NODE_OPTION" == "2" ]] || [[ "$NODE_OPTION" == "4" ]]; then 
-#    section_name="ReflectorLogic"
-#
-#    # Check if the section already exists
-#
-#    if grep -q "\[${section_name}\]" "$svxconf_file"; then
-#echo "Section $section_name already exists in $svxconf_file" | sudo tee -a /var/log/install.log
-#
-#    else
-#    echo "no valid option"
-#
-#    fi
-# #   fi
+#!/bin/bash
+SCRIPT_DIR="/home/pi/scripts"
+CLEANUP_SCRIPT="$SCRIPT_DIR/cleanup.sh"
+
+# Check if the script directory exists, if not, create it
+if [ ! -d "$SCRIPT_DIR" ]; then
+    mkdir -p "$SCRIPT_DIR"
+    show_info "Created directory $SCRIPT_DIR"
+fi
+
+
+
+# Check if the cleanup.sh script exists
+if [ -f "$CLEANUP_SCRIPT" ]; then
+    show_info "Script $CLEANUP_SCRIPT already exists. Exiting."
+    exit 0
+else
+    # Create the cleanup.sh script with the specified content
+    cat << 'EOF' > "$CLEANUP_SCRIPT"
 #!/bin/bash
 
-# Define directories and files
-CONF_DIR="/etc/svxlink"
-svxfile="svxlink.conf"
-svxconf_file="$CONF_DIR/$svxfile"
+# Directory to be cleaned
+DIR="/var/www/html/backups"
 
-section_name="ReflectorLogic"
-
-# Check if the section already exists
-if grep -q "\[${section_name}\]" "$svxconf_file"; then
-    echo "Section $section_name already exists in $svxconf_file"
+# Check if directory exists
+if [ -d "$DIR" ]; then
+    # Find and delete files older than 7 days
+    find "$DIR" -type f -mtime +7 -exec rm -f {} \;
 else
-    echo "Section $section_name does not exist in $svxconf_file"
-    
-    # Prompt for new HOSTS URL
-    echo "Enter the new URL for HOSTS:"
-    read new_hosts_url
-    
-    # Confirm the new HOSTS URL
-    echo "Is this URL correct? $new_hosts_url (yes/no):"
-    read answer
-    if [ "$answer" != "yes" ]; then
-        echo "URL confirmation failed. Exiting."
-        exit 1
-    fi
-
-    # Add the section and configuration lines to the file
-    {
-        echo ""
-        echo "[$section_name]"
-        echo "TYPE=Reflector"
-        echo "HOSTS=$new_hosts_url"
-        echo "FMNET=$new_hosts_url"
-        echo "HOST_PORT=5300"
-        echo "CALLSIGN=G4NAB-R"
-        echo 'AUTH_KEY="NE639NR"'
-        echo "DEFAULT_LANG=en_GB"
-        echo "JITTER_BUFFER_DELAY=0"
-        echo "DEFAULT_TG=0"
-        echo "MONITOR_TGS=235,2350,23561"
-        echo "TG_SELECT_TIMEOUT=360"
-        echo "ANNOUNCE_REMOTE_MIN_INTERVAL=300"
-        echo "EVENT_HANDLER=/usr/share/svxlink/events.tcl"
-        echo "NODE_INFO_FILE=/etc/svxlink/node_info.json"
-        echo "MUTE_FIRST_TX_LOC=0"
-        echo "MUTE_FIRST_TX_REM=0"
-        echo "TMP_MONITOR_TIMEOUT=0"
-    } >> "$svxconf_file"
+    echo "Directory $DIR does not exist."
 fi
+
+EOF
+
+    # Make the cleanup.sh script executable
+    sudo chmod +x "$CLEANUP_SCRIPT"
+    show_info "Created and made $CLEANUP_SCRIPT executable."
+fi
+
+# Check and add the cleanup.sh script to the sudo crontab if not already present
+CRON_JOB="01 00 * * * /home/pi/scripts/cleanup.sh"
+( sudo crontab -l | grep -q "$CRON_JOB" ) || ( sudo crontab -l; echo "$CRON_JOB" ) | sudo crontab -
+
+# Inform the user that the crontab entry has been added if it was not present
+show_info "Ensured that the crontab entry for $CLEANUP_SCRIPT exists."
