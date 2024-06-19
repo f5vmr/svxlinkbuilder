@@ -58,7 +58,7 @@ svxlink_source
 	sudo git clone https://github.com/ea5gvk/es_ES.git
 
   	cd /etc/svxlink
-   sudo chmod 777 -R *
+   sudo chmod 664 -R *
 
 #### BACKUP CONFIGURATION ####
  # clear

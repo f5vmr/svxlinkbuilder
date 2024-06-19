@@ -58,7 +58,7 @@ source "${BASH_SOURCE%/*}/functions/source.sh"
  	sudo tar -zxvf fr_FR.tar_.gz
  	sudo rm fr_FR.tar_.gz
   	cd /etc/svxlink
-   sudo chmod 777 -R *
+   sudo chmod 664 -R *
 
 #### BACKUP CONFIGURATION ####
  # clear

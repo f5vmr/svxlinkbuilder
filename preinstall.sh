@@ -15,7 +15,7 @@
     sudo apt-get install -y acl
     ## Set /var/log/install.log
     sudo touch /var/log/install.log
-    sudo chmod 777 /var/log/install.log
+    sudo chmod 664 /var/log/install.log
     sudo setfacl -R -m u:pi:rwx /var/log/install.log
     ## Manipulation of Soundcards
     echo "#### Moving USB Soundcard to Position Card:0 ####" | tee -a /var/log/install.log
@@ -28,6 +28,7 @@
     sudo cp -f /home/pi/svxlinkbuilder/configs/asound.conf /etc/modprobe.d/asound.conf
     echo "#### Setting up Loopback Soundcard ####" | tee -a /var/log/install.log
     echo snd-aloop > /etc/modules
+    sudo chmod 664 /etc/modules
     sudo cp -f /home/pi/svxlinkbuilder/configs/loopback.conf /etc/asound.conf
     echo "#### Reseting alsa-state.service #### " | tee -a /var/log/install.log
     sudo mkdir /etc/alsa

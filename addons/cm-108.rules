@@ -1,1 +1,1 @@
-KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0777"
+KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0664"

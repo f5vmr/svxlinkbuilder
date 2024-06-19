@@ -41,7 +41,7 @@ if [[ $LANG_OPTION == "3" ]]; then
  	sudo rm en_GB.tar_.gz
 	fi
   	cd /etc/svxlink
-   sudo chmod 777 -R *
+   sudo chmod 664 -R *
 
 #### BACKUP CONFIGURATION ####
  # clear
