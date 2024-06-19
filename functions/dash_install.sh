@@ -53,25 +53,8 @@ if [ ! -f "$SOURCE_FILE" ]; then
   whiptail --title "Error" --msgbox "Source file $SOURCE_FILE does not exist. Exiting." 8 78
   exit 1
 fi
-    ## permissions added
 
-## Define the lines to add to sudoers
-# sudo mkdir /etc/sudoers.d/
-sudo cp -f /home/pi/svxlinkbuilder/addons/svxlink /etc/sudoers.d/
 sudo chmod 0440 /etc/sudoers.d/svxlink
-## Check sudoers file syntax
-sudo visudo -c
-
-## Check if syntax check passed
-
-    echo "Lines added to sudoers successfully."
-else
-    echo "Error: Failed to add lines to sudoers. Restoring backup."
-    
-fi
-## Add permissions to Apache2
-
-## Determine IP address of eth0 and Wifi interface
 
 
 }
