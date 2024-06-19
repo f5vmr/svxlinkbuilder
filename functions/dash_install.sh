@@ -10,7 +10,7 @@ function install_dash {
     ## change ownership of the dashboard
     sudo chown -R svxlink:svxlink html
     ## change permissions of the dashboard
-    sudo chmod -R 755 html
+    sudo chmod -R 775 html
     ## change Apache2 permissions
     cd /etc/apache2/
     sed -i 's/APACHE_RUN_USER=www-data/APACHE_RUN_USER=svxlink/g' envvars

@@ -72,7 +72,7 @@ make_groups
 	echo -e "$(date)" "${GREEN} #### Actualización de SplashScreen al iniciar #### ${NORMAL}" | tee -a  /var/log/install.log
 
  	sudo sed -i "s/MYCALL/$CALL/g" /etc/update-motd.d/10-uname
- 	sudo chmod 0755 /etc/update-motd.d/10-uname
+ 	sudo chmod 0775 /etc/update-motd.d/10-uname
 
  # clear
 	echo -e "$(date)" "${YELLOW} #### Cambiar el sufijo del archivo de registro ${NORMAL}" | tee -a  /var/log/install.log

@@ -68,7 +68,7 @@ source "${BASH_SOURCE%/*}/functions/groups.sh"
 	echo -e "$(date)" "${GREEN} #### Mise à jour de SplashScreen au démarrage #### ${NORMAL}" | tee -a  /var/log/install.log
 
  	sudo sed -i "s/MYCALL/$CALL/g" /etc/update-motd.d/10-uname
- 	sudo chmod 0755 /etc/update-motd.d/10-uname
+ 	sudo chmod 0775 /etc/update-motd.d/10-uname
  #
  # clear
 	echo -e "$(date)" "${YELLOW} #### Modification du suffixe du fichier journal ${NORMAL}" | tee -a  /var/log/install.log

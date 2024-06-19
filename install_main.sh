@@ -83,7 +83,7 @@ if [[ $LANG_OPTION == "3" ]]; then
 	echo -e "$(date)" "${GREEN} #### Updating SplashScreen on startup #### ${NORMAL}" | tee -a  /var/log/install.log
 
  	sudo sed -i "s/MYCALL/$CALL/g" /etc/update-motd.d/10-uname
- 	sudo chmod 0755 /etc/update-motd.d/10-uname
+ 	sudo chmod 0775 /etc/update-motd.d/10-uname
 
  # clear
 	echo -e "$(date)" "${YELLOW} #### Changing Log file suffix ${NORMAL}" | tee -a  /var/log/install.log
