@@ -28,7 +28,7 @@ function install_dash {
 # Define the sudoers file, the source file, the script file, and the config file
 SUDOERS_FILE="/etc/sudoers.d/svxlink"
 SOURCE_FILE="www-data.sudoers"
-CONFIG_FILE="include/config.inc.php"
+CONFIG_FILE="/var/www/html/include/config.inc.php"
 
 # Function to display an info message using whiptail
 show_info() {
