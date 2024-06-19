@@ -48,5 +48,5 @@
     # Set en_GB.UTF-8 as the default locale
     sudo localectl set-locale LANG=en_GB.UTF-8
     echo "Locale setup completed."
-    echo "#### Rebooting after soundcard configuration ####" | sudo tee -a /var/log/install.log
+    echo "#### Rebooting after updates and soundcard configuration ####" | sudo tee -a /var/log/install.log
     sudo shutdown -r now
