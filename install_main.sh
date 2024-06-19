@@ -1,5 +1,9 @@
 #!/bin/bash
 lang=$(echo $LANG | grep -o '^[a-zA-Z]*_[a-zA-Z]*')
+#### Define Variables ####
+CONF="/etc/svxlink/svxlink.conf"
+#GPIO="/etc/svxlink/gpio.conf"
+OP=/etc/svxlink
 #### Welcome Message ####
 source "${BASH_SOURCE%/*}/functions/welcome.sh"
 welcome
@@ -144,19 +148,19 @@ echolinksetup
 	
  	sudo systemctl enable svxlink
 	
- 	sudo systemctl start svxlink_gpio_setup.service
+ 	sudo systemctl restart svxlink_gpio_setup.service
 	
- 	sudo systemctl start svxlink.service
+ 	sudo systemctl restart svxlink.service
 
 
 echo -e "$(date)" "${GREEN} #### Installation complete #### ${NORMAL}" | tee -a  /var/log/install.log
-whiptail --title "Installation Complete" --msgbox "Installation complete. Reboot in progress" 8 78
-echo -e "$(date)" "${RED} #### Rebooting SVXLink #### ${NORMAL}" | tee -a  /var/log/install.log
+whiptail --title "Installation Complete" --msgbox "Installation complete. Go to the Dashboard t" 8 78
+echo -e "$(date)" "${RED} #### Complete #### ${NORMAL}" | tee -a  /var/log/install.log
 
 #exit
 
 
- sudo reboot
+ 
 
 
 	
