@@ -5,7 +5,7 @@ function modulemetar {
 whiptail --title "Metar Info" --yesno "Voulez-vous configurer ce module?" 8 78 3>&1 1>&2 2>&3
     if [ $? -eq "0" ] 
     then
-selected=$(whiptail --title "Metar Info" --scrolltext --checklist "Choisir quels Aéroports:" 24 78 13 \
+selected=$(whiptail --title "Metar Info" --scrolltext --checklist "Choisir quels Aéroports: Vous pouvez les changer au Tableau" 24 78 13 \
         "LFPG" "Paris Charles de Gaulle" OFF \
         "LFPO" "Paris Orly" OFF \
         "LFOB" "Paris Beauvais" OFF \

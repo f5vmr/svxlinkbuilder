@@ -6,7 +6,7 @@ whiptail --title "Información del medidor" --yesno "¿Desea configurar este mó
     if [ $? -eq "0" ] 
     then
         sleep 1
-    selected=$(whiptail --title "Información del medidor" --checklist "Elija qué aeropuertos:" 24 78 13 \
+    selected=$(whiptail --title "Información del medidor" --checklist "Elija qué aeropuertos: Puedes cambiarlos en el tablero." 24 78 13 \
         "LECO"  "A Coruña " OFF \
         "LEAB"  "Albacete " OFF \
         "LEAL"  "Alicante-Elche " OFF \
