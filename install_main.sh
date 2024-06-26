@@ -148,14 +148,14 @@ chmod 0440 "$SUDOERS_FILE"
 	cd /home/pi
 	 # clear
  	echo -e "$(date)" "${RED} #### Changing ModuleMetar Link #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-source "${BASH_SOURCE%/*}/functions/modulemetar_setup.sh"
-modulemetar
+	source "${BASH_SOURCE%/*}/functions/modulemetar_setup.sh"
+	modulemetar
 	
 	 # clear
 	 cd /home/pi/
 	echo -e "$(date)" "${RED} #### Changing ModuleEchoLink Link #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-source "${BASH_SOURCE%/*}/functions/echolink_setup.sh"
-echolinksetup
+	source "${BASH_SOURCE%/*}/functions/echolink_setup.sh"
+	echolinksetup
 	
 	 # clear
 #	echo -e "$(date)" "${RED} #### Changing ModulePropagationMonitor #### ${NORMAL}" | sudo tee -a  /var/log/install.log

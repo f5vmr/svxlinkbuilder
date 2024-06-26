@@ -43,37 +43,63 @@ source "${BASH_SOURCE%/*}/functions/groups.sh"
 
  	sudo cp -p $CONF $CONF.bak
 ##
- 	cd /home/pi
- 	echo -e "$(date)" "${RED} #### Téléchargement de Dossiers de configuration du scripts #### ${NORMAL}" | sudo tee -a  /var/log/install.log
- 	sudo mkdir /home/pi/scripts
- 	sudo cp -f /home/pi/svxlinkbuilder/addons/10-uname /etc/update-motd.d/
+cd /home/pi/
+	SUDOERS_FILE="/etc/sudoers.d/svxlink"
+	SOURCE_FILE="svxlinkbuilder/www-data.sudoers"
+	if [ ! -f "$SOURCE_FILE" ]; then
+  whiptail --title "Error" --msgbox "Source file $SOURCE_FILE does not exist. Exiting." 8 78
+  exit 1
+fi
+
+# Check if the sudoers file exists
+if [ -f "$SUDOERS_FILE" ]; then
+  : > "$SUDOERS_FILE"
+else
+  touch "$SUDOERS_FILE"
+fi
+
+# Ensure the sudoers file has the correct permissions
+
+
+# Read the content from the source file into the sudoers file
+cat "$SOURCE_FILE" > "$SUDOERS_FILE"
+chmod 0440 "$SUDOERS_FILE"
+ 	echo -e "$(date)" "${RED} #### Téléchargement du dossier de configuration #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+ 	sudo touch /etc/sudoers.d/svxlink
+	sudo mkdir /home/pi/scripts
+	sudo cp -f /home/pi/svxlinkbuilder/addons/10-uname /etc/update-motd.d/
  	sudo cp -f /home/pi/svxlinkbuilder/configs/svxlink.conf /etc/svxlink/
  	sudo cp -f /home/pi/svxlinkbuilder/configs/gpio.conf /etc/svxlink/
  	sudo cp -f /home/pi/svxlinkbuilder/addons/node_info.json /etc/svxlink/node_info.json
  	sudo cp -f /home/pi/svxlinkbuilder/resetlog.sh /home/pi/scripts/resetlog.sh
  	(sudo crontab -l 2>/dev/null; echo "59 23 * * * /home/pi/scripts/resetlog.sh ") | sudo crontab -
+    sudo mkdir /usr/share/svxlink/events.d/local
+	sudo cp /usr/share/svxlink/events.d/*.tcl /usr/share/svxlink/events.d/local/
  # clear
-	echo -e "$(date)" "${GREEN} #### Définir l'indicatif d'appel sur $CALL #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${GREEN} #### Indicatif à $CALL #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
  	sudo sed -i "s/MYCALL/$CALL/g" $CONF
  	sudo sed -i "s/MYCALL/$CALL/g" /etc/svxlink/node_info.json
- 	echo -e "$(date)" "${GREEN} #### Setting Squelch Hangtime t*o 10 mS ${NORMAL}" | sudo tee -a  /var/log/install.log
- 	sudo sed -i 's/SQL_HANGTIME=2000/SQL_HANGTIME=10/g' $CONF
+
+	echo -e "$(date)" "${GREEN} ####  Squelch Hangtime à 10 mS ${NORMAL}" | sudo tee -a  /var/log/install.log
+ 	sudo sed -i s/SQL_HANGTIME=2000/SQL_HANGTIME=10/g $CONF
+ 
  # clear	
-	echo -e "$(date)" "${YELLOW} #### Désactivation des messages d'avertissement de distorsion audio #### ${NORMAL}"| sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${YELLOW} #### Disabling audio distortion warning messages #### ${NORMAL}"| sudo tee -a  /var/log/install.log
 
 
  	sudo sed -i 's/PEAK_METER=1/PEAK_METER=0/g' $CONF
+
  # clear
-	echo -e "$(date)" "${GREEN} #### Mise à jour de SplashScreen au démarrage #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${GREEN} #### Updating SplashScreen on startup #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
  	sudo sed -i "s/MYCALL/$CALL/g" /etc/update-motd.d/10-uname
  	sudo chmod 0775 /etc/update-motd.d/10-uname
- #
- # clear
-	echo -e "$(date)" "${YELLOW} #### Modification du suffixe du fichier journal ${NORMAL}" | sudo tee -a  /var/log/install.log
 
- 	sudo sed -i 's/log\/svxlink/log\/svxlink.log/g' /etc/default/svxlink
+ # clear
+	echo -e "$(date)" "${YELLOW} #### Changing Log file suffix ${NORMAL}" | sudo tee -a  /var/log/install.log
+
+ 	sudo sed -i '/^LOGFILE=/ s/\(LOGFILE=.*\)\.log\>/\1.log/' /etc/default/svxlink
 	#### INSTALLING DASHBOARD ####
  # clear
 	cd /home/pi
@@ -83,29 +109,42 @@ source "${BASH_SOURCE%/*}/functions/groups.sh"
 	ipaddress
  # clear
 	cd /home/pi
-	echo -e "$(date)" "${YELLOW} #### Installing Tableau de Bord #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${YELLOW} #### Installation du Tableau de Bord #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
 	source "${BASH_SOURCE%/*}/functions/dash_install_fr.sh"
 install_dash
  # clear
 	echo -e "$(date)" "${GREEN} #### Tableau installé #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-	whiptail --title "IP Addresses" --msgbox "Tableau de Bord installé. Noter bien l'adresse IP $eth_ip ou $wan_ip" 8 78
+	whiptail --title "IP Adresse" --msgbox "Tableau de Bord installé. Noter bien l'adresse IP $eth_ip ou $wan_ip" 8 78
 	cd /home/pi
 
 	 # clear
 	echo -e "$(date)" "${GREEN} #### Définir du Noed #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 source "${BASH_SOURCE%/*}/functions/node_setup_fr.sh"
 nodeset
-echo -e "$(date)" "${RED} #### Changement du ModuleMetar #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-source "${BASH_SOURCE%/*}/functions/modulemetar_setup_fr.sh"
-modulemetar
+#### Removal of unwanted files ####
+	echo -e "$(date)" "${YELLOW} #### Removing unwanted files #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	source "${BASH_SOURCE%/*}/functions/deletion.sh"
+	delete
+#### Identification setup ####
+	echo -e "$(date)" "${GREEN} #### Identification setup  #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	source "${BASH_SOURCE%/*}/functions/announce.sh"
+	announce
+	echo -e "$(date)" "${GREEN} #### Announcement setup complete  #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	source "${BASH_SOURCE%/*}/functions/tones.sh"
+	tones
+	echo -e "$(date)" "${GREEN} #### Tones setup complete  #### ${NORMAL}" | sudo tee -a  /var/log/install.log	
+	cd /home/pi	
+	# clear
+	echo -e "$(date)" "${RED} #### Changement du ModuleMetar #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	source "${BASH_SOURCE%/*}/functions/modulemetar_setup_fr.sh"
+	modulemetar
 	
 	 # clear
-	
-	 # clear
+	 cd /home/pi
 	echo -e "$(date)" "${RED} #### Changement du ModuleEchoLink #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-source "${BASH_SOURCE%/*}/functions/echolink_setup_fr.sh"
-echolinksetup
+	source "${BASH_SOURCE%/*}/functions/echolink_setup_fr.sh"
+	echolinksetup
 	
 	 # clear
 #	echo -e "$(date)" "${RED} #### Changement du ModulePropagationMonitor #### ${NORMAL}" | sudo tee -a  /var/log/install.log
@@ -126,7 +165,7 @@ echolinksetup
 
 echo -e "$(date)" "${GREEN} #### Installation complète #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
-echo -e "$(date)" "${RED} #### Rebooting SVXLink #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+echo -e "$(date)" "${RED} #### SVXLink est prêt  - allez au Tableau #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
 #exit
 
