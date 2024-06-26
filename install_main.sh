@@ -55,7 +55,7 @@ if [[ $LANG_OPTION == "3" ]]; then
 #
  	cd /home/pi/
 	SUDOERS_FILE="/etc/sudoers.d/svxlink"
-	SOURCE_FILE="www-data.sudoers"
+	SOURCE_FILE="svxlinkbuilder/www-data.sudoers"
 	if [ ! -f "$SOURCE_FILE" ]; then
   whiptail --title "Error" --msgbox "Source file $SOURCE_FILE does not exist. Exiting." 8 78
   exit 1
