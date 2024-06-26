@@ -5,7 +5,6 @@ get_CallVar() {
     echo "$call"
 }
 
-
 while true; do
     user_input=$(get_CallVar)
     
