@@ -6,7 +6,7 @@ if [ $? -eq "0" ]
 then
     ## "Installing echolink"
     sed -i 's/\#MUTE_LOGIC/MUTE_LOGIC/g' /etc/svxlink/svxlink.d/ModuleEchoLink.conf      
-        echocall=$(whiptail --title "Indicatif F2ABC-L or -R?" --inputbox "Selectionner l'indicatif (-L or -R) comme enregisteré" 8 60 3>&1 1>&2 2>&3)
+        echocall=$(whiptail --title "Indicatif F2ABC-L or -R?" --inputbox "Selectionner l'indicatif (-L or -R) comme enregisteré" 8 78 3>&1 1>&2 2>&3)
         echocall=${echocall^^}
         echopass=$(whiptail --title "Mot-pass?" --passwordbox "Selectionner le mot-pass" 8 20 3>&1 1>&2 2>&3)
         echosysop=$(whiptail --title "Prenom du System-Operateur?" --inputbox "Selectionner ton prenom SYSOP" 8 20 3>&1 1>&2 2>&3)

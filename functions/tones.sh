@@ -68,9 +68,9 @@ new_idle_timeout=$(whiptail --title "Change IDLE_TIMEOUT (End of QSO)" --inputbo
 if [ $? -eq 0 ]; then
     # Update the IDLE_TIMEOUT value in svxlink.conf
     update_idle_timeout "$new_idle_timeout"
-    whiptail --title "Success" --msgbox "IDLE_TIMEOUT updated successfully to $new_idle_timeout." 8 60
+    whiptail --title "Success" --msgbox "IDLE_TIMEOUT updated successfully to $new_idle_timeout." 8 78
 else
-    whiptail --title "Canceled" --msgbox "No changes were made to IDLE_TIMEOUT." 8 60
+    whiptail --title "Canceled" --msgbox "No changes were made to IDLE_TIMEOUT." 8 78
 fi
 
 #### Add "-" "...-.-" to CW.tcl

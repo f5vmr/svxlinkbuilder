@@ -1,18 +1,18 @@
 #!/bin/bash
 ## Set up echolink
 function echolinksetup {
-whiptail --title "Para configurar-EchoLink?" --yesno "Esto instalará EchoLink y lo configurará." 8 87 
+whiptail --title "Para configurar-EchoLink?" --yesno "Esto instalará EchoLink y lo configurará." 8 78 
 if [ $? -eq "0" ] 
 then
     ## "Installing echolink"
     sed -i 's/\#MUTE_LOGIC/MUTE_LOGIC/g' /etc/svxlink/svxlink.d/ModuleEchoLink.conf
-        echocall=$(whiptail --title "¿Indicativo EA2ABC-L or -R?" --inputbox "Ingrese su indicativo (-L o -R) como registrado" 8 60 3>&1 1>&2 2>&3)
+        echocall=$(whiptail --title "¿Indicativo EA2ABC-L or -R?" --inputbox "Ingrese su indicativo (-L o -R) como registrado" 8 78 3>&1 1>&2 2>&3)
         echocall=${echocall^^}
-        echopass=$(whiptail --title "¿Contraseña?" --passwordbox "Ingrese su contraseña de EchoLink" 8 60 3>&1 1>&2 2>&3)
-        echosysop=$(whiptail --title "¿Nombre del operador del sistema?" --inputbox "Ingrese su nombre de operador del sistema" 8 60 3>&1 1>&2 2>&3)
+        echopass=$(whiptail --title "¿Contraseña?" --passwordbox "Ingrese su contraseña de EchoLink" 8 78 3>&1 1>&2 2>&3)
+        echosysop=$(whiptail --title "¿Nombre del operador del sistema?" --inputbox "Ingrese su nombre de operador del sistema" 8 78 3>&1 1>&2 2>&3)
         echosysop=${echosysop^}
-        echofreq=$(whiptail --title "Frecuencia" --inputbox "Ingrese su frecuencia de salida en MHz, por ejemplo, 145.2375" 8 60 3>&1 1>&2 2>&3)
-        echolocation=$(whiptail --title "Ubicación" --inputbox "Ingresa tu ubicación" 8 60 3>&1 1>&2 2>&3)
+        echofreq=$(whiptail --title "Frecuencia" --inputbox "Ingrese su frecuencia de salida en MHz, por ejemplo, 145.2375" 8 78 3>&1 1>&2 2>&3)
+        echolocation=$(whiptail --title "Ubicación" --inputbox "Ingresa tu ubicación" 8 78 3>&1 1>&2 2>&3)
         echolocation=${echolocation^}
     sed -i "s/CALLSIGN=MYCALL-L/CALLSIGN=$echocall/g" /etc/svxlink/svxlink.d/ModuleEchoLink.conf
     sed -i "s/PASSWORD=MyPass/PASSWORD=$echopass/g" /etc/svxlink/svxlink.d/ModuleEchoLink.conf
