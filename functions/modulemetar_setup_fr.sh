@@ -32,7 +32,7 @@ whiptail --title "Metar Info" --yesno "Voulez-vous configurer ce module?" 8 78 3
         selected=$(echo "$selected" | tr ' ' ',')
         sed -i "s/AIRPORTS=.*/AIRPORTS=$selected/g"  /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
      
-    specific_airport=$(whiptail --title "Metar Info" --radiolist "SVP un code ICAO unique pour un aéroport de défaut: " ${#airports} 24 78 17 \
+    specific_airport=$(whiptail --title "Metar Info" --radiolist "SVP un code ICAO unique pour un aéroport de défaut: " 24 78 17 \
         "LFPG" "Paris Charles de Gaulle" OFF \
         "LFPO" "Paris Orly" OFF \
         "LFOB" "Paris Beauvais" OFF \
