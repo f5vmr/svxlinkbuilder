@@ -40,7 +40,12 @@ source "${BASH_SOURCE%/*}/functions/groups.sh"
  # clear
 	echo -e "$(date)" "${GREEN} #### Sauvegarder la configuration à : $CONF.bak #### ${NORMAL}"| sudo tee -a  /var/log/install.log
 
- 	sudo cp -p $CONF $CONF.bak
+ 	if [ -f "$CONF" ]; then
+    sudo cp -p "$CONF" "$CONF.bak"
+else
+    echo "File $CONF does not exist."
+fi
+
 ##
 cd /home/pi/
 	SUDOERS_FILE="/etc/sudoers.d/svxlink"

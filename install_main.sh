@@ -51,7 +51,12 @@ if [[ $LANG_OPTION == "3" ]]; then
  # clear
 	echo -e "$(date)" "${GREEN} #### Backing up configuration to : $CONF.bak #### ${NORMAL}"| sudo tee -a  /var/log/install.log
 
- 	sudo cp -p $CONF $CONF.bak
+ 	if [ -f "$CONF" ]; then
+    sudo cp -p "$CONF" "$CONF.bak"
+else
+    echo "File $CONF does not exist."
+fi
+
 #
  	cd /home/pi/
 	SUDOERS_FILE="/etc/sudoers.d/svxlink"
