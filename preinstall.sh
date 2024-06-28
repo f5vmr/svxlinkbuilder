@@ -37,7 +37,7 @@
     sudo systemctl restart alsa-state.service
     ## Install svxlink-server
     echo "#### Installing repository key ####" | sudo tee -a /var/log/install.log
-    sudo wget -q https://online-amateur-radio-club-m0ouk.github.io/oarc-packages/hibby.key
+    sudo curl -O -q https://online-amateur-radio-club-m0ouk.github.io/oarc-packages/hibby.key
     sudo mv hibby.key /etc/apt/trusted.gpg.d/hibby.asc
     echo "#### Installing repository ####" | sudo tee -a /var/log/install.log
     echo "deb https://online-amateur-radio-club-m0ouk.github.io/oarc-packages bookworm main" | sudo tee -a /etc/apt/sources.list
