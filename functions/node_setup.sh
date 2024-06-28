@@ -31,7 +31,8 @@ function nodeset {
     fi  
 whiptail --title "Node" --msgbox "You have select node-type $node" 8 78
 ## Time to change the node
-
+node_type=$(echo $node | awk '{print $1}')
+sed -i "s/SvxLink server setting: SimplexLogic/SvxLink server setting: $node_type/" /etc/svxlink/svxlink.conf
 ##That's the Logics taken care of now we need to change the sound card settings 
 output=$(aplay -l)
 
