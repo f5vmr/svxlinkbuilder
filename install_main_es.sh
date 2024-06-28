@@ -123,9 +123,9 @@ install_dash
 source "${BASH_SOURCE%/*}/functions/node_setup_es.sh"
 nodeset
 	#### Removal of unwanted files ####
-	echo -e "$(date)" "${YELLOW} #### Removing unwanted files #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-	source "${BASH_SOURCE%/*}/functions/deletion.sh"
-	delete
+	#echo -e "$(date)" "${YELLOW} #### Removing unwanted files #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	#source "${BASH_SOURCE%/*}/functions/deletion.sh"
+	#delete
 	#### Identification setup ####
 	echo -e "$(date)" "${GREEN} #### Identification setup  #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	source "${BASH_SOURCE%/*}/functions/announce_es.sh"
