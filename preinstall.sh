@@ -52,5 +52,6 @@
     # Set en_GB.UTF-8 as the default locale
     sudo localectl set-locale LANG=en_GB.UTF-8
     echo "Locale setup completed."
-    echo "#### Rebooting after updates and soundcard configuration ####" | sudo tee -a /var/log/install.log
+    echo "#### Your next command / prochain commande/ próximo comando will be ${GREEN}./svxlinkbuilder/install.sh ####"
+    echo "#### Rebooting  ####" | sudo tee -a /var/log/install.log
     sudo shutdown -r now
