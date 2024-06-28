@@ -14,9 +14,7 @@ source "${BASH_SOURCE%/*}/functions/sound_card_es.sh"
 soundcard
 echo -e "$(date)" "${YELLOW} #### Sound Card: $HID $GPIOD $card #### ${NORMAL}" | sudo tee -a  /var/log/install.log	
 echo -e "$(date)" "${YELLOW} #### Checking Alsa #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-#### UPDATE ####
-source "${BASH_SOURCE%/*}/functions/update_es.sh"
-update
+
 #### REQUEST CALLSIGN ####
 source "${BASH_SOURCE%/*}/functions/callsign_es.sh"
 callsign
@@ -45,6 +43,27 @@ make_groups
  	sudo cp -p $CONF $CONF.bak
 #
  	cd /home/pi/
+		SUDOERS_FILE="/etc/sudoers.d/svxlink"
+	SOURCE_FILE="svxlinkbuilder/www-data.sudoers"
+	if [ ! -f "$SOURCE_FILE" ]; then
+  whiptail --title "Error" --msgbox "Source file $SOURCE_FILE does not exist. Exiting." 8 78
+  exit 1
+fi
+
+# Check if the sudoers file exists
+if [ -f "$SUDOERS_FILE" ]; then
+  : > "$SUDOERS_FILE"
+else
+  touch "$SUDOERS_FILE"
+fi
+
+# Ensure the sudoers file has the correct permissions
+
+
+# Read the content from the source file into the sudoers file
+cat "$SOURCE_FILE" > "$SUDOERS_FILE"
+chmod 0440 "$SUDOERS_FILE"
+
  	echo -e "$(date)" "${RED} #### Descarga de archivos de configuración preparados desde los scripts #### ${NORMAL}" | sudo tee -a  /var/log/install.log
  	sudo mkdir /home/pi/scripts
 	sudo cp -f /home/pi/svxlinkbuilder/addons/10-uname /etc/update-motd.d/
@@ -53,6 +72,9 @@ make_groups
  	sudo cp -f /home/pi/svxlinkbuilder/addons/node_info.json /etc/svxlink/node_info.json
  	sudo cp -f /home/pi/svxlinkbuilder/resetlog.sh /home/pi/scripts/resetlog.sh
  	(sudo crontab -l 2>/dev/null; echo "59 23 * * * /home/pi/scripts/resetlog.sh ") | sudo crontab -
+	sudo mkdir /usr/share/svxlink/events.d/local
+	sudo cp /usr/share/svxlink/events.d/*.tcl /usr/share/svxlink/events.d/local/
+
  # clear
 	echo -e "$(date)" "${GREEN} #### Establecer indicativo en $CALL #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
@@ -100,6 +122,19 @@ install_dash
 	echo -e "$(date)" "${GREEN} #### Configurando el nodo #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 source "${BASH_SOURCE%/*}/functions/node_setup_es.sh"
 nodeset
+	#### Removal of unwanted files ####
+	echo -e "$(date)" "${YELLOW} #### Removing unwanted files #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	source "${BASH_SOURCE%/*}/functions/deletion.sh"
+	delete
+	#### Identification setup ####
+	echo -e "$(date)" "${GREEN} #### Identification setup  #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	source "${BASH_SOURCE%/*}/functions/announce_es.sh"
+	announce
+	echo -e "$(date)" "${GREEN} #### Announcement setup complete  #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	source "${BASH_SOURCE%/*}/functions/tones_es.sh"
+	tones
+	echo -e "$(date)" "${GREEN} #### Tones setup complete  #### ${NORMAL}" | sudo tee -a  /var/log/install.log	
+	
 	cd /home/pi
 	 # clear
  	echo -e "$(date)" "${RED} #### Cambiando el móduloMetar Link #### ${NORMAL}" | sudo tee -a  /var/log/install.log
@@ -131,12 +166,11 @@ echolinksetup
 
 echo -e "$(date)" "${GREEN} #### Instalación completa #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
-echo -e "$(date)" "${RED} #### Reiniciar SvxLink #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+echo -e "$(date)" "${RED} #### Complete #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
 #exit
 
 
- sudo reboot
 
 
 	

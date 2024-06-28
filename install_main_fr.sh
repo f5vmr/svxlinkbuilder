@@ -14,9 +14,7 @@ source "${BASH_SOURCE%/*}/functions/sound_card_fr.sh"
 soundcard
 echo -e "$(date)" "${YELLOW} #### Carte de son : $HID $GPIOD $card #### ${NORMAL}" | sudo tee -a  /var/log/install.log	
 echo -e "$(date)" "${YELLOW} #### Verification d'Alsa #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-#### UPDATE ####
-source "${BASH_SOURCE%/*}/functions/update_fr.sh"
-update
+
 #### REQUEST CALLSIGN ####
 source "${BASH_SOURCE%/*}/functions/callsign_fr.sh"
 callsign
@@ -128,10 +126,10 @@ nodeset
 	delete
 #### Identification setup ####
 	echo -e "$(date)" "${GREEN} #### Identification setup  #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-	source "${BASH_SOURCE%/*}/functions/announce.sh"
+	source "${BASH_SOURCE%/*}/functions/announce_fr.sh"
 	announce
 	echo -e "$(date)" "${GREEN} #### Announcement setup complete  #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-	source "${BASH_SOURCE%/*}/functions/tones.sh"
+	source "${BASH_SOURCE%/*}/functions/tones_fr.sh"
 	tones
 	echo -e "$(date)" "${GREEN} #### Tones setup complete  #### ${NORMAL}" | sudo tee -a  /var/log/install.log	
 	cd /home/pi	
@@ -170,7 +168,7 @@ echo -e "$(date)" "${RED} #### SVXLink est prêt  - allez au Tableau #### ${NORM
 #exit
 
 
- sudo reboot
+ 
 
 
 	
