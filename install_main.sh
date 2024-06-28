@@ -168,19 +168,13 @@ chmod 0440 "$SUDOERS_FILE"
 #	propagationmonitor
 	
 	 # clear
-	echo -e "$(date)" "${RED} #### Setting up svxlink.service #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-
- 	sudo systemctl enable svxlink_gpio_setup
+	echo -e "$(date)" "${RED} #### Restarting svxlink.service #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	
- 	sudo systemctl enable svxlink
-	
- 	sudo systemctl restart svxlink_gpio_setup.service
-	
- 	sudo systemctl restart svxlink.service
+ 	sudo systemctl rerestart svxlink.service
 
 
 echo -e "$(date)" "${GREEN} #### Installation complete #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-whiptail --title "Installation Complete" --msgbox "Installation complete. Go to the Dashboard t" 8 78
+whiptail --title "Installation Complete" --msgbox "Installation complete. Go to the Dashboard" 8 78
 echo -e "$(date)" "${RED} #### Complete #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
 #exit

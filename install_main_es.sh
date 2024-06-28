@@ -162,15 +162,11 @@ echolinksetup
 #	propagationmonitor
 	
 	 # clear
-	echo -e "$(date)" "${RED} #### Configurando Svxlink.service #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${RED} #### Reinicie svxlink.service #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
- 	sudo systemctl enable svxlink_gpio_setup
+ 	
 	
- 	sudo systemctl enable svxlink
-	
- 	sudo systemctl start svxlink_gpio_setup.service
-	
- 	sudo systemctl start svxlink.service
+ 	sudo systemctl restart svxlink.service
 
 
 echo -e "$(date)" "${GREEN} #### Instalación completa #### ${NORMAL}" | sudo tee -a  /var/log/install.log
