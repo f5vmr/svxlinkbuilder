@@ -29,8 +29,8 @@ new_cw_amp=$(whiptail --title "CW AMP" --inputbox "Current CW Amplitude: $cw_amp
 new_cw_pitch=$(whiptail --title "CW PITCH" --inputbox "Current CW Tone Pitch: $cw_pitch Hz\nEnter new value for CW PITCH (440 to 2200 Hz):" 10 60 "$cw_pitch" 3>&1 1>&2 2>&3)
 new_cw_cpm=$(whiptail --title "CW CPM" --inputbox "Current CW characters per minute: $cw_cpm Characters Per Minute\nEnter new value for CW CPM (60 to 200 Characters Per Minute):" 10 60 "$cw_cpm" 3>&1 1>&2 2>&3)
 new_idle_timeout=$(whiptail --title "IDLE TIMEOUT" --inputbox "Current IDLE TIMEOUT - Repeater Idle Time: $idle_timeout seconds\nEnter new value for IDLE TIMEOUT (0 to 15 seconds):" 10 60 "$idle_timeout" 3>&1 1>&2 2>&3)
-new_short_ident_interval=$(whiptail --title "SHORT IDENT INTERVAL" --menu "Select SHORT Periodic  Ident Interval:" 15 60 5 0 "None" 5 "5 minutes" 10 "10 minutes" 15 "15 minutes" 20 "20 minutes" 30 "30 Minutes" 3>&1 1>&2 2>&3)
-new_long_ident_interval=$(whiptail --title "LONG IDENT INTERVAL" --menu "Select LONG Periodic Ident Interval:" 15 60 4 0 "None" 30 "30 minutes" 60 "60 minutes" 120 "120 minutes" 3>&1 1>&2 2>&3)
+new_short_ident_interval=$(whiptail --title "SHORT IDENT INTERVAL" --menu "Select SHORT Periodic  Ident Interval:" 15 78 5 0 "None" 5 "5 minutes" 10 "10 minutes" 15 "15 minutes" 20 "20 minutes" 30 "30 Minutes" 3>&1 1>&2 2>&3)
+new_long_ident_interval=$(whiptail --title "LONG IDENT INTERVAL" --menu "Select LONG Periodic Ident Interval:" 15 78 4 0 "None" 30 "30 minutes" 60 "60 minutes" 120 "120 minutes" 3>&1 1>&2 2>&3)
 
 # Replace the existing parameters with the user's new values using sed with double quotes as delimiters
 echo "Replacing CW_AMP with $new_cw_amp"
