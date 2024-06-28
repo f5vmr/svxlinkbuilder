@@ -5,7 +5,8 @@ function modulemetar {
 whiptail --title "Metar Info" --yesno "Voulez-vous configurer ce module?" 8 78 3>&1 1>&2 2>&3
     if [ $? -eq "0" ] 
     then
-selected=$(whiptail --title "Metar Info" --scrolltext --checklist "Choisir quels Aéroports: Vous pouvez les changer au Tableau" 24 78 13 \
+        sleep 1
+    selected=$(whiptail --title "Metar Info" --scrolltext --checklist "Choisir quels Aéroports: Vous pouvez les changer au Tableau" 24 78 13 \
         "LFPG" "Paris Charles de Gaulle" OFF \
         "LFPO" "Paris Orly" OFF \
         "LFOB" "Paris Beauvais" OFF \
@@ -31,7 +32,7 @@ selected=$(whiptail --title "Metar Info" --scrolltext --checklist "Choisir quels
         selected=$(echo "$selected" | tr ' ' ',')
         sed -i "s/AIRPORTS=.*/AIRPORTS=$selected/g"  /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
      
-specific_airport=$(whiptail --title "Metar Info" --radiolist "SVP un code ICAO unique pour un aéroport de défaut: " ${#airports} 24 78 13 \
+    specific_airport=$(whiptail --title "Metar Info" --radiolist "SVP un code ICAO unique pour un aéroport de défaut: " ${#airports} 24 78 13 \
         "LFPG" "Paris Charles de Gaulle" OFF \
         "LFPO" "Paris Orly" OFF \
         "LFOB" "Paris Beauvais" OFF \
@@ -53,7 +54,7 @@ specific_airport=$(whiptail --title "Metar Info" --radiolist "SVP un code ICAO u
         "LFOT" "Tours Val de Loire" OFF \
         "LFSL" "Brive Souillac" OFF \
         "LFBE" "Bergerac" OFF 3>&1 1>&2 2>&3)
-        specific_airport=$(echo "$specific_airport" | sed's/"//g')
+        specific_airport=$(echo "$specific_airport" | sed 's/"//g')
         sed -i "s/\#STARTDEFAULT=EDDP/STARTDEFAULT=$specific_airport/g" /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
         echo -e "$(date)" "${GREEN} $selected Aèroports inclu avec le défaut Aèroport $specific_airport ${NORMAL}" | sudo tee -a /var/log/install.log
    
