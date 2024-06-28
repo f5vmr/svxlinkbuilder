@@ -34,7 +34,6 @@ source "${BASH_SOURCE%/*}/functions/groups.sh"
 
  	cd /usr/share/svxlink/sounds
  	sudo curl -O https://g4nab.co.uk/wp-content/uploads/2023/08/fr_FR.tar_.gz
-#             https://g4nab.co.uk/wp-content/uploads/2023/08/fr_FR.tar_.gz
  	sudo tar -zxvf fr_FR.tar_.gz
  	sudo rm fr_FR.tar_.gz
   	cd /etc/svxlink
