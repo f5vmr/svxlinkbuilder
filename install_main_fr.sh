@@ -1,5 +1,9 @@
 #!/bin/bash
 lang=$(echo $LANG | grep -o '^[a-zA-Z]*_[a-zA-Z]*')
+#### Define Variables ####
+CONF="/etc/svxlink/svxlink.conf"
+#GPIO="/etc/svxlink/gpio.conf"
+OP=/etc/svxlink
 #### Welcome Message ####
 source "${BASH_SOURCE%/*}/functions/welcome_fr.sh"
 welcome
@@ -116,7 +120,7 @@ chmod 0440 "$SUDOERS_FILE"
 	echo -e "$(date)" "${YELLOW} #### Installation du Tableau de Bord #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
 	source "${BASH_SOURCE%/*}/functions/dash_install_fr.sh"
-install_dash
+	dash_install
  # clear
 	echo -e "$(date)" "${GREEN} #### Tableau installé #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	whiptail --title "IP Adresse" --msgbox "Tableau de Bord installé. Noter bien l'adresse IP $eth_ip ou $wan_ip" 8 78

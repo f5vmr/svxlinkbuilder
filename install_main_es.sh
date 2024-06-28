@@ -1,5 +1,9 @@
 #!/bin/bash
 lang=$(echo $LANG | grep -o '^[a-zA-Z]*_[a-zA-Z]*')
+#### Define Variables ####
+CONF="/etc/svxlink/svxlink.conf"
+#GPIO="/etc/svxlink/gpio.conf"
+OP=/etc/svxlink
 #### Welcome Message ####
 source "${BASH_SOURCE%/*}/functions/welcome_es.sh"
 welcome
