@@ -48,9 +48,7 @@
     echo "#### Installing locales ####" | sudo tee -a /var/log/install.log
     # installing locales.
     # Function to install locale if not already available
-    sudo cp -f /home/pi/svxlinkbuilder/addons/locale.gen /etc/
-    sudo locale-gen
-    echo "Locale setup completed."
+
     # Set en_GB.UTF-8 as the default locale
     sudo localectl set-locale LANG=en_GB.UTF-8
     echo "Locale setup completed."
