@@ -1,6 +1,6 @@
 #!/bin/bash
 function initialise {
-CONF_DIR=/etc/svxlink/
+CONF_DIR=/etc/svxlink
 LOG_DIR=/var/log/
 PID_DIR=/var/run/
 WWW_PATH=/var/www/
