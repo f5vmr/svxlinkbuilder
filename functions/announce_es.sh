@@ -29,12 +29,12 @@ echo "Current CW_AMP: $cw_amp"
 # Prompt the user for input within the specified range
 # Validate the current CW AMP value
 # Validate the current CW AMP value
-new_cw_amp=$(whiptail --title "CW AMP" --inputbox "Presente CW Amplitud: $cw_amp dB\nIntroduzca un nuevo valor para CW AMP (0 to -10 dB):" 10 60 -- "$cw_amp" 3>&1 1>&2 2>&3)
-new_cw_pitch=$(whiptail --title "CW PITCH" --inputbox "Presente CW Tono: $cw_pitch Hz\nIntroduzca un nuevo valor para CW PITCH (440 to 2200 Hz):" 10 60 "$cw_pitch" 3>&1 1>&2 2>&3)
+new_cw_amp=$(whiptail --title "CW AMP" --inputbox "Presente CW Amplitud: $cw_amp dB\nIntroduzca un nuevo valor para CW AMP (0 to -10 dB):" 10 78 -- "$cw_amp" 3>&1 1>&2 2>&3)
+new_cw_pitch=$(whiptail --title "CW PITCH" --inputbox "Presente CW Tono: $cw_pitch Hz\nIntroduzca un nuevo valor para CW PITCH (440 to 2200 Hz):" 10 78 "$cw_pitch" 3>&1 1>&2 2>&3)
 new_cw_cpm=$(whiptail --title "CW CPM" --inputbox "Presente CW caracters para minuto: $cw_cpm Characters Per Minute\nIntroduzca un nuevo valor para CW CPM (60 a 200 caracteres por minuto):" 10 60 "$cw_cpm" 3>&1 1>&2 2>&3)
 new_idle_timeout=$(whiptail --title "IDLE TIMEOUT" --inputbox "Current IDLE TIMEOUT - Repeater Idle Time: $idle_timeout seconds\nIntroduzca un nuevo valor para IDLE TIMEOUT (0 to 15 seconds):" 10 60 "$idle_timeout" 3>&1 1>&2 2>&3)
-new_short_ident_interval=$(whiptail --title "INTERVALO DE IDENTIFICACIÓN CORTO" --menu "Seleccione un intervalo de identificación periódico CORTO:" 15 60 5 0 "None" 5 "5 minutos" 10 "10 minutos" 15 "15 minutos" 20 "20 minutos" 30 "30 Minutos" 3>&1 1>&2 2>&3)
-new_long_ident_interval=$(whiptail --title "INTERVALO DE IDENTIFICACIÓN LARGO" --menu "Seleccione un intervalo de identificación periódico LARGO:" 15 60 4 0 "None" 30 "30 minutos" 60 "60 minutos" 120 "120 minutos" 3>&1 1>&2 2>&3)
+new_short_ident_interval=$(whiptail --title "INTERVALO DE IDENTIFICACIÓN CORTO" --menu "Seleccione un intervalo de identificación periódico CORTO:" 15 78 5 0 "None" 5 "5 minutos" 10 "10 minutos" 15 "15 minutos" 20 "20 minutos" 30 "30 Minutos" 3>&1 1>&2 2>&3)
+new_long_ident_interval=$(whiptail --title "INTERVALO DE IDENTIFICACIÓN LARGO" --menu "Seleccione un intervalo de identificación periódico LARGO:" 15 78 4 0 "None" 30 "30 minutos" 60 "60 minutos" 120 "120 minutos" 3>&1 1>&2 2>&3)
 
 # Replace the existing parameters with the user's new values using sed with double quotes as delimiters
 echo "Replacing CW_AMP with $new_cw_amp"
