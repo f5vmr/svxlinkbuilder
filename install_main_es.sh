@@ -2,6 +2,7 @@
 lang=$(echo $LANG | grep -o '^[a-zA-Z]*_[a-zA-Z]*')
 #### Define Variables ####
 CONF="/etc/svxlink/svxlink.conf"
+MODULE="/etc/svxlink/svxlink.d"
 #GPIO="/etc/svxlink/gpio.conf"
 OP=/etc/svxlink
 #### Welcome Message ####
@@ -83,7 +84,7 @@ chmod 0440 "$SUDOERS_FILE"
  	(sudo crontab -l 2>/dev/null; echo "59 23 * * * /home/pi/scripts/resetlog.sh ") | sudo crontab -
 	sudo mkdir /usr/share/svxlink/events.d/local
 	sudo cp /usr/share/svxlink/events.d/*.tcl /usr/share/svxlink/events.d/local/
-
+    sudo sed -i 's|LINK=/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&hoursBeforeNow=3&mostRecent=|LINK=/cgi-bin/data/dataserver.php?requestType=retrieve&dataSource=metars&hoursBeforeNow=3&stationString=|' $MODULE/ModuleMetarInfo.conf
  # clear
 	echo -e "$(date)" "${GREEN} #### Establecer indicativo en $CALL #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
