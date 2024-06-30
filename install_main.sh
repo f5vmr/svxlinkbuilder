@@ -36,9 +36,7 @@ make_groups
 
  	cd /usr/share/svxlink/sounds
 if [[ $LANG_OPTION == "3" ]]; then
-	sudo curl -O https://github.com/sm0svx/svxlink-sounds-en_US-heather/archive/refs/tags/24.02.tar.gz
- 	sudo tar -zxvf 24.02.tar.gz
-	sudo rm 24.02.tar.gz
+	sudo git clone https://github.com/f5vmr/en_US.git
 
 	else 
 	sudo curl -O https://g4nab.co.uk/wp-content/uploads/2023/08/en_GB.tar_.gz
