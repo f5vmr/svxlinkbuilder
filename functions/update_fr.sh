@@ -1,7 +1,6 @@
 #!/bin/bash
 function update {
 CONF="/etc/svxlink/svxlink.conf"
-GPIO="/etc/svxlink/gpio.conf"
 OP=/etc/svxlink
 
 

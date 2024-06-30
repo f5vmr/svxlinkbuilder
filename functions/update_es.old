@@ -1,7 +1,6 @@
 #!/bin/bash
 function update {
 CONF="/etc/svxlink/svxlink.conf"
-GPIO="/etc/svxlink/gpio.conf"
 OP=/etc/svxlink
 
 whiptail --title "Actualizado" --msgbox "Directorios actualizados para nodo js y expansión para el futuro. Escribe OK para continuar" 8 78
