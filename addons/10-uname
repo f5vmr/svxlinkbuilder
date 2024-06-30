@@ -2,3 +2,5 @@
 uname -snrvm
 TERM=linux toilet -F metal MYCALL-SVX
 sudo /opt/vc/bin/vcgencmd measure_temp
+## This file give the login screen of a Raspberry Pi a New Look
+## 30062024 - 1.2
