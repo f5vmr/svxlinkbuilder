@@ -5,7 +5,8 @@ check_os  #### ensures that the OS is Bookworm.
 usercheck #### ensures that the user is pi.
 SwapFileChange - Makes a bigger swap file not that it seems to make much difference
 SoundcardManipulation - Removes the onboard soundcard, making the USBCard : 0
-Install Locales - Language possibities of currently 4
+Install Locales as required.
+Loads everything and runs the services.
 Reboot for first pass
 2.Login and issue command at the prompt - No sudo
 ./svxlinkbuilder/install.sh
