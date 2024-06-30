@@ -34,7 +34,7 @@ make_groups
 	echo -e "$(date)" "${GREEN} #### Installing Voice Files #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
  	cd /usr/share/svxlink/sounds
-if [[ $LANG_OPTION == "3" ]]; then
+	if [[ $lang == "en_US" ]]; then
 	sudo git clone https://github.com/f5vmr/en_US.git
 
 	else 
