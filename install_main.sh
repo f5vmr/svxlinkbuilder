@@ -168,7 +168,9 @@ chmod 0440 "$SUDOERS_FILE"
 	 # clear
 	echo -e "$(date)" "${RED} #### Restarting svxlink.service #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	
- 	sudo systemctl rerestart svxlink.service
+ 	sudo systemctl restart svxlink.service
+
+	##.service really isn't necessary ##
 
 
 echo -e "$(date)" "${GREEN} #### Installation complete #### ${NORMAL}" | sudo tee -a  /var/log/install.log
