@@ -38,9 +38,8 @@ make_groups
 	sudo git clone https://github.com/f5vmr/en_US.git
 
 	else 
-	sudo curl -O https://g4nab.co.uk/wp-content/uploads/2023/08/en_GB.tar_.gz
- 	sudo tar -zxvf en_GB.tar_.gz
- 	sudo rm en_GB.tar_.gz
+	sudo git clone https://github.com/f5vmr/en_GB.git
+ 
 	fi
   	cd /etc/svxlink
    sudo chmod 775 -R *
