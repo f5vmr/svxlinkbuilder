@@ -33,9 +33,7 @@ source "${BASH_SOURCE%/*}/functions/groups.sh"
 	echo -e "$(date)" "${GREEN} #### Installation des dossiers de Voix  #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
  	cd /usr/share/svxlink/sounds
- 	sudo curl -O https://g4nab.co.uk/wp-content/uploads/2023/08/fr_FR.tar_.gz
- 	sudo tar -zxvf fr_FR.tar_.gz
- 	sudo rm fr_FR.tar_.gz
+ 	sudo git clone https://github.com/f5vmr/fr_FR.git
   	cd /etc/svxlink
    sudo chmod 775 -R *
 

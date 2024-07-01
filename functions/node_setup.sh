@@ -1,10 +1,5 @@
 #!/bin/bash
-#### Need to check the Language in SVXLINK.CONF
-#### The downloaded Model is en_GB, if not then change to en_US
-if [[ $lang  == "en_US" ]]
-then 
-sed -i 's/en_GB/en_US/g' /etc/svxlink/svxlink.conf
-fi
+
 
 #### Recall options
 
@@ -182,13 +177,13 @@ elif [[ "$HID" == "true" ]] && [[ "$GPIOD" == "false" ]] && [[ "$card" == "true"
 else
     echo no action here    
 fi
-
-sed -i "s/DEFAULT_LANG=en_GB/DEFAULT_LANG=$(echo $lang)/g" /etc/svxlink/svxlink.conf
-
-##need to change the PTT and COS to HID and all the statements to reflect this modified SoundCard Unit - ask for GPIOD pins
-
-
-
-
+#### Need to check the Language in SVXLINK.CONF
+#### The downloaded Model is en_GB, if not then change to en_US
+if [[ $lang  == "en_US" ]]
+then 
+sed -i 's/en_GB/en_US/g' /etc/svxlink/svxlink.conf
+else
+## no changes needed
+fi
 }
 
