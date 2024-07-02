@@ -38,7 +38,7 @@
     sudo touch /etc/alsa/state-daemon.conf
     sudo systemctl daemon-reload
     sudo systemctl restart alsa-state.service
-    ## Install svxlink-server
+    ## Install repository key and repository ##
     echo -e "${YELLOW}#### Installing repository key ####{WHITE}" | sudo tee -a /var/log/install.log
     sudo curl -O -q https://online-amateur-radio-club-m0ouk.github.io/oarc-packages/hibby.key
     sudo mv hibby.key /etc/apt/trusted.gpg.d/hibby.asc
@@ -46,17 +46,19 @@
     echo "deb https://online-amateur-radio-club-m0ouk.github.io/oarc-packages bookworm main" | sudo tee -a /etc/apt/sources.list
     echo -e "${BLUE}#### Updating apt ####{WHITE}" | sudo tee -a /var/log/install.log
     sudo apt update && sudo apt upgrade -y
+    ## Install svxlink-server  and dependencies ##
     echo -e "${BLUE}#### Installing svxlink-server ####{WHITE}" | sudo tee -a /var/log/install.log
-    sudo apt install -y svxlink-server apache2 apache2-bin apache2-data apache2-utils php8.2  python3-serial sqlite3 php8.2-sqlite3 toilet libgpiod-dev -y
+    sudo apt install -y svxlink-server apache2 apache2-bin apache2-data apache2-utils php8.2 python3-serial sqlite3 php8.2-sqlite3 toilet libgpiod-dev -y
     echo -e "${BLUE}#### Installing locales ####{WHITE}" | sudo tee -a /var/log/install.log
-    # installing locales.
-    # Must kill the remotetrx.service to avoid a problem later
+    
+    ## Must kill the remotetrx.service to avoid a problem later ##
     sudo systemctl stop remotetrx.service
     sudo systemctl disable remotetrx.service
     echo -e "${RED} #### remotetrx.service stopped #### ${NORMAL}" | sudo tee -a  /var/log/install.log 
-    # Set en_GB.UTF-8 as the default locale
+    ## installing locales.##
+    ## Set en_GB.UTF-8 as the default locale to begin with.##
     sudo localectl set-locale LANG=en_GB.UTF-8
     echo -e "${CYAN}Locale setup completed.${WHITE}"
-    echo -e "${YELLOW}#### Your next command / prochain commande/ próximo comando will be ${GREEN}./svxlinkbuilder/install.sh ####{WHITE}" | sudo tee -a /var/log/install.log
-    echo -e "${GREEN}#### Login after Rebooting  ####{WHITE}" | sudo tee -a /var/log/install.log
+    echo -e "${YELLOW}#### Your next command / prochain commande / próximo comando will be ${GREEN}./svxlinkbuilder/install.sh ####{WHITE}" | sudo tee -a /var/log/install.log
+    echo -e "${GREEN}#### Login after Rebooting  then ${BLUE} ./svxlinkbuilder/install.sh ####{WHITE}" | sudo tee -a /var/log/install.log
     sudo shutdown -r now
