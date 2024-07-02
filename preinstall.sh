@@ -53,10 +53,10 @@
     # Must kill the remotetrx.service to avoid a problem later
     sudo systemctl stop remotetrx.service
     sudo systemctl disable remotetrx.service
-    echo -e "${RED} #### remote trx service stopped #### ${NORMAL}" | sudo tee -a  /var/log/install.log 
+    echo -e "${RED} #### remotetrx.service stopped #### ${NORMAL}" | sudo tee -a  /var/log/install.log 
     # Set en_GB.UTF-8 as the default locale
     sudo localectl set-locale LANG=en_GB.UTF-8
     echo -e "${CYAN}Locale setup completed.${WHITE}"
     echo -e "${YELLOW}#### Your next command / prochain commande/ próximo comando will be ${GREEN}./svxlinkbuilder/install.sh ####{WHITE}" | sudo tee -a /var/log/install.log
-    echo -e "${GREEN}#### Rebooting  ####{WHITE}" | sudo tee -a /var/log/install.log
+    echo -e "${GREEN}#### Login after Rebooting  ####{WHITE}" | sudo tee -a /var/log/install.log
     sudo shutdown -r now
