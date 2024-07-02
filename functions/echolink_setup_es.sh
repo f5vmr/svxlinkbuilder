@@ -27,7 +27,7 @@ echo -e "$(date)" "${GREEN} Echolink is set up ${NORMAL}" | sudo tee -a /var/log
     else
      sed -i 's/,ModuleEchoLink//' /etc/svxlink/svxlink.conf
     # removing Echolink from the MODULES= line in both Simplex and Duplex
-echo -e "$(date)" "${YELLOW} EchoLink no está configurado ${NORMAL}" | sudo tee -a /var/log/install.log
+echo -e "$(date)" "${CYAN} EchoLink no está configurado ${NORMAL}" | sudo tee -a /var/log/install.log
     ##nothing to do
     fi
 }

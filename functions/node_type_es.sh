@@ -9,20 +9,20 @@ function nodeoption {
 
     if [[ "$NODE_OPTION" -eq "1" ]] 
     then
-        echo "Elija Nodo Simplex sin SvxReflector" | sudo tee -a /var/log/install.log
+        echo -e "${CYAN}Elija Nodo Simplex sin SvxReflector${WHITE}" | sudo tee -a /var/log/install.log
     elif [[ "$NODE_OPTION" -eq "2" ]] 
     then
-        echo "Elija Nodo Simplex con SvxReflector" | sudo tee -a /var/log/install.log
+        echo -e "${CYAN}Elija Nodo Simplex con SvxReflector${WHITE}" | sudo tee -a /var/log/install.log
     elif [[ "$NODE_OPTION" -eq "3" ]] 
     then
-        echo "Elija Nodo repetidor sin SvxReflector" | sudo tee -a /var/log/install.log
+        echo -e "${CYAN}Elija Nodo repetidor sin SvxReflector${WHITE}" | sudo tee -a /var/log/install.log
     elif [[ "$NODE_OPTION" -eq "4" ]] 
     then
-        echo "Elija Nodo repetidor con SvxReflector" | sudo tee -a /var/log/install.log
+        echo -e "${CYAN}Elija Nodo repetidor con SvxReflector${WHITE}" | sudo tee -a /var/log/install.log
     else 
-        echo "Ninguna opción elegida" | sudo tee -a /var/log/install.log
+        echo -E "${RED}Ninguna opción elegida${WHITE}" | sudo tee -a /var/log/install.log
 fi
-echo Node Option $NODE_OPTION
+echo "${GREEN}Node Option${WHITE} $NODE_OPTION"
 
 }
             
