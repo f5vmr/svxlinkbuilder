@@ -1,6 +1,9 @@
 #/bin/bash
     cd /home/pi
     logname=$(whoami)
+    #### INITIALISE ####
+    source "${BASH_SOURCE%/*}/functions/initialise.sh"
+    initialise
     #### CHECK OS ####
     source "${BASH_SOURCE%/*}/functions/check_os.sh"
     check_os
