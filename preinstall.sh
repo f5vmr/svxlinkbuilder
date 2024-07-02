@@ -50,8 +50,10 @@
     sudo apt install -y svxlink-server apache2 apache2-bin apache2-data apache2-utils php8.2  python3-serial sqlite3 php8.2-sqlite3 toilet libgpiod-dev -y
     echo -e "${BLUE}#### Installing locales ####{WHITE}" | sudo tee -a /var/log/install.log
     # installing locales.
-    # Function to install locale if not already available
-
+    # Must kill the remotetrx.service to avoid a problem later
+    sudo systemctl stop remotetrx.service
+    sudo systemctl disable remotetrx.service
+    echo -e "${RED} #### remote trx service stopped #### ${NORMAL}" | sudo tee -a  /var/log/install.log 
     # Set en_GB.UTF-8 as the default locale
     sudo localectl set-locale LANG=en_GB.UTF-8
     echo -e "${CYAN}Locale setup completed.${WHITE}"
