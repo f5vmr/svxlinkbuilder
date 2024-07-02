@@ -9,14 +9,14 @@ SVXLINK_VER="24.02"
 SOUNDS_DIR=/usr/share/svxlink/sounds/
 username=$USER
 logname=$(whoami)
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[0;33m'
-BLUE='\033[0;34m'
-MAGENTA='\033[0;35m'
-CYAN='\033[0;36m'
-WHITE='\033[0;37m'
-NORMAL='\033[0m'
+RED='\033[0;31m' # error
+GREEN='\033[0;32m' # success
+YELLOW='\033[0;33m' # warning
+BLUE='\033[0;34m' # info
+MAGENTA='\033[0;35m' # question
+CYAN='\033[0;36m' # input
+WHITE='\033[0;37m' # normal
+NORMAL='\033[0m' # normal
 home=/home/pi
-echo -e "$(date)" "${GREEN} #### Commencing initialisation #### ${NORMAL}" | sudo tee -a /var/log/install.log
+echo -e "$(date)" "${BLUE} #### Commencing initialisation #### ${NORMAL}" | sudo tee -a /var/log/install.log
 }

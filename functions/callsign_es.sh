@@ -2,7 +2,7 @@
 function callsign {
 get_CallVar() {
     call=$(whiptail --inputbox "Ingrese el indicativo del nodo:" 8 78 3>&1 1>&2 2>&3)
-    echo "$call"
+    echo -e "${CYAN}$call${WHITE}"
 }
 
 

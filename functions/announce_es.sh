@@ -24,7 +24,7 @@ long_ident_interval=$(grep -E "LONG_IDENT_INTERVAL" "$svxconf_file" | awk -F '='
 #    echo "Error: CW_AMP value is not within the specified range (0 to -10 dB)"
 #    exit 1
 #fi
-echo "Current CW_AMP: $cw_amp"
+echo -e "${CYAN}Current CW_AMP:${WHITE} $cw_amp"
 # Prompt the user to input new values for each parameter using whiptail
 # new_cw_amp=$(whiptail --title "CW AMP" --inputbox "Current CW Amplitude: $cw_amp dB\nEnter new value for CW AMP (0 to -10 dB):" 10 60 "$cw_amp" 3>&1 1>&2 2>&3)
 # Prompt the user for input within the specified range
@@ -38,7 +38,7 @@ new_short_ident_interval=$(whiptail --title "INTERVALO DE IDENTIFICACIÓN CORTO"
 new_long_ident_interval=$(whiptail --title "INTERVALO DE IDENTIFICACIÓN LARGO" --menu "Seleccione un intervalo de identificación periódico LARGO:" 15 78 4 0 "None" 30 "30 minutos" 60 "60 minutos" 120 "120 minutos" 3>&1 1>&2 2>&3)
 
 # Replace the existing parameters with the user's new values using sed with double quotes as delimiters
-echo "Replacing CW_AMP with $new_cw_amp"
+echo -e "${CYAN}Replacing CW_AMP with ${WHITE}$new_cw_amp"
 # Escape the minus sign in $new_cw_amp
 
 
@@ -49,17 +49,17 @@ echo "Replacing CW_AMP with $new_cw_amp"
 #sed -i "s/^CW_AMP=.*/CW_AMP=\"$new_cw_amp\"/g" -- "$svxconf_file"
 # Update svxlink.conf with the new value for CW_AMP using awk
 sed -i "s/^CW_AMP=.*/CW_AMP=$new_cw_amp/g" "$svxconf_file"
-echo "Replacing CW_PITCH with $new_cw_pitch"
+echo -e "${CYAN}Replacing CW_PITCH with ${WHITE}$new_cw_pitch"
 sed -i "s/^CW_PITCH=.*/CW_PITCH=$new_cw_pitch/g" "$svxconf_file"
-echo "Replacing CW_CPM with $new_cw_cpm"
+echo -e "${CYAN}Replacing CW_CPM with ${WHITE}$new_cw_cpm"
 sed -i "s/^CW_CPM=.*/CW_CPM=$new_cw_cpm/g" "$svxconf_file"
-echo "Replacing IDLE_TIMEOUT with $new_idle_timeout"
+echo -e "${CYAN}Replacing IDLE_TIMEOUT with ${WHITE}$new_idle_timeout"
 sed -i "s/^IDLE_TIMEOUT=.*/IDLE_TIMEOUT=$new_idle_timeout/g" "$svxconf_file"
-echo "Replacing SHORT_IDENT_INTERVAL with $new_short_ident_interval"
+echo -e "${CYAN}Replacing SHORT_IDENT_INTERVAL with ${WHITE}$new_short_ident_interval"
 sed -i "s/^SHORT_IDENT_INTERVAL=.*/SHORT_IDENT_INTERVAL=$new_short_ident_interval/g" "$svxconf_file"
-echo "Replacing LONG_IDENT_INTERVAL with $new_long_ident_interval"
+echo -e "${CYAN}Replacing LONG_IDENT_INTERVAL with ${WHITE}$new_long_ident_interval"
 sed -i "s/^LONG_IDENT_INTERVAL=.*/LONG_IDENT_INTERVAL=$new_long_ident_interval/g" "$svxconf_file"
-echo standby for logic changes
+echo -e "${YELLOW}Standby for logic changes ${WHITE}"
 #### LOGIC CHANGES ####
 ## Extract the values of the text indicators from Logic.tcl
 # Retrieve the current values of the variables
@@ -94,10 +94,10 @@ new_short_voice_id_enable=$(echo "$new_values" | grep -o "Short Voice ID Enable"
 new_short_cw_id_enable=$(echo "$new_values" | grep -o "Short CW ID Enable" | wc -l)
 new_long_voice_id_enable=$(echo "$new_values" | grep -o "Long Voice ID Enable" | wc -l)
 new_long_cw_id_enable=$(echo "$new_values" | grep -o "Long CW ID Enable" | wc -l)
-echo "Short Voice ID Enable: $new_short_voice_id_enable"
-echo "Short CW ID Enable: $new_short_cw_id_enable"
-echo "Long Voice ID Enable: $new_long_voice_id_enable"
-echo "Long CW ID Enable: $new_long_cw_id_enable"
+echo -e "${CYAN}Short Voice ID Enable:${WHITE} $new_short_voice_id_enable"
+echo -e "${CYAN}Short CW ID Enable:${WHITE} $new_short_cw_id_enable"
+echo -e "${CYAN}Long Voice ID Enable:${WHITE} $new_long_voice_id_enable"
+echo -e "${CYAN}Long CW ID Enable:${WHITE} $new_long_cw_id_enable"
 
 
 # Update the Logic.tcl file with the new values
