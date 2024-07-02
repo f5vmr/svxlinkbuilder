@@ -13,7 +13,6 @@ echo -e "${GREEN} #### OS = $operating_system and Current user = $logname #### $
 source "${BASH_SOURCE%/*}/functions/language.sh"
 which_language
 
-
 if  [[ "$LANG_OPTION" == "2" ]] 
 
 then
