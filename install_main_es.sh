@@ -108,7 +108,8 @@ chmod 0440 "$SUDOERS_FILE"
  # clear
 	echo -e "$(date)" "${YELLOW} #### Cambiar el sufijo del archivo de registro ${NORMAL}" | sudo tee -a  /var/log/install.log
 
- 	sudo sed -i '/^LOGFILE=/ s/\(LOGFILE=.*\)\(\.log\)*$/\1.log/' /etc/default/svxlink
+ 	sudo sed -i '/^LOGFILE=/ s/\(LOGFILE=\)\(.*\)\(.log\)\?$/\1\2.log/' /etc/default/svxlink
+
 	#### INSTALLING DASHBOARD ####
  # clear
 	cd /home/pi
