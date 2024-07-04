@@ -183,7 +183,7 @@ if [[ $lang  == "en_US" ]]
 then 
 sed -i 's/en_GB/en_US/g' /etc/svxlink/svxlink.conf
 else
-## no changes needed
+echo ## no changes needed
 fi
 }
 
