@@ -1,19 +1,36 @@
 Having made the OS Card with Bookworm Lite on the Raspberry Pi Writer. Ensure SSH and Wifi is set if required.
 1.issue command at the prompt No sudo
 ./svxlinkbuilder/preinstall.sh
+Initialise #### Need to check the Variable Library
 check_os  #### ensures that the OS is Bookworm.
 usercheck #### ensures that the user is pi.
 SwapFileChange - Makes a bigger swap file not that it seems to make much difference
+install Install.log #### This is the log file for the install script.
 SoundcardManipulation - Removes the onboard soundcard, making the USBCard : 0
-Install Locales as required.
+Fix Alsactl #### Fixes the alsactl state-daemone file
 Loads everything and runs the services.
-Reboot for first pass
+Install Repository Key #### Adds the key to the repository
+Install Repository #### Adds the repository
+Update/Upgrade ####   Standard methods + Build essentials
+Install Essentials and svxlink-server #### 
+Install Locale #### just en_GB at this time
+
+Reboot for first pass ####
+
 2.Login and issue command at the prompt - No sudo
 ./svxlinkbuilder/install.sh
-Initialise #### Need to check the Variable Library
-Language #### User selects Language options from the list
-3. Calls with sudo ./svxlinkbuilder/install.sh #### according  to language
+initialise #### Need to check the Variable Library
+which_language #### User selects Language options from the list
+
+3.install_main.sh - Language versions.
+language confirmed #### $lang is set
 welcome #### In the users language
+configure #### Reads the config.txt
+nodeoption #### Select the node type
+soundcard #### set the soundcard options
+callsign #### set the node RF callsign
+make_groups #### probably set by svxlink_server
+voiceinstall #### Depending on $lang
 node_type #### In the users language Simp/Duplex Reflector/None
 sound_card_setup #### Modified / Unmodified / Other
 update upgrade #### Standard methods + Build essentials
