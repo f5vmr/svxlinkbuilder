@@ -20,7 +20,7 @@
 <p>A copy of the design for an interface can be found on g4nab.co.uk. There is also a link to a web page showing the modification instructions for a CM-108 USB Sound Card.</p>
 <h2>The programming of the SDCard</h2>
 
-<p>As discussed, start with a download of <b>Raspberry OS Bookworm Lite</b> from RaspberryPi.org. Use a 8 or 16 GB MicroSD Card and transfer the image to the card, best using the <b>Raspberry Pi Image builder</b> from the same source. <b> You MUST make the user 'pi' - PLEASE DO NOT DEVIATE from this advice, as you will get issues. </b> You can however use your own password. There are versions of Raspberry Pi Imager for all operating systems. It allows for full WiFi usage. Do not forget the SSH tab.</p> 
+<p>As discussed, start with a download of <b>Raspberry OS Bookworm Lite</b> from RaspberryPi.org. Use a 8 or 16 GB MicroSD Card and transfer the image to the card, best using the <b>Raspberry Pi Image builder</b> from the same source. <b> You MUST make the user 'pi' - PLEASE DO NOT DEVIATE from this advice, as you will get issues. </b> You can however use your own password. There are versions of Raspberry Pi Imager for all operating systems. It allows for full WiFi usage. Do not forget the SSH tab in 'Services'.</p> 
 <p>In the first box <b>device</b> select 'No Filtering'</p>
 <p>In the second box <b>Choose OS</b> select 'Raspberry Pi OS (Other)' then 'Raspberry Pi Os 32 Bit' under which you will see 'Debian Bookworm with no desktop environment'. Select this</p>
 <p>Now select <b>Choose Storage</b> where you will be invited to select the sdcard.</p>
