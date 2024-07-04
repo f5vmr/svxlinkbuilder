@@ -1,86 +1,96 @@
-# SvxlinkBuilder
-<h1>Menu build for Raspberry Pi - Repeater or Hotspot node. EchoLink MetarInfo and SVXReflector Options</h1>
-<h2> Pour l'instruction en Français, MELIRE.md. Para instrucción en español LÉAME.md.</h2>
-<p>This SVXLink build presently contains a connection only to the <b>svxportal-uk (SvxReflector)</b> only . If this changes then so will this introduction. You can leave it without, and install an svxreflector later through the Dashboard.</p>
-<p>The connection to the svxreflector provides connectivity using pseudo-talkgroups to other nodes and repeaters on the network. for more information select this link http://svxportal-uk.ddns.net:81.</p>
-<b>Your First Steps</b>
-<p>The Requirements: A Raspberry Pi of any mark, a USB Soundcard, and an interface card (or a modified USB Soundcard and no interface). One or two transceivers. Experience with Shell Commands will help, but is not essential.</p>
-<p>If you are suitably experienced, you will be able to modify the installation once it is complete. But this system will provide you with a working system, and you can then modify it to your own needs should you want to.</p>
-<p>There are very few other raspberry images that work succesfully for this type of build, where there is a potential for using the application in several directions.</p>
-<p>This New SVXLINKBUILDER uses an apt install, especially created to avoid the long and tedious approach of a compilation.</p>
+#SvxlinkBuilder
+<h1>Creación de menú para Raspberry Pi: nodo repetidor o punto de acceso. Opciones de EchoLink MetarInfo y SVXReflector</h1>
+<h2> Para instrucciones en francés, README_FR.md. Para instrucciones en español README_ES.md.</h2>
+<h3>Introducción</h3>
+<p>Esta compilación de SVXLink actualmente contiene una conexión solo con <b>svxportal-uk (SvxReflector)</b> únicamente. Si esto cambia, también lo hará esta introducción. Puedes dejarlo sin e instalar un svxreflector más tarde a través del Panel.</p>
+<p>La conexión al svxreflector proporciona conectividad mediante pseudogrupos de conversación a otros nodos y repetidores de la red. Para obtener más información, seleccione este enlace http://svxportal-uk.ddns.net:81.</p>
+<h3>Tus primeros pasos</h3>
+<p><b>Los requisitos:</b> Una Raspberry Pi de cualquier marca, una tarjeta de sonido USB y una tarjeta de interfaz (o una tarjeta de sonido USB modificada y sin interfaz). Uno o dos transceptores. La experiencia con los comandos de Shell ayudará, pero no es esencial.</p>
+<p>Si tiene la experiencia adecuada, podrá modificar la instalación una vez completada. Pero este sistema le proporcionará un sistema que funcione y luego podrá modificarlo según sus propias necesidades si así lo desea.</p>
+<p>Hay muy pocas imágenes de Raspberry que funcionen con éxito para este tipo de compilación, donde existe la posibilidad de utilizar la aplicación en varias direcciones. Se fija una imagen, lo que te deja con muchos desconcertantes. Esto no es una imagen, sino una construcción sencilla basada en menús.</p>
+<p>Este nuevo SVXLINKBUILDER utiliza una instalación adecuada, especialmente creada para evitar el proceso largo y tedioso de una compilación.</p>
+<h2>Utilice siempre Raspberry OS Bookworm Lite (Debian 12) de 32 bits y no se equivocará.</h2>
+<p>Utilizando Raspberry Pi Imager, seleccione la imagen Lite del sistema operativo Raspberry Pi (32 bits). Pero asegúrese de que su nombre de usuario sea 'pi' y nada más.</p>
+<p>La cámara también le permitirá configurar su contraseña y WiFi si es necesario. Asegúrese de que la pestaña que permite SSH esté habilitada.</p>
+<h3>Antes de ejecutar el software</h>
+<p>Hay varias placas de interfaz disponibles que tienen una variedad de usos, ya sea como punto de acceso o repetidor, o incluso como receptor/transceptor de relleno para un repetidor SVXLink existente. Las configuraciones en esta compilación son para una placa de interfaz casera que usa GPIOD 23/17/8 para recibir COS y GPIOD 24/18/7 para el controlador PTT, o alternativamente un CM-108 completamente modificado que puede usar 'udev' y conducir el PTT y COS de los componentes de modificación. También hay una versión intermedia para el CM-108 donde solo se ha realizado la modificación de transmisión que usará 'udev' para la transmisión y le brindará opciones para la recepción GPIOD 23/17/8. También hay una opción para su propia selección de puerto GPIO.</p>
+<p>Cuando se utilizan los pines GPIO y GPIOD, también se requiere un pin de tierra, por lo que al usar esta combinación, por ejemplo, los pines 14, 16 y 18 son todos adyacentes y están ubicados idealmente para estas funciones. El pin 14 es la Tierra, el pin 16 es GPIO 23 y el pin 18 es GPIO 24.</p>
+<p>Para un segundo conjunto de transceptores, puede considerar GPIO 17 y 18 como COS y PTT para ellos.</p>
+<p>Puede encontrar una copia del diseño de una interfaz en g4nab.co.uk. También hay un enlace a una página web que muestra las instrucciones de modificación para una tarjeta de sonido USB CM-108.</p>
+<h2>La programación de la tarjeta SD</h2>
 
-<h2>Always use Raspberry OS Bookworm Lite (Debian 12) 32 Bit then you won't go wrong.</h2>
-<p>There are a number of available interface boards that have a variety of uses, either as a hotspot or a repeater, or even a fill-in receiver/transceiver for an existing SVXLink repeater. The settings in this build are for a homebrew interface board using GPIOD 23/17/8 for the Receive COS and GPIOD 24/18/7 for the PTT controller, or alternative a fully modified CM-108 that can use 'udev' and drive the PTT and COS from the modification components. There is an also intermediate version for the CM-108 where only the transmit modification has been done that will you use 'udev' for the transmit, and give you options for the receive GPIOD 23/17/8.</p>
-<p>When using the GPIO and GPIOD Pins, an earth pin is also require, so using this combination, pins 14,16 and 18 are all adjacent and ideally placed for these functions. Pin 14 is the Earth, Pin 16 is GPIO 23 and Pin 18 is GPIO 24.</p>
-<p>For a second set of transceivers, you can consider GPIO 17 and 18 as COS & PTT for those.</p> 
-<p>A copy of the design can be found on g4nab.co.uk. There is also a page showing the modification instructions for a CM-108 USB Sound Card.</p>
-<h2>The programming of the SDCard</h2>
+<p>Como se mencionó anteriormente, comience con una descarga de <b>Raspberry OS Bookworm Lite</b> desde RaspberryPi.org. Utilice una tarjeta MicroSD de 8 o 16 GB y transfiera la imagen a la tarjeta; lo mejor es utilizar el <b>Raspberry Pi Image Builder</b> de la misma fuente. <b> DEBE convertir el usuario en 'pi'. NO SE DESVÍE de este consejo, ya que tendrá problemas. </b> Sin embargo, puedes utilizar tu propia contraseña. Existen versiones de Raspberry Pi Imager para todos los sistemas operativos. Permite el uso completo de WiFi. No olvides la pestaña SSH.</p>
+<p>En el primer cuadro <b>dispositivo</b> seleccione 'Sin filtrado'</p>
+<p>En el segundo cuadro <b>Elija SO</b> seleccione 'Raspberry Pi OS (Otro)' y luego 'Raspberry Pi Os 32 Bit' debajo del cual verá 'Debian Bookworm sin entorno de escritorio'. Selecciona esto</p>
+<p>Ahora seleccione <b>Elegir almacenamiento</b> donde se le invitará a seleccionar la tarjeta SD.</p>
+<p>En <b>Siguiente</b> Complete el cuadro 'editar', pero <b>pi</b> debe ser el usuario. Si esto no es correcto, la instalación fallará. Puedes tener la contraseña que quieras.</p>
+<p>Puedes configurar tu configuración de Wi-Fi aquí si lo deseas.</p>
+<b>Siempre marque la casilla SSH en la segunda pestaña del cuadro siguiente; de ​​lo contrario, eso también provocará que la instalación falle.</b> puede usar una contraseña o establecer una clave si lo desea.</p>
+<p>Una vez completado, expulse la tarjeta, instálela en la Raspberry Pi y enciéndala. Introduce el usuario <b>pi</b> y tu contraseña.</p>
+<h2>La construcción</h2>
+<p>Este script también instalará una tarjeta de sonido ficticia para el uso de Darkice y Icecast2.</p>
+<p>Paso 1: <b>sudo apt-get install -y git</b> ya que sin esto no puedes descargar desde GitHub.</p>
 
-<p>As discussed start with a download of <b>Raspberry OS Bookworm Lite</b> from RaspberryPi.org. Then use a 8 or 16 GB MicroSD Card and transfer the image to the card, best using the <b>Raspberry Pi Image builder</b> from the same source. <b> You MUST make the user 'pi' - PLEASE DO NOT DEVIATE from my advice above, as you will get issues. </b> You can however use your own password. There are versions of Raspberry Pi Imager for all operating systems. It allows for full WiFi usage.</p> 
-<p>In the first box <b>device</b> select 'No Filtering'</p>
-<p>In the second box <b>Choose OS</b> select 'Raspberry Pi OS (Other)' then 'Raspberry Pi Os 32 Bit' under which you will see 'Debian Bookworm with no desktop environment'. Select this</p>
-<p>Now select <b>Choose Storage</b> where you will be invited to select the sdcard.</p>
-<p>In <b>Next</b> Complete the 'edit' box, but <b>pi</b> must be the user. If this is not correct, then your install will fail. You can have any password you like.</p>
-<p>You can set your Wi-Fi settings here if your wish.</p>
-<b>Always check the SSH box on the second tab of the next box, otherwise that will also cause your installation to fail.</b>  you can use a password or set a key if you wish.</p> 
+<p>Paso 2: <b>sudo git clone https://github.com/f5vmr/svxlinkbuilder.git</b>.</p>
+<p>Paso 3: <b>./svxlinkbuilder/preinstall.sh</b> </p>
+<p>No necesita ninguna información en esta etapa, hasta que el sistema se apague para reiniciarlo. Tardará un poco en completarse: entre 20 y 30 minutos.</p>
+<p>Paso 4: <b>./svxlinkbuilder/install.sh</b> </p>
+<p>Aquí se le pedirá que responda a una serie de preguntas en el menú.</p>
 
-<p>Once complete, eject the card and install it in the raspberry pi and power it up. Enter the user <b>pi</b> and your password.</p> 
-<h2>The compilation</h2>
-<p>This script will also install a dummy sound card for the use of Darkice and Icecast2.</p> 
-<p>The first step will be the following command: <b>sudo apt-get install -y git</b> as without this you cannot download from the GitHub.</p>  
+<p>Le guiarán a través de la instalación, hasta el tiempo de ejecución.</p>
+<b>Necesitarás saberlo antes de comenzar</b>
+<p>1. El estado de su transceptor, ya sea que el PTT y el COS estén activos altos o activos bajos.</p>
+<p>2. El estado y tipo de su tarjeta de sonido USB, modificada, parcialmente modificada o sin modificar. Con una tarjeta de sonido USB completamente modificada, no hay ninguna razón que impida esta instalación en otra computadora basada en Linux que ejecute Debian 12. Tiene que ser Debian 12, o algunas de las funciones fallarán.</p>
+<p>3. Decide <b>El indicativo de tu nodo</b>.<p>No utilices símbolos o números adicionales en esta etapa. El indicativo debe ser de notación estándar.</p>
+<p>4. Si ha decidido instalar EchoLink, tenga lista su información de registro.</p>
+<p>5. Si desea utilizar ModuleMetarInfo, la aplicación Airport Weather, lea sobre los códigos OACI y descubra los principales aeropuertos a su alrededor. No funcionará para aeropuertos que no proporcionen un servicio meteorológico en tiempo real.</p>
+<p>6. Si desea explorar ModulePropagationMonitor, puede instalarlo más tarde.</p>
+<b>Recuerde anotar todo antes de continuar.</b>
+<p>Todo lo demás será construido para ti</p>
+<h2>Comenzando la instalación</h2>
+<p>El script compilará la configuración en ejecución a medida que avance. Sólo se puede ejecutar una vez, debido a la naturaleza del programa.</p>
+<p>Permítase un período ininterrumpido de 30 minutos para responder las preguntas que le hagan y la instalación adjunta.</p>
+<p>Una Raspberry Pi 3 o 4 tardará menos, y una Raspberry Pi zero posiblemente un poco más. Sin embargo, Raspberry Pi Zero presentará un desafío debido a la falta de una toma USB externa.</p>
+<p>NO he incluido la instalación del sistema de sonido waveshare, si estás utilizando una interfaz Pi-Hat.</p>
+<p>Esperemos que no se informe de ningún error. Acabo de completar una compilación en una raspberry pi 3A desde el formato de tarjeta hasta el nodo de trabajo en aproximadamente 25 minutos, sin errores.</p>
+<p>Para el usuario estadounidense, los archivos de voz en_US se extraerán si selecciona 'Inglés - EE. UU.' en el menú.</p>
+<p>Espero que haya alguien que pueda agregar algo al código para portugués.</p>
+<p>Durante la compilación, se le notificará la dirección IP activa de su nodo. Toma nota de ello. Lo necesitarás para continuar.</p>
+<p>Al final de la compilación, el sistema estará listo para usar. Ahora puedes "salir" de la terminal.</p>
 
-<p>Now the following command: <b>sudo git clone https://github.com/f5vmr/svxlinkbuilder.git</b> .</p>
+<p>El siguiente paso será abrir un navegador de Internet como 'Chrome' o 'Firefox', escribir la dirección IP e ingresar. Se mostrará el tablero. Si su tarjeta de sonido USB parpadea, entonces el nodo debería estar completamente operativo.</p>
 
-<p>The menus tah follow will guide you through the installation, all the way to run-time. <b>You will need to know before you begin</b>, the status of your transceiver, whether the PTT and COS are Active High or Active Low, the status and type of your USB soundcard, modified, partly modified or unmodified. With a fully modified usb soundcard, there is no reason that would prevent this installation on another Linux based computer running Debian 12. It has to be Debian 12, or some of the features will fail. Decide also the callsign of your node. Do not use additional symbols or numbers at this stage. The callsign should be of standard notation. If you have decided to install EchoLink, then have ready your registration information. If you wish to use ModuleMetarInfo, the Airport Weather application, then read about the ICAO codes, and discover the major airports around you. It will not work for airports that do not provide a weather service in real time. If you wish to explore the ModulePropagationMonitor, then this can be installed later. Remember note everything down before you proceed.</p>
-<p>Everything else will be constructed for you</p>
-<h2>Beginning the install</h2>
-<p>The script will compile the running configuration as you proceed. It can only be run once, due to the nature of the program.</p>
-<p>Allow yourself an uninterupted period of 30 minutes, to answer the questions put to you, and the accompanying install.</p>
-<p>A Raspberry Pi 3 or 4 will take less time, and a Raspberry Pi zero possibly slightly longer. However the Raspberry Pi Zero will present a challenge due to the lack of an external USB socket.</p> 
-<p>I have NOT included the installation of the waveshare sound system, if you are using a Pi-Hat interface.</p> 
-<p>Hopefully there should be no reported error. I have just completed a build on a raspberry pi 3A from card format to working node in about 25 minutes, with no errors.</p>
-<p>For the American User, the en_US Voice files will be pulled if you select 'English - USA' from the menu.</p>
-<p>I hope that there will be someone out there that can add to the code for Spanish or Portuguese.</p>
-<h2>We begin</h2>
-<p>Type the following command at the current prompt: <b>./svxlinkbuilder/preinstall.sh</b> after which the system will reboot so login again as before.</p>
-<p>Type the following command <b> ./svxlinkbuilder/install.sh</b> Special NOTE - <b>No sudo here in these commands.</b></p>
-<p>Simply follow the menus, and enter the required information, which should should have noted, to assist you prior to running the program.</p>
-<p>During the compilation, you will be notified of the Active IP Address of your node. Make a note of it. You will need it to proceed.</p>
+<h2> Solución de problemas </h2>
 
-<p>At the end of the compilation, the system will ready to use. You may now exit the terminal.</p>
+<p>Necesitará comprender el archivo svxlink.conf y cómo realizar ajustes para la operación Simplex o Repetidora. En cualquier caso, es posible que necesites consultar la página principal de svxlink.org, o la página de usuarios de radioaficionados de svxlink en Facebook, o contactarme. Para obtener más información, consulte también las páginas de svxlink en g4nab.co.uk. En la terminal, escriba 'man svxlink.conf' y se mostrará la documentación integrada.</p>
 
-<p>The next step will be to open an internet browser such as 'Chrome' or 'Firefox' and type in the IP Address and enter. The dashboard will be displayed. If your USB soundcard is flashing then the node should be fully operational.</p>
+<p>Para detener la ejecución de svxlink, escriba en la terminal <b>sudo systemctl stop svxlink.service</b> y para reiniciarlo escriba <b>sudo systemctl restart svxlink.service</b>. También puede hacer esto si está autorizado en el Tablero en el menú ENERGÍA. No es necesario reiniciar el sistema en ningún momento.</p>
 
-<h2> Troubleshooting </h2>
+<p>Si desea modificar los archivos Svxlink.conf, EchoLink, MetarInfo y NodeInfo, puede hacerlo, si está autorizado, desde el panel de control. Al guardar los cambios, se reinicia inmediatamente svxlink con la nueva configuración, y los nuevos cambios se muestran después de hacer clic en el botón en el panel.</p>
+<p>Tenga cuidado al editar, ya que cambiar la estructura puede provocar que el nodo falle. Sin embargo, se puede encontrar una copia de la última configuración funcional en la carpeta /var/www/html/backups con la hora y la fecha.</p>
+<p>Para obtener información sobre node_info.json, vaya al navegador de una PC e ingrese <b>http://svxportal-uk.ddns.net:81</b> donde encontrará un panel.</p>
+<p>Haz clic en <b>Registrarse</b> en la parte superior, completando la información. Esta información se conserva únicamente para permitirle completar la siguiente etapa. Inicie sesión con la información que acaba de proporcionar, haga clic en <b>Mis estaciones</b> y haga clic en <b>Generar node_info.json</f></b>.
+<p>Al completar toda la información, <b>ignorando</b> cualquier referencia a CTCSS en este momento, esto generará un archivo llamado node_info.json. Guárdelo en una ubicación de su computadora. Puedes copiarlo y pegarlo más tarde en el archivo del nodo.</p>
+<p>Abra la terminal de Raspberry Pi y escriba <b>cd /etc/svxlink</b> seguido de return. Luego escribe <b>sudo nano node_info.json</b> y edita la información con el contenido del archivo que acabas de guardar en tu PC. Puedes abrir el archivo con un editor de texto o un bloc de notas.</p>
+<p>En la Terminal Raspberry o en el Panel de control si ha abierto el archivo NodeInfo allí y elimine todo el contenido. Vaya al Bloc de notas o al editor de texto, seleccione todo el texto allí y cópielo (cntrl-c). Resalte la terminal (o la ventana del tablero) y péguela (cntrl-v). </p>
+<p>Cuando se complete la edición, escriba <b>cntrl-o</b> y regrese al teclado del terminal seguido de <b>cntrl-x</b>.</p>
+<p>En el Panel de control, simplemente use el botón Guardar. La nueva información se guardará en el archivo del nodo.</p>
 
-<p>You will need to understand the svxlink.conf file and how to make adjustments for Simplex or Repeater operation. In any case you may need to refer to the svxlink.org main page, or svxlink amateur radio users page on facebook, or contact me. For further information also consult the svxlink pages on g4nab.co.uk. In the terminal, type 'man svxlink.conf' and the on-board documentation will be displayed.</p>
+<p>Verifique el contenido y, lo que es más importante, complete la información de su ubicación cerca de la parte inferior del archivo. escriba <b>cntrl-o</b> y regrese luego <b>cntrl-x</b> cuando haya terminado para guardar los cambios.</p>
+<p>Si aún no ha habilitado Echolink en <b>svxlink.conf</b>, es posible que deba hacerlo ahora y eliminar el encabezado del comentario <b>#</b> de las líneas relevantes simplemente haciendo clic en la casilla de verificación. Puedes hacer esto en el Configurador de Svxlink</p>
+<p>El reinicio de svxlink.service es automático al guardar los cambios.</b></p>
+<p>No realice cambios en <b>gpio.conf</b>. Los métodos antiguos de agregar la configuración gpio y establecer un inicio de demonio en /etc/rc.local están en desuso (ya no son necesarios). Estamos usando GPIOD o udev y están configurados en los menús.</p>
+<h2>EchoEnlace</h2>
+<p>Para modificar la información de Echolink, puede realizar cambios en su Configurador de EchoLink aquí. luego guarde el archivo como lo hizo anteriormente con <b>svxlink.conf</b>.</p>
+<p>Se aplican las reglas habituales con los puertos de salida para su dirección IP RaspberryPi configuradas en el enrutador al que está conectado</p>
+<p>Solo puedes tener un EchoLink configurado en tu dirección IP doméstica.</p>
+<p>Deberás configurar el indicativo y la contraseña con los que te registraste en EchoLink.</p>
+<p>Si no configuró EchoLink durante la fase de construcción, puede agregarlo en la línea MODULES= en la sección [SimplexLogic] del Configurador Svxlink y debe incluir ModuleEchoLink dentro de la línea. Para el usuario del repetidor se aplicará lo mismo excepto que la línea MODULES= estará en [RepeaterLogic]</p>
+<p>Finalmente, el paso importante es establecer el nivel correcto de audio. Esto ahora se configura usando amixer en el menú en la parte superior.<p>
+<p>Alsamixer no se puede utilizar desde el panel de control, por lo que nos dirigimos directamente al amixer.</p>
+<p> Para obtener mejores resultados, configure 'Altavoz' en alrededor de 75, 'Micrófono' en 0, 'Micrófono con captura' en 19-38 y 'Autogain' debe estar en 'OFF'. Simplemente ajuste los valores en el Configurador. </p>
+<p>'Altavoz' es el volumen del transmisor y 'Micrófono con captura' es el volumen del receptor. Es un poco contraintuitivo.</p>
+<p>Que tengas un día interesante</p>
 
-<p>To stop svxlink running type in the terminal <b>sudo systemctl stop svxlink.service</b> and to restart it type <b>sudo systemctl restart svxlink.service</b> You can also do this if authorised in the Dashboard at the POWER menu. You do not need to reboot the system at any time.</p>
-
-<p>If you wish to modify the Svxlink.conf, EchoLink, MetarInfo and NodeInfo files, you can do so, if authorised, from from the dashboard. Saving the changes immediately restarts the svxlink with the new setting, with the new changes show after a click on the button in the dashboard.</p>
-<p>Be careful whilst editing, as to change the structure, can cause the node to fail. However a copy of the last working configuration can be found in the /var/www/html/backups folder with a time and date.</p>
-<p>To obtain information for the node_info.json go to a PC Browser and enter <b>http://svxportal-uk.ddns.net:81</b> where you will find a dashboard.</p>
-<p>Click <b>Register</b> at the top, completing the information. This information is held only to enable you to complete the next stage. Log in with the information you have just supplied, click on <b>My Stations</b>, and click on <b>Generate node_info.json</f></b>
-<p>By completing all the information, <b>ignoring</b> any reference to CTCSS at this time, this will generate a file called node_info.json. Save it in a location in your computer. You can copy and paste from it later to the file in the node.</p>
-<p>Open the terminal of the Raspberry Pi, and type <b>cd /etc/svxlink</b> followed by return. Then type <b>sudo nano node_info.json</b> and edit the information with the content of the file you have just saved on your PC. You can open the file with a text editor or notepad.</p>
-<p>In the Raspberry Terminal or in the Dashboard if you have opened the NodeInfo file there, and delete all the contents. Go to the Notepad or text Editor and select all the text there, and copy (cntrl-c). Highlight the terminal (or the dashboard window) and paste (cntrl-v). </p>
-<p>When the editing is complete type <b>cntrl-o</b> and return at the keyboard for the terminal followed by <b>cntrl-x</b>.</p>
-<p>In the Dashboard, simply use the save button. The new information will be saved to the file in the node.</p>
-
-<p>Check the content and importantly complete your location information near the bottom of the file. type <b>cntrl-o</b> and return then <b>cntrl-x</b> when finished to save your changes.</p>
-<p>If you have not yet enabled Echolink in the <b>svxlink.conf</b> to may need to do this now, and remove the <b>#</b> comment header from the relevant lines. You can do this in the Svxlink Configurator</p>
-<p>The restart of the svxlink.service is automatic on saving changes.</b></p>
-<p>You do not need to make changes to the <b>gpio.conf</b>. The old methods of adding the gpio configuration and setting a daemon start in /etc/rc.local are deprecated (no longer required). We are using GPIOD or udev.</p>
-<h2>EchoLink</h2>
-<p>To modify the Echolink information, you can make your changes to your EchoLink Configurator here. then save the file as you did above with <b>svxlink.conf</b>.</p>
-<p>The usual rules apply with the outgoing ports for your RaspberryPi IP address set in the Router to which you are connected</p>
-<p>You can only have one EchoLink set up on your own home IP Address.</p>
-<p>You will need to set up the callsign and password with which you registered in EchoLink.</p>
-<p>If you did not set up EchoLink during the building phase, then you can add it the MODULES= line in the [SimplexLogic] section of the Svxlink Configurator and you must include ModuleEchoLink within the line. For the Repeater user the same will apply except the MODULES= line will be in [RepeaterLogic]</p>
-<p>Finally the important step is to set the correct level of audio. This is now set using amixer in the menu at the top.<p>
-<p>Alsamixer cannot be used so we address the amixer directly instead.</p>
-<p> For best results, set 'Loudspeaker' to around 75, 'Mic' as 0 'Mic with Capture' at 19-38 and 'Autogain' should be 'OFF'. Simply adjust the values in the Configurator. </p>
-<p>'Loudspeaker' is your transmitter volume, and 'Mic with capture' is the volume from the receiver. It is a little confusing.</p>
-<p>Everything introduced here is directly from the original presentation by Tobias SM0SVX.</p>
-
-
+<p>73 - Chris G4NAB</p>
+<p>Todo lo que se presenta aquí proviene directamente de la presentación original de Tobias SM0SVX.</p>
