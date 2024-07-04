@@ -28,6 +28,7 @@
 <b>Siempre marque la casilla SSH en la segunda pestaña del cuadro siguiente; de ​​lo contrario, eso también provocará que la instalación falle.</b> puede usar una contraseña o establecer una clave si lo desea.</p>
 <p>Una vez completado, expulse la tarjeta, instálela en la Raspberry Pi y enciéndala. Introduce el usuario <b>pi</b> y tu contraseña.</p>
 <h2>La construcción</h2>
+<b>No actualice el sistema en esta etapa.</b>
 <p>Este script también instalará una tarjeta de sonido ficticia para el uso de Darkice y Icecast2.</p>
 <p>Paso 1: <b>sudo apt-get install -y git</b> ya que sin esto no puedes descargar desde GitHub.</p>
 

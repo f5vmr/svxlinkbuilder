@@ -30,6 +30,7 @@
 
 <p>Une fois terminé, éjectez la carte, installez-la dans le Raspberry Pi et allumez-la. Entrez l'utilisateur <b>pi</b> et votre mot de passe.</p>
 <h2>La construction</h2>
+<b>Ne pas mettre à jour/mettre à jour le système à cet étape.</b>
 <p>Ce script installera également une carte son factice pour l'utilisation de Darkice et Icecast2.</p>
 <p>Étape 1 : <b>sudo apt-get install -y git</b> car sans cela, vous ne pouvez pas télécharger depuis GitHub.</p>
 
