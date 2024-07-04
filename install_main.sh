@@ -9,13 +9,14 @@ source "${BASH_SOURCE%/*}/functions/welcome.sh"
 welcome
 source "${BASH_SOURCE%/*}/functions/configure.sh"
 configure
+#### USB SOUND CARD ####
+source "${BASH_SOURCE%/*}/functions/sound_card.sh"
+soundcard
 #### NODE Selection ####
 source "${BASH_SOURCE%/*}/functions/node_type.sh"
 nodeoption
 echo -e "$(date)" "${YELLOW} #### Node Type: $NODEOPTION #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-#### USB SOUND CARD ####
-source "${BASH_SOURCE%/*}/functions/sound_card.sh"
-soundcard
+
 echo -e "$(date)" "${YELLOW} #### Sound Card: $HID $GPIOD $card #### ${NORMAL}" | sudo tee -a  /var/log/install.log	
 echo -e "$(date)" "${YELLOW} #### Checking Alsa #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 

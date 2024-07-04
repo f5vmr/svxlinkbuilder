@@ -1,6 +1,7 @@
 #!/bin/bash
 #### CW/Voice Announcements
 function announce {
+CONF_DIR="/etc/svxlink"
 LOGIC_DIR=/usr/share/svxlink/events.d/local
 logicfile="$LOGIC_DIR/Logic.tcl"
 svxconf_file="$CONF_DIR/svxlink.conf"
