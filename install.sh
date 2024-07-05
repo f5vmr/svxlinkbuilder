@@ -14,7 +14,7 @@ source "${BASH_SOURCE%/*}/functions/language.sh"
 which_language
 echo $lang
 echo $locale
-
+exit
 break
 
 if  [[ "$LANG_OPTION" == "2" ]] 
