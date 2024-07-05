@@ -5,11 +5,11 @@
 
 function set_locale() {
     locale=$1.UTF-8
-
+    echo -e "${YELLOW}Setting locale to ${locale} - ${RED} Please Wait ${YELLOW} #### ${NORMAL}"
     sudo localectl set-locale LANG=${locale}
     if [ $? -eq 0 ]; then
         export LANG=${locale}
-        echo "Locale set to ${locale}"
+       
     else
         echo "Failed to set locale"
     fi
