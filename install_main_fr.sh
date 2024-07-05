@@ -122,7 +122,7 @@ chmod 0440 "$SUDOERS_FILE"
 	dash_install
  # clear
 	echo -e "$(date)" "${GREEN} #### Tableau installé #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-	whiptail --title "IP Adresse" --msgbox "Tableau de Bord installé. Noter bien l'adresse IP $eth_ip ou $wan_ip" 8 78
+	whiptail --title "IP Adresse" --msgbox "Tableau de Bord installé. Noter bien l'adresse IP $ip_address sur $device" 8 78
 	cd /home/pi
 
 	 # clear
