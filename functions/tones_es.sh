@@ -78,9 +78,9 @@ CWLogic="CW.tcl"
 cwfile="$LOGIC_DIR/$CWLogic"
 # Adding the VA Bar code to CW.tcl
 sudo sed -i '72a "-" "...-.-"' /usr/share/svxlink/events.d/local/CW.tcl
-sed -i 's/playTone 400 900/\#playTone 400 900/g' "$logicfile"
-sed -i 's/playTone 360 900/\#playTone 360 900/g' "$logicfile"
-sed -i 's/\#playTone 360 900 /a CW::play \"\-\"\;/' "$logicfile"
+sed -i 's/playTone 400 900 50/\#playTone 400 900 50/g' "$logicfile"
+sed -i 's/playTone 360 900 50/\#playTone 360 900 50/g' "$logicfile"
+sed -i 's/\#playTone 360 900 50/CW::play \"\-\"\;/' "$logicfile"
 
 
 #### 
