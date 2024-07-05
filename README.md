@@ -33,7 +33,7 @@
 <h2>The Build</h2>
 <b>Do Not update/upgrade the system at this stage.</b>
 <p>This script will install a dummy sound card for the use of Darkice and Icecast2.</p> 
-<p>Step 1: <b>sudo apt-get install -y git</b> as without this you cannot download from the GitHub.</p>  
+<p>Step 1: <b>sudo apt install -y git</b> as without this you cannot download from the GitHub.</p>  
 
 <p>Step 2: <b>sudo git clone https://github.com/f5vmr/svxlinkbuilder.git</b> .</p>
 <p>Step 3: <b>./svxlinkbuilder/preinstall.sh</b> </p>
