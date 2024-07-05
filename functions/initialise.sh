@@ -18,5 +18,7 @@ CYAN='\033[0;36m' # input
 WHITE='\033[0;37m' # normal
 NORMAL='\033[0m' # normal
 home=/home/pi
+locale=""
+lang=""
 echo -e "$(date)" "${BLUE} #### Commencing initialisation #### ${NORMAL}" | sudo tee -a /var/log/install.log
 }
