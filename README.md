@@ -13,7 +13,7 @@
 <h2>Always use Raspberry OS Bookworm Lite (Debian 12) 32 Bit then you won't go wrong.</h2>
 <p>Using Raspberry Pi Imager, select the Raspberry Pi OS (32-bit) Lite image. But ensure your user name is 'pi' and nothing else.</p>
 <p>The Imager will also allow you to configure your password, and WiFi if required. Ensure that the tab permitting SSH is enabled.</p>
-<h3>Before running the software</h>
+<h3>Before running the software</h3>
 <p>There are a number of available interface boards that have a variety of uses, either as a hotspot or a repeater, or even a fill-in receiver/transceiver for an existing SVXLink repeater. The settings in this build are for a homebrew interface board using GPIOD 23/17/8 for the Receive COS and GPIOD 24/18/7 for the PTT controller, or alternative a fully modified CM-108 that can use 'udev' and drive the PTT and COS from the modification components. There is an also intermediate version for the CM-108 where only the transmit modification has been done that will you use 'udev' for the transmit, and give you options for the receive GPIOD 23/17/8. There is also an option for your own GPIO port selection.</p>
 <p>When using the GPIO and GPIOD Pins, an earth pin is also require, so using this combination for example, pins 14,16 and 18 are all adjacent and ideally placed for these functions. Pin 14 is the Earth, Pin 16 is GPIO 23 and Pin 18 is GPIO 24.</p>
 <p>For a second set of transceivers, you can consider GPIO 17 and 18 as COS & PTT for those.</p> 
