@@ -1,53 +1,44 @@
 Having made the OS Card with Bookworm Lite on the Raspberry Pi Writer. Ensure SSH and Wifi is set if required.
-1.issue command at the prompt No sudo
+1.  issue command at the prompt - STRICTLY No Setudo
 ./svxlinkbuilder/preinstall.sh
-Initialise #### Need to check the Variable Library
-check_os  #### ensures that the OS is Bookworm.
-usercheck #### ensures that the user is pi.
-SwapFileChange - Makes a bigger swap file not that it seems to make much difference
-install Install.log #### This is the log file for the install script.
-SoundcardManipulation - Removes the onboard soundcard, making the USBCard : 0
-Fix Alsactl #### Fixes the alsactl state-daemone file
-Loads everything and runs the services.
-Install Repository Key #### Adds the key to the repository
-Install Repository #### Adds the repository
-Update/Upgrade ####   Standard methods + Build essentials
-Install Essentials and svxlink-server #### 
-Install Locale #### just en_GB at this time
+    Initialise #### Need to check the Variable Library
+    check_os  #### ensures that the OS is Bookworm.
+    usercheck #### ensures that the user is pi.
+    SwapFileChange - Makes a bigger swap file not that it seems to make much difference
+    install Install.log #### This is the log file for the install script.
+    SoundcardManipulation - Removes the onboard soundcard, making the USBCard : 0
+    Fix Alsactl #### Fixes the alsactl state-daemon file - Seems to be an issue in all OS - Missing file causes one error and there is one other error
+    Now everything loads and runs the services.
+    Install Repository Key #### Adds the key to the repository
+    Install Repository #### Adds the repository
+    Update/Upgrade ####   Standard methods + Build essentials
+    Install Essentials and svxlink-server - kills the remotetrx.service and starts svxlink.service ####
+    Install Locale #### just en_GB at this time.
 
 Reboot for first pass ####
 
-2.Login and issue command at the prompt - No sudo
+    2.Login and issue command at the prompt - STRICTLY No sudo
 ./svxlinkbuilder/install.sh
-initialise #### Need to check the Variable Library
-which_language #### User selects Language options from the list
+    initialise #### Need to check the Variable Library
+    which_language #### User selects Language options from the list
 
-3.install_main.sh - Language versions.
-language confirmed #### $lang is set
-welcome #### In the users language
-configure #### Reads the config.txt
-nodeoption #### Select the node type
-soundcard #### set the soundcard options
-callsign #### set the node RF callsign
-make_groups #### probably set by svxlink_server
-voiceinstall #### Depending on $lang
-node_type #### In the users language Simp/Duplex Reflector/None
-sound_card_setup #### Modified / Unmodified / Other
-update upgrade #### Standard methods + Build essentials
-callsign #### User enters intended RF callsign
-groups #### OS Groups updated for svxlink etc.
-source #### Clones the git files
-compile #### Standard cmake line for compiling and installing
-voices #### Voice files installed language compliant.
-svx_modifs #### Import of svxlink .conf files from stock
-           #### /etc/default/svxlink modified for .log 
-           #### Splash screen modifier
-dashboard  #### sudo git clone Dashboard direct to /var/www/html
-           #### User sets up Dashboard user and password for edit purposes 
-ip_addresses #### check and verify ip addresses.
-node_setup #### all the node parameters
-ModuleMetar #### Standard for the UK Needs modifying for User
-ModuleEchoLink #### Yes or No for user.
-Services Started #### This is where the fun begins.
-Reboot
-Revert to Dashboard operations for further edits.
+    3.Language versions determine next stage.
+    language confirmed #### $lang is set three versions English/French/Spanish (en_GB/en_US options included)
+    welcome #### In the users language
+    configure #### Reads the config.txt (again in native language)
+    nodetype #### Select the nodeoption - simplex/repeater - reflector or not - No issues as editable in dashboard.
+    soundcard #### set the soundcard options Modified/Half-modified/Unmodified
+    callsign #### set the node RF callsign - Set the svxreflector callsign if different in the Dashboard
+    make_groups #### probably set by svxlink_server, but done to make sure.
+    voiceinstall #### Depending on $lang en_GB/en_US/es_ES/fr_FR
+    firstbackup #### create a backup of the svxlink.conf in /etc/svxlink
+    node_type #### In the users language changes the svxlink.conf according to the node_type set earlier
+    permissions #### Sets special permissions for the Dashboard
+    configuration #### Transfers 
+    sound_card_setup #### Modified / Unmodified / sets up Editable GPIO Ports for unmodified structures
+    Bells and Whistles #### sets up announcements and the tones for nodes
+    MetarInfo #### sets up the metar module. Can be done from the Dashboard
+    EchoLink #### Yes or No for user.
+    setup complete #### restart svxlink.service.
+
+Revert to Dashboard operations for further edits as necessary.
