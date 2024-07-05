@@ -1,9 +1,7 @@
 #### INSTALLATION SCRIPT ####
 # Setting non-superuser elements #
 #### INITIALISE ####
-
-
- # clear
+# clear
 source "${BASH_SOURCE%/*}/functions/initialise.sh"
 initialise
 cd $home 
