@@ -2,7 +2,7 @@
 # Setting non-superuser elements #
 #### INITIALISE ####
 
-lang=$(echo $LANG | grep -o '^[a-zA-Z]*_[a-zA-Z]*')
+
  # clear
 source "${BASH_SOURCE%/*}/functions/initialise.sh"
 initialise

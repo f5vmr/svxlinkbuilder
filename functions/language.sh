@@ -6,7 +6,7 @@ function set_locale() {
     locale=$1.UTF-8
 
     sudo localectl set-locale LANG=${locale}
-
+    lang=$(echo $LANG | grep -o '^[a-zA-Z]*_[a-zA-Z]*')
 
     echo "Locale set to ${locale}"
 }
@@ -40,10 +40,10 @@ case ${LANG_OPTION} in
         echo "Invalid choice"
         ;;
 esac
-    locale=$(echo "$locale" | cut -d'.' -f1)
-    lang=$(echo $LANG | grep -o '^[a-zA-Z]*_[a-zA-Z]*')
+
 
     echo "${GREEN} #### Language set to $LANG_OPTION $locale #### ${NORMAL}" | sudo tee -a /var/log/install.log
+    echo "${YELLOW} #### Language also set to $lang  #### ${NORMAL}" | sudo tee -a /var/log/install.log
     
     }
 
