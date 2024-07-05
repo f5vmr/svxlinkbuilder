@@ -38,7 +38,7 @@
 <p>Step 2: <b>sudo git clone https://github.com/f5vmr/svxlinkbuilder.git</b> .</p>
 <p>Step 3: <b>At the prompt type ./svxlinkbuilder/preinstall.sh</b> </p>
 <p>You need no input at this stage, until the system shutsdown for a reboot. It will take a while to complete - 20 - 30 minutes.</p>
-<p>Step 4: <b>./svxlinkbuilder/install.sh</b> </p>
+<p>Step 4: <b>Login again and at the prompt type ./svxlinkbuilder/install.sh</b> </p>
 <p>Here you will be required to respond to a number of questions in the menu.</p>
 
 <p>They will guide you through the installation, all the way to run-time.</p>
