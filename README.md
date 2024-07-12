@@ -4,7 +4,8 @@
 <h3>Introduction</h3>
 <p>This SVXLink build presently contains a connection only to the <b>svxportal-uk (SvxReflector)</b> only . If this changes then so will this introduction. You can leave it without, and install an svxreflector later through the Dashboard.</p>
 <p>The connection to the svxreflector provides connectivity using pseudo-talkgroups to other nodes and repeaters on the network. for more information select this link http://svxportal-uk.ddns.net:81.</p>
-<p>This build now contains an automatic three minute timeout for RF users. This is to educate users to keep their speech from being too long.</p> 
+<p>This build now contains an automatic three minute timeout for RF users. This is to educate users to keep their speech from being too long.</p>
+<p>This timeout mechanism does not block the user whilst speaking, but superimposes a series of pip-tones with the emission, that are terminated, when the speaker releases the PTT. The squelch mechanism detects this, and sends "Time-out" verbally on the transmission, before issuing a "K" for continued use of the repeater.</p>
 <h3>Your First Steps</h3>
 <p><b>The Requirements:</b> A Raspberry Pi of any mark, a USB Soundcard, and an interface card (or a modified USB Soundcard and no interface). One or two transceivers. Experience with Shell Commands will help, but is not essential.</p>
 <p>If you are suitably experienced, you will be able to modify the installation once it is complete. But this system will provide you with a working system, and you can then modify it to your own needs should you want to.</p>

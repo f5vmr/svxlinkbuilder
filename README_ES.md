@@ -5,6 +5,7 @@
 <p>Esta compilación de SVXLink actualmente contiene una conexión solo con <b>svxportal-uk (SvxReflector)</b> únicamente. Si esto cambia, también lo hará esta introducción. Puedes dejarlo sin e instalar un svxreflector más tarde a través del Panel.</p>
 <p>La conexión al svxreflector proporciona conectividad mediante pseudogrupos de conversación a otros nodos y repetidores de la red. Para obtener más información, seleccione este enlace http://svxportal-uk.ddns.net:81.</p>
 <p>Esta compilación ahora contiene un tiempo de espera automático de tres minutos para los usuarios de RF. Esto es para educar a los usuarios para que eviten que sus discursos sean demasiado largos.</p>
+<p>Este mecanismo de tiempo de espera no bloquea al usuario mientras habla, sino que superpone una serie de pitidos con la emisión, que finalizan cuando el hablante suelta el PTT. El mecanismo de silenciamiento detecta esto y envía un "Tiempo de espera" verbalmente en la transmisión, antes de emitir una "K" para el uso continuado del repetidor.</p>
 <h3>Tus primeros pasos</h3>
 <p><b>Los requisitos:</b> Una Raspberry Pi de cualquier marca, una tarjeta de sonido USB y una tarjeta de interfaz (o una tarjeta de sonido USB modificada y sin interfaz). Uno o dos transceptores. La experiencia con los comandos de Shell ayudará, pero no es esencial.</p>
 <p>Si tiene la experiencia adecuada, podrá modificar la instalación una vez completada. Pero este sistema le proporcionará un sistema que funcione y luego podrá modificarlo según sus propias necesidades si así lo desea.</p>
