@@ -2,7 +2,7 @@
 function svxlink_source {
     
     echo -e "$(date)" "${YELLOW} Svxlink_source is SvxLink from SM0SVX ${NORMAL}" | sudo tee -a /var/log/install.log
-    cd /home/pi/
+    cd $HOME/
     sudo git clone https://github.com/sm0svx/svxlink.git
 	sudo mkdir svxlink/src/build
 }

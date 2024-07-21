@@ -60,8 +60,8 @@ function dash_install {
     # Inform the user that the ownership change was successful
     echo "Ownership of files in /var/www/html has been changed to svxlink:svxlink, except for the script itself."
 
-    # New section to create /home/pi/scripts and cleanup.sh
-    SCRIPT_DIR="/home/pi/scripts"
+    # New section to create $HOME/scripts and cleanup.sh
+    SCRIPT_DIR="$HOME/scripts"
     CLEANUP_SCRIPT="$SCRIPT_DIR/cleanup.sh"
 
     # Check if the script directory exists, if not, create it
@@ -94,7 +94,7 @@ EOF
     fi
 
     # Check and add the cleanup.sh script to the sudo crontab if not already present
-    CRON_JOB="01 00 * * * /home/pi/scripts/cleanup.sh"
+    CRON_JOB="01 00 * * * $HOME/scripts/cleanup.sh"
     ( sudo crontab -l | grep -q "$CRON_JOB" ) || ( sudo crontab -l; echo "$CRON_JOB" ) | sudo crontab -
 
     # Inform the user that the crontab entry has been added if it was not present

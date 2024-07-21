@@ -56,7 +56,7 @@ else
 fi
 
 #
- 	cd /home/pi/
+ 	cd $HOME/
 	SUDOERS_FILE="/etc/sudoers.d/svxlink"
 	SOURCE_FILE="svxlinkbuilder/www-data.sudoers"
 	if [ ! -f "$SOURCE_FILE" ]; then
@@ -79,13 +79,13 @@ cat "$SOURCE_FILE" > "$SUDOERS_FILE"
 chmod 0440 "$SUDOERS_FILE"
  	echo -e "$(date)" "${RED} #### Downloading prepared configuration files from the scripts #### ${NORMAL}" | sudo tee -a  /var/log/install.log
  	
-	sudo mkdir /home/pi/scripts
-	sudo cp -f /home/pi/svxlinkbuilder/addons/10-uname /etc/update-motd.d/
- 	sudo cp -f /home/pi/svxlinkbuilder/configs/svxlink.conf /etc/svxlink/
-	sudo cp -f /home/pi/svxlinkbuilder/configs/Logic.tcl /usr/share/svxlink/events.d/local/Logic.tcl
- 	sudo cp -f /home/pi/svxlinkbuilder/addons/node_info.json /etc/svxlink/node_info.json
- 	sudo cp -f /home/pi/svxlinkbuilder/resetlog.sh /home/pi/scripts/resetlog.sh
- 	(sudo crontab -l 2>/dev/null; echo "59 23 * * * /home/pi/scripts/resetlog.sh ") | sudo crontab -
+	sudo mkdir $HOME/scripts
+	sudo cp -f $HOME/svxlinkbuilder/addons/10-uname /etc/update-motd.d/
+ 	sudo cp -f $HOME/svxlinkbuilder/configs/svxlink.conf /etc/svxlink/
+	sudo cp -f $HOME/svxlinkbuilder/configs/Logic.tcl /usr/share/svxlink/events.d/local/Logic.tcl
+ 	sudo cp -f $HOME/svxlinkbuilder/addons/node_info.json /etc/svxlink/node_info.json
+ 	sudo cp -f $HOME/svxlinkbuilder/resetlog.sh $HOME/scripts/resetlog.sh
+ 	(sudo crontab -l 2>/dev/null; echo "59 23 * * * $HOME/scripts/resetlog.sh ") | sudo crontab -
     sudo mkdir /usr/share/svxlink/events.d/local
 	sudo cp /usr/share/svxlink/events.d/*.tcl /usr/share/svxlink/events.d/local/
 	sudo sed -i '/^LINK=\/adds\/dataserver_current\/httpparam/ c\LINK=/cgi-bin/data/dataserver.php?requestType=retrieve&dataSource=metars&hoursBeforeNow=3&stationString=' $MODULE/ModuleMetarInfo.conf
@@ -117,13 +117,13 @@ chmod 0440 "$SUDOERS_FILE"
 
 	#### INSTALLING DASHBOARD ####
  # clear
-	cd /home/pi
+	cd $HOME
 	echo -e "$(date)" "${YELLOW} #### Checking IP Addresses #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	
 	source "${BASH_SOURCE%/*}/functions/get_ip.sh"
 	ipaddress
  # clear
-	cd /home/pi
+	cd $HOME
 	echo -e "$(date)" "${YELLOW} #### Installing Dashboard #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
 	source "${BASH_SOURCE%/*}/functions/dash_install.sh"
@@ -131,7 +131,7 @@ chmod 0440 "$SUDOERS_FILE"
  # clear
 	echo -e "$(date)" "${GREEN} #### Dashboard installed #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	whiptail --title "IP Addresses" --msgbox "Dashboard installed. Please note your IP address is $ip_address on $device" 8 78
-	cd /home/pi/
+	cd $HOME/
 
 	 # clear
 	echo -e "$(date)" "${GREEN} #### Setting up Node #### ${NORMAL}" | sudo tee -a  /var/log/install.log
@@ -149,14 +149,14 @@ chmod 0440 "$SUDOERS_FILE"
 	source "${BASH_SOURCE%/*}/functions/tones.sh"
 	tones
 	echo -e "$(date)" "${GREEN} #### Tones setup complete  #### ${NORMAL}" | sudo tee -a  /var/log/install.log	
-	cd /home/pi
+	cd $HOME
 	 # clear
  	echo -e "$(date)" "${RED} #### Changing ModuleMetar Link #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	source "${BASH_SOURCE%/*}/functions/modulemetar_setup.sh"
 	modulemetar
 	
 	 # clear
-	 cd /home/pi/
+	 cd $HOME/
 	echo -e "$(date)" "${RED} #### Changing ModuleEchoLink Link #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	source "${BASH_SOURCE%/*}/functions/echolink_setup.sh"
 	echolinksetup

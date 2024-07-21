@@ -11,17 +11,17 @@ echo -e "${GREEN} #### OS = $operating_system and Current user = $logname #### $
 source "${BASH_SOURCE%/*}/functions/language.sh"
 which_language
 
-if  [[ "$LANG_OPTION" == "2" ]] 
+if  [[ "$LANG" == "fr_FR.UTF-8" ]] 
 then
 ##French
 sudo ./svxlinkbuilder/install_main_fr.sh
 
-elif  [[ "$LANG_OPTION" == "3" ]]
+elif  [[ "$LANG" == "en_US.UTF-8" ]]
 ##US English
 then
 sudo ./svxlinkbuilder/install_main.sh
 
-elif  [[ "$LANG_OPTION" == "4" ]] 
+elif  [[ "$LANG" == "es_ES.UTF-8" ]] 
 then
 ##Spanish
 sudo ./svxlinkbuilder/install_main_es.sh

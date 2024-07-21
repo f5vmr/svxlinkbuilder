@@ -32,7 +32,7 @@ Reboot for first pass ####
     make_groups #### probably set by svxlink_server, but done to make sure.
     voiceinstall #### Depending on $lang en_GB/en_US/es_ES/fr_FR
     firstbackup #### create a backup of the svxlink.conf in /etc/svxlink
-    node_type #### In the users language changes the svxlink.conf according to the node_type set earlier
+    node_setup #### In the users language changes the svxlink.conf according to the node_type set earlier
     permissions #### Sets special permissions for the Dashboard
     configuration #### Transfers 
     sound_card_setup #### Modified / Unmodified / sets up Editable GPIO Ports for unmodified structures
