@@ -10,7 +10,7 @@ function nodeset {
     then
     node="Simplex avec UK Svxreflector"
     auth_key=$(whiptail --passwordbox "Selectionner un mot-pass SvxReflector" 8 78 --title "password dialog" 3>&1 1>&2 2>&3)
-     sed -i "s/AUTH_KEY=\"GET YOUR OWN KEY\"/AUTH_KEY=\"$auth_key\"/g" /etc/svxlink/svxlink.conf 
+     sed -i "s/AUTH_KEY=\"Change this key now\"/AUTH_KEY=\"$auth_key\"/g" /etc/svxlink/svxlink.conf 
     elif [[ $NODE_OPTION  == "3" ]] 
     then
     node="Repeater sans Svxreflector"
@@ -24,7 +24,7 @@ function nodeset {
     
      sed -i 's/set for SimplexLogic/set pour RepeaterLogic/g' /etc/svxlink/svxlink.conf
      sed -i 's/LOGICS=SimplexLogic/LOGICS=RepeaterLogic/g' /etc/svxlink/svxlink.conf
-     sed -i "s/AUTH_KEY=\"GET YOUR OWN KEY\"/AUTH_KEY=\"$auth_key\"/g" /etc/svxlink/svxlink.conf 
+     sed -i "s/AUTH_KEY=\"CHange this key now\"/AUTH_KEY=\"$auth_key\"/g" /etc/svxlink/svxlink.conf 
     else    
     node="unset"
     fi
