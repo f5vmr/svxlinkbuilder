@@ -74,13 +74,13 @@ chmod 0440 "$SUDOERS_FILE"
  	sudo touch /etc/sudoers.d/svxlink
 	sudo mkdir /home/pi/scripts
 	sudo cp -f /home/pi/svxlinkbuilder/addons/10-uname /etc/update-motd.d/
- 	sudo cp -f /home/pi/svxlinkbuilder/configs/svxlink.conf /etc/svxlink/
-	sudo cp -f /home/pi/svxlinkbuilder/configs/Logic.tcl /usr/share/svxlink/events.d/local/Logic.tcl
-	sudo cp -f /home/pi/svxlinkbuilder/addons/node_info.json /etc/svxlink/node_info.json
+ 	sudo cp -f /home/pi/svxlinkbuilder/addons/node_info.json /etc/svxlink/node_info.json
  	sudo cp -f /home/pi/svxlinkbuilder/resetlog.sh /home/pi/scripts/resetlog.sh
  	(sudo crontab -l 2>/dev/null; echo "59 23 * * * /home/pi/scripts/resetlog.sh ") | sudo crontab -
     sudo mkdir /usr/share/svxlink/events.d/local
 	sudo cp /usr/share/svxlink/events.d/*.tcl /usr/share/svxlink/events.d/local/
+	sudo cp -f /home/pi/svxlinkbuilder/configs/svxlink.conf /etc/svxlink/
+	sudo cp -f /home/pi/svxlinkbuilder/configs/Logic.tcl /usr/share/svxlink/events.d/local/Logic.tcl
 	sudo sed -i 's|LINK=/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&hoursBeforeNow=3&mostRecent=|LINK=/cgi-bin/data/dataserver.php?requestType=retrieve&dataSource=metars&hoursBeforeNow=3&stationString=|' $MODULE/ModuleMetarInfo.conf
  # clear
 	echo -e "$(date)" "${GREEN} #### Indicatif à $CALL #### ${NORMAL}" | sudo tee -a  /var/log/install.log
