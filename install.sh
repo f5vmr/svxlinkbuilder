@@ -4,7 +4,7 @@
 # clear
 source "${BASH_SOURCE%/*}/functions/initialise.sh"
 initialise
-cd $HOME
+cd /home/pi
 echo -e "${GREEN} #### OS = $operating_system and Current user = $logname #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 #### SuperUser Install ####
 #### LANGUAGE ####

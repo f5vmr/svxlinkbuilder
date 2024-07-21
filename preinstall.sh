@@ -1,5 +1,5 @@
 #/bin/bash
-    cd $HOME
+    cd /home/pi
     logname=$(whoami)
     #### INITIALISE ####
     source "${BASH_SOURCE%/*}/functions/initialise.sh"
@@ -28,11 +28,11 @@
     sudo sed -i 's/options snd-usb/\#options snd-usb/g' /lib/modprobe.d/aliases.conf
     echo -e "${BLUE}#### Disabling HMDI Sound - Not required for this build ####${WHITE}"| sudo tee -a /var/log/install.log
     sudo sed -i 's/dtoverlay=vc4-kms-v3d/dtoverlay=vc4-kms-v3d,noaudio/g' /boot/firmware/config.txt
-    sudo cp -f $HOME/svxlinkbuilder/configs/asound.conf /etc/modprobe.d/asound.conf
+    sudo cp -f /home/pi/svxlinkbuilder/configs/asound.conf /etc/modprobe.d/asound.conf
     echo -e "${BLUE}#### Setting up Loopback Soundcard ####${WHITE}" | sudo tee -a /var/log/install.log
     echo snd-aloop > /etc/modules
     sudo chmod 775 /etc/modules
-    sudo cp -f $HOME/svxlinkbuilder/configs/loopback.conf /etc/asound.conf
+    sudo cp -f /home/pi/svxlinkbuilder/configs/loopback.conf /etc/asound.conf
     echo -e "${BLUE}#### Reseting alsa-state.service ####${WHITE}" | sudo tee -a /var/log/install.log
     sudo mkdir /etc/alsa
     sudo touch /etc/alsa/state-daemon.conf

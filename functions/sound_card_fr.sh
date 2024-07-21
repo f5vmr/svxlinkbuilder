@@ -64,7 +64,7 @@ echo "Variable assigned: $sound_card_variable"
     if [[ "$card" = true ]] 
     then
     echo "Ok, allons y - changer les règles udev pour le USB sound card"
-               sudo cp $HOME/svxlinkbuilder/addons/cm-108.rules /etc/udev/rules.d/
+               sudo cp /home/pi/svxlinkbuilder/addons/cm-108.rules /etc/udev/rules.d/
                sudo udevadm control --reload-rules
                sudo udevadm trigger
                 
