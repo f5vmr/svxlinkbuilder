@@ -123,7 +123,7 @@ chmod 0440 "$SUDOERS_FILE"
 	echo -e "$(date)" "${YELLOW} #### Instalación del panel #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
 	source "${BASH_SOURCE%/*}/functions/dash_install_es.sh"
-install_dash
+dash_install
  # clear
 	echo -e "$(date)" "${GREEN} #### Panel instalado #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	whiptail --title "Adresses IP" --msgbox "Tablero instalado. Tenga en cuenta que su dirección IP es $ip_address en $device" 8 78
