@@ -24,7 +24,7 @@ echo -e "$(date)" "${YELLOW} #### Checking Alsa #### ${NORMAL}" | sudo tee -a  /
 source "${BASH_SOURCE%/*}/functions/callsign.sh"
 callsign
 #### GROUPS AND USERS ####
-clear
+# clear
 echo -e "$(date)" "${YELLOW} #### Creating Groups and Users #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 source "${BASH_SOURCE%/*}/functions/groups.sh"
 make_groups
