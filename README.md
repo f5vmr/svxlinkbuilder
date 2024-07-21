@@ -102,4 +102,9 @@
 <p>73 - Chris G4NAB </p>
 <p>Everything introduced here is directly from the original presentation by Tobias SM0SVX.</p>
 
-
+<h2>Addendum</h2>
+<p>Additional Talk Groups can be added to the Svxlink Configurator.</p>
+<p>Airports can be added and removed as required in the MetarInfo Configurator.</p
+<p>The Audio dashboard seems not to work for the moment.</p>
+<p>Module EchoLink can be added throught the dashboard, in the EchoLink configurator first of all, then add ModuleEchoLink to the MODULES= line in the [SimplexLogic] or [RepeaterLogic] section of the Svxlink Configurator.</p>
+<p>Amixer can be adjusted using the dashboard, and is more efficient than alsamixer in the terminal.</p>
