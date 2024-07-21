@@ -4,6 +4,7 @@ lang=$(echo $LANG | grep -o '^[a-zA-Z]*_[a-zA-Z]*')
 CONF="/etc/svxlink/svxlink.conf"
 MODULE="/etc/svxlink/svxlink.d"
 OP=/etc/svxlink
+export HOME
 #### Welcome Message ####
 source "${BASH_SOURCE%/*}/functions/welcome.sh"
 welcome
