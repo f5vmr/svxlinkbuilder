@@ -1,6 +1,6 @@
 #!/bin/bash
 function configure {
-     file="$HOME/svxlinkbuilder/functions/config.txt"
+     file="/home/pi/svxlinkbuilder/functions/config.txt"
     echo "File path: $file"  # Debugging statement
     if [ -r "$file" ]; then
         echo "File is readable"   
