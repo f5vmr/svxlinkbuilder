@@ -29,6 +29,16 @@
 <p>Puedes configurar tu configuración de Wi-Fi aquí si lo deseas.</p>
 <b>Siempre marque la casilla SSH en la segunda pestaña del cuadro siguiente; de ​​lo contrario, eso también provocará que la instalación falle.</b> puede usar una contraseña o establecer una clave si lo desea.</p>
 <p>Una vez completado, expulse la tarjeta, instálela en la Raspberry Pi y enciéndala. Introduce el usuario <b>pi</b> y tu contraseña.</p>
+<h2>Los usuarios de una tarjeta usvxcard y la tarjeta udracard de Juan Hagen F8ASB deben seguir este paso adicional antes de la compilación. Los demás usuarios saltan al siguiente párrafo.</h2>
+<p>Primero ejecute sudo apt update && sudo apt upgrade -y antes de continuar, luego sudo apt install -y git</p>
+<p>Utilizando sudo raspb-config en la terminal, asegúrese de que tanto la interfaz serial como el i2C estén habilitados.</p>
+<p>git clone https://github.com/HinTak/seeed-voicecard</p>
+<p>cd seeed-voicecard</p>
+<p>git checkout v6.6</p>
+<p>sudo ./install.sh</p>
+<p>Esto instalará los controladores de audio para la tarjeta usvxcard y la tarjeta udracard.</p>
+<p>Ahora puede continuar con el siguiente paso.</p>
+<p>Habrá un paso más para programar la tarjeta SA818, luego de finalizar la instalación.</p>
 <h2>La construcción</h2>
 <b>No actualice el sistema en esta etapa.</b>
 <p>Este script también instalará una tarjeta de sonido ficticia para el uso de Darkice y Icecast2.</p>
@@ -97,3 +107,17 @@
 
 <p>73 - Chris G4NAB</p>
 <p>Todo lo que se presenta aquí proviene directamente de la presentación original de Tobias SM0SVX.</p>
+<h2>Adenda</h2>
+<p>Los grupos de conversación deben agregarse al configurador Svxlink en ReflectorLogic y asegurarse de que la marca de verificación esté marcada al lado.</p>
+<p>Se pueden agregar y eliminar aeropuertos según sea necesario en el configurador MetarInfo.</p
+<p>El panel de control de audio parece no funcionar por el momento.</p>
+<p>El módulo EchoLink se puede agregar a través del panel de control, primero en el configurador EchoLink, luego agregue ModuleEchoLink a la línea MODULES= en la sección [SimplexLogic] o [RepeaterLogic] del configurador Svxlink.</p>
+<p>Amixer se puede ajustar usando el panel de control y es más eficiente que alsamixer en la terminal. Seleccione la configuración recomendada dentro de la ventana.</p>
+<p>Esta función no funciona para la tarjeta usvxcard de F8ASB. Debe ir a la terminal y escribir sudo alsamixer. Reduce todos los ajustes a alrededor del 60%.</p>
+<p>Por último, para los usuarios de F8ASB, ajuste el módulo SA818.</p>
+<p>Ya deberías haber habilitado la interfaz USB, que en el menú de Raspberry Pi debería ser /dev/ttyS0. </p>
+<p>sudo git clone https://github.com/0x9900/sa818</p>
+<p>cd sa818</p>
+<p>sudo python3 setup.py install</p>
+<p>sa818 --port /dev/ttyS0 radio --frequency 430.125 --squelch 2 --bw 0</p>
+<p>Este comando es simplemente para comunicarse con el puerto serial para configurar la radio a una frecuencia de 430.125 MHz con un nivel de silenciamiento 2 y un ancho de banda de 12.5 kHz. Por supuesto, sustituye tu propia frecuencia. Para obtener asistencia completa sobre el tipo SA818, escriba SA818 -h para todas las opciones.</p>

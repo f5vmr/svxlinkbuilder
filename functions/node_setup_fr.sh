@@ -33,18 +33,9 @@ whiptail --title "Node" --msgbox "Selectioné node-type $node" 8 78
 node_type=$(echo $node | awk '{print $1}')
 sed -i "s/SvxLink server setting: SimplexLogic/SvxLink server setting: $node_type/" /etc/svxlink/svxlink.conf
 ##That's the Logics taken care of now we need to change the sound card settings 
-output=$(aplay -l)
 
-## Use grep to find the line containing the desired sound card
-line=$(echo "$output" | grep "USB Audio")
-
-## Extract the card number from the line
-card_number=$(echo "$line" | awk '{print $2}' | tr -d ':')
-whiptail --title "Sound Card" --msgbox "La carte-son USB se trouve à carte $card_number." 8 78
-
-## Use sed to replace the line with the new one even if there is no change
-
- sed -i "s/AUDIO_DEV=alsa:plughw:0/AUDIO_DEV=alsa:plughw:$card_number/g" /etc/svxlink/svxlink.conf
+sed -i "s/AUDIO_DEV=alsa:plughw:0/AUDIO_DEV=alsa:plughw:$plughw_setting/g" /etc/svxlink/svxlink.conf
+sed -i "s/AUDIO_CHANNEL=0/AUDIO_CHANNEL=$channel_setting/g" /etc/svxlink/svxlink.conf
 ## so even if it is '0' it is still '0'
 ## now we need to change the settings for COS and Squelch.
 ## We need to check if the Squelch is set to '1' or '0'

@@ -36,18 +36,12 @@ whiptail --title "Node" --msgbox "You have select node-type $node" 8 78
 node_type=$(echo $node | awk '{print $1}')
 sed -i "s/SvxLink server setting: SimplexLogic/SvxLink server setting: $node_type/" /etc/svxlink/svxlink.conf
 ##That's the Logics taken care of now we need to change the sound card settings 
-output=$(aplay -l)
 
-## Use grep to find the line containing the desired sound card
-line=$(echo "$output" | grep "USB Audio")
-
-## Extract the card number from the line
-card_number=$(echo "$line" | awk '{print $2}' | tr -d ':')
-whiptail --title "Sound Card" --msgbox "The USB soundcard is located at card $card_number." 8 78
 
 ## Use sed to replace the line with the new one even if there is no change
 
- sed -i "s/AUDIO_DEV=alsa:plughw:0/AUDIO_DEV=alsa:plughw:$card_number/g" /etc/svxlink/svxlink.conf
+ sed -i "s/AUDIO_DEV=alsa:plughw:0/AUDIO_DEV=alsa:plughw:$plughw_setting/g" /etc/svxlink/svxlink.conf
+ sed -i "s/AUDIO_CHANNEL=0/AUDIO_CHANNEL=$channel_setting/g" /etc/svxlink/svxlink.conf
 ## so even if it is '0' it is still '0'
 ## now we need to change the settings for COS and Squelch.
 ## We need to check if the Squelch is set to '1' or '0'
@@ -84,12 +78,12 @@ if [[ "$HID" == "false" ]] && [[ "$GPIOD" == "true" ]] && [[ "$card" == "false" 
     fi
 
     if [[ "$ptt_direction" == "High" ]]; then
-         sed -i 's/\#PTT_TYPE=Hidraw/PTT_TYPE=GPIOD/g' /etc/svxlink/svxlink.conf
+         sed -i 's/\#PTT_TYPE=NONE/PTT_TYPE=GPIOD/g' /etc/svxlink/svxlink.conf
          sed -i 's/\#PTT_GPIOD_CHIP/PTT_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
          sed -i "s/\#PTT_GPIOD_LINE=!24/PTT_GPIOD_LINE=$ptt_pin/g" /etc/svxlink/svxlink.conf
 
     elif [[ "$ptt_direction" == "Low" ]]; then
-        sed -i 's/\#PTT_TYPE=Hidraw/PTT_TYPE=GPIOD/g' /etc/svxlink/svxlink.conf
+        sed -i 's/\#PTT_TYPE=NONE/PTT_TYPE=GPIOD/g' /etc/svxlink/svxlink.conf
         sed -i 's/\#PTT_GPIOD_CHIP/PTT_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
         sed -i "s/\#PTT_GPIOD_LINE=!24/PTT_GPIOD_LINE=!$ptt_pin/g" /etc/svxlink/svxlink.conf
     else
@@ -114,7 +108,7 @@ if [[ "$HID" == "false" ]] && [[ "$GPIOD" == "true" ]] && [[ "$card" == "false" 
         cos_pin="${cos_pin#"gpio "}"
     fi
 
-    sed -i 's/\#SQL_DET=GPIOD/SQL_DET=GPIOD/g' /etc/svxlink/svxlink.conf
+    sed -i 's/\#SQL_DET=VOX/SQL_DET=GPIOD/g' /etc/svxlink/svxlink.conf
     if [[ "$cos_direction" == "High" ]]; then
         sed -i 's/\#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
         sed -i "s/\#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=$cos_pin/g" /etc/svxlink/svxlink.conf
@@ -127,7 +121,7 @@ if [[ "$HID" == "false" ]] && [[ "$GPIOD" == "true" ]] && [[ "$card" == "false" 
     fi
 
 elif [[ "$HID" == "true" ]] && [[ "$GPIOD" == "true" ]] && [[ "$card" == "true" ]]; then
-    sed -i 's/\#PTT_TYPE=Hidraw/PTT_TYPE=Hidraw/g' /etc/svxlink/svxlink.conf
+    sed -i 's/\#PTT_TYPE=NONE/PTT_TYPE=Hidraw/g' /etc/svxlink/svxlink.conf
     sed -i '/^\[Tx1\]$/,/^\[/{ /#HID_DEVICE/ s/#HID_DEVICE/HID_DEVICE/ }' /etc/svxlink/svxlink.conf
     sed -i 's/\#HID_PTT_PIN=GPIO3/HID_PTT_PIN=GPIO3/g' /etc/svxlink/svxlink.conf
 
@@ -149,7 +143,7 @@ elif [[ "$HID" == "true" ]] && [[ "$GPIOD" == "true" ]] && [[ "$card" == "true" 
         cos_pin="${cos_pin#"gpio "}"
     fi
 
-    sed -i 's/\#SQL_DET=GPIOD/SQL_DET=GPIOD/g' /etc/svxlink/svxlink.conf
+    sed -i 's/\#SQL_DET=VOX/SQL_DET=GPIOD/g' /etc/svxlink/svxlink.conf
     if [[ "$cos_direction" == "High" ]]; then
         sed -i 's/\#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
         sed -i "s/\#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=$cos_pin/g" /etc/svxlink/svxlink.conf
@@ -162,10 +156,10 @@ elif [[ "$HID" == "true" ]] && [[ "$GPIOD" == "true" ]] && [[ "$card" == "true" 
     fi
 
 elif [[ "$HID" == "true" ]] && [[ "$GPIOD" == "false" ]] && [[ "$card" == "true" ]]; then
-    sed -i 's/\#PTT_TYPE=Hidraw/PTT_TYPE=Hidraw/g' /etc/svxlink/svxlink.conf
+    sed -i 's/\#PTT_TYPE=NONE/PTT_TYPE=Hidraw/g' /etc/svxlink/svxlink.conf
     sed -i 's/\#HID_DEVICE=/HID_DEVICE=/g' /etc/svxlink/svxlink.conf
     sed -i 's/\#HID_PTT_PIN=GPIO3/HID_PTT_PIN=GPIO3/g' /etc/svxlink/svxlink.conf
-    sed -i 's/\#SQL_DET=GPIOD/SQL_DET=HIDRAW/g' /etc/svxlink/svxlink.conf
+    sed -i 's/\#SQL_DET=VOX/SQL_DET=HIDRAW/g' /etc/svxlink/svxlink.conf
     sed -i 's/\#HID_SQL_PIN/HID_SQL_PIN/g' /etc/svxlink/svxlink.conf
     if [[ "$cos_direction" == "High" ]]; then
         sed -i 's/=VOL_DN/=VOL_UP/g' /etc/svxlink/svxlink.conf

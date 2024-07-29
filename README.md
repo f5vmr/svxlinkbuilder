@@ -31,15 +31,25 @@
 <p>You can set your Wi-Fi settings here if your wish.</p>
 <b>Always check the SSH box on the second tab of the next box, otherwise that will also cause your installation to fail.</b>  you can use a password or set a key if you wish.</p> 
 
-<p>Once complete, eject the card and install it in the raspberry pi and power it up. Enter the user <b>pi</b> and your password.</p> 
+<p>Once complete, eject the card and install it in the raspberry pi and power it up. Enter the user <b>pi</b> and your password.</p>
+<h2>Users of a usvxcard and the udracard from Juan Hagen F8ASB need to follow this additional step before the build. Other users skip to the next paragraph.</h2>
+<p>First perform sudo apt update && sudo apt upgrade -y before proceeding, then sudo apt install -y git</p>
+<p>Using the sudo raspb-config in the terminal, ensure that the serial interface and i2c are both enabled.</p>
+<p>git clone https://github.com/HinTak/seeed-voicecard</p>
+<p>cd seeed-voicecard</p>
+<p>git checkout v6.6</p>
+<p>sudo ./install.sh</p>
+<p>This will install the audio drivers for the usvxcard and udracard.</p>
+<p>You can now proceed to the next step.</p>
+<p>There will be a further step to program the SA818 card, after the end of the install.</p>
 <h2>The Build</h2>
-<b>Do Not update/upgrade the system at this stage.</b>
+<b>Do Not update/upgrade the system at this stage. F8ASB card users ignore this of course.</b>
 <p>This script will install a dummy sound card for the use of Darkice and Icecast2.</p> 
 <p>Step 1: <b>sudo apt install -y git</b> as without this you cannot download from the GitHub.</p>  
 
 <p>Step 2: <b>sudo git clone https://github.com/f5vmr/svxlinkbuilder.git</b> .</p>
 <p>Step 3: <b>At the prompt type ./svxlinkbuilder/preinstall.sh</b> </p>
-<p>You need no input at this stage, until the system shutsdown for a reboot. It will take a while to complete - 20 - 30 minutes.</p>
+<p>You need no input at this stage, until the system shutsdown for a reboot. It will take a while to complete, about 20 minutes.</p>
 <p>Step 4: <b>Login again and at the prompt type ./svxlinkbuilder/install.sh</b> </p>
 <p>Here you will be required to respond to a number of questions in the menu.</p>
 
@@ -103,8 +113,16 @@
 <p>Everything introduced here is directly from the original presentation by Tobias SM0SVX.</p>
 
 <h2>Addendum</h2>
-<p>Additional Talk Groups can be added to the Svxlink Configurator.</p>
+<p>Talk Groups should be added to the Svxlink Configurator in ReflectorLogic, and ensure the tick is checked alongside.</p>
 <p>Airports can be added and removed as required in the MetarInfo Configurator.</p
 <p>The Audio dashboard seems not to work for the moment.</p>
 <p>Module EchoLink can be added throught the dashboard, in the EchoLink configurator first of all, then add ModuleEchoLink to the MODULES= line in the [SimplexLogic] or [RepeaterLogic] section of the Svxlink Configurator.</p>
-<p>Amixer can be adjusted using the dashboard, and is more efficient than alsamixer in the terminal.</p>
+<p>Amixer can be adjusted using the dashboard, and is more efficient than alsamixer in the terminal. Select the recommended settings within the window.</p> 
+<p>This feature does not work for the usvxcard by F8ASB. You should go to the terminal and type sudo alsamixer. Reduce all settings to around 60%.</p>
+<p>Finally for the F8ASB users, tuning the SA818 module.</p>
+<p>You should have by now enabled the USB interface, that in the Raspberry Pi menu, should be /dev/ttyS0. </p>
+<p>sudo git clone https://github.com/0x9900/sa818</p>
+<p>cd sa818</p>
+<p>sudo python3 setup.py install</p>
+<p>sa818 --port /dev/ttyS0 radio --frequency 430.125 --squelch 2 --bw 0</p>
+<p>This command is simply to communicate with the serial port to set the radio to frequency 430.125 MHz with squelch level 2 and bandwidth 12.5 kHz. Of course substitute your own frequency. for full assistance on the SA818 type SA818 -h for all the options. </p>
