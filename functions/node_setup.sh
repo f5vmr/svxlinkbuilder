@@ -78,12 +78,12 @@ if [[ "$HID" == "false" ]] && [[ "$GPIOD" == "true" ]] && [[ "$card" == "false" 
     fi
 
     if [[ "$ptt_direction" == "High" ]]; then
-         sed -i 's/\#PTT_TYPE=Hidraw/PTT_TYPE=GPIOD/g' /etc/svxlink/svxlink.conf
+         sed -i 's/\#PTT_TYPE=NONE/PTT_TYPE=GPIOD/g' /etc/svxlink/svxlink.conf
          sed -i 's/\#PTT_GPIOD_CHIP/PTT_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
          sed -i "s/\#PTT_GPIOD_LINE=!24/PTT_GPIOD_LINE=$ptt_pin/g" /etc/svxlink/svxlink.conf
 
     elif [[ "$ptt_direction" == "Low" ]]; then
-        sed -i 's/\#PTT_TYPE=Hidraw/PTT_TYPE=GPIOD/g' /etc/svxlink/svxlink.conf
+        sed -i 's/\#PTT_TYPE=NONE/PTT_TYPE=GPIOD/g' /etc/svxlink/svxlink.conf
         sed -i 's/\#PTT_GPIOD_CHIP/PTT_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
         sed -i "s/\#PTT_GPIOD_LINE=!24/PTT_GPIOD_LINE=!$ptt_pin/g" /etc/svxlink/svxlink.conf
     else
@@ -108,7 +108,7 @@ if [[ "$HID" == "false" ]] && [[ "$GPIOD" == "true" ]] && [[ "$card" == "false" 
         cos_pin="${cos_pin#"gpio "}"
     fi
 
-    sed -i 's/\#SQL_DET=GPIOD/SQL_DET=GPIOD/g' /etc/svxlink/svxlink.conf
+    sed -i 's/\#SQL_DET=VOX/SQL_DET=GPIOD/g' /etc/svxlink/svxlink.conf
     if [[ "$cos_direction" == "High" ]]; then
         sed -i 's/\#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
         sed -i "s/\#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=$cos_pin/g" /etc/svxlink/svxlink.conf
@@ -121,7 +121,7 @@ if [[ "$HID" == "false" ]] && [[ "$GPIOD" == "true" ]] && [[ "$card" == "false" 
     fi
 
 elif [[ "$HID" == "true" ]] && [[ "$GPIOD" == "true" ]] && [[ "$card" == "true" ]]; then
-    sed -i 's/\#PTT_TYPE=Hidraw/PTT_TYPE=Hidraw/g' /etc/svxlink/svxlink.conf
+    sed -i 's/\#PTT_TYPE=NONE/PTT_TYPE=Hidraw/g' /etc/svxlink/svxlink.conf
     sed -i '/^\[Tx1\]$/,/^\[/{ /#HID_DEVICE/ s/#HID_DEVICE/HID_DEVICE/ }' /etc/svxlink/svxlink.conf
     sed -i 's/\#HID_PTT_PIN=GPIO3/HID_PTT_PIN=GPIO3/g' /etc/svxlink/svxlink.conf
 
@@ -143,7 +143,7 @@ elif [[ "$HID" == "true" ]] && [[ "$GPIOD" == "true" ]] && [[ "$card" == "true" 
         cos_pin="${cos_pin#"gpio "}"
     fi
 
-    sed -i 's/\#SQL_DET=GPIOD/SQL_DET=GPIOD/g' /etc/svxlink/svxlink.conf
+    sed -i 's/\#SQL_DET=VOX/SQL_DET=GPIOD/g' /etc/svxlink/svxlink.conf
     if [[ "$cos_direction" == "High" ]]; then
         sed -i 's/\#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
         sed -i "s/\#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=$cos_pin/g" /etc/svxlink/svxlink.conf
@@ -156,10 +156,10 @@ elif [[ "$HID" == "true" ]] && [[ "$GPIOD" == "true" ]] && [[ "$card" == "true" 
     fi
 
 elif [[ "$HID" == "true" ]] && [[ "$GPIOD" == "false" ]] && [[ "$card" == "true" ]]; then
-    sed -i 's/\#PTT_TYPE=Hidraw/PTT_TYPE=Hidraw/g' /etc/svxlink/svxlink.conf
+    sed -i 's/\#PTT_TYPE=NONE/PTT_TYPE=Hidraw/g' /etc/svxlink/svxlink.conf
     sed -i 's/\#HID_DEVICE=/HID_DEVICE=/g' /etc/svxlink/svxlink.conf
     sed -i 's/\#HID_PTT_PIN=GPIO3/HID_PTT_PIN=GPIO3/g' /etc/svxlink/svxlink.conf
-    sed -i 's/\#SQL_DET=GPIOD/SQL_DET=HIDRAW/g' /etc/svxlink/svxlink.conf
+    sed -i 's/\#SQL_DET=VOX/SQL_DET=HIDRAW/g' /etc/svxlink/svxlink.conf
     sed -i 's/\#HID_SQL_PIN/HID_SQL_PIN/g' /etc/svxlink/svxlink.conf
     if [[ "$cos_direction" == "High" ]]; then
         sed -i 's/=VOL_DN/=VOL_UP/g' /etc/svxlink/svxlink.conf
