@@ -36,14 +36,7 @@ whiptail --title "Node" --msgbox "You have select node-type $node" 8 78
 node_type=$(echo $node | awk '{print $1}')
 sed -i "s/SvxLink server setting: SimplexLogic/SvxLink server setting: $node_type/" /etc/svxlink/svxlink.conf
 ##That's the Logics taken care of now we need to change the sound card settings 
-output=$(aplay -l)
 
-## Use grep to find the line containing the desired sound card
-line=$(echo "$output" | grep "USB Audio")
-
-## Extract the card number from the line
-card_number=$(echo "$line" | awk '{print $2}' | tr -d ':')
-whiptail --title "Sound Card" --msgbox "The USB soundcard is located at card $card_number." 8 78
 
 ## Use sed to replace the line with the new one even if there is no change
 

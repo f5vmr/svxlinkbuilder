@@ -57,7 +57,7 @@ fi
 
 }
 
-## Print the assigned variable value
+{function usb_sound_card_detected
 echo "Variable assigned: $sound_card_variable"
 
     SOUND_OPTION=$(whiptail --title "Tarjeta de sonido USB" --menu "Seleccione las opciones a continuación." 12 78 4 \
@@ -102,20 +102,28 @@ echo "Variable assigned: $sound_card_variable"
     fi                    
 fi
     echo -e "$(date)" "${GREEN}Audio actualizado, tarjeta de sonido ficticia incluida para Darkice completo.${NORMAL}" | sudo tee -a /var/log/install.log
-				
+plughw_setting="0"
+channel_setting="0"
 }
+
 {function seeed_sound_card_detected
 HID=false
 GPIOD=true
 card=true
+plughw_setting="seeed2micvoicecard,0"
+channel_setting="1"
 }
 {function  other_sound_card_detected
 HID=false
 GPIOD=true
 card=true
+plughw_setting="0"
+channel_setting="0"
 }
 {function no_sound_card_detected
 HID=false
 GPIOD=false
 card=false				
+plughw_setting="0"
+channel_setting="0"
 }
