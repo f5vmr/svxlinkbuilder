@@ -1,32 +1,61 @@
 #!/bin/bash
 function soundcard {
 
-card=false
+# Check the sound cards present
+sound_cards=$(cat /proc/asound/cards)
 
-## Run lsusb and filter the output to check for a USB sound card
-lsusb_output=$(lsusb)
+# Initialize variables to identify sound card types
+usb_sound_card_detected=false
+seeed_sound_card_detected=false
+other_sound_card_detected=false
 
-## Check if the USB sound card is present in the lsusb output
-if echo "$lsusb_output" | grep -q "C-Media"; 
-then
-    echo "La tarjeta de sonido USB está presente."
-    USB_sound_card_present=true
-else
-    echo "La tarjeta de sonido USB no está presente."
-    USB_sound_card_present=false
+# Check for USB sound card
+if echo "$sound_cards" | grep -q 'USB-Audio'; then
+    echo "USB sound card detected:"
+    echo "$sound_cards" | grep -A 1 'USB-Audio'
+    usb_sound_card_detected=true
 fi
 
-## Assign the presence of the USB sound card to a variable
-if [[ "$USB_sound_card_present" = true ]] 
-then
-    ## If USB sound card is present, assign some value to a variable
-    sound_card_variable="C-Media USB Sound Device"
-    card=true
-else
-    ## If USB sound card is not present, assign another value to the variable
-    sound_card_variable="Not present"
-    card=false
+# Check for Seeed 2-mic voice card
+if echo "$sound_cards" | grep -q 'seeed-2mic-voicecard'; then
+    echo "Seeed 2-mic voice card detected:"
+    echo "$sound_cards" | grep -A 1 'seeed-2mic-voicecard'
+    seeed_sound_card_detected=true
 fi
+
+# Check for any other sound cards not explicitly identified by name and not Loopback
+if echo "$sound_cards" | grep -q '[0-9] \[' && ! echo "$sound_cards" | grep -q 'Loopback' && ! $usb_sound_card_detected && ! $seeed_sound_card_detected; then
+    echo "Other sound card detected:"
+    echo "$sound_cards" | grep -v 'Loopback'
+    other_sound_card_detected=true
+fi
+
+# If no sound card is detected or only Loopback card is detected
+if ! $usb_sound_card_detected && ! $seeed_sound_card_detected && ! $other_sound_card_detected; then
+    echo "No sound card detected or only Loopback card detected." | tee -a /var/log/install.log
+    no_sound_card_detected
+fi
+
+# Handle based on detected sound card type
+if $usb_sound_card_detected; then
+    echo "Handling USB sound card specifics..." | tee -a /var/log/install.log
+    usb_sound_card_detected
+    # Add your specific handling code here for USB sound card
+fi
+
+if $seeed_sound_card_detected; then
+    echo "Handling Seeed 2-mic voice card specifics..." | tee -a /var/log/install.log
+    seeed_sound_card_detected  
+    # Add your specific handling code here for Seeed 2-mic voice card
+fi
+
+if $other_sound_card_detected; then
+    echo "Handling other sound card specifics..." | tee -a /var/log/install.log
+    other_sound_card_detected
+    # Add your specific handling code here for other sound cards
+fi
+
+}
 
 ## Print the assigned variable value
 echo "Variable assigned: $sound_card_variable"
@@ -74,4 +103,19 @@ echo "Variable assigned: $sound_card_variable"
 fi
     echo -e "$(date)" "${GREEN}Audio actualizado, tarjeta de sonido ficticia incluida para Darkice completo.${NORMAL}" | sudo tee -a /var/log/install.log
 				
+}
+{function seeed_sound_card_detected
+HID=false
+GPIOD=true
+card=true
+}
+{function  other_sound_card_detected
+HID=false
+GPIOD=true
+card=true
+}
+{function no_sound_card_detected
+HID=false
+GPIOD=false
+card=false				
 }
