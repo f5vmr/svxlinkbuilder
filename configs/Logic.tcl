@@ -1,7 +1,7 @@
 ###############################################################################
 #
 # Generic Logic event handlers
-# Includes 3 Minute Time-out Logic
+#
 ###############################################################################
 
 #
@@ -28,8 +28,8 @@ variable min_time_between_ident 120;
 variable short_ident_interval 0;
 variable long_ident_interval 0;
 
-variable short_voice_id_enable  0
-variable short_cw_id_enable     1
+variable short_voice_id_enable  1
+variable short_cw_id_enable     0
 variable short_announce_enable  0
 variable short_announce_file    ""
 
@@ -255,7 +255,7 @@ proc send_rgr_sound {} {
     CW::play $sql_rx_id 200 1000 -10
     set sql_rx_id "?"
   } else {
-    CW::play " K"
+    playTone 440 500 100
   }
   playSilence 100
 }
@@ -405,14 +405,11 @@ proc transmit {is_on} {
 #   rx_id   - The ID of the RX that the squelch opened/closed on
 #   is_open - Set to 1 if the squelch is open or 0 if it's closed
 #
-##proc squelch_open {rx_id is_open} {
-##  variable sql_rx_id;
-##  #puts "The squelch is $is_open on RX $rx_id";
-##  set sql_rx_id $rx_id;
-##}
-#
-# Executed each time the squelch is opened or closed
-#
+#proc squelch_open {rx_id is_open} {
+#  variable sql_rx_id;
+  #puts "The squelch is $is_open on RX $rx_id";
+#  set sql_rx_id $rx_id;
+#}
 proc squelch_open {rx_id is_open} {
   variable sql_rx_id;
   variable second_tick_subscribers;
@@ -452,19 +449,11 @@ proc check_squelch_timeout {} {
 }
 
 proc sound_timeout {} {
-playTone 850 700 100
+CW::play " K"
 #  CW::play "T" 95 750 -4; 
 }
 
-#proc repeater_idle {} {
-#set iterations 8;
-#set base 2;
-#set max [expr {pow($base, $iterations)}];
-#for {set i $iterations} {$i>0} {set i [expr $i - 1]} {
-#playTone 1180 [expr {round(pow($base, $i) * 150 / $max)}] 100;
-#playTone 1200 [expr {round(pow($base, $i) * 150 / $max)}] 100;
-#}
-#}
+#
 # Executed when a DTMF digit has been received
 #   digit     - The detected DTMF digit
 #   duration  - The duration, in milliseconds, of the digit

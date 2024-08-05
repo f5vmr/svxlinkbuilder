@@ -75,6 +75,7 @@ fi
 
 #### Add "-" "...-.-" to CW.tcl
 CWLogic="CW.tcl"
+LOGIC_DIR=/usr/share/svxlink/events.d/local
 cwfile="$LOGIC_DIR/$CWLogic"
 # Adding the VA Bar code to CW.tcl
 sudo sed -i '72a "-" "...-.-"' /usr/share/svxlink/events.d/local/CW.tcl
