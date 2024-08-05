@@ -26,30 +26,30 @@
     sudo sh -c 'echo "blacklist snd_bcm2835" > /etc/modprobe.d/raspi-blacklist.conf'
     echo -e "${BLUE}#### Blacklisting snd_bcm 2835 #### ${WHITE}" | sudo tee -a /var/log/install.log
     sudo sed -i 's/options snd-usb/\#options snd-usb/g' /lib/modprobe.d/aliases.conf
-    echo -e "${BLUE}#### Disabling HMDI Sound - Not required for this build #### $[WHITE}"| sudo tee -a /var/log/install.log
+    echo -e "${BLUE}#### Disabling HMDI Sound - Not required for this build #### ${WHITE}"| sudo tee -a /var/log/install.log
     sudo sed -i 's/dtoverlay=vc4-kms-v3d/dtoverlay=vc4-kms-v3d,noaudio/g' /boot/firmware/config.txt
     sudo cp -f /home/pi/svxlinkbuilder/configs/asound.conf /etc/modprobe.d/asound.conf
-    echo -e "${BLUE}#### Setting up Loopback Soundcard #### $[WHITE}" | sudo tee -a /var/log/install.log
+    echo -e "${BLUE}#### Setting up Loopback Soundcard #### ${WHITE}" | sudo tee -a /var/log/install.log
     echo snd-aloop > /etc/modules
     sudo chmod 775 /etc/modules
     sudo cp -f /home/pi/svxlinkbuilder/configs/loopback.conf /etc/asound.conf
-    echo -e "${BLUE}#### Reseting alsa-state.service #### $[WHITE}" | sudo tee -a /var/log/install.log
+    echo -e "${BLUE}#### Reseting alsa-state.service #### ${WHITE}" | sudo tee -a /var/log/install.log
     sudo mkdir /etc/alsa
     sudo touch /etc/alsa/state-daemon.conf
     sudo systemctl daemon-reload
     sudo systemctl restart alsa-state.service
     ## Install repository key and repository ##
-    echo -e "${YELLOW}#### Installing repository key #### $[WHITE}" | sudo tee -a /var/log/install.log
+    echo -e "${YELLOW}#### Installing repository key #### ${WHITE}" | sudo tee -a /var/log/install.log
     sudo curl -O -q https://online-amateur-radio-club-m0ouk.github.io/oarc-packages/hibby.key
     sudo mv hibby.key /etc/apt/trusted.gpg.d/hibby.asc
-    echo -e "${BLUE}#### Installing repository #### $[WHITE}" | sudo tee -a /var/log/install.log
+    echo -e "${BLUE}#### Installing repository #### ${WHITE}" | sudo tee -a /var/log/install.log
     echo "deb https://online-amateur-radio-club-m0ouk.github.io/oarc-packages bookworm main" | sudo tee -a /etc/apt/sources.list
-    echo -e "${BLUE}#### Updating apt #### $[WHITE}" | sudo tee -a /var/log/install.log
+    echo -e "${BLUE}#### Updating apt #### ${WHITE}" | sudo tee -a /var/log/install.log
     sudo apt update && sudo apt upgrade -y
     ## Install svxlink-server  and dependencies ##
-    echo -e "${BLUE}#### Installing svxlink-server #### $[WHITE}" | sudo tee -a /var/log/install.log
+    echo -e "${BLUE}#### Installing svxlink-server #### ${WHITE}" | sudo tee -a /var/log/install.log
     sudo apt install -y curl svxlink-server qtel apache2 apache2-bin apache2-data apache2-utils php8.2 python3-serial sqlite3 libssl-dev php8.2-sqlite3 toilet libgpiod-dev --fix-missing -y
-    echo -e "${BLUE}#### Installing locales #### $[WHITE}" | sudo tee -a /var/log/install.log
+    echo -e "${BLUE}#### Installing locales #### ${WHITE}" | sudo tee -a /var/log/install.log
     
     ## Must kill the remotetrx.service to avoid a problem later ##
     sudo systemctl stop remotetrx.service
@@ -59,6 +59,6 @@
     ## Set en_GB.UTF-8 as the default locale to begin with.##
     sudo localectl set-locale LANG=en_GB.UTF-8
     echo -e "${CYAN}Locale setup completed.${WHITE}"
-    echo -e "${YELLOW}#### Your next command / prochain commande / próximo comando will be ${GREEN}./svxlinkbuilder/install.sh #### $[WHITE}" | sudo tee -a /var/log/install.log
-    echo -e "${GREEN}#### Login after Rebooting  then ${BLUE} ./svxlinkbuilder/install.sh #### $[WHITE}" | sudo tee -a /var/log/install.log
+    echo -e "${YELLOW}#### Your next command / prochain commande / próximo comando will be ${GREEN}./svxlinkbuilder/install.sh #### ${WHITE}" | sudo tee -a /var/log/install.log
+    echo -e "${GREEN}#### Login after Rebooting  then ${BLUE} ./svxlinkbuilder/install.sh #### ${WHITE}" | sudo tee -a /var/log/install.log
     sudo shutdown -r now
