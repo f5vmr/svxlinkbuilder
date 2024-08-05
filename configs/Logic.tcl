@@ -449,7 +449,7 @@ proc check_squelch_timeout {} {
 }
 
 proc sound_timeout {} {
-CW::play " K"
+playTone 850 700 100
 #  CW::play "T" 95 750 -4; 
 }
 
