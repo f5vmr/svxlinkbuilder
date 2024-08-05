@@ -15,7 +15,7 @@ function timeselect {
     CONFIG_FILE="/etc/svxlink/svxlink.conf"
     
     if [ -f "$CONFIG_FILE" ]; then
-        sed -i "s/TIME_FORMAT=[0-9]*/TIME_FORMAT=$CHOICE/" "$CONFIG_FILE"
+        sed -i "s/^TIME_FORMAT=.*/TIME_FORMAT=\"$CHOICE\"/" "$CONFIG_FILE"
         echo "${GREEN} TIME_FORMAT updated to $CHOICE in $CONFIG_FILE. ${WHITE}" | tee
     else
         echo "Configuration file not found: $CONFIG_FILE"
