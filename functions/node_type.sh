@@ -22,8 +22,7 @@ function nodeoption {
     else 
         echo -e "${RED}You did not choose anything${WHITE}" | sudo tee -a /var/log/install.log
 fi
-echo Node Option $NODE_OPTION
+echo "${GREEN}Node Option ${WHITE} $NODE_OPTION"
 export NODE_OPTION; 
-
 }
             

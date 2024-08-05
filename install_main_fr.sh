@@ -4,6 +4,7 @@ lang=$(echo $LANG | grep -o '^[a-zA-Z]*_[a-zA-Z]*')
 CONF="/etc/svxlink/svxlink.conf"
 MODULE="/etc/svxlink/svxlink.d"
 OP=/etc/svxlink
+export HOME
 #### Welcome Message ####
 source "${BASH_SOURCE%/*}/functions/welcome_fr.sh"
 welcome
@@ -27,7 +28,7 @@ callsign
 # clear
 echo -e "$(date)" "${YELLOW} #### Creation des Groupes and Users #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 source "${BASH_SOURCE%/*}/functions/groups.sh"
- make_groups
+make_groups
 
 #### CONFIGURATION VOICES ####
  # clear
@@ -71,17 +72,16 @@ fi
 cat "$SOURCE_FILE" > "$SUDOERS_FILE"
 chmod 0440 "$SUDOERS_FILE"
  	echo -e "$(date)" "${RED} #### Téléchargement du dossier de configuration #### ${NORMAL}" | sudo tee -a  /var/log/install.log
- 	sudo touch /etc/sudoers.d/svxlink
-	sudo mkdir /home/pi/scripts
+ 	sudo mkdir /home/pi/scripts
 	sudo cp -f /home/pi/svxlinkbuilder/addons/10-uname /etc/update-motd.d/
- 	sudo cp -f /home/pi/svxlinkbuilder/addons/node_info.json /etc/svxlink/node_info.json
+ 	sudo cp -f /home/pi/svxlinkbuilder/configs/svxlink.conf /etc/svxlink/
+    sudo cp -f /home/pi/svxlinkbuilder/addons/node_info.json /etc/svxlink/node_info.json
  	sudo cp -f /home/pi/svxlinkbuilder/resetlog.sh /home/pi/scripts/resetlog.sh
  	(sudo crontab -l 2>/dev/null; echo "59 23 * * * /home/pi/scripts/resetlog.sh ") | sudo crontab -
     sudo mkdir /usr/share/svxlink/events.d/local
 	sudo cp /usr/share/svxlink/events.d/*.tcl /usr/share/svxlink/events.d/local/
-	sudo cp -f /home/pi/svxlinkbuilder/configs/svxlink.conf /etc/svxlink/
 	sudo cp -f /home/pi/svxlinkbuilder/configs/Logic.tcl /usr/share/svxlink/events.d/local/Logic.tcl
-	sudo sed -i 's|LINK=/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&hoursBeforeNow=3&mostRecent=|LINK=/cgi-bin/data/dataserver.php?requestType=retrieve&dataSource=metars&hoursBeforeNow=3&stationString=|' $MODULE/ModuleMetarInfo.conf
+	sudo sed -i '/^LINK=\/adds\/dataserver_current\/httpparam/ c\LINK=/cgi-bin/data/dataserver.php?requestType=retrieve&dataSource=metars&hoursBeforeNow=3&stationString=' $MODULE/ModuleMetarInfo.conf
  # clear
 	echo -e "$(date)" "${GREEN} #### Indicatif à $CALL #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
@@ -130,11 +130,14 @@ chmod 0440 "$SUDOERS_FILE"
 	echo -e "$(date)" "${GREEN} #### Définir du Noed #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 source "${BASH_SOURCE%/*}/functions/node_setup_fr.sh"
 nodeset
-#### Removal of unwanted files ####
+	#### Removal of unwanted files ####
 	#echo -e "$(date)" "${YELLOW} #### Removing unwanted files #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	#source "${BASH_SOURCE%/*}/functions/deletion.sh"
 	#delete
-#### Identification setup ####
+	#### TIME SELECTION ####
+    source "${BASH_SOURCE%/*}/functions/time_selection_fr.sh"
+    timeselect
+	#### Identification setup ####
 	echo -e "$(date)" "${GREEN} #### Identification setup  #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	source "${BASH_SOURCE%/*}/functions/announce_fr.sh"
 	announce
@@ -161,12 +164,13 @@ nodeset
 	
 	 # clear
 	echo -e "$(date)" "${RED} #### Redemmarage du svxlink.service #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-
 	
  	sudo systemctl restart svxlink.service
 
+##.service isn't necessary ##
 
 echo -e "$(date)" "${GREEN} #### Installation complète #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+whiptail --title "Installation Complèté" --msgbox "Installation complèté. Allons-y au Tableau de bord" 8 78
 
 echo -e "$(date)" "${RED} #### SVXLink est prêt  - allez au Tableau #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 

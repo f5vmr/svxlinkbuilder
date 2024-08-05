@@ -56,6 +56,7 @@ if $other_sound_card_detected; then
 fi
 
 }
+## Print the assigned variable value
 
 {function usb_sound_card_detected
 echo "Variable assigned: $sound_card_variable"
@@ -105,7 +106,6 @@ fi
 plughw_setting="0"
 channel_setting="0"
 }
-
 {function seeed_sound_card_detected
 HID=false
 GPIOD=true

@@ -25,7 +25,8 @@ function nodeset {
      sed -i 's/set for SimplexLogic/set pour RepeaterLogic/g' /etc/svxlink/svxlink.conf
      sed -i 's/LOGICS=SimplexLogic/LOGICS=RepeaterLogic/g' /etc/svxlink/svxlink.conf
      sed -i "s/AUTH_KEY=\"CHange this key now\"/AUTH_KEY=\"$auth_key\"/g" /etc/svxlink/svxlink.conf 
-    else    
+     sed -i 's/CONNECT_LOGICS=SimplexLogic:9:/CONNECT_LOGICS=RepeaterLogic:9:/g' /etc/svxlink/svxlink.conf
+        else    
     node="unset"
     fi
 whiptail --title "Node" --msgbox "Selectioné node-type $node" 8 78
@@ -33,6 +34,7 @@ whiptail --title "Node" --msgbox "Selectioné node-type $node" 8 78
 node_type=$(echo $node | awk '{print $1}')
 sed -i "s/SvxLink server setting: SimplexLogic/SvxLink server setting: $node_type/" /etc/svxlink/svxlink.conf
 ##That's the Logics taken care of now we need to change the sound card settings 
+## Use sed to replace the line with the new one even if there is no change
 
 sed -i "s/AUDIO_DEV=alsa:plughw:0/AUDIO_DEV=alsa:plughw:$plughw_setting/g" /etc/svxlink/svxlink.conf
 sed -i "s/AUDIO_CHANNEL=0/AUDIO_CHANNEL=$channel_setting/g" /etc/svxlink/svxlink.conf

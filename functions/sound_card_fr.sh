@@ -56,13 +56,14 @@ if $other_sound_card_detected; then
 fi
 
 }
+## Print the assigned variable value
 
 {function usb_sound_card_detected
 echo "Variable assigned: $sound_card_variable"
 
     SOUND_OPTION=$(whiptail --title "USB Soundcard" --menu "Selectionner des options dessous." 12 78 4 \
-        "1" "Modifié pour Tx et Rx" \
-        "2" "Modifié uniquement pour Tx" \
+        "1" "Modifié pour Tx et Rx (udev uniquement)" \
+        "2" "Modifié uniquement pour Tx (udev TX & GPIOD RX)" \
         "3" "Sans modification (utiliser GPIOD contrôler le Squelch et PTT )" 3>&1 1>&2 2>&3)      
     if [[ "$SOUND_OPTION" = "1" ]] 
     then
@@ -105,7 +106,6 @@ fi
 plughw_setting="0"
 channel_setting="0"
 }
-
 {function seeed_sound_card_detected
 HID=false
 GPIOD=true

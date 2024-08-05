@@ -8,13 +8,9 @@ svxconf_file="$CONF_DIR/svxlink.conf"
 
 #### CW TONE VARIABLES #### IDENTS ####
 # Extract numerical variables from svxlink.conf
-
-
 cw_amp=$(grep -E "CW_AMP" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
 cw_pitch=$(grep -E "CW_PITCH" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
 cw_cpm=$(grep -E "CW_CPM" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
-
-
 short_ident_interval=$(grep -E "SHORT_IDENT_INTERVAL" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
 long_ident_interval=$(grep -E "LONG_IDENT_INTERVAL" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
 
@@ -36,7 +32,7 @@ new_short_ident_interval=$(whiptail --title "INTERVALO DE IDENTIFICACIÓN CORTO"
 new_long_ident_interval=$(whiptail --title "INTERVALO DE IDENTIFICACIÓN LARGO" --menu "Seleccione un intervalo de identificación periódico LARGO:" 15 78 4 0 "None" 30 "30 minutos" 60 "60 minutos" 120 "120 minutos" 3>&1 1>&2 2>&3)
 
 # Replace the existing parameters with the user's new values using sed with double quotes as delimiters
-echo -e "${CYAN}Replacing CW_AMP with ${WHITE}$new_cw_amp"
+echo -e "${CYAN}Replacing CW_AMP with ${WHITE} $new_cw_amp"
 # Escape the minus sign in $new_cw_amp
 
 

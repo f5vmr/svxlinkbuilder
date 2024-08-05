@@ -58,7 +58,6 @@ fi
 }
 ## Print the assigned variable value
 
-
 {function usb_sound_card_detected
 echo "Variable assigned: $sound_card_variable"
 

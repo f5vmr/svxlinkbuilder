@@ -30,7 +30,6 @@ echo -e "$(date)" "${YELLOW} #### Creating Groups and Users #### ${NORMAL}" | su
 source "${BASH_SOURCE%/*}/functions/groups.sh"
 make_groups
 
-
 #### CONFIGURATION VOICES ####
  # clear
 	echo -e "$(date)" "${GREEN} #### Installing Voice Files #### ${NORMAL}" | sudo tee -a  /var/log/install.log
@@ -56,7 +55,7 @@ else
     echo "File $CONF does not exist."
 fi
 
-#
+##
  	cd /home/pi/
 	SUDOERS_FILE="/etc/sudoers.d/svxlink"
 	SOURCE_FILE="svxlinkbuilder/www-data.sudoers"
@@ -79,7 +78,6 @@ fi
 cat "$SOURCE_FILE" > "$SUDOERS_FILE"
 chmod 0440 "$SUDOERS_FILE"
  	echo -e "$(date)" "${RED} #### Downloading prepared configuration files from the scripts #### ${NORMAL}" | sudo tee -a  /var/log/install.log
- 	
 	sudo mkdir /home/pi/scripts
 	sudo cp -f /home/pi/svxlinkbuilder/addons/10-uname /etc/update-motd.d/
  	sudo cp -f /home/pi/svxlinkbuilder/configs/svxlink.conf /etc/svxlink/
@@ -142,6 +140,9 @@ chmod 0440 "$SUDOERS_FILE"
 	#echo -e "$(date)" "${YELLOW} #### Removing unwanted files #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	#source "${BASH_SOURCE%/*}/functions/deletion.sh"
 	#delete
+	#### TIME SELECTION ####
+    source "${BASH_SOURCE%/*}/functions/time_selection.sh"
+    timeselect
 	#### Identification setup ####
 	echo -e "$(date)" "${GREEN} #### Identification setup  #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	source "${BASH_SOURCE%/*}/functions/announce.sh"
@@ -173,14 +174,11 @@ chmod 0440 "$SUDOERS_FILE"
  	sudo systemctl restart svxlink.service
 
 	##.service isn't necessary ##
-
-
 echo -e "$(date)" "${GREEN} #### Installation complete #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 whiptail --title "Installation Complete" --msgbox "Installation complete. Go to the Dashboard" 8 78
 echo -e "$(date)" "${RED} #### Complete #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
 #exit
-
 
  
 

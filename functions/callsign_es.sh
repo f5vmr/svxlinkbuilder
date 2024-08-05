@@ -5,7 +5,6 @@ get_CallVar() {
     echo -e "${CYAN}$call${WHITE}"
 }
 
-
 while true; do
     user_input=$(get_CallVar)
     

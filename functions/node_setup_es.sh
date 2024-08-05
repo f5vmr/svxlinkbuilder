@@ -1,5 +1,5 @@
 #!/bin/bash
-#### Recall options
+#### Recall Node_Options
 function nodeset {
     if [[ $NODE_OPTION  == "1" ]] 
     then 
@@ -25,6 +25,7 @@ function nodeset {
      sed -i 's/set for SimplexLogic/set for RepeaterLogic/g' /etc/svxlink/svxlink.conf
      sed -i 's/LOGICS=SimplexLogic/LOGICS=RepeaterLogic/g' /etc/svxlink/svxlink.conf
      sed -i "s/AUTH_KEY=\"Change this key now\"/AUTH_KEY=\"$auth_key\"/g" /etc/svxlink/svxlink.conf 
+     sed -i 's/CONNECT_LOGICS=SimplexLogic:9:/CONNECT_LOGICS=RepeaterLogic:9:/g' /etc/svxlink/svxlink.conf
     else    
     node="unset"
     fi  
@@ -32,8 +33,8 @@ whiptail --title "Nodo" --msgbox "Tienes seleccionado el tipo de nodo $node" 8 7
 ## Time to change the node
 node_type=$(echo $node | awk '{print $1}')
 sed -i "s/SvxLink server setting: SimplexLogic/SvxLink server setting: $node_type/" /etc/svxlink/svxlink.conf
-
 ##That's the Logics taken care of now we need to change the sound card settings 
+## Use sed to replace the line with the new one even if there is no change
 sed -i "s/AUDIO_DEV=alsa:plughw:0/AUDIO_DEV=alsa:plughw:$plughw_setting/g" /etc/svxlink/svxlink.conf
 sed -i "s/AUDIO_CHANNEL=0/AUDIO_CHANNEL=$channel_setting/g" /etc/svxlink/svxlink.conf
 ## so even if it is '0' it is still '0'
@@ -165,13 +166,7 @@ elif [[ "$HID" == "true" ]] && [[ "$GPIOD" == "false" ]] && [[ "$card" == "true"
 else
     echo no action here    
 fi
-
 sed -i "s/DEFAULT_LANG=en_GB/DEFAULT_LANG=es_ES/g" /etc/svxlink/svxlink.conf
-
 ##need to change the PTT and COS to HID and all the statements to reflect this modified SoundCard Unit - ask for GPIOD pins
-
-
-
-
 }
 

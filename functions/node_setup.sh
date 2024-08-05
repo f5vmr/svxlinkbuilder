@@ -1,8 +1,5 @@
 #!/bin/bash
-
-
 #### Recall Node_Options
-
 function nodeset {
     if [[ $NODE_OPTION  == "1" ]] 
     then 
@@ -37,10 +34,7 @@ whiptail --title "Node" --msgbox "You have select node-type $node" 8 78
 node_type=$(echo $node | awk '{print $1}')
 sed -i "s/SvxLink server setting: SimplexLogic/SvxLink server setting: $node_type/" /etc/svxlink/svxlink.conf
 ##That's the Logics taken care of now we need to change the sound card settings 
-
-
 ## Use sed to replace the line with the new one even if there is no change
-
  sed -i "s/AUDIO_DEV=alsa:plughw:0/AUDIO_DEV=alsa:plughw:$plughw_setting/g" /etc/svxlink/svxlink.conf
  sed -i "s/AUDIO_CHANNEL=0/AUDIO_CHANNEL=$channel_setting/g" /etc/svxlink/svxlink.conf
 ## so even if it is '0' it is still '0'
