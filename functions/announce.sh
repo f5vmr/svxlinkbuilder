@@ -112,10 +112,10 @@ default_duration=100
 if echo "$send_rgr_sound_content" | grep -q "playTone $default_frequency $default_volume $default_duration"; then
     # Default setting is a beep
     default_option="Beep"
-elif echo "$send_rgr_sound_content" | grep -q "CW::play \"K\""; then
+elif echo "$send_rgr_sound_content" | grep -q "CW::play \" K\""; then
     # Default setting is Morse "K"
     default_option="Morse K"
-elif echo "$send_rgr_sound_content" | grep -q "CW::play \"T\""; then
+elif echo "$send_rgr_sound_content" | grep -q "CW::play \" T\""; then
     # Default setting is Morse "T"
     default_option="Morse T"
 elif echo "$send_rgr_sound_content" | grep -q "CW::play \"\""; then
