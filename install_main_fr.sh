@@ -16,9 +16,9 @@ soundcard
 #### NODE Selection ####
 source "${BASH_SOURCE%/*}/functions/node_type_fr.sh"
 nodeoption
-echo -e "$(date)" "${YELLOW} #### Type du Noed: $NODEOPTION #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+echo -e "$(date)" "${YELLOW} #### Type du Noeud: $NODEOPTION #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
-echo -e "$(date)" "${YELLOW} #### Carte de son : $HID $GPIOD $card #### ${NORMAL}" | sudo tee -a  /var/log/install.log	
+echo -e "$(date)" "${YELLOW} #### Carte son : $HID $GPIOD $card #### ${NORMAL}" | sudo tee -a  /var/log/install.log	
 echo -e "$(date)" "${YELLOW} #### Verification d'Alsa #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
 #### REQUEST CALLSIGN ####
@@ -26,13 +26,13 @@ source "${BASH_SOURCE%/*}/functions/callsign_fr.sh"
 callsign
 #### GROUPS AND USERS ####
 # clear
-echo -e "$(date)" "${YELLOW} #### Creation des Groupes and Users #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+echo -e "$(date)" "${YELLOW} #### Creation des Groupes and Utilisateurs #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 source "${BASH_SOURCE%/*}/functions/groups.sh"
 make_groups
 
 #### CONFIGURATION VOICES ####
  # clear
-	echo -e "$(date)" "${GREEN} #### Installation des dossiers de Voix  #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${GREEN} #### Installation des fichiers sons (Voix)  #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
  	cd /usr/share/svxlink/sounds
  	sudo git clone https://github.com/f5vmr/fr_FR.git
@@ -46,7 +46,7 @@ make_groups
  	if [ -f "$CONF" ]; then
     sudo cp -p "$CONF" "$CONF.bak"
 else
-    echo "File $CONF does not exist."
+    echo "File $CONF n'existe pas."
 fi
 
 ##
@@ -54,7 +54,7 @@ cd /home/pi/
 	SUDOERS_FILE="/etc/sudoers.d/svxlink"
 	SOURCE_FILE="svxlinkbuilder/www-data.sudoers"
 	if [ ! -f "$SOURCE_FILE" ]; then
-  whiptail --title "Error" --msgbox "Source file $SOURCE_FILE does not exist. Exiting." 8 78
+  whiptail --title "Error" --msgbox "Fichier source $SOURCE_FILE n'existe pas. Quitter." 8 78
   exit 1
 fi
 
@@ -92,19 +92,19 @@ chmod 0440 "$SUDOERS_FILE"
  	sudo sed -i s/SQL_HANGTIME=2000/SQL_HANGTIME=10/g $CONF
  
  # clear	
-	echo -e "$(date)" "${YELLOW} #### Disabling audio distortion warning messages #### ${NORMAL}"| sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${YELLOW} #### Désactivation des messagess d'alertes de distortion #### ${NORMAL}"| sudo tee -a  /var/log/install.log
 
 
  	sudo sed -i 's/PEAK_METER=1/PEAK_METER=0/g' $CONF
 
  # clear
-	echo -e "$(date)" "${GREEN} #### Updating SplashScreen on startup #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${GREEN} #### Mise à jour écran au demarrage #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
  	sudo sed -i "s/MYCALL/$CALL/g" /etc/update-motd.d/10-uname
  	sudo chmod 0775 /etc/update-motd.d/10-uname
 
  # clear
-	echo -e "$(date)" "${YELLOW} #### Changing Log file suffix ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${YELLOW} #### Changement du suffix du Fichier Log ${NORMAL}" | sudo tee -a  /var/log/install.log
 
 	sudo sed -i '/^LOGFILE=/ { /[^.log]$/ s/$/.log/ }' /etc/default/svxlink
 
@@ -127,38 +127,38 @@ chmod 0440 "$SUDOERS_FILE"
 	cd /home/pi
 
 	 # clear
-	echo -e "$(date)" "${GREEN} #### Définir du Noed #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${GREEN} #### Définir du Noeud #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 source "${BASH_SOURCE%/*}/functions/node_setup_fr.sh"
 nodeset
 	#### Removal of unwanted files ####
-	#echo -e "$(date)" "${YELLOW} #### Removing unwanted files #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	#echo -e "$(date)" "${YELLOW} #### Suppression des fichier Removing indésirables #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	#source "${BASH_SOURCE%/*}/functions/deletion.sh"
 	#delete
 	#### TIME SELECTION ####
     source "${BASH_SOURCE%/*}/functions/time_selection_fr.sh"
     timeselect
 	#### Identification setup ####
-	echo -e "$(date)" "${GREEN} #### Identification setup  #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${GREEN} #### Configuration des paramêtres d'identifications #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	source "${BASH_SOURCE%/*}/functions/announce_fr.sh"
 	announce
-	echo -e "$(date)" "${GREEN} #### Announcement setup complete  #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${GREEN} #### Configuration des paramêtres d'annonces terminés  #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	source "${BASH_SOURCE%/*}/functions/tones_fr.sh"
 	tones
-	echo -e "$(date)" "${GREEN} #### Tones setup complete  #### ${NORMAL}" | sudo tee -a  /var/log/install.log	
+	echo -e "$(date)" "${GREEN} #### Parametres des tonalités terminées  #### ${NORMAL}" | sudo tee -a  /var/log/install.log	
 	cd /home/pi	
 	# clear
-	echo -e "$(date)" "${RED} #### Changement du ModuleMetar #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${RED} #### Configuration du ModuleMetar (météo) #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	source "${BASH_SOURCE%/*}/functions/modulemetar_setup_fr.sh"
 	modulemetar
 	
 	 # clear
 	 cd /home/pi
-	echo -e "$(date)" "${RED} #### Changement du ModuleEchoLink #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${RED} #### Configuration du ModuleEchoLink #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	source "${BASH_SOURCE%/*}/functions/echolink_setup_fr.sh"
 	echolinksetup
 	
 	 # clear
-#	echo -e "$(date)" "${RED} #### Changement du ModulePropagationMonitor #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+#	echo -e "$(date)" "${RED} #### Configuration du ModulePropagationMonitor #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 #	source "${BASH_SOURCE%/*}/functions/propagationmonitor_setup.sh"
 #	propagationmonitor
 	
@@ -170,9 +170,9 @@ nodeset
 ##.service isn't necessary ##
 
 echo -e "$(date)" "${GREEN} #### Installation complète #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-whiptail --title "Installation Complèté" --msgbox "Installation complèté. Allons-y au Tableau de bord" 8 78
+whiptail --title "Installation terminée" --msgbox "Installation terminée. Allons-y au Tableau de bord" 8 78
 
-echo -e "$(date)" "${RED} #### SVXLink est prêt  - allez au Tableau #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+echo -e "$(date)" "${RED} #### SVXLink est prêt  - allez au Tableau de bord (Dashboard)#### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
 #exit
 
