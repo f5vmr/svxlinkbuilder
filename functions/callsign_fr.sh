@@ -1,7 +1,7 @@
 #!/bin/bash
 function callsign {
 get_CallVar() {
-    call=$(whiptail --inputbox "Taper l'indicatif du noed:" 8 78 3>&1 1>&2 2>&3)
+    call=$(whiptail --inputbox "Taper l'indicatif du point d'accès (noeud):" 8 78 3>&1 1>&2 2>&3)
     echo -e "${CYAN}$call${WHITE}"
 }
 
@@ -11,7 +11,7 @@ while true; do
     ## Check if input is empty
     if [ -z "$user_input" ] 
     then
-        whiptail --msgbox "L'indicatif du Noed ne doit pas vide. Essayé encore une fois." 8 78
+        whiptail --msgbox "L'indicatif ne doit pas être vide. Essayez encore une fois." 8 78
     else
         ## If input is not empty, break the loop
         break
@@ -20,5 +20,5 @@ done
 CALL=${user_input^^}
 ## Use the non-empty name
 
-	echo -e "$(date)" "${GREEN} #### Creation du Noed " $CALL " #### ${NORMAL}" | sudo tee -a  /var/log/install.log  
+	echo -e "$(date)" "${GREEN} #### Creation du point d'accès (Noeud) " $CALL " #### ${NORMAL}" | sudo tee -a  /var/log/install.log  
 }
