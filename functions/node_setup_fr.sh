@@ -29,7 +29,7 @@ function nodeset {
         else    
     node="unset"
     fi
-whiptail --title "Node" --msgbox "Selectioné node-type $node" 8 78
+whiptail --title "Node" --msgbox "Selection du type de node $node" 8 78
 ## Time to change the node
 node_type=$(echo $node | awk '{print $1}')
 sed -i "s/SvxLink server setting: SimplexLogic/SvxLink server setting: $node_type/" /etc/svxlink/svxlink.conf
@@ -55,20 +55,20 @@ sed -i "s/AUDIO_CHANNEL=0/AUDIO_CHANNEL=$channel_setting/g" /etc/svxlink/svxlink
 if [[ "$HID" == "false" ]] && [[ "$GPIOD" == "true" ]] && [[ "$card" == "false" ]]; then
 
     ptt_direction=$(whiptail --title "PTT" --radiolist "Selectionez le sens de PTT" 8 78 3 \
-    "High" "Transmit PTT comme active-High" OFF \
-    "Low" "Transmit PTT comme active-Low" OFF 3>&1 1>&2 2>&3)
+    "High" "commutation PTT positive (0 vers +)" OFF \
+    "Low" "commutation PTT négative (+ vers 0)" OFF 3>&1 1>&2 2>&3)
 
-    ptt_pin=$(whiptail --title "PTT Pin" --radiolist "Veuillez saisir le PIN pour PTT  (gpio #)" 16 78 8 \
-        "gpio 24" "comme PTT Pin" ON \
-        "gpio 18" "comme PTT Pin" OFF \
-        "gpio 7" "spotnik PTT Pin" OFF \
-        "gpio 17" "usvxcard PTT" OFF \
-        "gpio 16" "rf-guru PTT" OFF \
-        "gpio 12" "special case PTT" OFF \
+    ptt_pin=$(whiptail --title "PTT Pin" --radiolist "Veuillez saisir le PIN GPIO pour PTT  (gpio #)" 16 78 8 \
+        "gpio 24" "comme Pin PTT" ON \
+        "gpio 18" "comme Pin PTT" OFF \
+        "gpio 7" "spotnik Pin PTT" OFF \
+        "gpio 17" "usvxcard Pin PTT" OFF \
+        "gpio 16" "rf-guru Pin PTT" OFF \
+        "gpio 12" "specifique PTT" OFF \
         "Personnalisé" "Spécifiez votre propre Port GPIO" OFF 3>&1 1>&2 2>&3)
 
     if [[ "$ptt_pin" == "Custom" ]]; then
-        ptt_pin=$(whiptail --inputbox "Spécifiez votre propre Port GPIO pour PTT" 8 78 3>&1 1>&2 2>&3)
+        ptt_pin=$(whiptail --inputbox "Spécifiez votre propre Port GPIO PTT" 8 78 3>&1 1>&2 2>&3)
     else
         ptt_pin="${ptt_pin#"gpio "}"
     fi
@@ -86,9 +86,9 @@ if [[ "$HID" == "false" ]] && [[ "$GPIOD" == "true" ]] && [[ "$card" == "false" 
         echo no actions here.
     fi
 
-    cos_direction=$(whiptail --title "COS" --radiolist "Sélectionnez le sens du COS" 8 78 2 \
-    "High" "Receive COS is active-High" OFF \
-    "Low" "Receive COS is active-Low" OFF 3>&1 1>&2 2>&3)
+    cos_direction=$(whiptail --title "COS" --radiolist "Sélectionnez le sens du COS(détection squelch)" 8 78 2 \
+    "High" "Détection COS est 0 vers +" OFF \
+    "Low" "Détection COS est + vers 0" OFF 3>&1 1>&2 2>&3)
 
     cos_pin=$(whiptail --title "COS Pin" --radiolist "Spécifiez votre propre port GPIO pour COS (gpio #)" 16 78 6 \
         "gpio 23" "comme COS Pin" ON \
@@ -122,8 +122,8 @@ elif [[ "$HID" == "true" ]] && [[ "$GPIOD" == "true" ]] && [[ "$card" == "true" 
     sed -i 's/\#HID_PTT_PIN=GPIO3/HID_PTT_PIN=GPIO3/g' /etc/svxlink/svxlink.conf
 
     cos_direction=$(whiptail --title "COS" --radiolist "Sélectionnez le sens du COS" 10 78 3 \
-    "High" "Rx COS est active-High" OFF \
-    "Low" "Rx COS est active-Low" OFF 3>&1 1>&2 2>&3)
+    "High" "Détection COS est 0 vers +" OFF \
+    "Low" "Détection COS est + vers 0" OFF 3>&1 1>&2 2>&3)
 
     cos_pin=$(whiptail --title "COS Pin" --radiolist "Saisir le pin COS (gpio #)" 16 78 8 \
         "gpio 23" "comme COS Pin" ON \
@@ -131,7 +131,7 @@ elif [[ "$HID" == "true" ]] && [[ "$GPIOD" == "true" ]] && [[ "$card" == "true" 
         "gpio 8" "comme COS Pin" OFF \
         "gpio 10" "spotnik COS Pin" OFF \
         "gpio 12" "rf-guru COS" OFF \
-        "Personnalisé" "Specify your own GPIO Port" OFF 3>&1 1>&2 2>&3)
+        "Personnalisé" "Specifiez votre pin GPIO" OFF 3>&1 1>&2 2>&3)
 
     if [[ "$cos_pin" == "Custom" ]]; then
         cos_pin=$(whiptail --inputbox "Spécifiez votre propre port GPIO pour COS" 8 78 3>&1 1>&2 2>&3)
@@ -160,12 +160,12 @@ elif [[ "$HID" == "true" ]] && [[ "$GPIOD" == "false" ]] && [[ "$card" == "true"
     if [[ "$cos_direction" == "High" ]]; then
         sed -i 's/=VOL_DN/=VOL_UP/g' /etc/svxlink/svxlink.conf
     elif [[ "$cos_direction" == "Low" ]]; then
-        echo leave everything as it is
+        echo ne change rien
     else
-        echo no action here   
+        echo aucune action ici
     fi
 else
-    echo no action here    
+    echo aucune action ici    
 fi
 
 sed -i "s/DEFAULT_LANG=en_GB/DEFAULT_LANG=fr_FR/g" /etc/svxlink/svxlink.conf

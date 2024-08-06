@@ -11,38 +11,38 @@ logicfile="$LOGIC_DIR/$RepeaterLogic"
 
 # Define the options for the whiptail menu
 # Display the whiptail menu and store the selected option in a variable
-selected_option=$(whiptail --title "Sélectionnez l'option de son du répéteur" --menu "Choisir une option de son:" 15 78 4 \
+selected_option=$(whiptail --title "Sélectionnez l'option du son du répéteur" --menu "Choisir une option de tonalité de relais:" 15 78 4 \
     "Ton de Cloche" "Sélectionnez cette option pour la tonalité de cloche par défaut" \
     "Carillon" "Sélectionnez cette option pour un carillon doux" \
     "Pip" "Sélectionnez cette option pour la tonalité pip" \
-    "Silence" "Sélectionnez cette option pour aucune tonalité d'inactivité" \
+    "Silence" "Sélectionnez cette option pour desactiver la tonalité" \
     3>&1 1>&2 2>&3)
 
 # Check if the user canceled or selected an option
 if [ $? -eq 0 ]; then
     case "$selected_option" in
         "Bell Tone")
-            echo "You selected Bell Tone."
+            echo "Vous avez selectionne le son cloche."
             # Add your code for Bell Tone option here
             ;;
         "Chime")
-            echo "You selected Chime."
+            echo "Vous avez selectionne le son carillon."
             sed -i 's/playTone 1100/playTone 1180/g' "$logicfile"
             ;;
         "Pip")
-            echo "You selected Pip."
+            echo "Vous avez selectionne le son Pip."
             sed -i 's/playTone 1100/\#playTone 1100/g' "$logicfile"
             sed -i 's/playTone 1200/\#playTone 1200/g' "$logicfile"
             sed -i '/#playTone 1200 \[expr {round(pow(\$base, \$i) \* 150 \/ \$max)}\] 100;/a\with CW::play "E";' "$logicfile"
             ;;
         "Silence")
-            echo "You selected Silence."
+            echo "Vous avez desavtivé le son."
             sed -i 's/playTone 1100/\#playTone 1100/g' "$logicfile"
             sed -i 's/playTone 1200/\#playTone 1200/g' "$logicfile"
             ;;
     esac
 else
-    echo "You cancelled. Tones not changed."
+    echo "Annulation. PAde de changement de son."
 fi
 
 
@@ -87,7 +87,7 @@ sed -i 's/\#playTone 360 900 50/CW::play \"\-\"\;/' "$logicfile"
 #### 
 else
     # Code to execute if NODE_OPTION is not equal to 3 or 4
-    echo "NODE_OPTION is not 3 or 4. Skipping code..."
+    echo "NODE_OPTION n'est pas 3 ou 4. fermeture du programme..."
     # Add optional alternative code here
 fi
 } 

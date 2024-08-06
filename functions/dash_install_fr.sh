@@ -26,9 +26,9 @@ function dash_install {
 
     # Check if the user pressed Cancel or entered an empty input
     if [ $? -eq 0 ]; then
-        echo "User entered username: $DASHBOARD_USER"
+        echo "Nom d'utiliateur entré: $DASHBOARD_USER"
     else
-        echo "User cancelled the username input."
+        echo "Annulation du nom d'utilisateur entré"
         exit 1
     fi
 
@@ -37,9 +37,9 @@ function dash_install {
 
     # Check if the user pressed Cancel or entered an empty input
     if [ $? -eq 0 ]; then
-        echo "User entered password: [hidden]"
+        echo "Mot de passe utilisateur: [caché]"
     else
-        echo "User cancelled the password input."
+        echo "L'utilisateur à annuler le mot de passe entré."
         exit 1
     fi
 
@@ -50,7 +50,7 @@ function dash_install {
         sudo sed -i "s/define(\"PHP_AUTH_PW\", \".*\");/define(\"PHP_AUTH_PW\", \"$DASHBOARD_PASSWORD\");/" "$CONFIG_FILE"
         echo "The config file $CONFIG_FILE has been updated with the new username and password."
     else
-        echo "Error: Config file $CONFIG_FILE does not exist. Exiting."
+        echo "Error: Config file $CONFIG_FILE n'existe pas. Sortir."
         exit 1
     fi
 
@@ -58,7 +58,7 @@ function dash_install {
     sudo find /var/www/html -exec sudo chown svxlink:svxlink {} +
 
     # Inform the user that the ownership change was successful
-    echo "Ownership of files in /var/www/html has been changed to svxlink:svxlink, except for the script itself."
+    echo "La propriété des fichiers dans /var/www/html a été modifiée en svxlink:svxlink, à l'exception du script lui-même."
 
     # New section to create /home/pi/scripts and cleanup.sh
     SCRIPT_DIR="/home/pi/scripts"
@@ -67,7 +67,7 @@ function dash_install {
     # Check if the script directory exists, if not, create it
     if [ ! -d "$SCRIPT_DIR" ]; then
         mkdir -p "$SCRIPT_DIR"
-        echo "Created directory $SCRIPT_DIR"
+        echo "Creation du reépertoire $SCRIPT_DIR"
     fi
 
     # Check if the cleanup.sh script does not exist
@@ -84,13 +84,13 @@ if [ -d "\$DIR" ]; then
     # Find and delete files older than 7 days
     find "\$DIR" -type f -mtime +7 -exec rm -f {} \;
 else
-    echo "Directory \$DIR does not exist."
+    echo "Le répertoire \$DIR n'existe pas."
 fi
 EOF
 
         # Make the cleanup.sh script executable
         sudo chmod +x "$CLEANUP_SCRIPT"
-        echo "Created and made $CLEANUP_SCRIPT executable."
+        echo "Créer et rendre $CLEANUP_SCRIPT executable."
     fi
 
     # Check and add the cleanup.sh script to the sudo crontab if not already present
@@ -98,7 +98,7 @@ EOF
     ( sudo crontab -l | grep -q "$CRON_JOB" ) || ( sudo crontab -l; echo "$CRON_JOB" ) | sudo crontab -
 
     # Inform the user that the crontab entry has been added if it was not present
-    echo "Ensured that the crontab entry for $CLEANUP_SCRIPT exists."
+    echo "Le ficher $CLEANUP_SCRIPT existe et il est présent dans le crontab."
 }
 
 

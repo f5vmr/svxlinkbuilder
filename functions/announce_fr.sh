@@ -26,13 +26,13 @@ echo -e "${CYAN}Current CW_AMP:${WHITE} $cw_amp"
 # Validate the current CW AMP value
 # Validate the current CW AMP value
 new_cw_amp=$(whiptail --title "CW AMP Amplitude" --inputbox " CW Amplitude Actuelle: $cw_amp dB\nEntrer nouveau valeur pour CW AMP (0 to -10 dB):" 10 78 -- "$cw_amp" 3>&1 1>&2 2>&3)
-new_cw_pitch=$(whiptail --title "CW PITCH Hauteur" --inputbox "CW Ton hauteur Actuel: $cw_pitch Hz\nEntrer nouveau valeur pour l'hauteur (440 to 2200 Hz):" 10 78 "$cw_pitch" 3>&1 1>&2 2>&3)
-new_cw_cpm=$(whiptail --title "CW CPM Vitesse" --inputbox "CW characteres par minute Actuelles: $cw_cpm Characters Per Minute\nEntrer nouveau valeur CW CPM (60 to 200 Charactères Par Minute):" 10 78 "$cw_cpm" 3>&1 1>&2 2>&3)
-new_short_ident_interval=$(whiptail --title "SHORT IDENT INTERVAL" --menu "Selecte Intervale de Ident Court:" 15 78 5 0 "None" 5 "5 minutes" 10 "10 minutes" 15 "15 minutes" 20 "20 minutes" 30 "30 Minutes" 3>&1 1>&2 2>&3)
-new_long_ident_interval=$(whiptail --title "LONG IDENT INTERVAL" --menu "Selecte Intervale de Ident Longe :" 15 78 4 0 "None" 30 "30 minutes" 60 "60 minutes" 120 "120 minutes" 3>&1 1>&2 2>&3)
+new_cw_pitch=$(whiptail --title "CW PITCH Hauteur" --inputbox "CW fréquence Actuelle: $cw_pitch Hz\nEntrer la nouvelle fréquence (440 to 2200 Hz):" 10 78 "$cw_pitch" 3>&1 1>&2 2>&3)
+new_cw_cpm=$(whiptail --title "CW CPM Vitesse" --inputbox "CW caractères par minute actuels: $cw_cpm Characters Per Minute\nEntrer la nouvelle valeur CW CPM (60 to 200 Caractères Par Minute):" 10 78 "$cw_cpm" 3>&1 1>&2 2>&3)
+new_short_ident_interval=$(whiptail --title "SHORT IDENT INTERVAL" --menu "Intervalle de balise courte:" 15 78 5 0 "None" 5 "5 minutes" 10 "10 minutes" 15 "15 minutes" 20 "20 minutes" 30 "30 Minutes" 3>&1 1>&2 2>&3)
+new_long_ident_interval=$(whiptail --title "LONG IDENT INTERVAL" --menu "Intervalle de balise Longue :" 15 78 4 0 "None" 30 "30 minutes" 60 "60 minutes" 120 "120 minutes" 3>&1 1>&2 2>&3)
 
 # Replace the existing parameters with the user's new values using sed with double quotes as delimiters
-echo -e "${CYAN}Replacing CW_AMP with ${WHITE} $new_cw_amp"
+echo -e "${CYAN}Remplacement CW_AMP with ${WHITE} $new_cw_amp"
 # Escape the minus sign in $new_cw_amp
 
 
@@ -79,7 +79,7 @@ for ((i = 0; i < ${#options[@]}; i+=3)); do
 done
 
 # Prompt the user to toggle the variables using a checklist dialog
-new_values=$(whiptail --title "Toggle Logic Timing Variables" --checklist "Toggle Variables" 15 78 4 "${options[@]}" 3>&1 1>&2 2>&3)
+new_values=$(whiptail --title "Changement variable de temps de la logique" --checklist "Toggle Variables" 15 78 4 "${options[@]}" 3>&1 1>&2 2>&3)
 
 # Extract the new values from the checklist dialog
 new_short_voice_id_enable=$(echo "$new_values" | grep -o "Short Voice ID Enable" | wc -l)
@@ -135,9 +135,9 @@ selected_option=$(whiptail --title "Selectionner Son Roger-beep " --menu "Choisi
 case $selected_option in
     "Beep")
         # Prompt for frequency, volume, and duration if "Beep" is selected
-        frequency=$(whiptail --title "Fréquence" --inputbox "Entrer Fréquence (Hz):" 10 50 "$frequency" 3>&1 1>&2 2>&3)
-        volume=$(whiptail --title "Volume" --inputbox "Entrer Volume (0-100):" 10 50 "100" 3>&1 1>&2 2>&3)
-        duration=$(whiptail --title "Duration" --inputbox "Entrer duration (ms):" 10 50 "$default_duration" 3>&1 1>&2 2>&3)
+        frequency=$(whiptail --title "Fréquence" --inputbox "Entrer la fréquence (Hz):" 10 50 "$frequency" 3>&1 1>&2 2>&3)
+        volume=$(whiptail --title "Volume" --inputbox "Entrer le Volume (0-100):" 10 50 "100" 3>&1 1>&2 2>&3)
+        duration=$(whiptail --title "Duration" --inputbox "Entrer la durée (ms):" 10 50 "$default_duration" 3>&1 1>&2 2>&3)
         # Update Logic.tcl with the entered frequency, volume, and duration
         echo "beep"
         sed -i "s/playTone [0-9]\+ [0-9]\+ [0-9]\+/playTone $frequency $volume $duration/g" "$logicfile"

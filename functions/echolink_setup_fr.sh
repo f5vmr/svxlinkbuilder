@@ -1,18 +1,18 @@
 #!/bin/bash
 ## Set up echolink
 function echolinksetup {
-whiptail --title "Setup EchoLink?" --yesno "Ceci va installer l'EchoLink et en configurer" 8 87 
+whiptail --title "Setup EchoLink?" --yesno "Ceci va installer l'EchoLink et le configurer" 8 87 
 if [ $? -eq "0" ] 
 then
     ## "Installing echolink"
     sed -i 's/\#MUTE_LOGIC/MUTE_LOGIC/g' /etc/svxlink/svxlink.d/ModuleEchoLink.conf      
-        echocall=$(whiptail --title "Indicatif F2ABC-L or -R?" --inputbox "Selectionner l'indicatif (-L or -R) comme enregisteré" 8 78 3>&1 1>&2 2>&3)
+        echocall=$(whiptail --title "Indicatif F2ABC-L ou -R?" --inputbox "Selectionner l'indicatif (-L or -R) comme enregistré" 8 78 3>&1 1>&2 2>&3)
         echocall=${echocall^^}
-        echopass=$(whiptail --title "Mot-pass?" --passwordbox "Selectionner le mot-pass" 8 20 3>&1 1>&2 2>&3)
-        echosysop=$(whiptail --title "Prenom du System-Operateur?" --inputbox "Selectionner ton prenom SYSOP" 8 20 3>&1 1>&2 2>&3)
+        echopass=$(whiptail --title "Mot de passe?" --passwordbox "Entrer le mot de passe" 8 20 3>&1 1>&2 2>&3)
+        echosysop=$(whiptail --title "Prenom de l'opérateur?" --inputbox "Indiquez votre prenom" 8 20 3>&1 1>&2 2>&3)
         echosysop=${echosysop^}
-        echofreq=$(whiptail --title "Frequence" --inputbox "Selectionner La frequence sortie en MHz eg 145.2375" 8 20 3>&1 1>&2 2>&3)
-        echolocation=$(whiptail --title "Endroit" --inputbox "Selectionner le Ville ou Dept." 8 20 3>&1 1>&2 2>&3)
+        echofreq=$(whiptail --title "Frequence" --inputbox "Indiquer La fréquence de sortie en MHz ex 145.2375" 8 20 3>&1 1>&2 2>&3)
+        echolocation=$(whiptail --title "Ville" --inputbox "Indiquer la Ville ou le Dept." 8 20 3>&1 1>&2 2>&3)
         echolocation=${echolocation^}
     sed -i "s/CALLSIGN=MYCALL-L/CALLSIGN=$echocall/g" /etc/svxlink/svxlink.d/ModuleEchoLink.conf
     sed -i "s/PASSWORD=MyPass/PASSWORD=$echopass/g" /etc/svxlink/svxlink.d/ModuleEchoLink.conf
