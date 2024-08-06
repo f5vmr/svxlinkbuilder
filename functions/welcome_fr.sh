@@ -1,6 +1,6 @@
 #!/bin/bash
 function welcome {
-message="Bienvenue au monde du SVXLink."
+message="Bienvenue dans le monde de SVXLink."
 whiptail --title "SVXLink" --msgbox "$message" 8 78
 
 }
