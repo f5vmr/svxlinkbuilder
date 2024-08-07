@@ -420,7 +420,7 @@ proc squelch_open {rx_id is_open} {
   variable sql_rx_id;
   variable second_tick_subscribers;
   variable time_elapsed;
-  variable squelch_is_open;
+  global squelch_is_open;
 
   set sql_rx_id $rx_id;
   set squelch_is_open $is_open;
