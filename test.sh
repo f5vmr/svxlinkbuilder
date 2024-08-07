@@ -7,9 +7,10 @@ svxconf_file="$CONF_DIR/svxlink.conf"
 
 #### CW TONE VARIABLES #### IDENTS ####
 # Extract numerical variables from svxlink.conf
-cw_amp=$(grep -E "CW_AMP" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
-cw_pitch=$(grep -E "CW_PITCH" "$svxconf_file"  | awk -F '=' '{print $2}' | tr -d ' ')
-cw_cpm=$(grep -E "CW_CPM" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
+cw_amp=$(grep -E "CW_AMP" "$svxconf_file" | head -n 1 | awk -F '=' '{print $2}' | tr -d ' ')
+
+cw_pitch=$(grep -E "CW_PITCH" "$svxconf_file" | head -n 1  | awk -F '=' '{print $2}' | tr -d ' ')
+cw_cpm=$(grep -E "CW_CPM" "$svxconf_file" | head -n 1 | awk -F '=' '{print $2}' | tr -d ' ')
 short_ident_interval=$(grep -E "SHORT_IDENT_INTERVAL" "$svxconf_file" ) #| awk -F '=' '{print $2}' | tr -d ' ')
 long_ident_interval=$(grep -E "LONG_IDENT_INTERVAL" "$svxconf_file" ) #| awk -F '=' '{print $2}' | tr -d ' ')
 
