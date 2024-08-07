@@ -54,7 +54,7 @@
 
 <p>Ils vous guideront tout au long de l'installation, jusqu'à l'exécution.</p>
 <b>Vous devrez disposez des informations avant de commencer</b>
-<p>1. Les caracteristiques de votre émetteur-récepteur, les infotmations concernant les GPIOs PTT et COS ( active de 0 à positif ou l'inverse)</p>
+<p>1. Les caracteristiques de votre émetteur-récepteur, les informations concernant les GPIOs PTT et COS ( active de 0 à positif ou l'inverse)</p>
 <p>2. L'état et le type de votre carte son USB, modifié, partiellement modifié ou non modifié. Avec une carte son USB entièrement modifiée, il n'y a aucune raison qui empêcherait cette installation sur un autre ordinateur Linux exécutant Debian 12. Il doit s'agir de Debian 12, sinon certaines fonctionnalités échoueront.</p>
 <p>3. Décidez <b>L'indicatif de votre point d'accès</b>.<p>N'utilisez pas de symboles ou de chiffres supplémentaires à ce stade. L'indicatif doit être de notation standard.</p>
 <p>4. Si vous avez décidé d'installer EchoLink, préparez vos informations d'enregistrement.(login et mot de passe)</p>
