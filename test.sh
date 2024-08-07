@@ -31,7 +31,10 @@ if [ "$frequency_band" -eq 1 ]; then
     done
 
     # Debug: Print UHF options to verify
-    echo "UHF Frequencies: ${options[@]}"
+    echo "UHF Frequencies:"
+    for i in "${!options[@]}"; do
+        echo "${options[i]}"
+    done
 
     # UHF frequency selection
     selected_frequency=$(whiptail --title "UHF Frequency Selection" --radiolist \
@@ -48,13 +51,16 @@ elif [ "$frequency_band" -eq 2 ]; then
     done
 
     # Debug: Print VHF options to verify
-    echo "VHF Frequencies: ${options[@]}"
+    echo "VHF Frequencies:"
+    for i in "${!options[@]}"; do
+        echo "${options[i]}"
+    done
 
     # VHF frequency selection
     selected_frequency=$(whiptail --title "VHF Frequency Selection" --radiolist \
     "Select the VHF frequency:" 20 78 12 "${options[@]}" 3>&1 1>&2 2>&3)
 else
-    selected_frequency="Invalid selection or no SA818 device"
+    selected_frequency="Invalid selection"
 fi
 
 # Output the selected frequency for verification
