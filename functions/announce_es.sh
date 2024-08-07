@@ -8,9 +8,9 @@ svxconf_file="$CONF_DIR/svxlink.conf"
 
 #### CW TONE VARIABLES #### IDENTS ####
 # Extract numerical variables from svxlink.conf
-cw_amp=$(grep -E "CW_AMP" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
-cw_pitch=$(grep -E "CW_PITCH" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
-cw_cpm=$(grep -E "CW_CPM" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
+cw_amp=$(grep -E "CW_AMP" "$svxconf_file" | head -n 1 | awk -F '=' '{print $2}' | tr -d ' ')
+cw_pitch=$(grep -E "CW_PITCH" "$svxconf_file" | head -n 1  | awk -F '=' '{print $2}' | tr -d ' ')
+cw_cpm=$(grep -E "CW_CPM" "$svxconf_file" | head -n 1 | awk -F '=' '{print $2}' | tr -d ' ')
 short_ident_interval=$(grep -E "SHORT_IDENT_INTERVAL" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
 long_ident_interval=$(grep -E "LONG_IDENT_INTERVAL" "$svxconf_file" | awk -F '=' '{print $2}' | tr -d ' ')
 
@@ -25,9 +25,9 @@ echo -e "${CYAN}Current CW_AMP:${WHITE} $cw_amp"
 # Prompt the user for input within the specified range
 # Validate the current CW AMP value
 # Validate the current CW AMP value
-new_cw_amp=$(whiptail --title "CW AMP" --inputbox "Presente CW Amplitud: $cw_amp dB\nIntroduzca un nuevo valor para CW AMP (0 to -10 dB):" 10 78 -- "$cw_amp" 3>&1 1>&2 2>&3)
-new_cw_pitch=$(whiptail --title "CW PITCH" --inputbox "Presente CW Tono: $cw_pitch Hz\nIntroduzca un nuevo valor para CW PITCH (440 to 2200 Hz):" 10 78 "$cw_pitch" 3>&1 1>&2 2>&3)
-new_cw_cpm=$(whiptail --title "CW CPM" --inputbox "Presente CW caracters para minuto: $cw_cpm Characters Per Minute\nIntroduzca un nuevo valor para CW CPM (60 a 200 caracteres por minuto):" 10 78 "$cw_cpm" 3>&1 1>&2 2>&3)
+new_cw_amp=$(whiptail --title "CW AMP" --inputbox "Current CW Amplitude: $cw_amp dB\nEnter new value for CW AMP (0 to -10 dB):" 10 78 -- 3>&1 1>&2 2>&3)
+new_cw_pitch=$(whiptail --title "CW PITCH" --inputbox "Current CW Tone Pitch: $cw_pitch Hz\nEnter new value for CW PITCH (440 to 2200 Hz):" 10 78 -- 3>&1 1>&2 2>&3)
+new_cw_cpm=$(whiptail --title "CW CPM" --inputbox "Current CW characters per minute: $cw_cpm \nEnter new value for CW CPM (60 to 200 Characters Per Minute):" 10 78 -- 3>&1 1>&2 2>&3)
 new_short_ident_interval=$(whiptail --title "INTERVALO DE IDENTIFICACIÓN CORTO" --menu "Seleccione un intervalo de identificación periódico CORTO:" 15 78 5 0 "None" 5 "5 minutos" 10 "10 minutos" 15 "15 minutos" 20 "20 minutos" 30 "30 Minutos" 3>&1 1>&2 2>&3)
 new_long_ident_interval=$(whiptail --title "INTERVALO DE IDENTIFICACIÓN LARGO" --menu "Seleccione un intervalo de identificación periódico LARGO:" 15 78 4 0 "None" 30 "30 minutos" 60 "60 minutos" 120 "120 minutos" 3>&1 1>&2 2>&3)
 
@@ -42,15 +42,16 @@ echo -e "${CYAN}Replacing CW_AMP with ${WHITE} $new_cw_amp"
 # Update svxlink.conf with the new values for CW_AMP with the replacement value enclosed in double quotes
 #sed -i "s/^CW_AMP=.*/CW_AMP=\"$new_cw_amp\"/g" -- "$svxconf_file"
 # Update svxlink.conf with the new value for CW_AMP using awk
-sed -i "s/^CW_AMP=.*/CW_AMP=$new_cw_amp/g" "$svxconf_file"
-echo -e "${CYAN}Replacing CW_PITCH with ${WHITE}$new_cw_pitch"
-sed -i "s/^CW_PITCH=.*/CW_PITCH=$new_cw_pitch/g" "$svxconf_file"
-echo -e "${CYAN}Replacing CW_CPM with ${WHITE}$new_cw_cpm"
-sed -i "s/^CW_CPM=.*/CW_CPM=$new_cw_cpm/g" "$svxconf_file"
-echo -e "${CYAN}Replacing SHORT_IDENT_INTERVAL with ${WHITE}$new_short_ident_interval"
-sed -i "s/^SHORT_IDENT_INTERVAL=.*/SHORT_IDENT_INTERVAL=$new_short_ident_interval/g" "$svxconf_file"
-echo -e "${CYAN}Replacing LONG_IDENT_INTERVAL with ${WHITE}$new_long_ident_interval"
-sed -i "s/^LONG_IDENT_INTERVAL=.*/LONG_IDENT_INTERVAL=$new_long_ident_interval/g" "$svxconf_file"
+echo -e "${CYAN}Replacing CW_AMP with ${WHITE} $new_cw_amp"
+sed -i "s/^CW_AMP\s*=\s*.*/CW_AMP = $new_cw_amp/g" "$svxconf_file"
+echo -e "${CYAN}Replacing CW_PITCH with ${WHITE} $new_cw_pitch"
+sed -i "s/^CW_PITCH\s*=\s*.*/CW_PITCH=$new_cw_pitch/g" "$svxconf_file"
+echo -e "${CYAN}Replacing CW_CPM with ${WHITE} $new_cw_cpm"
+sed -i "s/^CW_CPM\s*=\s*.*/CW_CPM=$new_cw_cpm/g" "$svxconf_file"
+echo -e "${CYAN}Replacing SHORT_IDENT_INTERVAL with ${WHITE} $new_short_ident_interval"
+sed -i "s|SHORT_IDENT_INTERVAL=.*|SHORT_IDENT_INTERVAL=$new_short_ident_interval|g" "$svxconf_file"
+echo -e "${CYAN}Replacing LONG_IDENT_INTERVAL with ${WHITE} $new_long_ident_interval"
+sed -i "s|LONG_IDENT_INTERVAL=.*|LONG_IDENT_INTERVAL=$new_long_ident_interval|g" "$svxconf_file"
 echo -e "${YELLOW}Standby for logic changes ${WHITE}"
 #### LOGIC CHANGES ####
 ## Extract the values of the text indicators from Logic.tcl
