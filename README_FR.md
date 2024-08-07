@@ -1,6 +1,6 @@
 #SvxlinkBuilder
 <h1>Création du menu pour Raspberry Pi - Répéteur ou Hotspot. Options EchoLink MetarInfo et SVXReflector</h1>
-<h2> Pour le manuel en Français, README_FR.md. Pour les instructions en espagnol README_ES.md.</h2>
+<h2> Pour le manuel en Anglais, README.md. Pour les instructions en espagnol README_ES.md.</h2>
 <h3>Présentation</h3>
 <p>Cette version de SVXLink contient actuellement une connexion uniquement au <b>svxportal-uk (SvxReflector)</b>. Si cela change, ce manuel evoluera également. Vous pourrez installer un svxreflector plus tard depuis le tableau de bord.</p>
 <p>La connexion au svxreflector fournit une connectivité à l'aide de pseudo-groupes(PG) de discussion vers d'autres points d'accès ou répéteurs du réseau. Pour plus d'informations, cliquer sur ce lien http://svxportal-uk.ddns.net:81.</p>
@@ -33,14 +33,21 @@
 <p>Une fois terminé, éjectez la carte, installez-la dans le Raspberry Pi et allumez-la. Connectez vous en SSH puis Entrez l'utilisateur <b>pi</b> et votre mot de passe.</p>
 <h2>Les utilisateurs d'une carte usvxcard et de la carte udracard de Juan, F8ASB doivent suivre cette étape supplémentaire avant la construction. Les autres utilisateurs passent au paragraphe suivant.</h2>
 <p>Exécutez d'abord sudo apt update && sudo apt upgrade -y avant de continuer, puis sudo apt install -y git</p>
-<p>En utilisant le sudo raspb-config dans le terminal, assurez-vous que l'interface série et l'i2C sont tous deux activés.</p>
+<p>En utilisant le sudo raspb-config dans le terminal, assurez-vous que l'interface série est activés.</p>
+<p>Redémarrez le système, puis reconnectez-vous en tant qu'utilisateur <b>pi</b> et exécutez les commandes suivantes dans le terminal :</p>
+<p>sudo nano /boot/firmware/config.txt</p>
+<p>Ajoutez les lignes suivantes à la fin du fichier :</p>
+<p>dtoverlay=pi3-miniuart-bt</p>
+<p>enable_uart=1</p>
+<p>sudo reboot</p>
+<p>connectez-vous à nouveau en tant qu'utilisateur <b>pi</b> et exécutez les commandes suivantes dans le terminal :</p>
 <p>git clone https://github.com/HinTak/seeed-voicecard</p>
 <p>cd seeed-voicecard</p>
 <p>git checkout v6.6</p>
 <p>sudo ./install.sh</p>
 <p>Cela installera les pilotes audio pour la carte usvxcard et la carte udracard.</p>
 <p>Vous pouvez maintenant passer à l'étape suivante.</p>
-<p>Une étape supplémentaire consistera à programmer la carte SA818, après la fin de l'installation.</p>
+<p>Une étape supplémentaire consistera à programmer la carte SA818, pendant l'installation.</p>
 <h2>La construction</h2>
 <b>Ne pas mettre à jour/mettre à jour le système à cet étape.</b>
 <p>Ce script installera également une carte son factice pour l'utilisation de Darkice et Icecast2.</p>

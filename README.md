@@ -6,6 +6,8 @@
 <p>The connection to the svxreflector provides connectivity using pseudo-talkgroups to other nodes and repeaters on the network. for more information select this link http://svxportal-uk.ddns.net:81.</p>
 <p>This build now contains an automatic three minute timeout for RF users. This is to educate users to keep their speech from being too long.</p>
 <p>This timeout mechanism does not block the user whilst speaking, but superimposes a series of pip-tones with the emission, that are terminated, when the speaker releases the PTT. The squelch mechanism detects this, and sends "Time-out" verbally on the transmission, before issuing a "K" for continued use of the repeater.</p>
+<h3>For users of the SA818 device</h3>
+<p>There will be opportunity to select the programming of it during the installation progress. This is particularly important for the users of the uSvxCard with uDraCard from F8ASB and for the Guru-Rf Hotspot. For users of these devices, extra care and instructions may be required. Watch for them below.</p>
 <h3>Your First Steps</h3>
 <p><b>The Requirements:</b> A Raspberry Pi of any mark, a USB Soundcard, and an interface card (or a modified USB Soundcard and no interface). One or two transceivers. Experience with Shell Commands will help, but is not essential.</p>
 <p>If you are suitably experienced, you will be able to modify the installation once it is complete. But this system will provide you with a working system, and you can then modify it to your own needs should you want to.</p>
@@ -34,16 +36,23 @@
 <p>Once complete, eject the card and install it in the raspberry pi and power it up. Enter the user <b>pi</b> and your password.</p>
 <h2>Users of a usvxcard and the udracard from Juan Hagen F8ASB need to follow this additional step before the build. Other users skip to the next paragraph.</h2>
 <p>First perform sudo apt update && sudo apt upgrade -y before proceeding, then sudo apt install -y git</p>
-<p>Using the sudo raspb-config in the terminal, ensure that the serial interface and i2c are both enabled.</p>
+<p>Using the sudo raspb-config in the terminal, ensure that the serial interface is first enabled.</p>
+<p>Reboot the system and then log back in as the user <b>pi</b> and run the following commands in the terminal:</p>
+<p>sudo nano /boot/firmware/config.txt</p>
+<p>Add the following lines to the end of the file:</p>
+<p>dtoverlay=pi3-miniuart-bt</p>
+<p>enable_uart=1</p>
+<p>sudo reboot</p>
+<p>login again as the user <b>pi</b> and run the following commands in the terminal:</p>
 <p>git clone https://github.com/HinTak/seeed-voicecard</p>
 <p>cd seeed-voicecard</p>
 <p>git checkout v6.6</p>
 <p>sudo ./install.sh</p>
 <p>This will install the audio drivers for the usvxcard and udracard.</p>
 <p>You can now proceed to the next step.</p>
-<p>There will be a further step to program the SA818 card, after the end of the install.</p>
+<p>There will be a further step to program the SA818 card, during the install process.</p>
 <h2>The Build</h2>
-<b>Do Not update/upgrade the system at this stage. F8ASB card users ignore this of course.</b>
+<b>Do Not update/upgrade the system at this stage. SA818 card users ignore this of course, you have done it already.</b>
 <p>This script will install a dummy sound card for the use of Darkice and Icecast2.</p> 
 <p>Step 1: <b>sudo apt install -y git</b> as without this you cannot download from the GitHub.</p>  
 

@@ -1,6 +1,6 @@
 #SvxlinkBuilder
 <h1>Creación de menú para Raspberry Pi: nodo repetidor o punto de acceso. Opciones de EchoLink MetarInfo y SVXReflector</h1>
-<h2> Para instrucciones en francés, README_FR.md. Para instrucciones en español README_ES.md.</h2>
+<h2> Para instrucciones en francés, README_FR.md. Para instrucciones en inglesa README.md.</h2>
 <h3>Introducción</h3>
 <p>Esta compilación de SVXLink actualmente contiene una conexión solo con <b>svxportal-uk (SvxReflector)</b> únicamente. Si esto cambia, también lo hará esta introducción. Puedes dejarlo sin e instalar un svxreflector más tarde a través del Panel.</p>
 <p>La conexión al svxreflector proporciona conectividad mediante pseudogrupos de conversación a otros nodos y repetidores de la red. Para obtener más información, seleccione este enlace http://svxportal-uk.ddns.net:81.</p>
@@ -32,6 +32,13 @@
 <h2>Los usuarios de una tarjeta usvxcard y la tarjeta udracard de Juan Hagen F8ASB deben seguir este paso adicional antes de la compilación. Los demás usuarios saltan al siguiente párrafo.</h2>
 <p>Primero ejecute sudo apt update && sudo apt upgrade -y antes de continuar, luego sudo apt install -y git</p>
 <p>Utilizando sudo raspb-config en la terminal, asegúrese de que tanto la interfaz serial como el i2C estén habilitados.</p>
+<p>Reinicie el sistema y vuelva a iniciar sesión como usuario <b>pi</b> y ejecute los siguientes comandos en la terminal:</p>
+<p>sudo nano /boot/firmware/config.txt</p>
+<p>Agregue las siguientes líneas al final del archivo:</p>
+<p>dtoverlay=pi3-miniuart-bt</p>
+<p>enable_uart=1</p>
+<p>sudo reboot</p>
+<p>Inicie sesión nuevamente como el usuario <b>pi</b> y ejecute los siguientes comandos en la terminal:</p>
 <p>git clone https://github.com/HinTak/seeed-voicecard</p>
 <p>cd seeed-voicecard</p>
 <p>git checkout v6.6</p>
