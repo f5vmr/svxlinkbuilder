@@ -18,7 +18,7 @@ long_ident_interval=$(grep -E "LONG_IDENT_INTERVAL" "$svxconf_file" | awk -F '='
 #    echo "Error: CW_AMP value is not within the specified range (0 to -10 dB)"
 #    exit 1
 #fi
-echo -e "${CYAN}Current CW_AMP:${WHITE} $cw_amp"
+#echo -e "${CYAN}Current CW_AMP:${WHITE} $cw_amp"
 # Prompt the user to input new values for each parameter using whiptail
 # new_cw_amp=$(whiptail --title "CW AMP" --inputbox "Current CW Amplitude: $cw_amp dB\nEnter new value for CW AMP (0 to -10 dB):" 10 78 "$cw_amp" 3>&1 1>&2 2>&3)
 # Prompt the user for input within the specified range
@@ -26,7 +26,7 @@ echo -e "${CYAN}Current CW_AMP:${WHITE} $cw_amp"
 # Validate the current CW AMP value
 new_cw_amp=$(whiptail --title "CW AMP" --inputbox "Current CW Amplitude: $cw_amp dB\nEnter new value for CW AMP (0 to -10 dB):" 10 78 --nocancel 3>&1 1>&2 2>&3)
 new_cw_pitch=$(whiptail --title "CW PITCH" --inputbox "Current CW Tone Pitch: $cw_pitch Hz\nEnter new value for CW PITCH (440 to 2200 Hz):" 10 78 --nocancel 3>&1 1>&2 2>&3)
-new_cw_cpm=$(whiptail --title "CW CPM" --inputbox "Current CW characters per minute: $cw_cpm Characters Per Minute\nEnter new value for CW CPM (60 to 200 Characters Per Minute):" 10 78 --nocancel 3>&1 1>&2 2>&3)
+new_cw_cpm=$(whiptail --title "CW CPM" --inputbox "Current CW characters per minute: $cw_cpm \nEnter new value for CW CPM (60 to 200 Characters Per Minute):" 10 78 --nocancel 3>&1 1>&2 2>&3)
 new_short_ident_interval=$(whiptail --title "SHORT IDENT INTERVAL" --menu "Select SHORT Periodic  Ident Interval:" 15 78 5 0 "None" 5 "5 minutes" 10 "10 minutes" 15 "15 minutes" 20 "20 minutes" 30 "30 Minutes" 3>&1 1>&2 2>&3)
 new_long_ident_interval=$(whiptail --title "LONG IDENT INTERVAL" --menu "Select LONG Periodic Ident Interval:" 15 78 4 0 "None" 30 "30 minutes" 60 "60 minutes" 120 "120 minutes" 3>&1 1>&2 2>&3)
 
