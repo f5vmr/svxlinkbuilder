@@ -419,7 +419,7 @@ proc transmit {is_on} {
 proc squelch_open {rx_id is_open} {
   variable sql_rx_id;
   variable second_tick_subscribers;
-  variable time_elapsed;
+  global time_elapsed;
   global squelch_is_open;
 
   set sql_rx_id $rx_id;
