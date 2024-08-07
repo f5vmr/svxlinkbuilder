@@ -13,6 +13,6 @@ highpass= '1'
 channelspace = '0'     # 0=12.5kHz, 1=25kHz
 txfreq = '431.8500'          # TX frequency
 rxfreq = '431.8500'          # RX frequency
-squelch = '4'        # SQUELCH 0-8 (0 = open)
+squelch = '2'        # SQUELCH 0-8 (0 = open)
 txctcss = '0000'        # CTCSS / CDCSS
 rxctcss = '0000'        # CTCSS / CDCSS
