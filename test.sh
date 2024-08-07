@@ -2,6 +2,8 @@
 
    #!/bin/bash
 
+#!/bin/bash
+
 # UHF or VHF selection
 frequency_band=$(whiptail --title "Frequency Band Selection" --menu "Choose the frequency band:" 10 78 2 \
 "1" "UHF" \
@@ -15,13 +17,16 @@ if [ "$frequency_band" -eq 1 ]; then
         uhf_frequencies+=("$freq")
         freq=$(echo "$freq + 0.0125" | bc)
     done
-    
+
     # Create whiptail menu options from UHF frequencies
     options=()
     for freq in "${uhf_frequencies[@]}"; do
         options+=("$freq" "")
     done
-    
+
+    # Debug: Print options to verify
+    echo "UHF Options: ${options[@]}"
+
     # UHF frequency selection
     selected_frequency=$(whiptail --title "UHF Frequency Selection" --radiolist \
     "Select the UHF frequency:" 20 78 12 "${options[@]}" 3>&1 1>&2 2>&3)
@@ -33,13 +38,16 @@ else
         vhf_frequencies+=("$freq")
         freq=$(echo "$freq + 0.0125" | bc)
     done
-    
+
     # Create whiptail menu options from VHF frequencies
     options=()
     for freq in "${vhf_frequencies[@]}"; do
         options+=("$freq" "")
     done
-    
+
+    # Debug: Print options to verify
+    echo "VHF Options: ${options[@]}"
+
     # VHF frequency selection
     selected_frequency=$(whiptail --title "VHF Frequency Selection" --radiolist \
     "Select the VHF frequency:" 20 78 12 "${options[@]}" 3>&1 1>&2 2>&3)
@@ -47,4 +55,3 @@ fi
 
 # Output the selected frequency for verification
 echo "Selected frequency: $selected_frequency"
-
