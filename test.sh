@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # Function to generate frequency list
 generate_frequencies() {
     local start_freq=$1
@@ -8,7 +7,7 @@ generate_frequencies() {
     local increment=$3
     local -n freq_array=$4
     local freq=$start_freq
-    
+
     while (( $(echo "$freq <= $end_freq" | bc -l) )); do
         freq_array+=("$freq" "")
         freq=$(echo "$freq + $increment" | bc)
@@ -27,8 +26,10 @@ if [ "$frequency_band" -eq 1 ]; then
 
     # Debug: Print UHF options to verify
     echo "UHF Frequencies:"
-    for freq in "${uhf_frequencies[@]}"; do
-        echo "$freq"
+    for i in "${!uhf_frequencies[@]}"; do
+        if (( i % 2 == 0 )); then
+            echo "Frequency: ${uhf_frequencies[i]}"
+        fi
     done
 
     # UHF frequency selection
@@ -41,8 +42,10 @@ elif [ "$frequency_band" -eq 2 ]; then
 
     # Debug: Print VHF options to verify
     echo "VHF Frequencies:"
-    for freq in "${vhf_frequencies[@]}"; do
-        echo "$freq"
+    for i in "${!vhf_frequencies[@]}"; do
+        if (( i % 2 == 0 )); then
+            echo "Frequency: ${vhf_frequencies[i]}"
+        fi
     done
 
     # VHF frequency selection
