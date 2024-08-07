@@ -21,7 +21,7 @@ long_ident_interval=$(grep -E "LONG_IDENT_INTERVAL" "$svxconf_file" | awk -F '='
 #fi
 echo -e "${CYAN}Current CW_AMP:${WHITE} $cw_amp"
 # Prompt the user to input new values for each parameter using whiptail
-# new_cw_amp=$(whiptail --title "CW AMP" --inputbox "Current CW Amplitude: $cw_amp dB\nEnter new value for CW AMP (0 to -10 dB):" 10 60 "$cw_amp" 3>&1 1>&2 2>&3)
+# new_cw_amp=$(whiptail --title "CW AMP" --inputbox "Current CW Amplitude: $cw_amp dB\nEnter new value for CW AMP (0 to -10 dB):" 10 78 "$cw_amp" 3>&1 1>&2 2>&3)
 # Prompt the user for input within the specified range
 # Validate the current CW AMP value
 # Validate the current CW AMP value

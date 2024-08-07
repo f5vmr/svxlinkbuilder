@@ -62,7 +62,7 @@ update_idle_timeout() {
 current_idle_timeout=$(get_idle_timeout)
 
 # Use whiptail to prompt the user for a new IDLE_TIMEOUT value
-new_idle_timeout=$(whiptail --title "Change IDLE_TIMEOUT (End of QSO)" --inputbox "Current IDLE_TIMEOUT in secs : $current_idle_timeout\nEnter new IDLE_TIMEOUT:" 10 60 "$current_idle_timeout" 3>&1 1>&2 2>&3)
+new_idle_timeout=$(whiptail --title "Change IDLE_TIMEOUT (End of QSO)" --inputbox "Current IDLE_TIMEOUT in secs : $current_idle_timeout\nEnter new IDLE_TIMEOUT:" 10 78 "$current_idle_timeout" 3>&1 1>&2 2>&3)
 
 # Check if the user canceled or entered a new value
 if [ $? -eq 0 ]; then
