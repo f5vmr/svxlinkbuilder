@@ -24,33 +24,35 @@ if [ "$frequency_band" -eq 1 ]; then
     uhf_frequencies=()
     generate_frequencies 433.400 434.600 0.0125 uhf_frequencies
 
-    # Debug: Print UHF options to verify
-    echo "UHF Frequencies:"
-    for i in "${!uhf_frequencies[@]}"; do
-        if (( i % 2 == 0 )); then
-            echo "Frequency: ${uhf_frequencies[i]}"
-        fi
+    # Prepare UHF frequencies for whiptail
+    options=()
+    for freq in "${uhf_frequencies[@]}"; do
+        options+=("$freq" "")
     done
+
+    # Debug: Print UHF options to verify
+    echo "UHF Frequencies: ${options[@]}"
 
     # UHF frequency selection
     selected_frequency=$(whiptail --title "UHF Frequency Selection" --radiolist \
-    "Select the UHF frequency:" 20 78 12 "${uhf_frequencies[@]}" 3>&1 1>&2 2>&3)
+    "Select the UHF frequency:" 20 78 12 "${options[@]}" 3>&1 1>&2 2>&3)
 elif [ "$frequency_band" -eq 2 ]; then
     # Generate VHF frequency list
     vhf_frequencies=()
     generate_frequencies 145.200 145.3375 0.0125 vhf_frequencies
 
-    # Debug: Print VHF options to verify
-    echo "VHF Frequencies:"
-    for i in "${!vhf_frequencies[@]}"; do
-        if (( i % 2 == 0 )); then
-            echo "Frequency: ${vhf_frequencies[i]}"
-        fi
+    # Prepare VHF frequencies for whiptail
+    options=()
+    for freq in "${vhf_frequencies[@]}"; do
+        options+=("$freq" "")
     done
+
+    # Debug: Print VHF options to verify
+    echo "VHF Frequencies: ${options[@]}"
 
     # VHF frequency selection
     selected_frequency=$(whiptail --title "VHF Frequency Selection" --radiolist \
-    "Select the VHF frequency:" 20 78 12 "${vhf_frequencies[@]}" 3>&1 1>&2 2>&3)
+    "Select the VHF frequency:" 20 78 12 "${options[@]}" 3>&1 1>&2 2>&3)
 else
     selected_frequency="Invalid selection or no SA818 device"
 fi
