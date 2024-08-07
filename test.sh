@@ -41,15 +41,15 @@ echo -e "${CYAN}Replacing CW_AMP with ${WHITE} $new_cw_amp"
 # Update svxlink.conf with the new values for CW_AMP with the replacement value enclosed in double quotes
 #sed -i "s/^CW_AMP=.*/CW_AMP=\"$new_cw_amp\"/g" -- "$svxconf_file"
 # Update svxlink.conf with the new value for CW_AMP using awk
-sed -i "s/^CW_AMP=.*/CW_AMP=$new_cw_amp/g" "$svxconf_file"
+sed -i "s|^CW_AMP=.*|CW_AMP=$new_cw_amp|g" "$svxconf_file"
 echo -e "${CYAN}Replacing CW_PITCH with ${WHITE} $new_cw_pitch"
-sed -i "s/^CW_PITCH=.*/CW_PITCH=$new_cw_pitch/g" "$svxconf_file"
+sed -i "s|^CW_PITCH=.*|CW_PITCH=$new_cw_pitch|g" "$svxconf_file"
 echo -e "${CYAN}Replacing CW_CPM with ${WHITE} $new_cw_cpm"
-sed -i "s/^CW_CPM=.*/CW_CPM=$new_cw_cpm/g" "$svxconf_file"
+sed -i "s|^CW_CPM=.*|CW_CPM=$new_cw_cpm|g" "$svxconf_file"
 echo -e "${CYAN}Replacing SHORT_IDENT_INTERVAL with ${WHITE} $new_short_ident_interval"
-sed -i "s/^SHORT_IDENT_INTERVAL=.*/SHORT_IDENT_INTERVAL=$new_short_ident_interval/g" "$svxconf_file"
+sed -i "s|^SHORT_IDENT_INTERVAL=.*|SHORT_IDENT_INTERVAL=$new_short_ident_interval|g" "$svxconf_file"
 echo -e "${CYAN}Replacing LONG_IDENT_INTERVAL with ${WHITE} $new_long_ident_interval"
-sed -i "s/^LONG_IDENT_INTERVAL=.*/LONG_IDENT_INTERVAL=$new_long_ident_interval/g" "$svxconf_file"
+sed -i "s|^LONG_IDENT_INTERVAL=.*|LONG_IDENT_INTERVAL=$new_long_ident_interval|g" "$svxconf_file"
 echo -e "${YELLOW}Standby for logic changes ${WHITE}"
 #### LOGIC CHANGES ####
 ## Extract the values of the text indicators from Logic.tcl
