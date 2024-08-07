@@ -59,6 +59,12 @@ variable second_tick_subscribers [list];
 # Contains the ID of the last receiver that indicated squelch activity
 #
 variable sql_rx_id "?";
+#
+# Contains the true or false value of indication squelch activity
+variable squelch_is_open;
+
+# contains the time in seconds since squelch opened
+variable time_elapsed;
 
 #
 # Executed when the SvxLink software is started
@@ -413,8 +419,8 @@ proc transmit {is_on} {
 proc squelch_open {rx_id is_open} {
   variable sql_rx_id;
   variable second_tick_subscribers;
-  global time_elapsed;
-  global squelch_is_open;
+  variable time_elapsed;
+  variable squelch_is_open;
 
   set sql_rx_id $rx_id;
   set squelch_is_open $is_open;
