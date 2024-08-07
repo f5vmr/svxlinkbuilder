@@ -1,12 +1,54 @@
 #!/bin/bash
 function sa818_prog {
-#### This is for the additions of the udracard.sh script to the svxlink.conf file
-band = (whiptail --title "SA818 Device Check" -- "Do you have an SA818 device fitted as a transceiver in your hotspot? If you do not then select 'No' otherwise select 'Yes'." 10 78); then
-    sa818=true
-else
-    sa818=false
-fi
-#### Band checking ####
+    
+    # UHF or VHF selection
+    frequency_band=$(whiptail --title "Frequency Band Selection" --menu "Choose the frequency band:" 10 78 2 \
+    "1" "UHF" \
+    "2" "VHF" 3>&1 1>&2 2>&3)
+    
+    if [ "$frequency_band" -eq 1 ]; then
+        # Generate UHF frequency list
+        uhf_frequencies=()
+        freq=433.400
+        while (( $(echo "$freq <= 434.600" | bc -l) )); do
+            uhf_frequencies+=("$freq")
+            freq=$(echo "$freq + 0.0125" | bc)
+        done
+        
+        # Create whiptail menu options from UHF frequencies
+        options=()
+        for freq in "${uhf_frequencies[@]}"; do
+            options+=("$freq" "")
+        done
+        
+        # UHF frequency selection
+        selected_frequency=$(whiptail --title "UHF Frequency Selection" --radiolist \
+        "Select the UHF frequency:" 20 78 12 "${options[@]}" 3>&1 1>&2 2>&3)
+    else
+        # Generate VHF frequency list
+        vhf_frequencies=()
+        freq=145.200
+        while (( $(echo "$freq <= 145.3375" | bc -l) )); do
+            vhf_frequencies+=("$freq")
+            freq=$(echo "$freq + 0.0125" | bc)
+        done
+        
+        # Create whiptail menu options from VHF frequencies
+        options=()
+        for freq in "${vhf_frequencies[@]}"; do
+            options+=("$freq" "")
+        done
+        
+        # VHF frequency selection
+        selected_frequency=$(whiptail --title "VHF Frequency Selection" --radiolist \
+        "Select the VHF frequency:" 20 78 12 "${options[@]}" 3>&1 1>&2 2>&3)
+    fi
+
+
+# Output the results for verification
+echo "SA818 device fitted: $sa818"
+echo "Selected frequency band: $frequency_band"
+echo "Selected frequency: $selected_frequency"
 
 
 #### Changing Frequency ####
