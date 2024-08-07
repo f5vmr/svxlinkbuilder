@@ -1,8 +1,19 @@
 #!/bin/bash
 
-   #!/bin/bash
 
-#!/bin/bash
+# Function to generate frequency list
+generate_frequencies() {
+    local start_freq=$1
+    local end_freq=$2
+    local increment=$3
+    local -n freq_array=$4
+    local freq=$start_freq
+    
+    while (( $(echo "$freq <= $end_freq" | bc -l) )); do
+        freq_array+=("$freq" "")
+        freq=$(echo "$freq + $increment" | bc)
+    done
+}
 
 # UHF or VHF selection
 frequency_band=$(whiptail --title "Frequency Band Selection" --menu "Choose the frequency band:" 10 78 2 \
@@ -12,45 +23,33 @@ frequency_band=$(whiptail --title "Frequency Band Selection" --menu "Choose the 
 if [ "$frequency_band" -eq 1 ]; then
     # Generate UHF frequency list
     uhf_frequencies=()
-    freq=433.400
-    while (( $(echo "$freq <= 434.600" | bc -l) )); do
-        uhf_frequencies+=("$freq")
-        freq=$(echo "$freq + 0.0125" | bc)
-    done
+    generate_frequencies 433.400 434.600 0.0125 uhf_frequencies
 
-    # Create whiptail menu options from UHF frequencies
-    options=()
+    # Debug: Print UHF options to verify
+    echo "UHF Frequencies:"
     for freq in "${uhf_frequencies[@]}"; do
-        options+=("$freq" "")
+        echo "$freq"
     done
-
-    # Debug: Print options to verify
-    echo "UHF Options: ${options[@]}"
 
     # UHF frequency selection
     selected_frequency=$(whiptail --title "UHF Frequency Selection" --radiolist \
-    "Select the UHF frequency:" 20 78 12 "${options[@]}" 3>&1 1>&2 2>&3)
-else
+    "Select the UHF frequency:" 20 78 12 "${uhf_frequencies[@]}" 3>&1 1>&2 2>&3)
+elif [ "$frequency_band" -eq 2 ]; then
     # Generate VHF frequency list
     vhf_frequencies=()
-    freq=145.200
-    while (( $(echo "$freq <= 145.3375" | bc -l) )); do
-        vhf_frequencies+=("$freq")
-        freq=$(echo "$freq + 0.0125" | bc)
-    done
+    generate_frequencies 145.200 145.3375 0.0125 vhf_frequencies
 
-    # Create whiptail menu options from VHF frequencies
-    options=()
+    # Debug: Print VHF options to verify
+    echo "VHF Frequencies:"
     for freq in "${vhf_frequencies[@]}"; do
-        options+=("$freq" "")
+        echo "$freq"
     done
-
-    # Debug: Print options to verify
-    echo "VHF Options: ${options[@]}"
 
     # VHF frequency selection
     selected_frequency=$(whiptail --title "VHF Frequency Selection" --radiolist \
-    "Select the VHF frequency:" 20 78 12 "${options[@]}" 3>&1 1>&2 2>&3)
+    "Select the VHF frequency:" 20 78 12 "${vhf_frequencies[@]}" 3>&1 1>&2 2>&3)
+else
+    selected_frequency="Invalid selection or no SA818 device"
 fi
 
 # Output the selected frequency for verification
