@@ -24,9 +24,9 @@ long_ident_interval=$(grep -E "LONG_IDENT_INTERVAL" "$svxconf_file" ) #| awk -F 
 # Prompt the user for input within the specified range
 # Validate the current CW AMP value
 # Validate the current CW AMP value
-new_cw_amp=$(whiptail --title "CW AMP" --inputbox "Current CW Amplitude: $cw_amp dB\nEnter new value for CW AMP (0 to -10 dB):" 10 78 --nocancel 3>&1 1>&2 2>&3)
-new_cw_pitch=$(whiptail --title "CW PITCH" --inputbox "Current CW Tone Pitch: $cw_pitch Hz\nEnter new value for CW PITCH (440 to 2200 Hz):" 10 78 --nocancel 3>&1 1>&2 2>&3)
-new_cw_cpm=$(whiptail --title "CW CPM" --inputbox "Current CW characters per minute: $cw_cpm \nEnter new value for CW CPM (60 to 200 Characters Per Minute):" 10 78 --nocancel 3>&1 1>&2 2>&3)
+new_cw_amp=$(whiptail --title "CW AMP" --inputbox "Current CW Amplitude: $cw_amp dB\nEnter new value for CW AMP (0 to -10 dB):" 10 78 -- 3>&1 1>&2 2>&3)
+new_cw_pitch=$(whiptail --title "CW PITCH" --inputbox "Current CW Tone Pitch: $cw_pitch Hz\nEnter new value for CW PITCH (440 to 2200 Hz):" 10 78 -- 3>&1 1>&2 2>&3)
+new_cw_cpm=$(whiptail --title "CW CPM" --inputbox "Current CW characters per minute: $cw_cpm \nEnter new value for CW CPM (60 to 200 Characters Per Minute):" 10 78 -- 3>&1 1>&2 2>&3)
 new_short_ident_interval=$(whiptail --title "SHORT IDENT INTERVAL" --menu "Select SHORT Periodic  Ident Interval:" 15 78 5 0 "None" 5 "5 minutes" 10 "10 minutes" 15 "15 minutes" 20 "20 minutes" 30 "30 Minutes" 3>&1 1>&2 2>&3)
 new_long_ident_interval=$(whiptail --title "LONG IDENT INTERVAL" --menu "Select LONG Periodic Ident Interval:" 15 78 4 0 "None" 30 "30 minutes" 60 "60 minutes" 120 "120 minutes" 3>&1 1>&2 2>&3)
 
@@ -41,6 +41,7 @@ new_long_ident_interval=$(whiptail --title "LONG IDENT INTERVAL" --menu "Select 
 # Update svxlink.conf with the new values for CW_AMP with the replacement value enclosed in double quotes
 #sed -i "s/^CW_AMP=.*/CW_AMP=\"$new_cw_amp\"/g" -- "$svxconf_file"
 # Update svxlink.conf with the new value for CW_AMP using awk
+echo -e "${CYAN}Replacing CW_AMP with ${WHITE} $new_cw_amp"
 sed -i "s/^CW_AMP\s*=\s*.*/CW_AMP = $new_cw_amp/g" "$svxconf_file"
 echo -e "${CYAN}Replacing CW_PITCH with ${WHITE} $new_cw_pitch"
 sed -i "s/^CW_PITCH\s*=\s*.*/CW_PITCH=$new_cw_pitch/g" "$svxconf_file"
