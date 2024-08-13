@@ -17,5 +17,5 @@ case $? in
     band="VHF"
 esac
 
-echo $band " SA818 device fitted: $sa818" | sudo tee -a /var/log/install.log
+echo "$band SA818 device fitted: $sa818 " | sudo tee -a /var/log/install.log
 }
