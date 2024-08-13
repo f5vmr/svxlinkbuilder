@@ -2,8 +2,8 @@
 
 function sa818_prog {
     # Paths to frequency files
-    UHF_FILE="./configs/UHF.txt"
-    VHF_FILE="./configs/VHF.txt"
+    UHF_FILE="/home/pi/svxlinkbuilder/configs/UHF.txt"
+    VHF_FILE="/home/pi/svxlinkbuilder/configs/VHF.txt"
     
     # Determine which frequency file to use based on $band
     if [ "$band" == "UHF" ]; then
