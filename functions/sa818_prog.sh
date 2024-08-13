@@ -18,15 +18,17 @@ function sa818_prog {
         exit 1
     fi
 
-    # Read frequencies into an array
-    IFS=$'\n' read -d '' -r -a frequencies < "$FREQ_FILE"
+    # Read frequencies from the CSV file
+    frequencies=$(tr -d '\r' < "$FREQ_FILE" | tr ',' '\n')
 
     # Build the options array for whiptail
     options=()
-    for freq in "${frequencies[@]}"; do
+    while IFS= read -r freq; do
+        # Ensure the frequency is properly trimmed of any extra spaces or newlines
+        freq=$(echo "$freq" | xargs)
         # Add each frequency as an option with empty item text and default status "OFF"
         options+=("$freq" "" "OFF")
-    done
+    done <<< "$frequencies"
 
     # Debugging: print the options to check them
     echo "Options passed to whiptail: ${options[@]}"
