@@ -34,6 +34,8 @@ function sa818_prog {
     done
 
     # Frequency Selection
+     echo "Options passed to whiptail: ${options[@]}"
+     
     selected_frequency=$(whiptail --title "$band Frequency Selection" --radiolist 10 30 100 20\
     "Select the $band frequency:"  "${options[@]}" 3>&1 1>&2 2>&3)
 
