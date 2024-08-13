@@ -35,7 +35,7 @@ function sa818_prog {
 
     # Frequency Selection
     selected_frequency=$(whiptail --title "$band Frequency Selection" --radiolist \
-    "Select the $band frequency:" 20 78 12 "${options[@]}" 3>&1 1>&2 2>&3)
+    "Select the $band frequency:" 30 100 20 "${options[@]}" 3>&1 1>&2 2>&3)
 
     # Output the results for verification
     echo "SA818 device fitted: $sa818"
