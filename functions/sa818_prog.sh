@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function sa818_prog {
-    # Define file paths
+    # Define full file paths
     UHF_FILE="/home/pi/svxlinkbuilder/configs/UHF.txt"
     VHF_FILE="/home/pi/svxlinkbuilder/configs/VHF.txt"
 
@@ -18,13 +18,14 @@ function sa818_prog {
         exit 1
     fi
 
-    # Load frequencies into an array
-    mapfile -t frequencies < "$FREQ_FILE"
+    # Read frequencies into an array
+    IFS=$'\n' read -d '' -r -a frequencies < "$FREQ_FILE"
 
     # Build the options array for whiptail
     options=()
     for freq in "${frequencies[@]}"; do
-        options+=("$freq" "" "OFF")  # Use "OFF" to start with, or change as needed
+        # Add each frequency as an option with empty item text and default status "OFF"
+        options+=("$freq" "" "OFF")
     done
 
     # Debugging: print the options to check them
