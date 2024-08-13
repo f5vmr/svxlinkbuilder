@@ -5,7 +5,17 @@ if (whiptail --title "SA818 Device Check" --defaultno --yesno "Do you have an SA
 else
     sa818=false
 fi
-
+if (whiptail --title "SA818 Band Check" --radiolist \ "Do you have a VHF or a UHF SA818?" 10 78 2 \ "UHF" "The 430-440 version" ON \"VHF" "145 Mhz Version" OFF 3>&1 1>&2 2>&3); then
 # Output the result for verification
-echo "SA818 device fitted: $sa818" | sudo tee -a /var/log/install.log
+case $? in
+    UHF)
+    echo "UHF selected"
+    band="UHF"
+    ;;
+    VHF)
+    echo "VHF selected"
+    band="VHF"
+esac
+
+echo $band " SA818 device fitted: $sa818" | sudo tee -a /var/log/install.log
 }
