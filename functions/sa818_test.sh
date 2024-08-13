@@ -5,7 +5,7 @@ if (whiptail --title "SA818 Device Check" --defaultno --yesno "Do you have an SA
 else
     sa818=false
 fi
-band=(whiptail --title "SA818 Band Check" --radiolist \ "Do you have a VHF or a UHF SA818?" 10 78 2 \ "UHF" "The 430-440 version" ON \"VHF" "145 Mhz Version" OFF 3>&1 1>&2 2>&3); then
+band=(whiptail --title "SA818 Band Check" --radiolist \ "Do you have a VHF or a UHF SA818?" 10 78 2 \ "UHF" "The 430-440 version" ON \"VHF" "145 Mhz Version" OFF 3>&1 1>&2 2>&3)
 # Output the result for verification
 #case $? in
 #    UHF)
