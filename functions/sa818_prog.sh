@@ -1,48 +1,40 @@
 #!/bin/bash
 
 function sa818_prog {
-    # Paths to frequency files
-    UHF_FILE="/home/pi/svxlinkbuilder/configs/UHF.txt"
-    VHF_FILE="/home/pi/svxlinkbuilder/configs/VHF.txt"
-    
-    # Determine which frequency file to use based on $band
+    # Define file paths
+    UHF_FILE="./configs/UHF.txt"
+    VHF_FILE="./configs/VHF.txt"
+
+    # Select file based on band
     if [ "$band" == "UHF" ]; then
-        # Read UHF frequencies from file
-        if [ -f "$UHF_FILE" ]; then
-            mapfile -t frequencies < "$UHF_FILE"
-        else
-            whiptail --msgbox "Error: UHF frequency file not found!" 10 78
-            exit 1
-        fi
-    elif [ "$band" == "VHF" ]; then
-        # Read VHF frequencies from file
-        if [ -f "$VHF_FILE" ]; then
-            mapfile -t frequencies < "$VHF_FILE"
-        else
-            whiptail --msgbox "Error: VHF frequency file not found!" 10 78
-            exit 1
-        fi
+        FREQ_FILE="$UHF_FILE"
     else
-        whiptail --msgbox "Error: Invalid band selection!" 10 78
+        FREQ_FILE="$VHF_FILE"
+    fi
+
+    # Check if the frequency file exists
+    if [ ! -f "$FREQ_FILE" ]; then
+        echo "Error: Frequency file not found at $FREQ_FILE"
         exit 1
     fi
 
-    # Create whiptail menu options from frequencies
+    # Load frequencies into an array
+    mapfile -t frequencies < "$FREQ_FILE"
+
+    # Build the options array for whiptail
     options=()
     for freq in "${frequencies[@]}"; do
-        options+=("$freq" "")
+        options+=("$freq" "" "OFF")  # Use "OFF" to start with, or change as needed
     done
 
-    # Frequency Selection
-     echo "Options passed to whiptail: ${options[@]}"
-     
-    selected_frequency=$(whiptail --title "$band Frequency Selection" --radiolist 10 30 100 20\
-    "Select the $band frequency:"  "${options[@]}" 3>&1 1>&2 2>&3)
+    # Debugging: print the options to check them
+    echo "Options passed to whiptail: ${options[@]}"
 
-    # Output the results for verification
-    echo "SA818 device fitted: $sa818"
-    echo "Selected frequency band: $band"
+    # Display the whiptail radiolist
+    selected_frequency=$(whiptail --title "$band Frequency Selection" --radiolist \
+    "Select the $band frequency:" 20 100 10 "${options[@]}" 3>&1 1>&2 2>&3)
+
+    # Output the selected frequency
     echo "Selected frequency: $selected_frequency"
-
-    #### Changing Frequency ####
 }
+
