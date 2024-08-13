@@ -6,7 +6,7 @@ END_FREQ=434.7500
 INTERVAL=0.125
 
 # Output file
-OUTPUT_FILE="/home/pi/svxlinkbuilder/UHF.txt"
+OUTPUT_FILE="/home/pi/svxlinkbuilder/configs/UHF.txt"
 
 # Initialize the current frequency
 current_freq=$START_FREQ
