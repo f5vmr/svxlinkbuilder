@@ -1,29 +1,25 @@
 #!/bin/bash
 
-# Define the start and end frequencies and the interval
-START_FREQ=433.0125
-END_FREQ=434.7500
-INTERVAL=0.125
+# Define the starting frequency, ending frequency, and step size
+start_freq=433.0125
+end_freq=434.7500
+step=0.0125
 
-# Output file
-OUTPUT_FILE="/home/pi/svxlinkbuilder/configs/UHF.txt"
+# Define the output file path
+output_file="/home/pi/svxlinkbuilder/configs/UHF.txt"
 
-# Initialize the current frequency
-current_freq=$START_FREQ
+# Initialize an empty string for storing the frequencies
+frequencies=""
 
-# Create or clear the output file
-: > "$OUTPUT_FILE"
-
-# Generate frequencies
-while (( $(echo "$current_freq <= $END_FREQ" | bc -l) )); do
-    # Write the current frequency to the file, with a comma separator
-    printf "%.4f," "$current_freq" >> "$OUTPUT_FILE"
-    # Increment the frequency
-    current_freq=$(echo "$current_freq + $INTERVAL" | bc)
+# Loop to generate frequencies and append them to the string
+current_freq=$start_freq
+while (( $(echo "$current_freq <= $end_freq" | bc -l) )); do
+    frequencies+=$(printf "%.4f" $current_freq)","
+    current_freq=$(echo "$current_freq + $step" | bc)
 done
 
-# Remove the trailing comma
-sed -i '$ s/,$//' "$OUTPUT_FILE"
+# Remove the trailing comma and save to the file
+frequencies=${frequencies%,}
+echo $frequencies > $output_file
 
-# Notify the user
-echo "Frequencies saved to $OUTPUT_FILE"
+echo "Frequencies saved to $output_file"
