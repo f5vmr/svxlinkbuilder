@@ -225,7 +225,7 @@ def type_frequency(parg):
   except ValueError:
     raise argparse.ArgumentError from None
 
-  if not 144 < frequency < 148 and not 420 < frequency < 450:
+  if not 144 < frequency < 148 and not 430 < frequency < 440:
     logger.error('Frequency outside the amateur bands')
     raise argparse.ArgumentError
   return frequency
