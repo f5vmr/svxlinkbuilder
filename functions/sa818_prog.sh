@@ -85,6 +85,8 @@ function sa818_prog {
 "NB" "Narrow-band" ON \
 "WB" "Wide-band" OFF 3>&1 1>&2 2>&3)
     # Filters
+    filter1=$(whiptail --title "SA818 Filter Selection" --radiolist \
+    
     # Volume
     # Squelch
     # CTCSS Tone
