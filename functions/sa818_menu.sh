@@ -14,7 +14,7 @@
 #
 
 # ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== =====
-function sa818_menu() {
+#function sa818_menu() {
 MSGBOX_HEIGHT=12
 MSGBOX_WIDTH=60
 SA818_APPLY=0
@@ -1219,5 +1219,5 @@ while true; do
 
     # save/update failed, stay in the menu
 done
-}
+#}
 exit 0
