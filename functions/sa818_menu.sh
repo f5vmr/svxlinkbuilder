@@ -15,8 +15,6 @@
 
 # ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== =====
 function sa818_menu() {
-ASL_DEBUG=""
-ASL_VERSION=$(asl-show-version --asl 2>/dev/null)
 MSGBOX_HEIGHT=12
 MSGBOX_WIDTH=60
 SA818_APPLY=0
@@ -300,9 +298,6 @@ do_sa818_update() {
     fi
 
     sa818_cmd_base=("sa818")
-    if [[ -n "$ASL_DEBUG" ]]; then
-	sa818_cmd_base+=("$ASL_DEBUG")
-    fi
     if [[ -n "$CURRENT_PORT" ]]; then
 	sa818_cmd_base+=("--port" "$CURRENT_PORT")
     fi
@@ -1168,11 +1163,6 @@ while [[ $# -gt 0 ]]; do
 	    shift
 	    ;;
 
-	"--debug" )
-	    ASL_DEBUG="--debug"
-	    logfile=/tmp/sa818.log
-	    shift
-	    ;;
 
 	"--help" )
 	    usage
