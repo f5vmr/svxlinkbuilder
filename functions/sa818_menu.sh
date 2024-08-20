@@ -14,7 +14,7 @@
 #
 
 # ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== =====
-#function sa818_menu() {
+function sa818_menu() {
 MSGBOX_HEIGHT=12
 MSGBOX_WIDTH=60
 SA818_APPLY=0
@@ -26,13 +26,13 @@ logfile=/dev/null
 
 # ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== =====
 
-check_if_root() {
-    if [[ $EUID != 0 ]]; then
-	/usr/bin/clear
-	whiptail --msgbox "This script must be run as root or with sudo" $MSGBOX_HEIGHT $MSGBOX_WIDTH
-	exit 1
-    fi
-}
+#check_if_root() {
+#    if [[ $EUID != 0 ]]; then
+#	/usr/bin/clear
+#	whiptail --msgbox "This script must be run as root or with sudo" $MSGBOX_HEIGHT $MSGBOX_WIDTH
+#	exit 1
+#    fi
+#}
 
 # ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== =====
 
@@ -1219,5 +1219,5 @@ while true; do
 
     # save/update failed, stay in the menu
 done
-#}
-exit 0
+}
+#exit 0
