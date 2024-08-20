@@ -14,15 +14,15 @@
 #
 
 # ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== =====
-
+function sa818_menu() {
 ASL_DEBUG=""
 ASL_VERSION=$(asl-show-version --asl 2>/dev/null)
 MSGBOX_HEIGHT=12
 MSGBOX_WIDTH=60
 SA818_APPLY=0
-SA818_CONF="/etc/sa818.conf"
+SA818_CONF="/etc/svxlink/sa818.conf"
 SA818_UPDATED=0
-TITLE="Hotspot SA818 Configuration"
+TITLE="SvxLink SA818 Configuration"
 
 logfile=/dev/null
 
@@ -1229,5 +1229,5 @@ while true; do
 
     # save/update failed, stay in the menu
 done
-
+}
 exit 0
