@@ -1214,7 +1214,7 @@ while true; do
     if [[ $? -ne 0 ]]; then
 	# if save/update complete
 	echo "SA818 update complete"
-	break
+	#break
     fi
 
     # save/update failed, stay in the menu
