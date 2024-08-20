@@ -31,7 +31,7 @@ function sa818_prog {
     done <<< "$frequencies"
 
     # Debugging: print the options to check them
-    echo "Options passed to whiptail: ${options[@]}"
+#    echo "Options passed to whiptail: ${options[@]}"
 ###     sa818 --help
 ### usage: sa818 [-h] [--debug] [--port PORT] [--speed {300,1200,2400,4800,9600,19200,38400,57600,115200}]
 ###              {radio,volume,filters,filter,version} ...
@@ -75,7 +75,7 @@ function sa818_prog {
 
     # Display the whiptail radiolist
     selected_frequency=$(whiptail --title "$band Frequency Selection" --radiolist \
-    "Select the $band frequency:" 20 100 10 "${options[@]}" 3>&1 1>&2 2>&3)
+    "Select the $band frequency:" 20 100 15 "${options[@]}" 3>&1 1>&2 2>&3)
 
     # Output the selected frequency
     echo "Selected frequency: $selected_frequency"
