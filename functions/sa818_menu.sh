@@ -361,12 +361,12 @@ do_enable_disable() {
 set_band_limits() {
     case $CURRENT_BAND in
 	"VHF" )
-	    F_MIN="134.0000"
-	    F_MAX="174.0000"
+	    F_MIN="144.0000"
+	    F_MAX="146.0000"
 	    ;;
 	"UHF" )
-	    F_MIN="400.0000"
-	    F_MAX="480.0000"
+	    F_MIN="430.0000"
+	    F_MAX="434.7500"
 	    ;;
     esac
 
