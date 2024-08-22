@@ -10,6 +10,13 @@ source "${BASH_SOURCE%/*}/functions/welcome_fr.sh"
 welcome
 source "${BASH_SOURCE%/*}/functions/configure_fr.sh"
 configure_fr
+#### TEST for SA818 ####
+source "${BASH_SOURCE%/*}/functions/sa818_test_fr.sh"
+sa818_test_fr
+if [[ $sa818 == true ]]; then
+source "${BASH_SOURCE%/*}/functions/sa818_menu_fr.sh"
+sa818_menu
+
 #### USB SOUND CARD ####
 source "${BASH_SOURCE%/*}/functions/sound_card_fr.sh"
 soundcard
