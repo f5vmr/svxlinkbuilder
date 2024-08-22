@@ -44,9 +44,8 @@
 <p>enable_uart=1</p>
 <p>sudo reboot</p>
 <p>login again as the user <b>pi</b> and run the following commands in the terminal:</p>
-<p>git clone https://github.com/HinTak/seeed-voicecard</p>
+<p>git clone https://github.com/f5vmr/seeed-voicecard</p>
 <p>cd seeed-voicecard</p>
-<p>git checkout v6.6</p>
 <p>sudo ./install.sh</p>
 <p>This will install the audio drivers for the usvxcard and udracard.</p>
 <p>You can now proceed to the next step.</p>
