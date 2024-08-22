@@ -5,9 +5,9 @@ port = '/dev/ttyAMA0'
 speed = '9600'
 # VARIABLES CONFIGURATION DRA/SA818
 volumelevel = '2'       # volume 2-8
-filterpre = '1'   # Filter pre/de-emph
-lowpass= '1'
-highpass= '1'
+filterpre = '0'   # Filter pre/de-emph
+lowpass= '0'
+highpass= '0'
 
 # CONFIG GENERALE : 'AT+DMOSETGROUP={},{},{},{},{},{}\r\n'.format(channelspace, txfreq, rxfreq, txcxcss, squelch, rxcxcss)
 channelspace = '0'     # 0=12.5kHz, 1=25kHz
