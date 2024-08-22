@@ -21,7 +21,6 @@ SA818_APPLY=0
 SA818_CONF="/etc/svxlink/sa818.conf"
 SA818_UPDATED=0
 TITLE="SvxLink SA818 Configuration"
-
 logfile=/dev/null
 
 # ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== =====
@@ -35,7 +34,7 @@ logfile=/dev/null
 #}
 
 # ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== =====
-}
+
 calc_wt_size() {
     echo "doing calc_wt_size" >>$logfile
 
@@ -1220,7 +1219,7 @@ while true; do
 
     # if save/update failed, stay in the menu and continue looping
 done
-
+}
 #while true; do
 #    do_main_menu
 #    if [[ $? -eq 255 ]]; then
