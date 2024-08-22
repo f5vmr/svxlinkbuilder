@@ -1220,4 +1220,4 @@ while true; do
     # save/update failed, stay in the menu
 done
 }
-#exit 0
+return 0
