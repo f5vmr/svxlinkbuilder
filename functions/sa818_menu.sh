@@ -22,7 +22,7 @@ SA818_CONF="/etc/svxlink/sa818.conf"
 SA818_UPDATED=0
 TITLE="SvxLink SA818 Configuration"
 
-logfile=/dev/null
+logfile=/var/log/sa818.log
 
 # ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== =====
 
@@ -35,7 +35,7 @@ logfile=/dev/null
 #}
 
 # ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== =====
-
+}
 calc_wt_size() {
     echo "doing calc_wt_size" >>$logfile
 
@@ -1196,28 +1196,52 @@ if [[ $SA818_APPLY -ne 0 ]]; then
 fi
 
 /usr/bin/clear
-
 while true; do
     do_main_menu
+    
     if [[ $? -eq 255 ]]; then
-	# if ESC
-	exit 0
+        # if ESC is pressed, return to the calling function
+        return 0
     fi
 
     if [[ $SA818_UPDATED -eq 0 ]]; then
-	# if no changes
-	exit 0
+        # if no changes were made, return to the calling function
+        return 0
     fi
 
     do_settings_store
     do_sa818_update
+    
     if [[ $? -ne 0 ]]; then
-	# if save/update complete
-	echo "SA818 update complete"
-	#break
+        # if the save/update completed successfully
+        echo "SA818 update complete"
+        return 0
     fi
 
-    # save/update failed, stay in the menu
+    # if save/update failed, stay in the menu and continue looping
 done
-}
-return 0
+
+#while true; do
+#    do_main_menu
+#    if [[ $? -eq 255 ]]; then
+#	# if ESC
+#	exit 0
+#    fi
+#
+#    if [[ $SA818_UPDATED -eq 0 ]]; then
+#	# if no changes
+#	exit 0
+#    fi
+#
+#    do_settings_store
+#    do_sa818_update
+#    if [[ $? -ne 0 ]]; then
+#	# if save/update complete
+#	echo "SA818 update complete"
+#	#break
+#    fi
+#
+#    # save/update failed, stay in the menu
+#done
+#}
+#return 0
