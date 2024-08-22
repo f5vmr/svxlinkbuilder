@@ -11,22 +11,22 @@ other_sound_card_detected=false
 
 # Check for USB sound card
 if echo "$sound_cards" | grep -q 'USB-Audio'; then
-    echo "USB sound card detected:"
+    echo "USB sound card detected:" | tee -a /var/log/install.log
     echo "$sound_cards" | grep -A 1 'USB-Audio'
     usb_sound_card_detected=true
 fi
 
 # Check for Seeed 2-mic voice card
 if echo "$sound_cards" | grep -q 'seeed-2mic-voicecard'; then
-    echo "Seeed 2-mic voice card detected:"
+    echo "Seeed 2-mic voice card detected:" | tee -a /var/log/install.log
     echo "$sound_cards" | grep -A 1 'seeed-2mic-voicecard'
     seeed_sound_card_detected=true
 fi
 
 # Check for any other sound cards not explicitly identified by name and not Loopback
 if echo "$sound_cards" | grep -q '[0-9] \[' && ! echo "$sound_cards" | grep -q 'Loopback' && ! $usb_sound_card_detected && ! $seeed_sound_card_detected; then
-    echo "Other sound card detected:"
-    echo "$sound_cards" | grep -v 'Loopback'
+    echo "Other sound card detected:" | tee -a /var/log/install.log
+    echo "$sound_cards" | grep -v 'Loopback' 
     other_sound_card_detected=true
 fi
 
