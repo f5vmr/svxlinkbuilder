@@ -21,7 +21,7 @@ SA818_APPLY=0
 SA818_CONF="/etc/svxlink/sa818.conf"
 SA818_UPDATED=0
 TITLE="SvxLink SA818 Configuration"
-logfile=/dev/null
+logfile=/var/log/sa818.log
 
 # ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== =====
 
