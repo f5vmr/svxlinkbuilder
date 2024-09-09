@@ -121,13 +121,12 @@
 <p>Everything introduced here is directly from the original presentation by Tobias SM0SVX.</p>
 
 <h2>Addendum</h2>
-<p>Talk Groups should be added to the Svxlink Configurator in ReflectorLogic, and ensure the tick is checked alongside.</p>
+<p>Talk Groups should be added to the Svxlink Configurator in ReflectorLogic, and ensure the tick is checked alongside. Adding a + or ++ after a Talk-Group number will increase its importance, enabling a higher priority talk group to surplant one in use.</p>
 <p>Airports can be added and removed as required in the MetarInfo Configurator.</p
 <p>The Audio dashboard seems not to work for the moment.</p>
-<p>Module EchoLink can be added throught the dashboard, in the EchoLink configurator first of all, then add ModuleEchoLink to the MODULES= line in the [SimplexLogic] or [RepeaterLogic] section of the Svxlink Configurator.</p>
-<p>Amixer can be adjusted using the dashboard, and is more efficient than alsamixer in the terminal. Select the recommended settings within the window.</p> 
-<p>This feature does not work for the usvxcard by F8ASB. You should go to the terminal and type sudo alsamixer. Reduce all settings to around 60%.</p>
-<p>Finally for the F8ASB users, tuning the SA818 module.</p>
+<p>Module EchoLink can be added through the dashboard, in the EchoLink configurator first of all, then add ModuleEchoLink to the MODULES= line in the [SimplexLogic] or [RepeaterLogic] section of the Svxlink Configurator.</p>
+<p>Amixer can be adjusted using the dashboard, and is more efficient than alsamixer in the terminal. Select the recommended settings within the window. The F8ASB and RF-GURU users will still need to use alsamixer in the terminal, due to the complexity of the entry points. You should go to the terminal and type sudo alsamixer. Reduce all settings to around 60%.</p>
+<p>Finally for the F8ASB and rf-guru users, tuning the SA818 module.</p>
 <p>You should have by now enabled the USB interface, that in the Raspberry Pi menu, should be /dev/ttyS0. </p>
 <p>sudo git clone https://github.com/0x9900/sa818</p>
 <p>cd sa818</p>
