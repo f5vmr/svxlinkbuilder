@@ -63,7 +63,7 @@
 
 <p>They will guide you through the installation, all the way to run-time.</p>
 <b>You will need to know before you begin</b> 
-<p>1. The status of your transceiver, whether the PTT and COS are Active High or Active Low.</p>
+<p>1. The status of your transceiver, whether the PTT and COS are Active High or Active Low. The GPIO pin numbers.</p>
 <p>2. The status and type of your USB soundcard, modified, partly modified or unmodified. With a fully modified usb soundcard, there is no reason that would prevent this installation on another Linux based computer running Debian 12. It has to be Debian 12, or some of the features will fail.</p>
 <p>3. Decide <b>The callsign of your node</b>.<p>Do not use additional symbols or numbers at this stage. The callsign should be of standard notation.</p>
 <p>4. If you have decided to install EchoLink, then have ready your registration information.</p> 
