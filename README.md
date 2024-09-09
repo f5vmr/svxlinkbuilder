@@ -34,7 +34,7 @@
 <b>Always check the SSH box on the second tab of the next box, otherwise that will also cause your installation to fail.</b>  you can use a password or set a key if you wish.</p> 
 
 <p>Once complete, eject the card and install it in the raspberry pi and power it up. Enter the user <b>pi</b> and your password.</p>
-<h2>Users of a usvxcard and the udracard from Juan Hagen F8ASB need to follow this additional step before the build. Other users skip to the next paragraph.</h2>
+<h2>Users of a usvxcard and the udracard from Juan Hagen F8ASB and the RF-Guru need to follow this additional step before the build. Other users skip to the next paragraph.</h2>
 <p>First perform sudo apt update && sudo apt upgrade -y before proceeding, then sudo apt install -y git</p>
 <p>Using the sudo raspb-config in the terminal, ensure that the serial interface is first enabled.</p>
 <p>Reboot the system and then log back in as the user <b>pi</b> and run the following commands in the terminal:</p>
