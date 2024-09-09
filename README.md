@@ -42,9 +42,10 @@
 <p>Add the following lines to the end of the file:</p>
 <p>dtoverlay=pi3-miniuart-bt</p>
 <p>enable_uart=1</p>
-<p>sudo reboot</p>
+<p>Save the file. then sudo raspi-config and enable the second part of the serial port only</p>
+<p>Now reboot on closong the rasp-config</p>
 <p>login again as the user <b>pi</b> and run the following commands in the terminal:</p>
-<p>sudo apt install git</p>
+<p>sudo apt install git -y</p>
 <p>git clone https://github.com/f5vmr/seeed-voicecard</p>
 <p>cd seeed-voicecard</p>
 <p>sudo ./install.sh</p>
