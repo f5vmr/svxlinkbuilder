@@ -40,8 +40,8 @@
     sudo systemctl restart alsa-state.service
     ## Install repository key and repository ##
     echo -e "${YELLOW}#### Installing repository key #### ${WHITE}" | sudo tee -a /var/log/install.log
-    sudo curl -O -q https://online-amateur-radio-club-m0ouk.github.io/oarc-packages/hibby.key
-    sudo mv hibby.key /etc/apt/trusted.gpg.d/hibby.asc
+    #sudo curl -O -q https://online-amateur-radio-club-m0ouk.github.io/oarc-packages/hibby.key
+    sudo mv svxlinkbuilder/addons/hibby.key /etc/apt/trusted.gpg.d/hibby.asc
     echo -e "${BLUE}#### Installing repository #### ${WHITE}" | sudo tee -a /var/log/install.log
     echo "deb https://online-amateur-radio-club-m0ouk.github.io/oarc-packages bookworm main" | sudo tee -a /etc/apt/sources.list
     echo -e "${BLUE}#### Updating apt #### ${WHITE}" | sudo tee -a /var/log/install.log
