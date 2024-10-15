@@ -34,8 +34,10 @@
 <b>Always check the SSH box on the second tab of the next box, otherwise that will also cause your installation to fail.</b>  you can use a password or set a key if you wish.</p> 
 
 <p>Once complete, eject the card and install it in the raspberry pi and power it up. Enter the user <b>pi</b> and your password.</p>
-<h2>Users of a usvxcard and the udracard from Juan Hagen F8ASB and the RF-Guru need to follow this additional step before the build. Other users skip to the next paragraph.</h2>
 <p>First perform sudo apt update && sudo apt upgrade -y before proceeding, then sudo apt install -y git</p>
+
+<h2>Users of a usvxcard and the udracard from Juan Hagen F8ASB and the RF-Guru need to follow this additional step before the build. Other users skip to the next paragraph (The Build).</h2>
+
 <p>Using the sudo raspb-config in the terminal, ensure that the serial interface is first enabled.</p>
 <p>Reboot the system and then log back in as the user <b>pi</b> and run the following commands in the terminal:</p>
 <p>sudo nano /boot/firmware/config.txt</p>
@@ -45,7 +47,7 @@
 <p>Save the file. then sudo raspi-config and enable the second part of the serial port only</p>
 <p>Now reboot on closong the rasp-config</p>
 <p>login again as the user <b>pi</b> and run the following commands in the terminal:</p>
-<p>sudo apt update && sudo apt upgrade -y && install git -y</p>
+<p>sudo apt install git -y</p>
 <p>git clone https://github.com/f5vmr/seeed-voicecard</p>
 <p>cd seeed-voicecard</p>
 <p>sudo ./install.sh</p>
@@ -53,8 +55,7 @@
 <p>You can now proceed to the next step.</p>
 <p>There will be a further step to program the SA818 card, during the install process.</p>
 <h2>The Build</h2>
-<b>Do Not update/upgrade the system at this stage. SA818 card users ignore this of course, you have done it already.</b>
-<p>This script will install a dummy sound card for the use of Darkice and Icecast2.</p> 
+<p>This script will also nstall a dummy sound card for the use of Darkice and Icecast2.</p> 
 <p>Step 1: <b>sudo apt install -y git</b> as without this you cannot download from the GitHub.</p>  
 
 <p>Step 2: <b>sudo git clone https://github.com/f5vmr/svxlinkbuilder.git</b> .</p>
