@@ -3,7 +3,7 @@
 <h2> Pour le manuel en Anglais, README.md. Pour les instructions en espagnol README_ES.md.</h2>
 <h3>Présentation</h3>
 <p>Cette version de SVXLink contient actuellement une connexion uniquement au <b>svxportal-uk (SvxReflector)</b>. Si cela change, ce manuel evoluera également. Vous pourrez installer un svxreflector plus tard depuis le tableau de bord.</p>
-<p>La connexion au svxreflector fournit une connectivité à l'aide de pseudo-groupes(PG) de discussion vers d'autres points d'accès ou répéteurs du réseau. Pour plus d'informations, cliquer sur ce lien http://svxportal-uk.ddns.net:81.</p>
+<p>La connexion au svxreflector fournit une connectivité à l'aide de pseudo-groupes(PG) de discussion vers d'autres points d'accès ou répéteurs du réseau. Pour plus d'informations, cliquer sur ce lien http://portal.svxlink.uk:81.</p>
 <p>Cette version contient désormais un anti bavard de trois minutes pour les utilisateurs RF. Une mesure qui evite que le temps de paroles des utilisateurs ne soit trop long.</p>
 <p>Ce système de TOT ne bloque pas l'utilisateur pendant qu'il parle, mais superpose une série de beep à l'émission, qui se terminent lorsque l'on relâche le PTT. Le système détecte cela et envoie vocalement un « Time-out » sur la transmission, avant d'émettre un « K » pour une utilisation continue du répéteur.</p>
 <h3>Vos premiers pas</h3>
@@ -89,7 +89,7 @@
 
 <p>Si vous souhaitez modifier les fichiers Svxlink.conf, EchoLink, MetarInfo et NodeInfo, vous pouvez le faire, si autorisé, depuis le tableau de bord. L'enregistrement des modifications redémarre immédiatement le svxlink avec les nouveaux paramètres, les nouvelles modifications s'affichant après un clic sur le bouton dans le tableau de bord.</p>
 <p>Soyez prudent lors de l'édition, car modifier la structure peut entraîner le mauvais fonctionnement du point d'accès. Cependant, une copie de la dernière configuration fonctionnelle peut être trouvée dans le dossier /var/www/html/backups avec une heure et une date.</p>
-<p>Pour obtenir des informations sur node_info.json, accédez à un navigateur PC et entrez <b>http://svxportal-uk.ddns.net:81</b> où vous trouverez un tableau de bord.</p>
+<p>Pour obtenir des informations sur node_info.json, accédez à un navigateur PC et entrez <b>http://portal.svxlink.uk:81</b> où vous trouverez un tableau de bord.</p>
 <p>Cliquez sur <b>S'inscrire</b> en haut pour compléter les informations. Ces informations sont conservées uniquement pour vous permettre de passer à l'étape suivante. Connectez-vous avec les informations que vous venez de fournir, cliquez sur <b>Mes Stations</b>, puis cliquez sur <b>Générer node_info.json</f></b>
 <p>En complétant toutes les informations, <b>en ignorant</b> toute référence à CTCSS pour le moment, cela générera un fichier appelé node_info.json. Enregistrez-le dans un emplacement de votre ordinateur. Vous pourrez le copier et le coller ultérieurement dans le fichier du point d'accès.</p>
 <p>Ouvrez le terminal du Raspberry Pi et tapez <b>cd /etc/svxlink</b> et validez par la touche Entrée. Tapez ensuite <b>sudo nano node_info.json</b> et modifiez les informations avec le contenu du fichier que vous venez d'enregistrer sur votre PC. Vous pouvez ouvrir le fichier avec un éditeur de texte ou un bloc-notes.</p>

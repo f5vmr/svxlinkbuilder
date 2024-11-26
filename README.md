@@ -3,7 +3,7 @@
 <h2> Pour l'instruction en Français, README_FR.md. Para instrucción en español README_ES.md.</h2>
 <h3>Introduction</h3>
 <p>This SVXLink build presently contains a connection only to the <b>svxportal-uk (SvxReflector)</b> only . If this changes then so will this introduction. You can leave it without, and install an svxreflector later through the Dashboard.</p>
-<p>The connection to the svxreflector provides connectivity using pseudo-talkgroups to other nodes and repeaters on the network. for more information select this link http://svxportal-uk.ddns.net:81.</p>
+<p>The connection to the svxreflector provides connectivity using pseudo-talkgroups to other nodes and repeaters on the network. for more information select this link http://portal.svxlink.uk:81.</p>
 <p>This build now contains an automatic three minute timeout for RF users. This is to educate users to keep their speech from being too long.</p>
 <p>This timeout mechanism does not block the user whilst speaking, but superimposes a series of pip-tones with the emission, that are terminated, when the speaker releases the PTT. The squelch mechanism detects this, and sends "Time-out" verbally on the transmission, before issuing a "K" for continued use of the repeater.</p>
 <h3>For users of the SA818 device</h3>
@@ -96,7 +96,7 @@
 
 <p>If you wish to modify the Svxlink.conf, EchoLink, MetarInfo and NodeInfo files, you can do so, if authorised, from the dashboard. Saving the changes immediately restarts the svxlink with the new setting, with the new changes show after a click on the button in the dashboard.</p>
 <p>Be careful whilst editing, as to change the structure, can cause the node to fail. However a copy of the last working configuration can be found in the /var/www/html/backups folder with a time and date.</p>
-<p>To obtain information for the node_info.json go to a PC Browser and enter <b>http://svxportal-uk.ddns.net:81</b> where you will find a dashboard.</p>
+<p>To obtain information for the node_info.json go to a PC Browser and enter <b>http://portal.svxlink.uk:81</b> where you will find a dashboard.</p>
 <p>Click <b>Register</b> at the top, completing the information. This information is held only to enable you to complete the next stage. Log in with the information you have just supplied, click on <b>My Stations</b>, and click on <b>Generate node_info.json</f></b>
 <p>By completing all the information, <b>ignoring</b> any reference to CTCSS at this time, this will generate a file called node_info.json. Save it in a location in your computer. You can copy and paste from it later to the file in the node.</p>
 <p>Open the terminal of the Raspberry Pi, and type <b>cd /etc/svxlink</b> followed by return. Then type <b>sudo nano node_info.json</b> and edit the information with the content of the file you have just saved on your PC. You can open the file with a text editor or notepad.</p>

@@ -3,7 +3,7 @@
 <h2> Para instrucciones en francés, README_FR.md. Para instrucciones en inglesa README.md.</h2>
 <h3>Introducción</h3>
 <p>Esta compilación de SVXLink actualmente contiene una conexión solo con <b>svxportal-uk (SvxReflector)</b> únicamente. Si esto cambia, también lo hará esta introducción. Puedes dejarlo sin e instalar un svxreflector más tarde a través del Panel.</p>
-<p>La conexión al svxreflector proporciona conectividad mediante pseudogrupos de conversación a otros nodos y repetidores de la red. Para obtener más información, seleccione este enlace http://svxportal-uk.ddns.net:81.</p>
+<p>La conexión al svxreflector proporciona conectividad mediante pseudogrupos de conversación a otros nodos y repetidores de la red. Para obtener más información, seleccione este enlace http://portal.svxlink.uk:81.</p>
 <p>Esta compilación ahora contiene un tiempo de espera automático de tres minutos para los usuarios de RF. Esto es para educar a los usuarios para que eviten que sus discursos sean demasiado largos.</p>
 <p>Este mecanismo de tiempo de espera no bloquea al usuario mientras habla, sino que superpone una serie de pitidos con la emisión, que finalizan cuando el hablante suelta el PTT. El mecanismo de silenciamiento detecta esto y envía un "Tiempo de espera" verbalmente en la transmisión, antes de emitir una "K" para el uso continuado del repetidor.</p>
 <h3>Tus primeros pasos</h3>
@@ -88,7 +88,7 @@
 
 <p>Si desea modificar los archivos Svxlink.conf, EchoLink, MetarInfo y NodeInfo, puede hacerlo, si está autorizado, desde el panel de control. Al guardar los cambios, se reinicia inmediatamente svxlink con la nueva configuración, y los nuevos cambios se muestran después de hacer clic en el botón en el panel.</p>
 <p>Tenga cuidado al editar, ya que cambiar la estructura puede provocar que el nodo falle. Sin embargo, se puede encontrar una copia de la última configuración funcional en la carpeta /var/www/html/backups con la hora y la fecha.</p>
-<p>Para obtener información sobre node_info.json, vaya al navegador de una PC e ingrese <b>http://svxportal-uk.ddns.net:81</b> donde encontrará un panel.</p>
+<p>Para obtener información sobre node_info.json, vaya al navegador de una PC e ingrese <b>http://portal.svxlink.uk:81</b> donde encontrará un panel.</p>
 <p>Haz clic en <b>Registrarse</b> en la parte superior, completando la información. Esta información se conserva únicamente para permitirle completar la siguiente etapa. Inicie sesión con la información que acaba de proporcionar, haga clic en <b>Mis estaciones</b> y haga clic en <b>Generar node_info.json</f></b>.
 <p>Al completar toda la información, <b>ignorando</b> cualquier referencia a CTCSS en este momento, esto generará un archivo llamado node_info.json. Guárdelo en una ubicación de su computadora. Puedes copiarlo y pegarlo más tarde en el archivo del nodo.</p>
 <p>Abra la terminal de Raspberry Pi y escriba <b>cd /etc/svxlink</b> seguido de return. Luego escribe <b>sudo nano node_info.json</b> y edita la información con el contenido del archivo que acabas de guardar en tu PC. Puedes abrir el archivo con un editor de texto o un bloc de notas.</p>
