@@ -1,6 +1,5 @@
 #!/bin/bash
 function initialise {
-HOME=/home/pi
 CONF_DIR=/etc/svxlink
 LOG_DIR=/var/log/
 PID_DIR=/var/run/
@@ -20,6 +19,6 @@ WHITE='\033[0;37m' # normal
 NORMAL='\033[0m' # normal
 locale=""
 lang=""
-echo -e "$(date)" "${BLUE} #### Commencing initialisation #### ${NORMAL}" | sudo tee -a /var/log/install.log
+echo -e "$(date)" "${BLUE} #### Commencing initialisation #### ${NORMAL}" |  tee -a /var/log/install.log
 export HOME
 }

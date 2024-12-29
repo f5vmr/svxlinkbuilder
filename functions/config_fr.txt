@@ -1,8 +1,0 @@
-Nous sommes maintenant sur le point de configurer SVXLink selon les spécifications fournies.
-Ils remplaceront ceux contenus dans la configuration par défaut de SVXLink.
-Pour les modifier ultérieurement, vous pourrez le faire dans le tableau de bord Web.
-Le premier changement concernera la carte son USB utilisée.
-Ensuite, d'autres modifications concerneront la configuration SVXLink.
-A la fin de la configuration, vous pouvez accéder au Web Dashboard.
-L'adresse IP fixe sera fournie prochainement.
-
