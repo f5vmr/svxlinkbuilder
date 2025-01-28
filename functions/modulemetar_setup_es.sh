@@ -101,7 +101,7 @@ whiptail --title "Información del medidor" --yesno "¿Desea configurar este mó
         echo -e "$(date)" "${GREEN} $selected Aeropuertos incluidos con el aeropuerto predeterminado $specific_airport ${NORMAL}" | sudo tee -a /var/log/install.log
    
     else
-     sed -i 's/,ModuleMetarInfo//' /etc/svxlink/svxlink.conf
+     sed -i 's/,ModuleMetarInfo//' /etc/svxlink/svxlink.d/$NODE
     # removing MetarInfo from the MODULES= line in both Simplex and Duplex
     fi
 }
