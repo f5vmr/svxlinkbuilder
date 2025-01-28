@@ -10,6 +10,16 @@ source "${BASH_SOURCE%/*}/functions/welcome_es.sh"
 welcome
 source "${BASH_SOURCE%/*}/functions/configure_es.sh"
 configure
+#### TEST for SA818 ####
+source "${BASH_SOURCE%/*}/functions/sa818_test.sh"
+sa818_test
+if [[ $sa818 == true ]]; then
+source "${BASH_SOURCE%/*}/functions/sa818_menu.sh"
+sa818_menu
+
+else
+echo "No SA818 device" |tee -a  /var/log/install.log
+fi
 #### USB SOUND CARD ####
 source "${BASH_SOURCE%/*}/functions/sound_card_es.sh"
 soundcard
@@ -20,7 +30,11 @@ echo -e "$(date)" "${YELLOW} #### Node Type: $NODEOPTION #### ${NORMAL}" | sudo 
 
 echo -e "$(date)" "${YELLOW} #### Sound Card: $HID $GPIOD $card #### ${NORMAL}" | sudo tee -a  /var/log/install.log	
 echo -e "$(date)" "${YELLOW} #### Checking Alsa #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-
+if {{$NODEOPTION === 1 or $NODEOPTION === 2}}; then
+NODE="SimplexLogic.conf";
+else{{$NODEOPTION === 3 or $NODEOPTION === 4}}; then
+NODE="RepeaterLogic.conf";
+fi
 #### REQUEST CALLSIGN ####
 source "${BASH_SOURCE%/*}/functions/callsign_es.sh"
 callsign
@@ -89,6 +103,9 @@ chmod 0440 "$SUDOERS_FILE"
 	echo -e "$(date)" "${GREEN} #### Establecer indicativo en $CALL #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
  	sudo sed -i "s/MYCALL/$CALL/g" $CONF
+		sudo sed -i "s/MYCALL/$CALL/g" $MODULE.$NODE
+	sudo sed -i "s/MYCALL/$CALL/g" $MODULE/RelectorLogic.conf
+
  	sudo sed -i "s/MYCALL/$CALL/g" /etc/svxlink/node_info.json
 
 	echo -e "$(date)" "${GREEN} #### Configuración del tiempo de suspensión del silenciador en 10 mS ${NORMAL}" | sudo tee -a  /var/log/install.log

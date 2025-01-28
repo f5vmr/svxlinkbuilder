@@ -27,7 +27,11 @@ echo -e "$(date)" "${YELLOW} #### Type du Noeud: $NODEOPTION #### ${NORMAL}" | s
 
 echo -e "$(date)" "${YELLOW} #### Carte son : $HID $GPIOD $card #### ${NORMAL}" | sudo tee -a  /var/log/install.log	
 echo -e "$(date)" "${YELLOW} #### Verification d'Alsa #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-
+if {{$NODEOPTION === 1 or $NODEOPTION === 2}}; then
+NODE="SimplexLogic.conf";
+else{{$NODEOPTION === 3 or $NODEOPTION === 4}}; then
+NODE="RepeaterLogic.conf";
+fi
 #### REQUEST CALLSIGN ####
 source "${BASH_SOURCE%/*}/functions/callsign_fr.sh"
 callsign
@@ -95,6 +99,9 @@ chmod 0440 "$SUDOERS_FILE"
 	echo -e "$(date)" "${GREEN} #### Indicatif à $CALL #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
  	sudo sed -i "s/MYCALL/$CALL/g" $CONF
+	sudo sed -i "s/MYCALL/$CALL/g" $MODULE.$NODE
+	sudo sed -i "s/MYCALL/$CALL/g" $MODULE/RelectorLogic.conf
+ 	
  	sudo sed -i "s/MYCALL/$CALL/g" /etc/svxlink/node_info.json
 
 	echo -e "$(date)" "${GREEN} ####  Squelch Hangtime à 10 mS ${NORMAL}" | sudo tee -a  /var/log/install.log
