@@ -3,6 +3,7 @@ lang=$(echo $LANG | grep -o '^[a-zA-Z]*_[a-zA-Z]*')
 #### Define Variables ####
 CONF="/etc/svxlink/svxlink.conf"
 MODULE="/etc/svxlink/svxlink.d"
+
 OP="/etc/svxlink"
 export HOME
 #### Welcome Message ####
@@ -30,7 +31,11 @@ echo -e "$(date)" "${YELLOW} #### Node Type: $NODEOPTION #### ${NORMAL}" | sudo 
 
 echo -e "$(date)" "${YELLOW} #### Sound Card: $HID $GPIOD $card #### ${NORMAL}" | sudo tee -a  /var/log/install.log	
 echo -e "$(date)" "${YELLOW} #### Checking Alsa #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-
+if {{$NODEOPTION === 1 or $NODEOPTION === 2}}; then
+NODE$="SimplexLogic.conf";
+else{{$NODEOPTION === 3 or $NODEOPTION === 4}}; then
+NODE$="RepeaterLogic.conf";
+fi
 #### REQUEST CALLSIGN ####
 source "${BASH_SOURCE%/*}/functions/callsign.sh"
 callsign
@@ -91,8 +96,7 @@ chmod 0440 "$SUDOERS_FILE"
 	sudo mkdir /home/pi/scripts
 	sudo cp -f /home/pi/svxlinkbuilder/addons/10-uname /etc/update-motd.d/
  	sudo cp -f /home/pi/svxlinkbuilder/configs/svxlink.conf /etc/svxlink/
-	sudo cp -f /home/pi/svxlinkbuilder/configs/svxlink.d /etc/svxlink/svxlink.d
- 	
+	sudo cp -f /home/pi/svxlinkbuilder/configs/svxlink.d/*.* /etc/svxlink/svxlink.d/ 	
 	sudo cp -f /home/pi/svxlinkbuilder/addons/node_info.json /etc/svxlink/node_info.json
  	sudo cp -f /home/pi/svxlinkbuilder/resetlog.sh /home/pi/scripts/resetlog.sh
  	(sudo crontab -l 2>/dev/null; echo "59 23 * * * /home/pi/scripts/resetlog.sh ") | sudo crontab -
@@ -104,6 +108,8 @@ chmod 0440 "$SUDOERS_FILE"
 	echo -e "$(date)" "${GREEN} #### Setting Callsign to $CALL #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
  	sudo sed -i "s/MYCALL/$CALL/g" $CONF
+	sudo sed -i "s/MYCALL/$CALL/g" $MODULE.$NODE
+	sudo sed -i "s/MYCALL/$CALL/g" $MODULE/RelectorLogic.conf
  	sudo sed -i "s/MYCALL/$CALL/g" /etc/svxlink/node_info.json
 
 	echo -e "$(date)" "${GREEN} #### Setting Squelch Hangtime to 10 mS #### ${NORMAL}" | sudo tee -a  /var/log/install.log
