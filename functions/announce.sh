@@ -4,7 +4,7 @@ function announce {
 CONF_DIR="/etc/svxlink"
 LOGIC_DIR=/usr/share/svxlink/events.d/local
 logicfile="$LOGIC_DIR/Logic.tcl"
-svxconf_file="$CONF_DIR/svxlink.conf"
+svxconf_file="$CONF_DIR/svxlink.d/$NODE"
 
 #### CW TONE VARIABLES #### IDENTS ####
 # Extract numerical variables from svxlink.conf
