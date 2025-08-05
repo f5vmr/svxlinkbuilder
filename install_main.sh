@@ -31,11 +31,12 @@ echo -e "$(date)" "${YELLOW} #### Node Type: $NODEOPTION #### ${NORMAL}" | sudo 
 
 echo -e "$(date)" "${YELLOW} #### Sound Card: $HID $GPIOD $card #### ${NORMAL}" | sudo tee -a  /var/log/install.log	
 echo -e "$(date)" "${YELLOW} #### Checking Alsa #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-if {{$NODEOPTION === 1 or $NODEOPTION === 2}}; 
-NODE="SimplexLogic.conf";
-elif {{$NODEOPTION === 3 or $NODEOPTION === 4}}; 
-NODE="RepeaterLogic.conf";
+if [[ $NODEOPTION -eq 1 || $NODEOPTION -eq 2 ]]; then
+    NODE="SimplexLogic.conf"
+elif [[ $NODEOPTION -eq 3 || $NODEOPTION -eq 4 ]]; then
+    NODE="RepeaterLogic.conf"
 fi
+
 #### REQUEST CALLSIGN ####
 source "${BASH_SOURCE%/*}/functions/callsign.sh"
 callsign
