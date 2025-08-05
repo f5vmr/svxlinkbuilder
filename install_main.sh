@@ -33,7 +33,7 @@ echo -e "$(date)" "${YELLOW} #### Sound Card: $HID $GPIOD $card #### ${NORMAL}" 
 echo -e "$(date)" "${YELLOW} #### Checking Alsa #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 if {{$NODEOPTION === 1 or $NODEOPTION === 2}}; 
 NODE="SimplexLogic.conf";
-else {{$NODEOPTION === 3 or $NODEOPTION === 4}}; 
+elif {{$NODEOPTION === 3 or $NODEOPTION === 4}}; 
 NODE="RepeaterLogic.conf";
 fi
 #### REQUEST CALLSIGN ####
