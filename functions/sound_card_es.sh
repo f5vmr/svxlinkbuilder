@@ -58,7 +58,7 @@ fi
 }
 ## Print the assigned variable value
 
-{function usb_sound_card_detected
+function usb_sound_card_detected {
 echo "Variable assigned: $sound_card_variable"
 
     SOUND_OPTION=$(whiptail --title "Tarjeta de sonido USB" --menu "Seleccione las opciones a continuación." 12 78 4 \
@@ -106,21 +106,21 @@ fi
 plughw_setting="0"
 channel_setting="0"
 }
-{function seeed_sound_card_detected
+function seeed_sound_card_detected {
 HID=false
 GPIOD=true
 card=true
 plughw_setting="seeed2micvoicecard,0"
 channel_setting="1"
 }
-{function  other_sound_card_detected
+function  other_sound_card_detected {
 HID=false
 GPIOD=true
 card=true
 plughw_setting="0"
 channel_setting="0"
 }
-{function no_sound_card_detected
+function no_sound_card_detected {
 HID=false
 GPIOD=false
 card=false				
