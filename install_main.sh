@@ -106,7 +106,7 @@ chmod 0440 "$SUDOERS_FILE"
 
  	sudo sed -i "s/MYCALL/$CALL/g" $CONF
 	sudo sed -i "s/MYCALL/$CALL/g" $MODULE.$NODE
-	sudo sed -i "s/MYCALL/$CALL/g" $MODULE/RelectorLogic.conf
+	sudo sed -i "s/MYCALL/$CALL/g" $MODULE/ReflectorLogic.conf
  	sudo sed -i "s/MYCALL/$CALL/g" /etc/svxlink/node_info.json
 
 	echo -e "$(date)" "${GREEN} #### Setting Squelch Hangtime to 10 mS #### ${NORMAL}" | sudo tee -a  /var/log/install.log

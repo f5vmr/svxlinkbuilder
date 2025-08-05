@@ -168,7 +168,7 @@ else
     echo aucune action ici    
 fi
 
-sed -i "s/DEFAULT_LANG=en_GB/DEFAULT_LANG=fr_FR/g" /etc/svxlink/svxlink.conf
+sed -i "s/#DEFAULT_LANG=en_US/DEFAULT_LANG=fr_FR/g" /etc/svxlink/svxlink.conf
 
 }
 

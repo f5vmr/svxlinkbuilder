@@ -170,9 +170,9 @@ fi
 #### The downloaded Model is en_GB, if not then change to en_US
 if [[ $lang  == "en_US" ]]
 then 
-sed -i 's/en_GB/en_US/g' /etc/svxlink/svxlink.conf
+sed -i "s/#DEFAULT_LANG=en_US/DEFAULT_LANG=en_US/g" /etc/svxlink/svxlink.conf
 else
-echo ## no changes needed
+sed -i "s/#DEFAULT_LANG=en_US/DEFAULT_LANG=en_GB/g" /etc/svxlink/svxlink.conf
 fi
 }
 
