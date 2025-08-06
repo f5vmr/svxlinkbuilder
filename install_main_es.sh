@@ -98,8 +98,7 @@ chmod 0440 "$SUDOERS_FILE"
 	sudo mkdir /usr/share/svxlink/events.d/local
 	sudo cp /usr/share/svxlink/events.d/*.tcl /usr/share/svxlink/events.d/local/
     sudo cp -f /home/pi/svxlinkbuilder/configs/Logic.tcl /usr/share/svxlink/events.d/local/Logic.tcl
-    sudo sed -i '/^LINK=\/adds\/dataserver_current\/httpparam/ c\LINK=/cgi-bin/data/dataserver.php?requestType=retrieve&dataSource=metars&hoursBeforeNow=3&stationString=' $MODULE/ModuleMetarInfo.conf
-# clear
+    # clear
 	echo -e "$(date)" "${GREEN} #### Establecer indicativo en $CALL #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
  	sudo sed -i "s/MYCALL/$CALL/g" $CONF
@@ -120,7 +119,7 @@ chmod 0440 "$SUDOERS_FILE"
  # clear
 	echo -e "$(date)" "${GREEN} #### Actualización de SplashScreen al iniciar #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
- 	sudo sed -i "s/MYCALL/$CALL/g" /etc/update-motd.d/10-uname
+ 	sudo sed -i 's/MYCALL/$CALL/g' /etc/update-motd.d/10-uname
  	sudo chmod 0775 /etc/update-motd.d/10-uname
 
  # clear

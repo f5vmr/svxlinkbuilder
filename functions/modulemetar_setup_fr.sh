@@ -28,9 +28,9 @@ whiptail --title "Metar Info" --yesno "Voulez-vous configurer ce module?" 8 78 3
         "LFOT" "Tours Val de Loire" OFF \
         "LFSL" "Brive Souillac" OFF \
         "LFBE" "Bergerac" OFF 3>&1 1>&2 2>&3)
-        selected=$(echo "$selected" | sed 's/"//g')
+        selected=$(echo "$selected" | sudo sed 's/"//g')
         selected=$(echo "$selected" | tr ' ' ',')
-        sed -i "s/AIRPORTS=.*/AIRPORTS=$selected/g"  /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
+        sudo sed -i "s/AIRPORTS=.*/AIRPORTS=$selected/g"  /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
      
     specific_airport=$(whiptail --title "Metar Info" --radiolist "SVP un code ICAO unique pour un aéroport par défaut: " 24 78 17 \
         "LFPG" "Paris Charles de Gaulle" OFF \
@@ -54,12 +54,12 @@ whiptail --title "Metar Info" --yesno "Voulez-vous configurer ce module?" 8 78 3
         "LFOT" "Tours Val de Loire" OFF \
         "LFSL" "Brive Souillac" OFF \
         "LFBE" "Bergerac" OFF 3>&1 1>&2 2>&3)
-        specific_airport=$(echo "$specific_airport" | sed 's/"//g')
-        sed -i "s/\#STARTDEFAULT=EDDP/STARTDEFAULT=$specific_airport/g" /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
+        specific_airport=$(echo "$specific_airport" | sudo sed 's/"//g')
+        sudo sed -i "s/\#STARTDEFAULT=EDDP/STARTDEFAULT=$specific_airport/g" /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
         echo -e "$(date)" "${GREEN} $selected Aèroport inclus par défaut $specific_airport ${NORMAL}" | sudo tee -a /var/log/install.log
    
     else
-     sed -i 's/,ModuleMetarInfo//' /etc/svxlink/svxlink.d/$NODE
+     sudo sed -i 's/,ModuleMetarInfo//' /etc/svxlink/svxlink.d/$NODE
     # removing MetarInfo from the MODULES= line in both Simplex and Duplex
     fi
 }

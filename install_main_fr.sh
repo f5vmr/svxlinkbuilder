@@ -94,18 +94,17 @@ chmod 0440 "$SUDOERS_FILE"
     sudo mkdir /usr/share/svxlink/events.d/local
 	sudo cp /usr/share/svxlink/events.d/*.tcl /usr/share/svxlink/events.d/local/
 	sudo cp -f /home/pi/svxlinkbuilder/configs/Logic.tcl /usr/share/svxlink/events.d/local/Logic.tcl
-	sudo sed -i '/^LINK=\/adds\/dataserver_current\/httpparam/ c\LINK=/cgi-bin/data/dataserver.php?requestType=retrieve&dataSource=metars&hoursBeforeNow=3&stationString=' $MODULE/ModuleMetarInfo.conf
- # clear
+	# clear
 	echo -e "$(date)" "${GREEN} #### Indicatif à $CALL #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
- 	sudo sed -i "s/MYCALL/$CALL/g" $CONF
-	sudo sed -i "s/MYCALL/$CALL/g" $MODULE.$NODE
-	sudo sed -i "s/MYCALL/$CALL/g" $MODULE/RelectorLogic.conf
+ 	sudo sed -i 's/MYCALL/$CALL/g' $CONF
+	sudo sed -i 's/MYCALL/$CALL/g' $MODULE.$NODE
+	sudo sed -i 's/MYCALL/$CALL/g' $MODULE/RelectorLogic.conf
  	
- 	sudo sed -i "s/MYCALL/$CALL/g" /etc/svxlink/node_info.json
+ 	sudo sed -i 's/MYCALL/$CALL/g' /etc/svxlink/node_info.json
 
 	echo -e "$(date)" "${GREEN} ####  Squelch Hangtime à 10 mS ${NORMAL}" | sudo tee -a  /var/log/install.log
- 	sudo sed -i s/SQL_HANGTIME=2000/SQL_HANGTIME=10/g $CONF
+ 	sudo sed -i 's/SQL_HANGTIME=2000/SQL_HANGTIME=10/g' $CONF
  
  # clear	
 	echo -e "$(date)" "${YELLOW} #### Désactivation des messagess d'alertes de distortion #### ${NORMAL}"| sudo tee -a  /var/log/install.log
@@ -116,7 +115,7 @@ chmod 0440 "$SUDOERS_FILE"
  # clear
 	echo -e "$(date)" "${GREEN} #### Mise à jour écran au demarrage #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
- 	sudo sed -i "s/MYCALL/$CALL/g" /etc/update-motd.d/10-uname
+ 	sudo sed -i 's/MYCALL/$CALL/g' /etc/update-motd.d/10-uname
  	sudo chmod 0775 /etc/update-motd.d/10-uname
 
  # clear

@@ -105,13 +105,13 @@ chmod 0440 "$SUDOERS_FILE"
 	# clear
 	echo -e "$(date)" "${GREEN} #### Setting Callsign to $CALL #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
- 	sudo sed -i "s/MYCALL/$CALL/g" $CONF
-	sudo sed -i "s/MYCALL/$CALL/g" $MODULE.$NODE
-	sudo sed -i "s/MYCALL/$CALL/g" $MODULE/ReflectorLogic.conf
- 	sudo sed -i "s/MYCALL/$CALL/g" /etc/svxlink/node_info.json
+ 	sudo sed -i 's/MYCALL/$CALL/g' $CONF
+	sudo sed -i 's/MYCALL/$CALL/g' $MODULE.$NODE
+	sudo sed -i 's/MYCALL/$CALL/g' $MODULE/ReflectorLogic.conf
+ 	sudo sed -i 's/MYCALL/$CALL/g' /etc/svxlink/node_info.json
 
 	echo -e "$(date)" "${GREEN} #### Setting Squelch Hangtime to 10 mS #### ${NORMAL}" | sudo tee -a  /var/log/install.log
- 	sudo sed -i s/SQL_HANGTIME=2000/SQL_HANGTIME=10/g $CONF
+ 	sudo sed -i 's/SQL_HANGTIME=2000/SQL_HANGTIME=10/g' $CONF
  
  # clear	
 	echo -e "$(date)" "${YELLOW} #### Disabling audio distortion warning messages #### ${NORMAL}"| sudo tee -a  /var/log/install.log
@@ -122,7 +122,7 @@ chmod 0440 "$SUDOERS_FILE"
  # clear
 	echo -e "$(date)" "${GREEN} #### Updating SplashScreen on startup #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
- 	sudo sed -i "s/MYCALL/$CALL/g" /etc/update-motd.d/10-uname
+ 	sudo sed -i 's/MYCALL/$CALL/g' /etc/update-motd.d/10-uname
  	sudo chmod 0775 /etc/update-motd.d/10-uname
 
  # clear

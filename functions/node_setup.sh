@@ -4,39 +4,39 @@ function nodeset {
     if [[ $NODE_OPTION  == "1" ]] 
     then 
     node="Simplex without Svxreflector"
-     sed -i 's/LOGICS=SimplexLogic,ReflectorLogic/LOGICS=SimplexLogic/g' /etc/svxlink/svxlink.conf
-     sed -i 's/LINKS=/\#LINKS=/g' /etc/svxlink/svxlink.conf
+     sudo sed -i 's/LOGICS=SimplexLogic,ReflectorLogic/LOGICS=SimplexLogic/g' /etc/svxlink/svxlink.conf
+     sudo sed -i 's/LINKS=/\#LINKS=/g' /etc/svxlink/svxlink.conf
     elif [[ $NODE_OPTION  == "2" ]] 
     then
     node="Simplex with UK Svxreflector"
     auth_key=$(whiptail --passwordbox "Please enter your SvxReflector Key" 8 78 --title "password dialog" 3>&1 1>&2 2>&3)
-     sed -i "s/AUTH_KEY=\"Change this key now\"/AUTH_KEY=\"$auth_key\"/g" /etc/svxlink/svxlink.conf 
+     sudo sed -i "s/AUTH_KEY=\"Change this key now\"/AUTH_KEY=\"$auth_key\"/g" /etc/svxlink/svxlink.conf 
     elif [[ $NODE_OPTION  == "3" ]] 
     then
     node="Repeater without Svxreflector"
-     sed -i 's/set for SimplexLogic/set for RepeaterLogic/g' /etc/svxlink/svxlink.conf
-     sed -i 's/LOGICS=SimplexLogic,ReflectorLogic/LOGICS=RepeaterLogic/g' /etc/svxlink/svxlink.conf
-     sed -i 's/LINKS=/\#LINKS=/g' /etc/svxlink/svxlink.conf
+     sudo sed -i 's/set for SimplexLogic/set for RepeaterLogic/g' /etc/svxlink/svxlink.conf
+     sudo sed -i 's/LOGICS=SimplexLogic,ReflectorLogic/LOGICS=RepeaterLogic/g' /etc/svxlink/svxlink.conf
+     sudo sed -i 's/LINKS=/\#LINKS=/g' /etc/svxlink/svxlink.conf
     elif [[ $NODE_OPTION  == "4" ]] 
     then
     node="Repeater with UK Svxreflector"
     auth_key=$(whiptail --passwordbox "Please enter your SvxReflector Key" 8 78 --title "password dialog" 3>&1 1>&2 2>&3)
     
-     sed -i 's/set for SimplexLogic/set for RepeaterLogic/g' /etc/svxlink/svxlink.conf
-     sed -i 's/LOGICS=SimplexLogic/LOGICS=RepeaterLogic/g' /etc/svxlink/svxlink.conf
-     sed -i "s/AUTH_KEY=\"Change this key now\"/AUTH_KEY=\"$auth_key\"/g" /etc/svxlink/svxlink.conf
-     sed -i 's/CONNECT_LOGICS=SimplexLogic:9:/CONNECT_LOGICS=RepeaterLogic:9:/g' /etc/svxlink/svxlink.conf
+     sudo sed -i 's/set for SimplexLogic/set for RepeaterLogic/g' /etc/svxlink/svxlink.conf
+     sudo sed -i 's/LOGICS=SimplexLogic/LOGICS=RepeaterLogic/g' /etc/svxlink/svxlink.conf
+     sudo sed -i "s/AUTH_KEY=\"Change this key now\"/AUTH_KEY=\"$auth_key\"/g" /etc/svxlink/svxlink.conf
+     sudo sed -i 's/CONNECT_LOGICS=SimplexLogic:9:/CONNECT_LOGICS=RepeaterLogic:9:/g' /etc/svxlink/svxlink.conf
     else    
     node="unset"
     fi  
 whiptail --title "Node" --msgbox "You have select node-type $node" 8 78
 ## Time to change the node
 node_type=$(echo $node | awk '{print $1}')
-sed -i "s/SvxLink server setting: SimplexLogic/SvxLink server setting: $node_type/" /etc/svxlink/svxlink.conf
+sudo sed -i "s/SvxLink server setting: SimplexLogic/SvxLink server setting: $node_type/" /etc/svxlink/svxlink.conf
 ##That's the Logics taken care of now we need to change the sound card settings 
 ## Use sed to replace the line with the new one even if there is no change
- sed -i "s/AUDIO_DEV=alsa:plughw:0/AUDIO_DEV=alsa:plughw:$plughw_setting/g" /etc/svxlink/svxlink.conf
- sed -i "s/AUDIO_CHANNEL=0/AUDIO_CHANNEL=$channel_setting/g" /etc/svxlink/svxlink.conf
+ sudo sed -i "s/AUDIO_DEV=alsa:plughw:0/AUDIO_DEV=alsa:plughw:$plughw_setting/g" /etc/svxlink/svxlink.conf
+ sudo sed -i "s/AUDIO_CHANNEL=0/AUDIO_CHANNEL=$channel_setting/g" /etc/svxlink/svxlink.conf
 ## so even if it is '0' it is still '0'
 ## now we need to change the settings for COS and Squelch.
 ## We need to check if the Squelch is set to '1' or '0'
@@ -73,14 +73,14 @@ if [[ "$HID" == "false" ]] && [[ "$GPIOD" == "true" ]] && [[ "$card" == "false" 
     fi
 
     if [[ "$ptt_direction" == "High" ]]; then
-         sed -i 's/\#PTT_TYPE=NONE/PTT_TYPE=GPIOD/g' /etc/svxlink/svxlink.conf
-         sed -i 's/\#PTT_GPIOD_CHIP/PTT_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
-         sed -i "s/\#PTT_GPIOD_LINE=!24/PTT_GPIOD_LINE=$ptt_pin/g" /etc/svxlink/svxlink.conf
+         sudo sed -i 's/\#PTT_TYPE=NONE/PTT_TYPE=GPIOD/g' /etc/svxlink/svxlink.conf
+         sudo sed -i 's/\#PTT_GPIOD_CHIP/PTT_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
+         sudo sed -i "s/\#PTT_GPIOD_LINE=!24/PTT_GPIOD_LINE=$ptt_pin/g" /etc/svxlink/svxlink.conf
 
     elif [[ "$ptt_direction" == "Low" ]]; then
-        sed -i 's/\#PTT_TYPE=NONE/PTT_TYPE=GPIOD/g' /etc/svxlink/svxlink.conf
-        sed -i 's/\#PTT_GPIOD_CHIP/PTT_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
-        sed -i "s/\#PTT_GPIOD_LINE=!24/PTT_GPIOD_LINE=!$ptt_pin/g" /etc/svxlink/svxlink.conf
+        sudo sed -i 's/\#PTT_TYPE=NONE/PTT_TYPE=GPIOD/g' /etc/svxlink/svxlink.conf
+        sudo sed -i 's/\#PTT_GPIOD_CHIP/PTT_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
+        sudo sed -i "s/\#PTT_GPIOD_LINE=!24/PTT_GPIOD_LINE=!$ptt_pin/g" /etc/svxlink/svxlink.conf
     else
         echo no actions here.
     fi
@@ -103,22 +103,22 @@ if [[ "$HID" == "false" ]] && [[ "$GPIOD" == "true" ]] && [[ "$card" == "false" 
         cos_pin="${cos_pin#"gpio "}"
     fi
 
-    sed -i 's/\#SQL_DET=VOX/SQL_DET=GPIOD/g' /etc/svxlink/svxlink.conf
+    sudo sed -i 's/\#SQL_DET=VOX/SQL_DET=GPIOD/g' /etc/svxlink/svxlink.conf
     if [[ "$cos_direction" == "High" ]]; then
-        sed -i 's/\#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
-        sed -i "s/\#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=$cos_pin/g" /etc/svxlink/svxlink.conf
+        sudo sed -i 's/\#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
+        sudo sed -i "s/\#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=$cos_pin/g" /etc/svxlink/svxlink.conf
 
     elif [[ "$cos_direction" == "Low" ]]; then
-        sed -i 's/\#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
-        sed -i "s/\#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=!$cos_pin/g" /etc/svxlink/svxlink.conf
+        sudo sed -i 's/\#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
+        sudo sed -i "s/\#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=!$cos_pin/g" /etc/svxlink/svxlink.conf
     else
         echo no action here
     fi
 
 elif [[ "$HID" == "true" ]] && [[ "$GPIOD" == "true" ]] && [[ "$card" == "true" ]]; then
-    sed -i 's/\#PTT_TYPE=NONE/PTT_TYPE=Hidraw/g' /etc/svxlink/svxlink.conf
-    sed -i '/^\[Tx1\]$/,/^\[/{ /#HID_DEVICE/ s/#HID_DEVICE/HID_DEVICE/ }' /etc/svxlink/svxlink.conf
-    sed -i 's/\#HID_PTT_PIN=GPIO3/HID_PTT_PIN=GPIO3/g' /etc/svxlink/svxlink.conf
+    sudo sed -i 's/\#PTT_TYPE=NONE/PTT_TYPE=Hidraw/g' /etc/svxlink/svxlink.conf
+    sudo sed -i '/^\[Tx1\]$/,/^\[/{ /#HID_DEVICE/ s/#HID_DEVICE/HID_DEVICE/ }' /etc/svxlink/svxlink.conf
+    sudo sed -i 's/\#HID_PTT_PIN=GPIO3/HID_PTT_PIN=GPIO3/g' /etc/svxlink/svxlink.conf
 
     cos_direction=$(whiptail --title "COS" --radiolist "Please select COS direction" 10 78 3 \
     "High" "Receive COS is active-High" OFF \
@@ -138,26 +138,26 @@ elif [[ "$HID" == "true" ]] && [[ "$GPIOD" == "true" ]] && [[ "$card" == "true" 
         cos_pin="${cos_pin#"gpio "}"
     fi
 
-    sed -i 's/\#SQL_DET=VOX/SQL_DET=GPIOD/g' /etc/svxlink/svxlink.conf
+    sudo sed -i 's/\#SQL_DET=VOX/SQL_DET=GPIOD/g' /etc/svxlink/svxlink.conf
     if [[ "$cos_direction" == "High" ]]; then
-        sed -i 's/\#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
-        sed -i "s/\#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=$cos_pin/g" /etc/svxlink/svxlink.conf
+        sudo sed -i 's/\#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
+        sudo sed -i "s/\#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=$cos_pin/g" /etc/svxlink/svxlink.conf
 
     elif [[ "$cos_direction" == "Low" ]]; then
-        sed -i 's/\#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
-        sed -i "s/\#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=!$cos_pin/g" /etc/svxlink/svxlink.conf
+        sudo sed -i 's/\#SQL_GPIOD_CHIP/SQL_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
+        sudo sed -i "s/\#SQL_GPIOD_LINE=!23/SQL_GPIOD_LINE=!$cos_pin/g" /etc/svxlink/svxlink.conf
     else
         echo no action here
     fi
 
 elif [[ "$HID" == "true" ]] && [[ "$GPIOD" == "false" ]] && [[ "$card" == "true" ]]; then
-    sed -i 's/\#PTT_TYPE=NONE/PTT_TYPE=Hidraw/g' /etc/svxlink/svxlink.conf
-    sed -i 's/\#HID_DEVICE=/HID_DEVICE=/g' /etc/svxlink/svxlink.conf
-    sed -i 's/\#HID_PTT_PIN=GPIO3/HID_PTT_PIN=GPIO3/g' /etc/svxlink/svxlink.conf
-    sed -i 's/\#SQL_DET=VOX/SQL_DET=HIDRAW/g' /etc/svxlink/svxlink.conf
-    sed -i 's/\#HID_SQL_PIN/HID_SQL_PIN/g' /etc/svxlink/svxlink.conf
+    sudo sed -i 's/\#PTT_TYPE=NONE/PTT_TYPE=Hidraw/g' /etc/svxlink/svxlink.conf
+    sudo sed -i 's/\#HID_DEVICE=/HID_DEVICE=/g' /etc/svxlink/svxlink.conf
+    sudo sed -i 's/\#HID_PTT_PIN=GPIO3/HID_PTT_PIN=GPIO3/g' /etc/svxlink/svxlink.conf
+    sudo sed -i 's/\#SQL_DET=VOX/SQL_DET=HIDRAW/g' /etc/svxlink/svxlink.conf
+    sudo sed -i 's/\#HID_SQL_PIN/HID_SQL_PIN/g' /etc/svxlink/svxlink.conf
     if [[ "$cos_direction" == "High" ]]; then
-        sed -i 's/=VOL_DN/=!VOL_DN/g' /etc/svxlink/svxlink.conf
+        sudo sed -i 's/=VOL_DN/=!VOL_DN/g' /etc/svxlink/svxlink.conf
     elif [[ "$cos_direction" == "Low" ]]; then
         echo leave everything as it is
     else
@@ -170,9 +170,9 @@ fi
 #### The downloaded Model is en_GB, if not then change to en_US
 if [[ $lang  == "en_US" ]]
 then 
-sed -i "s/#DEFAULT_LANG=en_US/DEFAULT_LANG=en_US/g" /etc/svxlink/svxlink.conf
+sudo sed -i "s/#DEFAULT_LANG=en_US/DEFAULT_LANG=en_US/g" /etc/svxlink/svxlink.conf
 else
-sed -i "s/#DEFAULT_LANG=en_US/DEFAULT_LANG=en_GB/g" /etc/svxlink/svxlink.conf
+sudo sed -i "s/#DEFAULT_LANG=en_US/DEFAULT_LANG=en_GB/g" /etc/svxlink/svxlink.conf
 fi
 }
 
