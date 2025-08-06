@@ -12,7 +12,7 @@
     usercheck    
     ## Change swapfile size
     #sudo dphys-swapfile swapoff 
-    #sudo sed -i 's/CONF_SWAPSIZE=100/CONF_SWAPSIZE=150/g' /etc/dphys-swapfile
+    #sudo sed -i "s/CONF_SWAPSIZE=100/CONF_SWAPSIZE=150/g" /etc/dphys-swapfile
     #sudo dphys-swapfile swapon
     ## Install file manipulation pkg ##
     sudo apt-get install -y acl
@@ -25,9 +25,9 @@
     sudo chmod 777 /etc/modules
     sudo sh -c 'echo "blacklist snd_bcm2835" > /etc/modprobe.d/raspi-blacklist.conf'
     echo -e "${BLUE}#### Blacklisting snd_bcm 2835 #### ${WHITE}" | sudo tee -a /var/log/install.log
-    sudo sed -i 's/options snd-usb/\#options snd-usb/g' /lib/modprobe.d/aliases.conf
+    sudo sed -i "s/options snd-usb/\#options snd-usb/g" /lib/modprobe.d/aliases.conf
     echo -e "${BLUE}#### Disabling HMDI Sound - Not required for this build #### ${WHITE}"| sudo tee -a /var/log/install.log
-    sudo sed -i 's/dtoverlay=vc4-kms-v3d/dtoverlay=vc4-kms-v3d,noaudio/g' /boot/firmware/config.txt
+    sudo sed -i "s/dtoverlay=vc4-kms-v3d/dtoverlay=vc4-kms-v3d,noaudio/g" /boot/firmware/config.txt
     sudo cp -f /home/pi/svxlinkbuilder/configs/asound.conf /etc/modprobe.d/asound.conf
     echo -e "${BLUE}#### Setting up Loopback Soundcard #### ${WHITE}" | sudo tee -a /var/log/install.log
     echo snd-aloop > /etc/modules

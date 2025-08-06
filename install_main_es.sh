@@ -114,18 +114,18 @@ chmod 0440 "$SUDOERS_FILE"
 	echo -e "$(date)" "${YELLOW} #### Desactivar mensajes de advertencia de distorsión de audio #### ${NORMAL}"| sudo tee -a  /var/log/install.log
 
 
- 	sudo sed -i 's/PEAK_METER=1/PEAK_METER=0/g' $CONF
+ 	sudo sed -i "s/PEAK_METER=1/PEAK_METER=0/g" $CONF
 
  # clear
 	echo -e "$(date)" "${GREEN} #### Actualización de SplashScreen al iniciar #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
- 	sudo sed -i 's/MYCALL/$CALL/g' /etc/update-motd.d/10-uname
+ 	sudo sed -i "s/MYCALL/$CALL/g" /etc/update-motd.d/10-uname
  	sudo chmod 0775 /etc/update-motd.d/10-uname
 
  # clear
 	echo -e "$(date)" "${YELLOW} #### Cambiar el sufijo del archivo de registro ${NORMAL}" | sudo tee -a  /var/log/install.log
 
- 		sudo sed -i '/^LOGFILE=/ { /[^.log]$/ s/$/.log/ }' /etc/default/svxlink
+ 		sudo sed -i "/^LOGFILE=/ { /[^.log]$/ s/$/.log/ }" /etc/default/svxlink
 
 	#### INSTALLING DASHBOARD ####
  # clear

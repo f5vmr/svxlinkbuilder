@@ -97,31 +97,31 @@ chmod 0440 "$SUDOERS_FILE"
 	# clear
 	echo -e "$(date)" "${GREEN} #### Indicatif à $CALL #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
- 	sudo sed -i 's/MYCALL/$CALL/g' $CONF
-	sudo sed -i 's/MYCALL/$CALL/g' $MODULE.$NODE
-	sudo sed -i 's/MYCALL/$CALL/g' $MODULE/RelectorLogic.conf
+ 	sudo sed -i "s/MYCALL/$CALL/g" $CONF
+	sudo sed -i "s/MYCALL/$CALL/g" $MODULE.$NODE
+	sudo sed -i "s/MYCALL/$CALL/g" $MODULE/RelectorLogic.conf
  	
- 	sudo sed -i 's/MYCALL/$CALL/g' /etc/svxlink/node_info.json
+ 	sudo sed -i "s/MYCALL/$CALL/g" /etc/svxlink/node_info.json
 
 	echo -e "$(date)" "${GREEN} ####  Squelch Hangtime à 10 mS ${NORMAL}" | sudo tee -a  /var/log/install.log
- 	sudo sed -i 's/SQL_HANGTIME=2000/SQL_HANGTIME=10/g' $CONF
+ 	sudo sed -i "s/SQL_HANGTIME=2000/SQL_HANGTIME=10/g" $CONF
  
  # clear	
 	echo -e "$(date)" "${YELLOW} #### Désactivation des messagess d'alertes de distortion #### ${NORMAL}"| sudo tee -a  /var/log/install.log
 
 
- 	sudo sed -i 's/PEAK_METER=1/PEAK_METER=0/g' $CONF
+ 	sudo sed -i "s/PEAK_METER=1/PEAK_METER=0/g" $CONF
 
  # clear
 	echo -e "$(date)" "${GREEN} #### Mise à jour écran au demarrage #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
- 	sudo sed -i 's/MYCALL/$CALL/g' /etc/update-motd.d/10-uname
+ 	sudo sed -i "s/MYCALL/$CALL/g" /etc/update-motd.d/10-uname
  	sudo chmod 0775 /etc/update-motd.d/10-uname
 
  # clear
 	echo -e "$(date)" "${YELLOW} #### Changement du suffix du Fichier Log ${NORMAL}" | sudo tee -a  /var/log/install.log
 
-	sudo sed -i '/^LOGFILE=/ { /[^.log]$/ s/$/.log/ }' /etc/default/svxlink
+	sudo sed -i "/^LOGFILE=/ { /[^.log]$/ s/$/.log/ }" /etc/default/svxlink
 
 	#### INSTALLING DASHBOARD ####
  # clear

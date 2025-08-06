@@ -145,18 +145,18 @@ case $selected_option in
         ;;
     "Morse K")
         # Replace playTone with CW::play " K" or CW::play " T"
-        sudo sed -i 's/playTone [0-9]\+ [0-9]\+ [0-9]\+/CW::play \" K\"/g' "$logicfile"
+        sudo sed -i "s/playTone [0-9]\+ [0-9]\+ [0-9]\+/CW::play \" K\"/g" "$logicfile"
 
         ;;
     "Morse T")
         echo "T"
         # Replace playTone with CW::play " K" or CW::play " T"
-        sudo sed -i 's/playTone [0-9]\+ [0-9]\+ [0-9]\+/CW::play \" T\"/g' "$logicfile"
+        sudo sed -i "s/playTone [0-9]\+ [0-9]\+ [0-9]\+/CW::play \" T\"/g" "$logicfile"
         ;;
     "None")
         echo "None"
     # Replace playTone with CW::play ""
-    sudo sed -i 's/playTone [0-9]\+ [0-9]\+ [0-9]\+/CW::play \"\"/g' "$logicfile"
+    "s/playTone [0-9]\+ [0-9]\+ [0-9]\+/CW::play \"\"/g" "$logicfile"
         ;;
 esac
 
