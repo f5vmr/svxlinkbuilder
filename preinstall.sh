@@ -38,9 +38,7 @@
     sudo touch /etc/alsa/state-daemon.conf
     sudo systemctl daemon-reload
     sudo systemctl restart alsa-state.service
-    ## Install repository ##
-    source "${BASH_SOURCE%/*}/functions/svxlink.sh"
-    install
+    
     ## Install svxlink-server  and dependencies ##
     #echo -e "${BLUE}#### Installing svxlink-server #### ${WHITE}" | sudo tee -a /var/log/install.log
     sudo apt install -y curl qtel apache2 apache2-bin apache2-data apache2-utils php8.2 python3-serial sqlite3 libssl-dev php8.2-sqlite3 toilet libgpiod-dev libgcrypt-dev libgsm1-dev libsigc++-2.0-dev tcl-dev libspeex-dev libasound2-dev libpopt-dev libssl-dev libopus-dev libjsoncpp-dev librtssdr-dev --fix-missing
