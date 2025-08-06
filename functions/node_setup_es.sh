@@ -157,7 +157,7 @@ elif [[ "$HID" == "true" ]] && [[ "$GPIOD" == "false" ]] && [[ "$card" == "true"
     sed -i 's/\#SQL_DET=GPIOD/SQL_DET=HIDRAW/g' /etc/svxlink/svxlink.conf
     sed -i 's/\#HID_SQL_PIN/HID_SQL_PIN/g' /etc/svxlink/svxlink.conf
     if [[ "$cos_direction" == "High" ]]; then
-        sed -i 's/=VOL_DN/=VOL_UP/g' /etc/svxlink/svxlink.conf
+        sed -i 's/=VOL_DN/=!VOL_DN/g' /etc/svxlink/svxlink.conf
     elif [[ "$cos_direction" == "Low" ]]; then
         echo leave everything as it is
     else
