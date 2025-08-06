@@ -11,9 +11,9 @@
     source "${BASH_SOURCE%/*}/functions/check_user.sh"
     usercheck    
     ## Change swapfile size
-    sudo dphys-swapfile swapoff 
-    sudo sed -i 's/CONF_SWAPSIZE=100/CONF_SWAPSIZE=150/g' /etc/dphys-swapfile
-    sudo dphys-swapfile swapon
+    #sudo dphys-swapfile swapoff 
+    #sudo sed -i 's/CONF_SWAPSIZE=100/CONF_SWAPSIZE=150/g' /etc/dphys-swapfile
+    #sudo dphys-swapfile swapon
     ## Install file manipulation pkg ##
     sudo apt-get install -y acl
     ## Set /var/log/install.log ##
