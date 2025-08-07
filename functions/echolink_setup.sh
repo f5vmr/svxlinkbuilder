@@ -21,14 +21,14 @@ then
     sudo sed -i "s/MyTown/$echolocation/g" /etc/svxlink/svxlink.d/ModuleEchoLink.conf
     #### The reverse to node_setup.sh where en_US is the default language
     if [[ "$lang" == "en_GB" ]]; then
-    sudo sed -i "s/#DEFAULT_LANG=en_US/DEFAULT_LANG=$lang/g" /etc/svxlink/svxlink.d/ModuleEchoLink.conf
+    sudo sed -i 's/#DEFAULT_LANG=en_US/DEFAULT_LANG=$lang/g' /etc/svxlink/svxlink.d/ModuleEchoLink.conf
 fi
     #sed -i 's/DESCRIPTION/\#DESCRIPTION/g' /etc/svxlink/svxlink.d/ModuleEchoLink.conf
-    sudo sed -i "s/\#STATUS_SERVER_LIST/STATUS_SERVER_LIST/g" /etc/svxlink/svxlink.conf
+    sudo sed -i 's/\#STATUS_SERVER_LIST/STATUS_SERVER_LIST/g' /etc/svxlink/svxlink.conf
 echo -e "$(date)" "${GREEN} Echolink is set up ${NORMAL}" | sudo tee -a /var/log/install.log
 
     else
-     sudo sed -i "s/,ModuleEchoLink//" /etc/svxlink/svxlink.d/$NODE
+     sudo sed -i 's/,ModuleEchoLink//' /etc/svxlink/svxlink.d/$NODE
     # removing Echolink from the MODULES= line in both Simplex and Duplex
 echo -e "$(date)" "${CYAN} EchoLink is not set up ${NORMAL}" | sudo tee -a /var/log/install.log
     ##nothing to do

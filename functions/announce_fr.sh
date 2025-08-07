@@ -49,9 +49,9 @@ sudo sed -i "s/^CW_PITCH\s*=\s*.*/CW_PITCH=$new_cw_pitch/g" "$svxconf_file"
 echo -e "${CYAN}Replacing CW_CPM with ${WHITE} $new_cw_cpm"
 sudo sed -i "s/^CW_CPM\s*=\s*.*/CW_CPM=$new_cw_cpm/g" "$svxconf_file"
 echo -e "${CYAN}Replacing SHORT_IDENT_INTERVAL with ${WHITE} $new_short_ident_interval"
-sudo sed -i "s|SHORT_IDENT_INTERVAL=.*|SHORT_IDENT_INTERVAL=$new_short_ident_interval|g" "$svxconf_file"
+sudo sed -i "s/SHORT_IDENT_INTERVAL=.*/SHORT_IDENT_INTERVAL=$new_short_ident_interval/g" "$svxconf_file"
 echo -e "${CYAN}Replacing LONG_IDENT_INTERVAL with ${WHITE} $new_long_ident_interval"
-sudo sed -i "s|LONG_IDENT_INTERVAL=.*|LONG_IDENT_INTERVAL=$new_long_ident_interval|g" "$svxconf_file"
+sudo sed -i "s/LONG_IDENT_INTERVAL=.*/LONG_IDENT_INTERVAL=$new_long_ident_interval/g" "$svxconf_file"
 echo -e "${YELLOW}Standby for logic changes ${WHITE}"
 #### LOGIC CHANGES ####
 ## Extract the values of the text indicators from Logic.tcl
@@ -101,7 +101,7 @@ sudo sed -i "s/^\(variable long_cw_id_enable\s*\)[0-9].*/\1$new_long_cw_id_enabl
 
 
 # Extract the content of the send_rgr_sound procedure
-send_rgr_sound_content=$(sed -n '/proc send_rgr_sound/,/}/p' "$logicfile" | sed '1d;$d' | sed -n '/else/,/}/p' | sed '1d;$d')
+send_rgr_sound_content=$(sed -n "/proc send_rgr_sound/,/}/p" "$logicfile" | sed "1d;$d" | sed -n "/else/,/}/p" | sed "1d;$d")
 
 # Default settings
 default_option="Beep"

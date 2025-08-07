@@ -5,7 +5,7 @@ whiptail --title "Setup EchoLink?" --yesno "Ceci va installer l'EchoLink et le c
 if [ $? -eq "0" ] 
 then
     ## "Installing echolink"
-    #sed -i 's/\#MUTE_LOGIC/MUTE_LOGIC/g' /etc/svxlink/svxlink.d/ModuleEchoLink.conf      
+    #sed -i "s/\#MUTE_LOGIC/MUTE_LOGIC/g" /etc/svxlink/svxlink.d/ModuleEchoLink.conf      
         echocall=$(whiptail --title "Indicatif F2ABC-L ou -R?" --inputbox "Selectionner l'indicatif (-L or -R) comme enregistré" 8 78 3>&1 1>&2 2>&3)
         echocall=${echocall^^}
         echopass=$(whiptail --title "Mot de passe?" --passwordbox "Entrer le mot de passe" 8 20 3>&1 1>&2 2>&3)
@@ -19,13 +19,13 @@ then
     sudo sed -i "s/MyName/$echosysop/g" /etc/svxlink/svxlink.d/ModuleEchoLink.conf
     sudo sed -i "s/Fq,/$echofreq/g" /etc/svxlink/svxlink.d/ModuleEchoLink.conf
     sudo sed -i "s/MyTown/$echolocation/g" /etc/svxlink/svxlink.d/ModuleEchoLink.conf
-    sudo sed -i "s/\#DEFAULT_LANG=en_US/DEFAULT_LANG=fr_FR/g" /etc/svxlink/svxlink.d/ModuleEchoLink.conf
+    sudo sed -i 's/\#DEFAULT_LANG=en_US/DEFAULT_LANG=fr_FR/g' /etc/svxlink/svxlink.d/ModuleEchoLink.conf
     #sed -i 's/DESCRIPTION/\#DESCRIPTION/g' /etc/svxlink/svxlink.d/ModuleEchoLink.conf
-    sudo sed -i "s/\#STATUS_SERVER_LIST/STATUS_SERVER_LIST/g" /etc/svxlink/svxlink.d/ModuleEchoLink.conf
+    sudo sed -i 's/\#STATUS_SERVER_LIST/STATUS_SERVER_LIST/g' /etc/svxlink/svxlink.d/ModuleEchoLink.conf
  echo -e "$(date)" "${GREEN} Echolink est disponible. ${NORMAL}" | sudo tee -a /var/log/install.log
    
     else
-     sudo sed -i "s/,ModuleEchoLink//" /etc/svxlink/svxlink.d/$NODE
+     sudo sed -i 's/,ModuleEchoLink//' /etc/svxlink/svxlink.d/$NODE
     # removing Echolink from the MODULES= line in both Simplex and Duplex
    echo -e "$(date)" "${CYAN} EchoLink n'est pas disponible. ${NORMAL}" | sudo tee -a /var/log/install.log
 

@@ -12,10 +12,10 @@ function dash_install {
     sudo chmod -R 775 html
     ## change Apache2 permissions
     cd /etc/apache2/ || exit 1
-    sudo sed -i "s/APACHE_RUN_USER=www-data/APACHE_RUN_USER=svxlink/g" envvars
-    sudo sed -i "s/APACHE_RUN_GROUP=www-data/APACHE_RUN_GROUP=svxlink/g" envvars
+    sudo sed -i 's/APACHE_RUN_USER=www-data/APACHE_RUN_USER=svxlink/g' envvars
+    sudo sed -i 's/APACHE_RUN_GROUP=www-data/APACHE_RUN_GROUP=svxlink/g' envvars
     cd /usr/lib/systemd/system/ || exit 1
-    sudo sed -i "s/PrivateTmp=true/PrivateTmp=false/g" apache2.service
+    sudo sed -i 's/PrivateTmp=true/PrivateTmp=false/g' apache2.service
     ## restart Apache2
     sudo systemctl daemon-reload
     sudo systemctl restart apache2.service

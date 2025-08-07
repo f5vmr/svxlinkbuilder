@@ -108,13 +108,13 @@ chmod 0440 "$SUDOERS_FILE"
  	sudo sed -i "s/MYCALL/$CALL/g" /etc/svxlink/node_info.json
 
 	echo -e "$(date)" "${GREEN} #### Configuración del tiempo de suspensión del silenciador en 10 mS ${NORMAL}" | sudo tee -a  /var/log/install.log
- 	sudo sed -i s/SQL_HANGTIME=2000/SQL_HANGTIME=10/g $CONF
+ 	sudo sed -i 's/SQL_HANGTIME=2000/SQL_HANGTIME=10/g' $CONF
  
  # clear	
 	echo -e "$(date)" "${YELLOW} #### Desactivar mensajes de advertencia de distorsión de audio #### ${NORMAL}"| sudo tee -a  /var/log/install.log
 
 
- 	sudo sed -i "s/PEAK_METER=1/PEAK_METER=0/g" $CONF
+ 	sudo sed -i 's/PEAK_METER=1/PEAK_METER=0/g' $CONF
 
  # clear
 	echo -e "$(date)" "${GREEN} #### Actualización de SplashScreen al iniciar #### ${NORMAL}" | sudo tee -a  /var/log/install.log

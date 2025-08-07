@@ -27,18 +27,18 @@ if [ $? -eq 0 ]; then
             ;;
         "Chime")
             echo "Vous avez selectionne le son carillon."
-            sed -i 's/playTone 1100/playTone 1180/g' "$logicfile"
+            sudo sed -i 's/playTone 1100/playTone 1180/g' "$logicfile"
             ;;
         "Pip")
             echo "Vous avez selectionne le son Pip."
-            sed -i 's/playTone 1100/\#playTone 1100/g' "$logicfile"
-            sed -i 's/playTone 1200/\#playTone 1200/g' "$logicfile"
-            sed -i '/#playTone 1200 \[expr {round(pow(\$base, \$i) \* 150 \/ \$max)}\] 100;/a\with CW::play "E";' "$logicfile"
+            sudo sed -i 's/playTone 1100/\#playTone 1100/g' "$logicfile"
+            sudo sed -i 's/playTone 1200/\#playTone 1200/g' "$logicfile"
+            sudo sed -i '/#playTone 1200 \[expr {round(pow(\$base, \$i) \* 150 \/ \$max)}\] 100;/a\with CW::play "E";' "$logicfile"
             ;;
         "Silence")
             echo "Vous avez desavtivé le son."
-            sed -i 's/playTone 1100/\#playTone 1100/g' "$logicfile"
-            sed -i 's/playTone 1200/\#playTone 1200/g' "$logicfile"
+            sudo sed -i 's/playTone 1100/\#playTone 1100/g' "$logicfile"
+            sudo sed -i 's/playTone 1200/\#playTone 1200/g' "$logicfile"
             ;;
     esac
 else
@@ -54,7 +54,7 @@ get_idle_timeout() {
 
 # Function to update the IDLE_TIMEOUT value in svxlink.conf
 update_idle_timeout() {
-    sed -i "/^\[RepeaterLogic\]/,/^\[/ s/^IDLE_TIMEOUT=.*/IDLE_TIMEOUT=$1/" /etc/svxlink/svxlink.conf
+    sudo sed -i "/^\[RepeaterLogic\]/,/^\[/ s/^IDLE_TIMEOUT=.*/IDLE_TIMEOUT=$1/" /etc/svxlink/svxlink.conf
 }
 
 
@@ -79,9 +79,10 @@ LOGIC_DIR=/usr/share/svxlink/events.d/local
 cwfile="$LOGIC_DIR/$CWLogic"
 # Adding the VA Bar code to CW.tcl
 sudo sed -i "72a \"-\" \"...-.-\"" /usr/share/svxlink/events.d/local/CW.tcl
-sed -i "s/playTone 400 900 50/\#playTone 400 900 50/g" "$logicfile"
-sed -i "s/playTone 360 900 50/\#playTone 360 900 50/g" "$logicfile"
-sed -i "s/\#playTone 360 900 50/CW::play \"\-\"\;/" "$logicfile"
+sudo sed -i 's/playTone 400 900 50/\#playTone 400 900 50/g' "$logicfile"
+sudo sed -i 's/playTone 360 900 50/\#playTone 360 900 50/g' "$logicfile"
+sudo sed -i 's|#playTone 360 900 50|CW::play "-";|' "$logicfile"
+
 
 
 #### 
