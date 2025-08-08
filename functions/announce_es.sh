@@ -52,53 +52,6 @@ echo -e "${CYAN}Replacing SHORT_IDENT_INTERVAL with ${WHITE} $new_short_ident_in
 sudo sed -i "s/^SHORT_IDENT_INTERVAL\s*=\s*.*/SHORT_IDENT_INTERVAL = $new_short_ident_interval/g" "$svxconf_file"
 echo -e "${CYAN}Replacing LONG_IDENT_INTERVAL with ${WHITE} $new_long_ident_interval"
 sudo sed -i "s/^LONG_IDENT_INTERVAL\s*=\s*.*/LONG_IDENT_INTERVAL = $new_long_ident_interval/g" "$svxconf_file"
-echo -e "${YELLOW}Standby for logic changes ${WHITE}"
-#### LOGIC CHANGES ####
-## Extract the values of the text indicators from Logic.tcl
-# Retrieve the current values of the variables
-short_voice_id_enable=$(head -n 40 "$logicfile" | awk '/^variable short_voice_id_enable/{print $NF; exit}')
-short_cw_id_enable=$(head -n 40 "$logicfile" | awk '/^variable short_cw_id_enable/{print $NF; exit}')
-long_voice_id_enable=$(head -n 40 "$logicfile" | awk '/^variable long_voice_id_enable/{print $NF; exit}')
-long_cw_id_enable=$(head -n 40 "$logicfile" | awk '/^variable long_cw_id_enable/{print $NF; exit}')
-
-# Define the options for the checklist dialog
-options=(
-    "Short Voice ID Enable" "$short_voice_id_enable" ""  # Empty description for now
-    "Short CW ID Enable" "$short_cw_id_enable" ""        # Empty description for now
-    "Long Voice ID Enable" "$long_voice_id_enable" ""    # Empty description for now
-    "Long CW ID Enable" "$long_cw_id_enable" ""          # Empty description for now
-)
-
-# Add descriptions to the options based on their current values
-for ((i = 0; i < ${#options[@]}; i+=3)); do
-    value="${options[i+1]}"
-    if [ "$value" == "1" ]; then
-        options[i+2]="Enabled"
-    else
-        options[i+2]="Disabled"
-    fi
-done
-
-# Prompt the user to toggle the variables using a checklist dialog
-new_values=$(whiptail --title "Toggle Logic Timing Variables" --checklist "Toggle Variables" 15 78 4 "${options[@]}" 3>&1 1>&2 2>&3)
-
-# Extract the new values from the checklist dialog
-new_short_voice_id_enable=$(echo "$new_values" | grep -o "Short Voice ID Enable" | wc -l)
-new_short_cw_id_enable=$(echo "$new_values" | grep -o "Short CW ID Enable" | wc -l)
-new_long_voice_id_enable=$(echo "$new_values" | grep -o "Long Voice ID Enable" | wc -l)
-new_long_cw_id_enable=$(echo "$new_values" | grep -o "Long CW ID Enable" | wc -l)
-echo -e "${CYAN}Short Voice ID Enable:${WHITE} $new_short_voice_id_enable"
-echo -e "${CYAN}Short CW ID Enable:${WHITE} $new_short_cw_id_enable"
-echo -e "${CYAN}Long Voice ID Enable:${WHITE} $new_long_voice_id_enable"
-echo -e "${CYAN}Long CW ID Enable:${WHITE} $new_long_cw_id_enable"
-
-
-# Update the Logic.tcl file with the new values
-sudo sed -i "s/^\(variable short_voice_id_enable\s*\)[0-9].*/\1$new_short_voice_id_enable/g" "$logicfile"
-sudo sed -i "s/^\(variable short_cw_id_enable\s*\)[0-9].*/\1$new_short_cw_id_enable/g" "$logicfile"
-sudo sed -i "s/^\(variable long_voice_id_enable\s*\)[0-9].*/\1$new_long_voice_id_enable/g" "$logicfile"
-sudo sed -i "s/^\(variable long_cw_id_enable\s*\)[0-9].*/\1$new_long_cw_id_enable/g" "$logicfile"
-
 
 # Extract the content of the send_rgr_sound procedure
 send_rgr_sound_content=$(sed -n "/proc send_rgr_sound/,/}/p" "$logicfile" | sed "1d;$d" | sed -n "/else/,/}/p" | sed "1d;$d")
