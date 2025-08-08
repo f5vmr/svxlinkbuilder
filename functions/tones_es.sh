@@ -27,18 +27,18 @@ if [ $? -eq 0 ]; then
             ;;
         "Chime")
             echo "You selected Chime."
-            sudo sed -i 's/playTone 1100/playTone 1180/g' "$logicfile"
+            sudo sed -i 's/playTone 1100/playTone 1180/' "$logicfile"
             ;;
         "Pip")
             echo "You selected Pip."
-            sudo sed -i 's/playTone 1100/\#playTone 1100/g' "$logicfile"
-            sudo sed -i 's/playTone 1200/\#playTone 1200/g' "$logicfile"
+            sudo sed -i 's/playTone 1100/\#playTone 1100/' "$logicfile"
+            sudo sed -i 's/playTone 1200/\#playTone 1200/' "$logicfile"
             sudo sed -i '/#playTone 1200 \[expr {round(pow(\$base, \$i) \* 150 \/ \$max)}\] 100;/a\with CW::play "E";' "$logicfile"
             ;;
         "Silence")
             echo "You selected Silence."
-            sudo sed -i 's/playTone 1100/\#playTone 1100/g' "$logicfile"
-            sudo sed -i 's/playTone 1200/\#playTone 1200/g' "$logicfile"
+            sudo sed -i 's/playTone 1100/\#playTone 1100/' "$logicfile"
+            sudo sed -i 's/playTone 1200/\#playTone 1200/' "$logicfile"
             ;;
     esac
 else
@@ -79,8 +79,8 @@ LOGIC_DIR=/usr/share/svxlink/events.d/local
 cwfile="$LOGIC_DIR/$CWLogic"
 # Adding the VA Bar code to CW.tcl
 sudo sed -i 72a "-" "...-.-"' /usr/share/svxlink/events.d/local/CW.tcl
-sudo sed -i 's/playTone 400 900 50/\#playTone 400 900 50/g' "$logicfile"
-sudo sed -i 's/playTone 360 900 50/\#playTone 360 900 50/g' "$logicfile"
+sudo sed -i 's/playTone 400 900 50/\#playTone 400 900 50/' "$logicfile"
+sudo sed -i 's/playTone 360 900 50/\#playTone 360 900 50/' "$logicfile"
 sudo sed -i 's/#playTone 360 900 50/CW::play "-";/' "$logicfile"
 
 
