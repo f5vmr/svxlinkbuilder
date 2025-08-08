@@ -2,7 +2,7 @@
 function tones {
 if [ "$NODE_OPTION" -eq "3" ] || [ "$NODE_OPTION" -eq "4" ]; then
 LOGIC_DIR=/usr/share/svxlink/events.d/local
-RepeaterLogic="RepeaterLogic.tcl"
+RepeaterLogic="RepeaterLogicType.tcl"
 logicfile="$LOGIC_DIR/$RepeaterLogic"
 #    # Code to execute if NODE_OPTION is equal to 3 or 4
 #    echo "NODE_OPTION is 3 or 4. Executing code..."
@@ -31,9 +31,9 @@ if [ $? -eq 0 ]; then
             ;;
         "Pip")
             echo "You selected Pip."
-            sudo sed -i 's/playTone 1100/\#playTone 1100/g' "$logicfile"
-            sudo sed -i 's/playTone 1200/\#playTone 1200/g' "$logicfile"
-            sudo sed -i '/#playTone 1200 \[expr {round(pow(\$base, \$i) \* 150 \/ \$max)}\] 100;/a\CW::play "E";' "$logicfile"
+            sudo sed -i 's/playTone 1100/#playTone 1100/g' "$logicfile"
+            sudo sed -i 's/playTone 1200/#playTone 1200/g' "$logicfile"
+            sudo sed -i 's/#playTone 1200 \[expr {round(pow(\$base, \$i) \* 150 \/ \$max)}\] 100;/a\CW::play "E";' "$logicfile"
             ;;       
         "Silence")
             echo "You selected Silence."
@@ -78,7 +78,7 @@ LOGIC_DIR=/usr/share/svxlink/events.d/local
 CWLogic="CW.tcl"
 cwfile="$LOGIC_DIR/$CWLogic"
 # Adding the VA Bar code to CW.tcl
-sudo sed -i "72a \"-\" \"...-.-\"" /usr/share/svxlink/events.d/local/CW.tcl
+sudo sed -i '72a "-" "...-.-"' /usr/share/svxlink/events.d/local/CW.tcl
 sudo sed -i 's/playTone 400 900 50/\#playTone 400 900 50/g' "$logicfile"
 sudo sed -i 's/playTone 360 900 50/\#playTone 360 900 50/g' "$logicfile"
 sudo sed -i 's/#playTone 360 900 50/CW::play "-";' "$logicfile"
