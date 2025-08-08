@@ -70,7 +70,7 @@ if [ $? -eq 0 ]; then
     update_idle_timeout "$new_idle_timeout"
     whiptail --title "Success" --msgbox "IDLE_TIMEOUT updated successfully to $new_idle_timeout." 8 78
 else
-    whiptail --title "Canceled" --msgbox "No changes were made to IDLE_TIMEOUT." 8 78
+    whiptail --title "Cancelled" --msgbox "No changes were made to IDLE_TIMEOUT." 8 78
 fi
 
 #### Add "-" "...-.-" to CW.tcl
