@@ -25,7 +25,7 @@ then
  echo -e "$(date)" "${GREEN} Echolink est disponible. ${NORMAL}" | sudo tee -a /var/log/install.log
    
     else
-     sudo sed -i 's/,ModuleEchoLink//' /etc/svxlink/svxlink.d/$NODE
+     sudo sed -i 's/,ModuleEchoLink//' /etc/svxlink/$NODE
     # removing Echolink from the MODULES= line in both Simplex and Duplex
    echo -e "$(date)" "${CYAN} EchoLink n'est pas disponible. ${NORMAL}" | sudo tee -a /var/log/install.log
 

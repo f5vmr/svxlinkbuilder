@@ -59,7 +59,7 @@ whiptail --title "Metar Info" --yesno "Voulez-vous configurer ce module?" 8 78 3
         echo -e "$(date)" "${GREEN} $selected Aèroport inclus par défaut $specific_airport ${NORMAL}" | sudo tee -a /var/log/install.log
    
     else
-     sudo sed -i 's/,ModuleMetarInfo//' /etc/svxlink/svxlink.d/$NODE
+     sudo sed -i 's/,ModuleMetarInfo//' /etc/svxlink/$NODE
     # removing MetarInfo from the MODULES= line in both Simplex and Duplex
     fi
 }
