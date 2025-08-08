@@ -4,6 +4,8 @@ if [ "$NODE_OPTION" -eq "3" ] || [ "$NODE_OPTION" -eq "4" ]; then
 LOGIC_DIR=/usr/share/svxlink/events.d/local
 RepeaterLogic="RepeaterLogicType.tcl"
 logicfile="$LOGIC_DIR/$RepeaterLogic"
+CWLogic="CW.tcl"
+cwfile="$LOGIC_DIR/$CWLogic"
 #    # Code to execute if NODE_OPTION is equal to 3 or 4
 #    echo "NODE_OPTION is 3 or 4. Executing code..."
 #    # Add your code here
@@ -74,11 +76,9 @@ else
 fi
 
 #### Add "-" "...-.-" to CW.tcl
-LOGIC_DIR=/usr/share/svxlink/events.d/local
-CWLogic="CW.tcl"
-cwfile="$LOGIC_DIR/$CWLogic"
+
 # Adding the VA Bar code to CW.tcl
-sudo sed -i '72a "-" "...-.-"' /usr/share/svxlink/events.d/local/CW.tcl
+sudo sed -i '72a "-" "...-.-"' "$cwfile"
 sudo sed -i 's/playTone 400 900 50/\#playTone 400 900 50/' "$logicfile"
 sudo sed -i 's/playTone 360 900 50/\#playTone 360 900 50/' "$logicfile"
 sudo sed -i 's/#playTone 360 900 50/CW::play "-";' "$logicfile"
