@@ -38,22 +38,32 @@
     sudo touch /etc/alsa/state-daemon.conf
     sudo systemctl daemon-reload
     sudo systemctl restart alsa-state.service
-    ## Install repository key and repository ##
-    echo -e "${YELLOW}#### Installing repository key #### ${WHITE}" | sudo tee -a /var/log/install.log
-    #sudo curl -O -q https://online-amateur-radio-club-m0ouk.github.io/oarc-packages/hibby.key
-    sudo mv svxlinkbuilder/addons/hibby.key /etc/apt/trusted.gpg.d/hibby.asc
-    echo -e "${BLUE}#### Installing repository #### ${WHITE}" | sudo tee -a /var/log/install.log
-    echo "deb https://online-amateur-radio-club-m0ouk.github.io/oarc-packages bookworm main" | sudo tee -a /etc/apt/sources.list
-    echo -e "${BLUE}#### Updating apt #### ${WHITE}" | sudo tee -a /var/log/install.log
+    ##Install users and groups ##
+    echo -e "${BLUE}#### Adding svxlink user and group #### ${WHITE}" | sudo tee -a /var/log/install.log
+    sudo useradd -rG audio,plugdev,gpio,dialout svxlink
+    sudo wget -p https://github.com/f5vmr/svxlink/releases/download/V25.5/svxlink-V25.5.16.deb /tmp/
     sudo apt update && sudo apt upgrade -y
-    ## Install svxlink-server  and dependencies ##
-    echo -e "${BLUE}#### Installing svxlink-server #### ${WHITE}" | sudo tee -a /var/log/install.log
-    sudo apt install -y curl svxlink-server qtel apache2 apache2-bin apache2-data apache2-utils php8.2 python3-serial sqlite3 libssl-dev php8.2-sqlite3 toilet libgpiod-dev --fix-missing -y
+    ### Install repository key and repository ##
+    #echo -e "${YELLOW}#### Installing repository key #### ${WHITE}" | sudo tee -a /var/log/install.log
+    ##sudo curl -O -q https://online-amateur-radio-club-m0ouk.github.io/oarc-packages/hibby.key
+    #sudo mv svxlinkbuilder/addons/hibby.key /etc/apt/trusted.gpg.d/hibby.asc
+    #echo -e "${BLUE}#### Installing repository #### ${WHITE}" | sudo tee -a /var/log/install.log
+    #echo "deb https://online-amateur-radio-club-m0ouk.github.io/oarc-packages bookworm main" | sudo tee -a /etc/apt/sources.list
+    #echo -e "${BLUE}#### Updating apt #### ${WHITE}" | sudo tee -a /var/log/install.log
+    #sudo apt update && sudo apt upgrade -y
+    ### Install svxlink-server  and dependencies ##
+    sudo wget -O /var/cache/apt/archives/svxlink-25.5.17.gf677916a-Linux.deb \
+    https://github.com/f5vmr/svxlink/releases/download/V25.5/svxlink-25.5.17.gf677916a-Linux.deb
+
+    sudo apt install /var/cache/apt/archives/svxlink-25.5.17.gf677916a-Linux.deb
+
+    echo -e "${BLUE}#### Installing svxlink #### ${WHITE}" | sudo tee -a /var/log/install.log
+    sudo apt install -y curl svxlink-server qtel apache2 apache2-bin apache2-data apache2-utils php8.2 python3-serial toilet --fix-missing -y
     echo -e "${BLUE}#### Installing locales #### ${WHITE}" | sudo tee -a /var/log/install.log
     
     ## Must kill the remotetrx.service to avoid a problem later ##
-    sudo systemctl stop remotetrx.service
-    sudo systemctl disable remotetrx.service
+    #sudo systemctl stop remotetrx.service
+    #sudo systemctl disable remotetrx.service
     echo -e "${RED} #### remotetrx.service stopped #### ${NORMAL}" | sudo tee -a  /var/log/install.log 
     ## installing locales.##
     ## Set en_GB.UTF-8 as the default locale to begin with.##
