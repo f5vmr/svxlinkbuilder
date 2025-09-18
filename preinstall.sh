@@ -41,17 +41,8 @@
     ##Install users and groups ##
     echo -e "${BLUE}#### Adding svxlink user and group #### ${WHITE}" | sudo tee -a /var/log/install.log
     sudo useradd -rG audio,plugdev,gpio,dialout svxlink
-    sudo wget -p https://github.com/f5vmr/svxlink/releases/download/V25.5/svxlink-V25.5.16.deb /tmp/
     sudo apt update && sudo apt upgrade -y
-    ### Install repository key and repository ##
-    #echo -e "${YELLOW}#### Installing repository key #### ${WHITE}" | sudo tee -a /var/log/install.log
-    ##sudo curl -O -q https://online-amateur-radio-club-m0ouk.github.io/oarc-packages/hibby.key
-    #sudo mv svxlinkbuilder/addons/hibby.key /etc/apt/trusted.gpg.d/hibby.asc
-    #echo -e "${BLUE}#### Installing repository #### ${WHITE}" | sudo tee -a /var/log/install.log
-    #echo "deb https://online-amateur-radio-club-m0ouk.github.io/oarc-packages bookworm main" | sudo tee -a /etc/apt/sources.list
-    #echo -e "${BLUE}#### Updating apt #### ${WHITE}" | sudo tee -a /var/log/install.log
-    #sudo apt update && sudo apt upgrade -y
-    ### Install svxlink-server  and dependencies ##
+   
     sudo wget -O /var/cache/apt/archives/svxlink-25.5.17.gf677916a-Linux.deb \
     https://github.com/f5vmr/svxlink/releases/download/V25.5/svxlink-25.5.17.gf677916a-Linux.deb
 
