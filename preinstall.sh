@@ -55,7 +55,7 @@
     ## Must kill the remotetrx.service to avoid a problem later ##
     #sudo systemctl stop remotetrx.service
     #sudo systemctl disable remotetrx.service
-    echo -e "${RED} #### remotetrx.service stopped #### ${NORMAL}" | sudo tee -a  /var/log/install.log 
+    #echo -e "${RED} #### remotetrx.service stopped #### ${NORMAL}" | sudo tee -a  /var/log/install.log 
     ## installing locales.##
     ## Set en_GB.UTF-8 as the default locale to begin with.##
     sudo localectl set-locale LANG=en_GB.UTF-8
