@@ -2,7 +2,7 @@
 function tones {
 if [ "$NODE_OPTION" -eq "3" ] || [ "$NODE_OPTION" -eq "4" ]; then
 LOGIC_DIR=/usr/share/svxlink/events.d/local
-RepeaterLogic="RepeaterLogic.tcl"
+RepeaterLogic="RepeaterLogicType.tcl"
 logicfile="$LOGIC_DIR/$RepeaterLogic"
 #    # Code to execute if NODE_OPTION is equal to 3 or 4
 #    echo "NODE_OPTION is 3 or 4. Executing code..."
@@ -27,7 +27,7 @@ if [ $? -eq 0 ]; then
             ;;
         "Chime")
             echo "You selected Chime."
-            sed -i 's/playTone 1100/playTone 1180/g' "$logicfile"
+            sed -i 's/playTone 1100/playTone 1190/g' "$logicfile"
             ;;
         "Pip")
             echo "You selected Pip."
