@@ -165,9 +165,16 @@ chmod 0440 "$SUDOERS_FILE"
 	cd /home/pi
 	 # clear
  	echo -e "$(date)" "${RED} #### Changing ModuleMetar Link #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	
+	if [[ $lang == "en_US" ]]; then
+	## geting US Airports
+	source "${BASH_SOURCE%/*}/functions/modulemetar_setup_us.sh"
+	modulemetar
+	else
+	## getting UK Airports
 	source "${BASH_SOURCE%/*}/functions/modulemetar_setup.sh"
 	modulemetar
-	
+	fi	
 	 # clear
 	 cd /home/pi/
 	echo -e "$(date)" "${RED} #### Changing ModuleEchoLink Link #### ${NORMAL}" | sudo tee -a  /var/log/install.log
