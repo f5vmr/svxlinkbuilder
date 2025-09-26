@@ -73,17 +73,6 @@ else
     whiptail --title "Canceled" --msgbox "No changes were made to IDLE_TIMEOUT." 8 78
 fi
 
-#### Add "-" "...-.-" to CW.tcl
-LOGIC_DIR=/usr/share/svxlink/events.d/local
-CWLogic="CW.tcl"
-cwfile="$LOGIC_DIR/$CWLogic"
-# Adding the VA Bar code to CW.tcl
-sudo sed -i '72a "-" "...-.-"' /usr/share/svxlink/events.d/local/CW.tcl
-sed -i 's/playTone 400 900 50/\#playTone 400 900 50/g' "$logicfile"
-sed -i 's/playTone 360 900 50/\#playTone 360 900 50/g' "$logicfile"
-sed -i 's/\#playTone 360 900 50/CW::play \"\-\"\;/' "$logicfile"
-
-
 #### 
 else
     # Code to execute if NODE_OPTION is not equal to 3 or 4
