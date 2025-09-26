@@ -45,7 +45,7 @@
    
     sudo wget -O /var/cache/apt/archives/svxlink-25.5.21.g66f33884-Linux.deb \
     https://github.com/f5vmr/svxlink/releases/download/V25.5/svxlink-25.5.21.g66f33884-Linux.deb
-    sudo apt install /var/cache/apt/archives/svxlink-25.5.21.g66f33884-Linux.deb
+    sudo apt install /var/cache/apt/archives/svxlink-25.5.21.g66f33884-Linux.deb -y
 
     echo -e "${BLUE}#### Installing svxlink #### ${WHITE}" | sudo tee -a /var/log/install.log
     sudo apt install -y curl apache2 apache2-bin apache2-data apache2-utils php8.2 python3-serial toilet --fix-missing -y
