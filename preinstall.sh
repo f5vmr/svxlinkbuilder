@@ -48,7 +48,7 @@
     sudo apt install /var/cache/apt/archives/svxlink-25.5.21.g66f33884-Linux.deb
 
     echo -e "${BLUE}#### Installing svxlink #### ${WHITE}" | sudo tee -a /var/log/install.log
-    sudo apt install -y curl qtel apache2 apache2-bin apache2-data apache2-utils php8.2 python3-serial toilet --fix-missing -y
+    sudo apt install -y curl apache2 apache2-bin apache2-data apache2-utils php8.2 python3-serial toilet --fix-missing -y
     echo -e "${BLUE}#### Installing locales #### ${WHITE}" | sudo tee -a /var/log/install.log
     
     ## Must kill the remotetrx.service to avoid a problem later ##
