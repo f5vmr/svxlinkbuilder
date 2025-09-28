@@ -37,7 +37,8 @@ whiptail --title "Metar Info" --yesno "Do you wish to configure this module?" 8 
         "KSEA" "Seattle-Tacoma International" OFF \
         "KSFO" "San Francisco International" OFF \
         "KSLC" "Salt Lake City International" OFF \
-        "KTPA" "Tampa International"  OFF 3>&1 1>&2 2>&3)
+        "KTPA" "Tampa International"  OFF \
+        "KTOL" "Toledo" 3>&1 1>&2 2>&3)
         selected=$(echo "$selected" | sed 's/"//g')
         selected=$(echo "$selected" | tr ' ' ',')
         sed -i "s/AIRPORTS=.*/AIRPORTS=$selected/g"  /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
@@ -73,7 +74,8 @@ whiptail --title "Metar Info" --yesno "Do you wish to configure this module?" 8 
         "KSEA" "Seattle-Tacoma International" OFF \
         "KSFO" "San Francisco International" OFF \
         "KSLC" "Salt Lake City International" OFF \
-        "KTPA" "Tampa International" OFF 3>&1 1>&2 2>&3)
+        "KTPA" "Tampa International" OFF \
+        "KTOL" "Toledo" OFF 3>&1 1>&2 2>&3)
         specific_airport=$(echo "$specific_airport" | sed 's/"//g')
         sed -i "s/\#STARTDEFAULT=EDDP/STARTDEFAULT=$specific_airport/g" /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
         echo -e "$(date)" "${GREEN} $selected Airports included with default Airport $specific_airport ${NORMAL}" | sudo tee -a /var/log/install.log
