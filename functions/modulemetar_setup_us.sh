@@ -7,36 +7,36 @@ whiptail --title "Metar Info" --yesno "Do you wish to configure this module?" 8 
     then
         sleep 1
     selected=$(whiptail --title "Metar Info" --checklist "Choose which Airports: You can change them in the Dashboard" 24 78 17 \
-        "KAIH" "Washington Dulles" \
-        "KATL" "Hartsfield-Jackson Atlanta" \
-        "KAUS" "Austin-Bergstrom" \
-        "KBNA" "Nashville International" \
-        "KBWI" "Baltimore-Washington" \
-        "KCLT" "Charlotte Douglas" \
-        "KDCA" "Ronald Reagan Washington" \
-        "KDEN" "Denver International" \
-        "KDFW" "Dallas-Fort Worth" \
-        "KDTW" "Detroit Metropolitan" \
-        "KEWR" "Newark Liberty" \
-        "KFLL" "Fort Lauderdale-Hollywood" \
-        "KIAH" "George Bush Intercontinental" \
-        "KJFK" "John F. Kennedy International" \
-        "KLAS" "McCarran International" \
-        "KLAX" "Los Angeles International" \
-        "KLGA" "LaGuardia" \
-        "KMCO" "Orlando International" \
-        "KMIA" "Miami International" \
-        "KMSP" "Minneapolis-Saint Paul" \
-        "KORD" "Chicago O'Hare" \
-        "KPHL" "Philadelphia International" \
-        "KPHX" "Phoenix Sky Harbor" \
-        "KPIT" "Pittsburgh International" \
-        "KRDU" "Raleigh-Durham" \
-        "KSAN" "San Diego International" \
-        "KSEA" "Seattle-Tacoma International" \
-        "KSFO" "San Francisco International" \
-        "KSLC" "Salt Lake City International" \
-        "KTPA" "Tampa International" 3>&1 1>&2 2>&3)
+        "KAIH" "Washington Dulles" OFF \
+        "KATL" "Hartsfield-Jackson Atlanta" OFF \
+        "KAUS" "Austin-Bergstrom" OFF \
+        "KBNA" "Nashville International" OFF \
+        "KBWI" "Baltimore-Washington" OFF \
+        "KCLT" "Charlotte Douglas" OFF \
+        "KDCA" "Ronald Reagan Washington" OFF \
+        "KDEN" "Denver International" OFF \
+        "KDFW" "Dallas-Fort Worth" OFF \
+        "KDTW" "Detroit Metropolitan" OFF \
+        "KEWR" "Newark Liberty" OFF \
+        "KFLL" "Fort Lauderdale-Hollywood" OFF \
+        "KIAH" "George Bush Intercontinental" OFF \
+        "KJFK" "John F. Kennedy International" OFF \
+        "KLAS" "McCarran International" OFF \
+        "KLAX" "Los Angeles International" OFF \
+        "KLGA" "LaGuardia" OFF \
+        "KMCO" "Orlando International" OFF \
+        "KMIA" "Miami International" OFF \
+        "KMSP" "Minneapolis-Saint Paul" OFF \
+        "KORD" "Chicago O'Hare" OFF \
+        "KPHL" "Philadelphia International" OFF \
+        "KPHX" "Phoenix Sky Harbor" OFF \
+        "KPIT" "Pittsburgh International" OFF \
+        "KRDU" "Raleigh-Durham" OFF \
+        "KSAN" "San Diego International" OFF \
+        "KSEA" "Seattle-Tacoma International" OFF \
+        "KSFO" "San Francisco International" OFF \
+        "KSLC" "Salt Lake City International" OFF \
+        "KTPA" "Tampa International"  OFF 3>&1 1>&2 2>&3)
         selected=$(echo "$selected" | sed 's/"//g')
         selected=$(echo "$selected" | tr ' ' ',')
         sed -i "s/AIRPORTS=.*/AIRPORTS=$selected/g"  /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
