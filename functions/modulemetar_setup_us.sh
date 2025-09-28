@@ -47,6 +47,7 @@ whiptail --title "Metar Info" --yesno "Do you wish to configure this module?" 8 
         "KATL" "Hartsfield-Jackson Atlanta" OFF \
         "KAUS" "Austin-Bergstrom" OFF \
         "KBNA" "Nashville International" OFF \
+        "KBOS" "Boston Logan" OFF \
         "KBWI" "Baltimore-Washington" OFF \
         "KCLT" "Charlotte Douglas" OFF \
         "KDCA" "Ronald Reagan Washington" OFF \
