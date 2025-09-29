@@ -30,11 +30,10 @@ if [ $? -eq 0 ]; then
             sed -i 's/playTone 1100/playTone 1190/g' "$logicfile"
             ;;
         "Pip")
-            echo "Vous avez selectionne le son Pip."
-            sed -i 's/playTone 1100/\#playTone 1100/g' "$logicfile"
-            sed -i 's/playTone 1200/\#playTone 1200/g' "$logicfile"
-            sed -i '/#playTone 1200 \[expr {round(pow(\$base, \$i) \* 150 \/ \$max)}\] 100;/a\with CW::play "E";' "$logicfile"
-            ;;
+            echo "You selected Pip."
+            sudo sed -i '/^proc repeater_idle {/,/^}/ {s/^\(\s*playTone.*\)$/#\1/}' "$logicfile"
+            sudo sed -i '/^proc repeater_idle {/,/^}/ {/^\}/i\  set iterations 0; set base 0;  CW::play "E";}' "$logicfile"
+            ;;   
         "Silence")
             echo "Vous avez desavtivé le son."
             sed -i 's/playTone 1100/\#playTone 1100/g' "$logicfile"

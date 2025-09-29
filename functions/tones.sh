@@ -31,9 +31,8 @@ if [ $? -eq 0 ]; then
             ;;
         "Pip")
             echo "You selected Pip."
-            sed -i 's/playTone 1100/\#playTone 1100/g' "$logicfile"
-            sed -i 's/playTone 1200/\#playTone 1200/g' "$logicfile"
-            sed -i '/#playTone 1200 \[expr {round(pow(\$base, \$i) \* 150 \/ \$max)}\] 100;/a\CW::play "E";' "$logicfile"
+            sudo sed -i '/^proc repeater_idle {/,/^}/ {s/^\(\s*playTone.*\)$/#\1/}' "$logicfile"
+            sudo sed -i '/^proc repeater_idle {/,/^}/ {/^\}/i\  set iterations 0; set base 0;  CW::play "E";}' "$logicfile"
             ;;       
         "Silence")
             echo "You selected Silence."
