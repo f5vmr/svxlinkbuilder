@@ -1,6 +1,6 @@
 #!/bin/bash
 #### Metar Info ####
-function modulemetar {
+
  
 whiptail --title "Metar Info" --yesno "Do you wish to configure this module?" 8 78  3>&1 1>&2 2>&3
     if [ $? -eq "0" ] 
@@ -60,4 +60,3 @@ whiptail --title "Metar Info" --yesno "Do you wish to configure this module?" 8 
      sed -i 's/,ModuleMetarInfo//' /etc/svxlink/svxlink.conf
     # removing MetarInfo from the MODULES= line in both Simplex and Duplex
     fi
-}
