@@ -52,7 +52,7 @@ whiptail --title "Información del medidor" --yesno "¿Desea configurar este mó
         selected=$(echo "$selected" | sed 's/"//g')
         selected=$(echo "$selected" | tr ' ' ',')
         sed -i "s/AIRPORTS=.*/AIRPORTS=$selected/g"  /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
-        
+        sleep 5
         specific_airport=$(whiptail --title "Información del medidor" --radiolist "Especifique el código OACI del aeropuerto para un aeropuerto predeterminado: " 24 78 13 \
         "LECO"  "A Coruña " OFF \
         "LEAB"  "Albacete " OFF \
@@ -97,7 +97,7 @@ whiptail --title "Información del medidor" --yesno "¿Desea configurar este mó
         "GCLA"  "La Palma " OFF \
         "GCHI"  "El Hierro " OFF 3>&1 1>&2 2>&3)
         specific_airport=$(echo "$specific_airport" | sed 's/"//g')
-        sed -i "s/\#STARTDEFAULT=EDDP/STARTDEFAULT=$specific_airport/g" /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
+        sed -i "s/\STARTDEFAULT=.*/STARTDEFAULT=$specific_airport/g" /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
         echo -e "$(date)" "${GREEN} $selected Aeropuertos incluidos con el aeropuerto predeterminado $specific_airport ${NORMAL}" | sudo tee -a /var/log/install.log
    
     else
