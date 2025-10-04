@@ -51,10 +51,10 @@
     sudo apt install -y curl apache2 apache2-bin apache2-data apache2-utils php8.2 python3-serial toilet --fix-missing -y
     echo -e "${BLUE}#### Installing locales #### ${WHITE}" | sudo tee -a /var/log/install.log
     
-    ## Must kill the remotetrx.service to avoid a problem later ##
-    #sudo systemctl stop remotetrx.service
-    #sudo systemctl disable remotetrx.service
-    #echo -e "${RED} #### remotetrx.service stopped #### ${NORMAL}" | sudo tee -a  /var/log/install.log 
+    # Must enable the service.service to avoid a problem later ##
+    
+    sudo systemctl enable svxlink.service
+    echo -e "${RED} #### svxlink.service enabled for next reboot #### ${NORMAL}" | sudo tee -a  /var/log/install.log 
     ## installing locales.##
     ## Set en_GB.UTF-8 as the default locale to begin with.##
     sudo localectl set-locale LANG=en_GB.UTF-8
