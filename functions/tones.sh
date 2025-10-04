@@ -31,9 +31,12 @@ if [ $? -eq 0 ]; then
             ;;
         "Pip")
             echo "You selected Pip."
-            sudo sed -i '/^proc repeater_idle {/,/^}/ {s/^\(\s*playTone.*\)$/#\1/}' "$logicfile"
-            sudo sed -i '/^proc repeater_idle {/,/^}/ {/^\}/i\  set iterations 0; set base 0;  CW::play "E";}' "$logicfile"
-            ;;       
+            # Step 1: Comment out playTone lines in repeater_idle {}
+            sudo sed -i '/^proc repeater_idle {}/,/^}/ s/^\s*playTone /#&/' "$logicfile"
+
+            # Step 2: Add CW::play "E"; before closing brace in repeater_idle {}
+            sudo sed -i '/^proc repeater_idle {}/,/^}/ s/^}/    CW::play "E";\n}/' "$logicfile"
+;;       
         "Silence")
             echo "You selected Silence."
             sed -i 's/playTone 1100/\#playTone 1100/g' "$logicfile"
