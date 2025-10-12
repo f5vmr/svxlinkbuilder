@@ -21,6 +21,7 @@ whiptail --title "Metar Info" --yesno "Do you wish to configure this module?" 8 
         "KEWR" "Newark Liberty" OFF \
         "KFLL" "Fort Lauderdale-Hollywood" OFF \
         "KIAH" "George Bush Intercontinental" OFF \
+        "KJAC" "Jackson Hole" OFF \
         "KJFK" "John F. Kennedy International" OFF \
         "KLAS" "McCarran International" OFF \
         "KLAX" "Los Angeles International" OFF \
@@ -58,6 +59,7 @@ whiptail --title "Metar Info" --yesno "Do you wish to configure this module?" 8 
         "KEWR" "Newark Liberty" OFF \
         "KFLL" "Fort Lauderdale-Hollywood" OFF \
         "KIAH" "George Bush Intercontinental" OFF \
+        "KJAC" "Jackson Hole" OFF \
         "KJFK" "John F. Kennedy International" OFF \
         "KLAS" "McCarran International" OFF \
         "KLAX" "Los Angeles International" OFF \
