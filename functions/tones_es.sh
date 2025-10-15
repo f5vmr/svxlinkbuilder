@@ -44,7 +44,31 @@ else
     echo "You cancelled. Tones not changed."
 fi
 
+# Repeater Close Sound Option
+            selected_option=$(whiptail --title "Opción de sonido de cierre del repetidor" --menu "Choose a sound option:" 15 78 4 \
+    "Tono predeterminado" "Seleccione esta opción para Tono predeterminado (Bi-Boop)" \
+    "Sin tono" "Solo apagado del portador" \
+    "VA-Unido" "Select this option for CW VA (...-.-) Tone" \
+    3>&1 1>&2 2>&3)
 
+if [ $? -eq 0 ]; then
+    case "$selected_option" in
+        "Tono predeterminado")
+            echo "Has seleccionado el valor predeterminado."
+            # Add your code for Bell Tone option here
+            ;;
+        "Sin tono")
+            echo "Has seleccionado el apagado del operador"
+            sed -i '89,92d' "$logicfile"
+            ;;
+        "VA-Unido")
+            echo "Usted seleccionó CW VA se unió."
+            sed -i '89,92c\CW::play "-";' "$logicfile"
+            ;;
+    esac
+else
+    echo "User cancelled selection."
+fi
 # Function to get the current IDLE_TIMEOUT value from svxlink.conf
 get_idle_timeout() {
     idle_timeout=$(grep -Po '(?<=^IDLE_TIMEOUT=).*' /etc/svxlink/svxlink.conf)
@@ -71,10 +95,17 @@ if [ $? -eq 0 ]; then
 else
     whiptail --title "Canceled" --msgbox "No changes were made to IDLE_TIMEOUT." 8 78
 fi
+#### Add "-" "...-.-" to CW.tcl
+CWLogic="CW.tcl"
+LOGIC_DIR=/usr/share/svxlink/events.d/local
+cwfile="$LOGIC_DIR/$CWLogic"
+# Adding the VA Bar code to CW.tcl
+sudo sed -i '72a "-" "...-.-"' /usr/share/svxlink/events.d/local/CW.tcl
+sed -i 's/playTone 400 900 50/\#playTone 400 900 50/g' "$logicfile"
+sed -i 's/playTone 360 900 50/\#playTone 360 900 50/g' "$logicfile"
+sed -i 's/\#playTone 360 900 50/CW::play \"\-\"\;/' "$logicfile"
 
-
-
-
+#### End of CW.tcl changes
 #### 
 else
     # Code to execute if NODE_OPTION is not equal to 3 or 4

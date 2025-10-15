@@ -46,6 +46,31 @@ if [ $? -eq 0 ]; then
 else
     echo "You cancelled. Tones not changed."
 fi
+# Repeater Close Sound Option
+            selected_option=$(whiptail --title "Repeater Close Sound Option" --menu "Choose a sound option:" 15 78 4 \
+    "Default Tone" "Select this option for Default Tone (Bi-Boop)" \
+    "No Tone" "Just carrier shut-off" \
+    "VA-Barred" "Select this option for CW VA (...-.-) Tone" \
+    3>&1 1>&2 2>&3)
+
+if [ $? -eq 0 ]; then
+    case "$selected_option" in
+        "Default Tone")
+            echo "You selected Bell Tone."
+            # Add your code for Bell Tone option here
+            ;;
+        "No Tone")
+            echo "You selected carrier shut-off"
+            sed -i '89,92d' "$logicfile"
+            ;;
+        "VA-Barred")
+            echo "You selected CW VA-Barred."
+            sed -i '89,92c\CW::play "-";' "$logicfile"
+            ;;
+    esac
+else
+    echo "User cancelled selection."
+fi
 
 
 # Function to get the current IDLE_TIMEOUT value from svxlink.conf
@@ -74,6 +99,17 @@ if [ $? -eq 0 ]; then
 else
     whiptail --title "Canceled" --msgbox "No changes were made to IDLE_TIMEOUT." 8 78
 fi
+#### Add "-" "...-.-" to CW.tcl
+CWLogic="CW.tcl"
+LOGIC_DIR=/usr/share/svxlink/events.d/local
+cwfile="$LOGIC_DIR/$CWLogic"
+# Adding the VA Bar code to CW.tcl
+sudo sed -i '72a "-" "...-.-"' /usr/share/svxlink/events.d/local/CW.tcl
+sed -i 's/playTone 400 900 50/\#playTone 400 900 50/g' "$logicfile"
+sed -i 's/playTone 360 900 50/\#playTone 360 900 50/g' "$logicfile"
+sed -i 's/\#playTone 360 900 50/CW::play \"\-\"\;/' "$logicfile"
+
+#### End of CW.tcl changes
 
 #### 
 else
