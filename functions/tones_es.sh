@@ -48,7 +48,7 @@ fi
             selected_option=$(whiptail --title "Opción de sonido de cierre del repetidor" --menu "Choose a sound option:" 15 78 4 \
     "Tono predeterminado" "Seleccione esta opción para Tono predeterminado (Bi-Boop)" \
     "Sin tono" "Solo apagado del portador" \
-    "VA-Unido" "Select this option for CW VA (...-.-) Tone" \
+    "VA-Unido" "Seleccione esta opción para el tono CW VA (...-.-)" \
     3>&1 1>&2 2>&3)
 
 if [ $? -eq 0 ]; then
