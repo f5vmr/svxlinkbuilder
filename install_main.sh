@@ -96,8 +96,10 @@ chmod 0440 "$SUDOERS_FILE"
 	sudo cp -f /home/pi/svxlinkbuilder/dtmf_setup.sh /home/pi/scripts/dtmf_setup.sh
  	(sudo crontab -l 2>/dev/null; echo "59 23 * * * /home/pi/scripts/resetlog.sh " ; echo "@reboot /home/pi/scripts/dtmf_setup.sh") | sudo crontab -
 	sudo mkdir /usr/share/svxlink/events.d/local
-	sudo cp /usr/share/svxlink/events.d/*.tcl /usr/share/svxlink/events.d/local/
-	#sudo cp -f /home/pi/svxlinkbuilder/configs/Logic.tcl /usr/share/svxlink/events.d/local/Logic.tcl
+	sudo cp /usr/share/svxlink/events.d/RepeaterLogicType.tcl /usr/share/svxlink/events.d/local/
+    sudo cp /usr/share/svxlink/events.d/CW.tcl /usr/share/svxlink/events.d/local/
+    sudo cp /usr/share/svxlink/events.d/Logic.tcl /usr/share/svxlink/events.d/local/
+    #sudo cp -f /home/pi/svxlinkbuilder/configs/Logic.tcl /usr/share/svxlink/events.d/local/Logic.tcl
  	#sudo sed -i '/^LINK=\/adds\/dataserver_current\/httpparam/ c\LINK=/cgi-bin/data/dataserver.php?requestType=retrieve&dataSource=metars&hoursBeforeNow=3&stationString=' $MODULE/ModuleMetarInfo.conf
 # clear
 	echo -e "$(date)" "${GREEN} #### Setting Callsign to $CALL #### ${NORMAL}" | sudo tee -a  /var/log/install.log
