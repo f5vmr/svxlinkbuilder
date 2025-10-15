@@ -58,11 +58,11 @@ if [ $? -eq 0 ]; then
             # Add your code for Bell Tone option here
             ;;
         "Sin tono")
-            echo "Has seleccionado el apagado del operador"
+            echo "Has seleccionado el apagado sin tono"
             sed -i '89,92d' "$logicfile"
             ;;
         "VA-Unido")
-            echo "Usted seleccionó CW VA se unió."
+            echo "Has seleccionado VA unido"
             sed -i '89,92c\CW::play "-";' "$logicfile"
             ;;
     esac
