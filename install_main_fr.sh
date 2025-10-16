@@ -15,7 +15,7 @@ source "${BASH_SOURCE%/*}/functions/sa818_test_fr.sh"
 sa818_test_fr
 if [[ $sa818 == true ]]; then
 source "${BASH_SOURCE%/*}/functions/sa818_menu_fr.sh"
-sa818_menu
+sa818_menu_fr
 
 #### USB SOUND CARD ####
 source "${BASH_SOURCE%/*}/functions/sound_card_fr.sh"
