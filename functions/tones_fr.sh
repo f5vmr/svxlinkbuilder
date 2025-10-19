@@ -21,11 +21,11 @@ selected_option=$(whiptail --title "Sélectionnez l'option du son du répéteur"
 # Check if the user canceled or selected an option
 if [ $? -eq 0 ]; then
     case "$selected_option" in
-        "Bell Tone")
+        "Tone de Cloche")
             echo "Vous avez selectionne le son cloche."
             # Add your code for Bell Tone option here
             ;;
-        "Chime")
+        "Carillon")
             echo "Vous avez selectionne le son carillon."
             sed -i 's/playTone 1100/playTone 1190/g' "$logicfile"
             ;;
@@ -35,7 +35,7 @@ if [ $? -eq 0 ]; then
             sudo sed -i '/^proc repeater_idle {/,/^}/ {/^\}/i\  set iterations 0; set base 0;  CW::play "E";}' "$logicfile"
             ;;   
         "Silence")
-            echo "Vous avez desavtivé le son."
+            echo "Vous avez desactivé le son."
             sed -i 's/playTone 1100/\#playTone 1100/g' "$logicfile"
             sed -i 's/playTone 1200/\#playTone 1200/g' "$logicfile"
             ;;
@@ -47,7 +47,7 @@ fi
 # Repeater Close Sound Option
             selected_option=$(whiptail --title "Repeater Close Option de son" --menu "Choose a sound option:" 15 78 4 \
     "Ton de defaut" "Selecté cette option for Ton de Defaut (Bi-Boop)" \
-    "Pas de Tone" "Fermeture sans ton" \
+    "Pas de Ton" "Fermeture sans ton" \
     "VA-Barré" "Selectionné pour CW VA (...-.-) Ton" \
     3>&1 1>&2 2>&3)
 
