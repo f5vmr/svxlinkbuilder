@@ -34,7 +34,7 @@
     sudo chmod 775 /etc/modules
     sudo cp -f /home/pi/svxlinkbuilder/configs/loopback.conf /etc/asound.conf
     echo -e "${BLUE}#### Reseting alsa-state.service #### ${WHITE}" | sudo tee -a /var/log/install.log
-    sudo mkdir /etc/alsa
+    sudo mkdir -p /etc/alsa
     sudo touch /etc/alsa/state-daemon.conf
     sudo systemctl daemon-reload
     sudo systemctl restart alsa-state.service

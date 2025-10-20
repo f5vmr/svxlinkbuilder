@@ -83,14 +83,14 @@ fi
 cat "$SOURCE_FILE" > "$SUDOERS_FILE"
 chmod 0440 "$SUDOERS_FILE"
  	echo -e "$(date)" "${RED} #### Descarga de archivos de configuración preparados desde los scripts #### ${NORMAL}" | sudo tee -a  /var/log/install.log
- 	sudo mkdir /home/pi/scripts
+ 	sudo mkdir -p /home/pi/scripts
 	sudo cp -f /home/pi/svxlinkbuilder/addons/10-uname /etc/update-motd.d/
  	sudo cp -f /home/pi/svxlinkbuilder/configs/svxlink.conf /etc/svxlink/
  	sudo cp -f /home/pi/svxlinkbuilder/addons/node_info.json /etc/svxlink/node_info.json
  	sudo cp -f /home/pi/svxlinkbuilder/resetlog.sh /home/pi/scripts/resetlog.sh
 	sudo cp -f /home/pi/svxlinkbuilder/dtmf_setup.sh /home/pi/scripts/dtmf_setup.sh
  	(sudo crontab -l 2>/dev/null; echo "59 23 * * * /home/pi/scripts/resetlog.sh " ; echo "@reboot /home/pi/scripts/dtmf_setup.sh") | sudo crontab -
-	sudo mkdir /usr/share/svxlink/events.d/local
+	sudo mkdir -p /usr/share/svxlink/events.d/local
 	sudo cp /usr/share/svxlink/events.d/RepeaterLogicType.tcl /usr/share/svxlink/events.d/local/
     sudo cp /usr/share/svxlink/events.d/CW.tcl /usr/share/svxlink/events.d/local/
     sudo cp /usr/share/svxlink/events.d/Logic.tcl /usr/share/svxlink/events.d/local/
