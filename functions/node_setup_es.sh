@@ -75,12 +75,12 @@ sed -i "s/AUDIO_CHANNEL=0/AUDIO_CHANNEL=$channel_setting/g" /etc/svxlink/svxlink
     if [[ "$ptt_direction" == "High" ]]; then
          sed -i 's/\#PTT_TYPE=GPIOD/PTT_TYPE=GPIOD/g' /etc/svxlink/svxlink.conf
          sed -i 's/\#PTT_GPIOD_CHIP/PTT_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
-         sed -i "s/\#PTT_GPIOD_LINE=!24/PTT_GPIOD_LINE=!$ptt_pin/g" /etc/svxlink/svxlink.conf
+         sed -i "s/\#PTT_GPIOD_LINE=24/PTT_GPIOD_LINE=!$ptt_pin/g" /etc/svxlink/svxlink.conf
 
     elif [[ "$ptt_direction" == "Low" ]]; then
         sed -i 's/\#PTT_TYPE=GPIOD/PTT_TYPE=GPIOD/g' /etc/svxlink/svxlink.conf
         sed -i 's/\#PTT_GPIOD_CHIP/PTT_GPIOD_CHIP/g' /etc/svxlink/svxlink.conf
-        sed -i "s/\#PTT_GPIOD_LINE=!24/PTT_GPIOD_LINE=$ptt_pin/g" /etc/svxlink/svxlink.conf
+        sed -i "s/\#PTT_GPIOD_LINE=24/PTT_GPIOD_LINE=$ptt_pin/g" /etc/svxlink/svxlink.conf
     else
         echo no actions here.
     fi
