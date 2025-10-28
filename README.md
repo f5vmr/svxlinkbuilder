@@ -121,9 +121,14 @@
 <p>Have an interesting day</p>
 
 <p>73 - Chris G4NAB </p>
-<p>Everything introduced here is directly from the original presentation by Tobias SM0SVX.</p>
 
-<h2>Addendum</h2>
+**Attribution Block** 
+<p>Core Software: SVXLink / SvxReflector — Tobias Blömberg SM0SVX</p>
+<p>Dashboard Framework: SP2ONG & SP0DZ</p>
+<p>Additional Contributors: Adi DL1HRC and the SVXLink community</p>
+<p>Modernisation & Integration (PHP 8.2, config editing, live-control, streaming): Chris G4NAB</p>
+
+**Addendum**
 <p>Talk Groups should be added to the Svxlink Configurator in ReflectorLogic, and ensure the tick is checked alongside. Adding a + or ++ after a Talk-Group number will increase its importance, enabling a higher priority talk group to surplant one in use.</p>
 <p>Airports can be added and removed as required in the MetarInfo Configurator.</p
 <p>The Audio dashboard seems not to work for the moment.</p>
