@@ -47,15 +47,14 @@ function dash_install {
         exit 1
     fi
 
-    CONFIG_FILE="/var/www/html/include/config.inc.php"
-    if [ -f "$CONFIG_FILE" ]; then
-        sudo sed -i "s/define(\"PHP_AUTH_USER\", \".*\");/define(\"PHP_AUTH_USER\", \"$DASHBOARD_USER\");/" "$CONFIG_FILE"
-        sudo sed -i "s/define(\"PHP_AUTH_PW\", \".*\");/define(\"PHP_AUTH_PW\", \"$DASHBOARD_PASSWORD\");/" "$CONFIG_FILE"
-        echo "The config file $CONFIG_FILE has been updated."
-    else
-        echo "Error: Config file $CONFIG_FILE does not exist. Exiting."
-        exit 1
-    fi
+    AUTH_FILE="/etc/svxlink/dashboard.auth.ini"
+    sudo install -m 640 -o svxlink -g svxlink /dev/null "$AUTH_FILE"
+    sudo cat > "$AUTH_FILE" << EOF
+[dashboard]
+auth_user = "${DASHBOARD_USER:-svxlink}"
+auth_pass = "${DASHBOARD_PASSWORD:-$(openssl rand -base64 12)}"
+EOF
+    echo "The authentication file $AUTH_FILE has been created and configured."
 
     ## change ownership of all files
     sudo find /var/www/html -exec chown svxlink:svxlink {} +
