@@ -48,8 +48,10 @@ function dash_install {
     fi
 
     AUTH_FILE="/etc/svxlink/dashboard.auth.ini"
+    [ -f "$AUTH_FILE" ] && sudo cp "$AUTH_FILE" "${AUTH_FILE}.bak"
+
     sudo install -m 640 -o svxlink -g svxlink /dev/null "$AUTH_FILE"
-    sudo cat > "$AUTH_FILE" << EOF
+    sudo tee "$AUTH_FILE" > /dev/null << EOF
 [dashboard]
 auth_user = "${DASHBOARD_USER:-svxlink}"
 auth_pass = "${DASHBOARD_PASSWORD:-$(openssl rand -base64 12)}"
