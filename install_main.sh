@@ -204,6 +204,7 @@ sed -i "/^\[$NOT_LOGIC_MODULE\]/,/^\[/{
 }" "$CONF"
 	if grep -q "^\[$NOT_LOGIC_MODULE\]" "$CONF"; then
 	echo "Failed to remove module [$NOT_LOGIC_MODULE] from $CONF" | sudo tee -a  /var/log/install.log
+	fi
 	 # clear
 	echo -e "$(date)" "${RED} #### Restarting svxlink.service #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	
