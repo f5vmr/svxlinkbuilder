@@ -134,6 +134,8 @@ chmod 0440 "$SUDOERS_FILE"
  # clear
 	echo -e "$(date)" "${GREEN} #### Tableau installé #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	whiptail --title "IP Adresse" --msgbox "Tableau de Bord installé. Noter bien l'adresse IP $ip_address sur $device" 8 78
+	IP=$ip_address
+	export IP
 	cd /home/pi
 
 	 # clear
@@ -177,9 +179,9 @@ nodeset
 NOT_LOGIC_MODULE="$(echo -n "$NOT_LOGIC_MODULE" | tr -d '\r' | xargs)"
 
 # Check that the section exists
-if ! grep -q "^\[$NOT_LOGIC_MODULE\]" "$SVX_CONF"; then
-    echo "Module [$NOT_LOGIC_MODULE] no longer found in $SVX_CONF" | sudo tee -a  /var/log/install.log
-else echo "Module [$NOT_LOGIC_MODULE] found in $SVX_CONF, proceeding to remove it." | sudo tee -a  /var/log/install.log	 
+if ! grep -q "^\[$NOT_LOGIC_MODULE\]" "$CONF"; then
+    echo "Module [$NOT_LOGIC_MODULE] no longer found in $CONF" | sudo tee -a  /var/log/install.log
+else echo "Module [$NOT_LOGIC_MODULE] found in $CONF, proceeding to remove it." | sudo tee -a  /var/log/install.log	 
 
 fi
 
@@ -187,7 +189,7 @@ fi
 sed -i "/^\[$NOT_LOGIC_MODULE\]/,/^\[/{
     /^\[$NOT_LOGIC_MODULE\]/d
     /^\[/!d
-}" "$SVX_CONF"
+}" "$CONF"
 	 # clear
 	echo -e "$(date)" "${RED} #### Redemmarage du svxlink.service #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	

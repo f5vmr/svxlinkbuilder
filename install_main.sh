@@ -140,6 +140,8 @@ chmod 0440 "$SUDOERS_FILE"
  # clear
 	echo -e "$(date)" "${GREEN} #### Dashboard installed #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	whiptail --title "IP Addresses" --msgbox "Dashboard installed. Please note your IP address is $ip_address on $device" 8 78
+	IP=$ip_address
+	export IP
 	cd /home/pi/
 
 	 # clear
@@ -190,18 +192,18 @@ chmod 0440 "$SUDOERS_FILE"
 NOT_LOGIC_MODULE="$(echo -n "$NOT_LOGIC_MODULE" | tr -d '\r' | xargs)"
 
 # Check that the section exists
-if ! grep -q "^\[$NOT_LOGIC_MODULE\]" "$SVX_CONF"; then
-    echo "Module [$NOT_LOGIC_MODULE] not found in $SVX_CONF"
-else echo "Module [$NOT_LOGIC_MODULE] found in $SVX_CONF, proceeding to remove it." | sudo tee -a  /var/log/install.log	 
+if ! grep -q "^\[$NOT_LOGIC_MODULE\]" "$CONF"; then
+    echo "Module [$NOT_LOGIC_MODULE] not found in $CONF"
+else echo "Module [$NOT_LOGIC_MODULE] found in $CONF, proceeding to remove it." | sudo tee -a  /var/log/install.log	 
 fi
 
 # Remove the section safely
 sed -i "/^\[$NOT_LOGIC_MODULE\]/,/^\[/{
     /^\[$NOT_LOGIC_MODULE\]/d
     /^\[/!d
-}" "$SVX_CONF"
-	if grep -q "^\[$NOT_LOGIC_MODULE\]" "$SVX_CONF"; then
-	echo "Failed to remove module [$NOT_LOGIC_MODULE] from $SVX_CONF" | sudo tee -a  /var/log/install.log
+}" "$CONF"
+	if grep -q "^\[$NOT_LOGIC_MODULE\]" "$CONF"; then
+	echo "Failed to remove module [$NOT_LOGIC_MODULE] from $CONF" | sudo tee -a  /var/log/install.log
 	 # clear
 	echo -e "$(date)" "${RED} #### Restarting svxlink.service #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	
@@ -209,7 +211,7 @@ sed -i "/^\[$NOT_LOGIC_MODULE\]/,/^\[/{
 
 	##.service isn't necessary ##
 echo -e "$(date)" "${GREEN} #### Installation complete #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-whiptail --title "Installation Complete" --msgbox "Installation complete. Go to the Dashboard" 8 78
+whiptail --title "Installation Complete" --msgbox "Installation complete. Go to the Dashboard, Your IP address $IP has been placed in the dhcpcd.conf" 8 78
 echo -e "$(date)" "${RED} #### Complete #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
 #exit
