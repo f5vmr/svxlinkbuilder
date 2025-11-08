@@ -131,13 +131,11 @@ function announce {
         update_key "SHORT_VOICE_ID_ENABLE" "$new_short_voice_id_enable"
         update_key "SHORT_CW_ID_ENABLE" "$new_short_cw_id_enable"
         update_key "SHORT_ANNOUNCE_ENABLE" "$new_short_announce_enable"
-        update_key "SHORT_ANNOUNCE_FILE" "$short_announce_file"
 
         update_key "LONG_IDENT_INTERVAL" "$new_long_ident_interval"
         update_key "LONG_VOICE_ID_ENABLE" "$new_long_voice_id_enable"
         update_key "LONG_CW_ID_ENABLE" "$new_long_cw_id_enable"
         update_key "LONG_ANNOUNCE_ENABLE" "$new_long_announce_enable"
-        update_key "LONG_ANNOUNCE_FILE" "$long_announce_file"
 
         echo -e "${GREEN}Updated identification and CW variables for [$section] in $conf${WHITE}"
     }
