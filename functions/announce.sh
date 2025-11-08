@@ -19,8 +19,20 @@ function announce {
 
     # Prompt user for new CW values
     new_cw_amp=$(whiptail --title "CW AMP" --inputbox \
-        "Current CW Amplitude: $cw_amp dB\nEnter new minus value for CW AMP (0 to -10 dB):" \
+        "Current CW Amplitude: $cw_amp dB\nEnter new minus value for CW AMP (at least -10 dB):" \
         10 78 -- "$cw_amp" 3>&1 1>&2 2>&3)
+        # Ensure CW_AMP is negative
+        # If user enters a positive number or zero, convert it to negative
+        if [[ "$new_cw_amp" =~ ^[0-9]+$ ]]; then
+            new_cw_amp="-$new_cw_amp"
+        elif [[ "$new_cw_amp" =~ ^-?[0-9]+$ ]]; then
+            # Already negative or zero; leave as-is
+            :
+        else
+            # Not a number at all — fallback to previous value
+            new_cw_amp="$cw_amp"
+        fi
+
     new_cw_pitch=$(whiptail --title "CW PITCH" --inputbox \
         "Current CW Tone Pitch: $cw_pitch Hz\nEnter new value for CW PITCH (440 to 2200 Hz):" \
         10 78 -- "$cw_pitch" 3>&1 1>&2 2>&3)
