@@ -23,6 +23,28 @@ function nodeoption {
         echo -e "${RED}You did not choose anything${WHITE}" | sudo tee -a /var/log/install.log
 fi
 echo "${GREEN}Node Option ${WHITE} $NODE_OPTION"
+# Determine the logic module from NODE_OPTION
+if [ "$NODE_OPTION" -eq "1" ] || [ "$NODE_OPTION" -eq "2" ]; then
+    LOGIC_MODULE="SimplexLogic"
+elif [ "$NODE_OPTION" -eq "3" ] || [ "$NODE_OPTION" -eq "4" ]; then
+    LOGIC_MODULE="RepeaterLogic"
+else
+    echo "Invalid node option selected" >&2
+    exit 1
+fi
+if [ "$LOGIC_MODULE" = "SimplexLogic" ]; then
+    NOT_LOGIC_MODULE="RepeaterLogic"
+else
+    NOT_LOGIC_MODULE="SimplexLogic"
+fi
+
+export NOT_LOGIC_MODULE
+echo "Hidden logic module: $NOT_LOGIC_MODULE"
+sudo sed -i "/^\[$NOT_LOGIC_MODULE\]/,/^\[/{/^$/!d; /^\\[$NOT_LOGIC_MODULE\\]/d}" /etc/svxlink/svxlink.conf
+echo "The logic module $NOT_LOGIC_MODULE has been removed from svxlink.conf"
+export LOGIC_MODULE
+echo "Using logic module: $LOGIC_MODULE"
+
 export NODE_OPTION; 
 }
             
