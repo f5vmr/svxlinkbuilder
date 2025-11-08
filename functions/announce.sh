@@ -20,13 +20,14 @@ function announce {
     # Prompt user for new CW values
     new_cw_amp=$(whiptail --title "CW AMP" --inputbox \
         "Current CW Amplitude: $cw_amp dB\nEnter new minus value for CW AMP (0 to -10 dB):" \
-        10 78 "$cw_amp" 3>&1 1>&2 2>&3)
+        10 78 -- "$cw_amp" 3>&1 1>&2 2>&3)
     new_cw_pitch=$(whiptail --title "CW PITCH" --inputbox \
         "Current CW Tone Pitch: $cw_pitch Hz\nEnter new value for CW PITCH (440 to 2200 Hz):" \
-        10 78 "$cw_pitch" 3>&1 1>&2 2>&3)
+        10 78 -- "$cw_pitch" 3>&1 1>&2 2>&3)
     new_cw_cpm=$(whiptail --title "CW CPM" --inputbox \
         "Current CW characters per minute: $cw_cpm\nEnter new value for CW CPM (60 to 200 Characters Per Minute):" \
-        10 78 "$cw_cpm" 3>&1 1>&2 2>&3)
+        10 78 -- "$cw_cpm" 3>&1 1>&2 2>&3)
+
 
     # Prompt for Short/Long Ident Interval
     new_short_ident_interval=$(whiptail --title "SHORT IDENT INTERVAL" --menu \
