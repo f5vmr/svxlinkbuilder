@@ -179,6 +179,7 @@ NOT_LOGIC_MODULE="$(echo -n "$NOT_LOGIC_MODULE" | tr -d '\r' | xargs)"
 # Check that the section exists
 if ! grep -q "^\[$NOT_LOGIC_MODULE\]" "$SVX_CONF"; then
     echo "Module [$NOT_LOGIC_MODULE] no longer found in $SVX_CONF" | sudo tee -a  /var/log/install.log
+else echo "Module [$NOT_LOGIC_MODULE] found in $SVX_CONF, proceeding to remove it." | sudo tee -a  /var/log/install.log	 
 
 fi
 
