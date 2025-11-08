@@ -192,7 +192,7 @@ NOT_LOGIC_MODULE="$(echo -n "$NOT_LOGIC_MODULE" | tr -d '\r' | xargs)"
 # Check that the section exists
 if ! grep -q "^\[$NOT_LOGIC_MODULE\]" "$SVX_CONF"; then
     echo "Module [$NOT_LOGIC_MODULE] not found in $SVX_CONF"
-    exit 1
+  
 fi
 
 # Remove the section safely
