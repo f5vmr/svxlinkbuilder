@@ -15,11 +15,11 @@ function announce {
     short_ident_interval=$(sed -n "/^\[$LOGIC_MODULE\]/,/^\[/{s/^SHORT_IDENT_INTERVAL *= *//p}" "$svxconf_file" | head -n 1)
     long_ident_interval=$(sed -n "/^\[$LOGIC_MODULE\]/,/^\[/{s/^LONG_IDENT_INTERVAL *= *//p}" "$svxconf_file" | head -n 1)
 
-    echo -e "${CYAN}Current CW_AMP:${WHITE} $cw_amp"
+    #echo -e "${CYAN}Current CW_AMP:${WHITE} $cw_amp"
 
     # Prompt user for new CW values
     new_cw_amp=$(whiptail --title "CW AMP" --inputbox \
-        "Current CW Amplitude: $cw_amp dB\nEnter new value for CW AMP (0 to -10 dB):" \
+        "Current CW Amplitude: $cw_amp dB\nEnter new minus value for CW AMP (0 to -10 dB):" \
         10 78 "$cw_amp" 3>&1 1>&2 2>&3)
     new_cw_pitch=$(whiptail --title "CW PITCH" --inputbox \
         "Current CW Tone Pitch: $cw_pitch Hz\nEnter new value for CW PITCH (440 to 2200 Hz):" \
