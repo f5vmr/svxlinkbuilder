@@ -40,7 +40,7 @@ fi
 
 export NOT_LOGIC_MODULE
 echo "Hidden logic module: $NOT_LOGIC_MODULE"
-sudo sed -i "/^\[$NOT_LOGIC_MODULE\]/,/^\[/{/^$/!d; /^\\[$NOT_LOGIC_MODULE\\]/d}" /etc/svxlink/svxlink.conf
+sudo sed -i "/^\[$NOT_LOGIC_MODULE\]/,/^\[/ { /^\[$NOT_LOGIC_MODULE\]/d; /^\[/!d }" svxlink.conf
 echo "The logic module $NOT_LOGIC_MODULE has been removed from svxlink.conf"
 export LOGIC_MODULE
 echo "Using logic module: $LOGIC_MODULE"
