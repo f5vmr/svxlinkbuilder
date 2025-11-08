@@ -39,24 +39,8 @@ fi
     fi
 
 export NOT_LOGIC_MODULE
-echo "Unused logic module: $NOT_LOGIC_MODULE"
-#sudo sed -i '/^\['"$NOT_LOGIC_MODULE"'\]/,/^\[/ { /^\['"$NOT_LOGIC_MODULE"'\]/d; /^\[/!d }' /etc/svxlink/svxlink.conf
-# Trim whitespace and remove CRs from module name
-NOT_LOGIC_MODULE="$(echo -n "$NOT_LOGIC_MODULE" | tr -d '\r' | xargs)"
 
-# Check that the section exists
-if ! grep -q "^\[$NOT_LOGIC_MODULE\]" "$SVX_CONF"; then
-    echo "Module [$NOT_LOGIC_MODULE] not found in $SVX_CONF"
-    exit 1
-fi
 
-# Remove the section safely
-sed -i "/^\[$NOT_LOGIC_MODULE\]/,/^\[/{
-    /^\[$NOT_LOGIC_MODULE\]/d
-    /^\[/!d
-}" "$SVX_CONF"
-
-echo "Logic module [$NOT_LOGIC_MODULE] removed from $SVX_CONF"
 echo "The logic module $NOT_LOGIC_MODULE will be removed from svxlink.conf" | sudo tee -a /var/log/install.log
 export LOGIC_MODULE
 echo "Using logic module: $LOGIC_MODULE" | sudo tee -a /var/log/install.log
