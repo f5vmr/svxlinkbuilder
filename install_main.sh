@@ -208,7 +208,7 @@ sed -i "/^\[$NOT_LOGIC_MODULE\]/,/^\[/{
 	 # clear
 	echo -e "$(date)" "${RED} #### Restarting svxlink.service #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	
- 	sudo systemctl restart svxlink 
+ 	sudo systemctl restart svxlink apache2 svxlink-node 
 
 	##.service isn't necessary ##
 echo -e "$(date)" "${GREEN} #### Installation complete #### ${NORMAL}" | sudo tee -a  /var/log/install.log
