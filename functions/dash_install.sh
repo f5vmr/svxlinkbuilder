@@ -38,14 +38,31 @@ function dash_install {
         exit 1
     fi
 
+    while true; do
     DASHBOARD_PASSWORD=$(whiptail --title "Dashboard Password" --passwordbox "Please enter your dashboard password:" 8 78 3>&1 1>&2 2>&3)
 
-    if [ $? -eq 0 ]; then
-        echo "User entered password: [hidden]"
-    else
+    # Check if user cancelled
+    if [ $? -ne 0 ]; then
         echo "User cancelled the password input."
         exit 1
     fi
+
+    # Ask for password confirmation
+    CONFIRM_PASSWORD=$(whiptail --title "Confirm Password" --passwordbox "Please confirm your dashboard password:" 8 78 3>&1 1>&2 2>&3)
+
+    if [ $? -ne 0 ]; then
+        echo "User cancelled the password confirmation."
+        exit 1
+    fi
+
+    # Check if passwords match
+    if [ "$DASHBOARD_PASSWORD" == "$CONFIRM_PASSWORD" ]; then
+        echo "Password confirmed."
+        break
+    else
+        whiptail --title "Error" --msgbox "Passwords do not match. Please try again." 8 78
+    fi
+done
 
     AUTH_FILE="/etc/svxlink/dashboard.auth.ini"
     [ -f "$AUTH_FILE" ] && sudo cp "$AUTH_FILE" "${AUTH_FILE}.bak"

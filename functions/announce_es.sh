@@ -5,7 +5,7 @@ function announce {
     LOGIC_DIR="/usr/share/svxlink/events.d/local"
     logicfile="$LOGIC_DIR/Logic.tcl"
     svxconf_file="$CONF_DIR/svxlink.conf"
-    echo "Using logic module: $LOGIC_MODULE"
+    echo "Using logic module: $LOGIC_MODULE" | sudo tee -a  /var/log/install.log 
 
     #### CW TONE VARIABLES ####
     # Extract current values from the correct section
@@ -15,7 +15,7 @@ function announce {
     short_ident_interval=$(sed -n "/^\[$LOGIC_MODULE\]/,/^\[/{s/^SHORT_IDENT_INTERVAL *= *//p}" "$svxconf_file" | head -n 1)
     long_ident_interval=$(sed -n "/^\[$LOGIC_MODULE\]/,/^\[/{s/^LONG_IDENT_INTERVAL *= *//p}" "$svxconf_file" | head -n 1)
 
-    echo -e "${CYAN}Current CW_AMP:${WHITE} $cw_amp"
+    echo -e "${CYAN}Current CW_AMP:${WHITE} $cw_amp" | sudo tee -a  /var/log/install.log 
 
     # Prompt user for new CW values
     new_cw_amp=$(whiptail --title "CW AMP" --inputbox \
@@ -37,11 +37,13 @@ function announce {
         "Select LONG Periodic Ident Interval:" 15 78 4 \
         0 "None" 30 "30 minutes" 60 "60 minutes" 120 "120 minutes" \
         3>&1 1>&2 2>&3)
+    echo "Short Ident Interval selected: $new_short_ident_interval" | sudo tee -a  /var/log/install.log 
+    echo "Long Ident Interval selected: $new_long_ident_interval" | sudo tee -a  /var/log/install.log
 
-    echo -e "${YELLOW}Standby for logic changes${WHITE}"
+    echo -e "${YELLOW}Standby for logic changes${WHITE}" | sudo tee -a  /var/log/install.log 
 
     #### LOGIC ID / ANNOUNCE FLAGS ####
-    echo -e "${YELLOW}Reading logic enable flags for [$LOGIC_MODULE]...${WHITE}"
+    echo -e "${YELLOW}Reading logic enable flags for [$LOGIC_MODULE]...${WHITE}" | sudo tee -a  /var/log/install.log 
 
     # Helper to read values safely from the current section
     get_value_from_section() {
@@ -61,10 +63,10 @@ function announce {
     options=(
         "Short Voice ID Enable" "" $( [ "$short_voice_id_enable" -eq 1 ] && echo "on" || echo "off" )
         "Short CW ID Enable"    "" $( [ "$short_cw_id_enable" -eq 1 ] && echo "on" || echo "off" )
-        "Short Announce Enable" "" $( [ "$short_announce_enable" -eq 1 ] && echo "on" || echo "off" )
+    #    "Short Announce Enable" "" $( [ "$short_announce_enable" -eq 1 ] && echo "on" || echo "off" )
         "Long Voice ID Enable"  "" $( [ "$long_voice_id_enable" -eq 1 ] && echo "on" || echo "off" )
         "Long CW ID Enable"     "" $( [ "$long_cw_id_enable" -eq 1 ] && echo "on" || echo "off" )
-        "Long Announce Enable"  "" $( [ "$long_announce_enable" -eq 1 ] && echo "on" || echo "off" )
+    #    "Long Announce Enable"  "" $( [ "$long_announce_enable" -eq 1 ] && echo "on" || echo "off" )
     )
 
     # Display checklist to toggle values
@@ -75,18 +77,18 @@ function announce {
     # Translate selections to 1/0
     new_short_voice_id_enable=$(echo "$new_values" | grep -q "Short Voice ID Enable" && echo 1 || echo 0)
     new_short_cw_id_enable=$(echo "$new_values" | grep -q "Short CW ID Enable" && echo 1 || echo 0)
-    new_short_announce_enable=$(echo "$new_values" | grep -q "Short Announce Enable" && echo 1 || echo 0)
+    #new_short_announce_enable=$(echo "$new_values" | grep -q "Short Announce Enable" && echo 1 || echo 0)
     new_long_voice_id_enable=$(echo "$new_values" | grep -q "Long Voice ID Enable" && echo 1 || echo 0)
     new_long_cw_id_enable=$(echo "$new_values" | grep -q "Long CW ID Enable" && echo 1 || echo 0)
-    new_long_announce_enable=$(echo "$new_values" | grep -q "Long Announce Enable" && echo 1 || echo 0)
+    #new_long_announce_enable=$(echo "$new_values" | grep -q "Long Announce Enable" && echo 1 || echo 0)
 
     # Display confirmation
-    echo -e "${CYAN}Short Voice ID Enable:${WHITE} $new_short_voice_id_enable"
-    echo -e "${CYAN}Short CW ID Enable:${WHITE} $new_short_cw_id_enable"
-    echo -e "${CYAN}Short Announce Enable:${WHITE} $new_short_announce_enable"
-    echo -e "${CYAN}Long Voice ID Enable:${WHITE} $new_long_voice_id_enable"
-    echo -e "${CYAN}Long CW ID Enable:${WHITE} $new_long_cw_id_enable"
-    echo -e "${CYAN}Long Announce Enable:${WHITE} $new_long_announce_enable"
+    echo -e "${CYAN}Short Voice ID Enable:${WHITE} $new_short_voice_id_enable" | sudo tee -a  /var/log/install.log 
+    echo -e "${CYAN}Short CW ID Enable:${WHITE} $new_short_cw_id_enable" | sudo tee -a  /var/log/install.log 
+    echo -e "${CYAN}Short Announce Enable:${WHITE} $new_short_announce_enable" | sudo tee -a  /var/log/install.log 
+    echo -e "${CYAN}Long Voice ID Enable:${WHITE} $new_long_voice_id_enable" | sudo tee -a  /var/log/install.log 
+    echo -e "${CYAN}Long CW ID Enable:${WHITE} $new_long_cw_id_enable" | sudo tee -a  /var/log/install.log 
+    echo -e "${CYAN}Long Announce Enable:${WHITE} $new_long_announce_enable" | sudo tee -a  /var/log/install.log 
 
     #### UPDATE SVXLINK.CONF FUNCTION ####
     update_svxlink_conf() {
@@ -118,15 +120,15 @@ function announce {
         update_key "SHORT_VOICE_ID_ENABLE" "$new_short_voice_id_enable"
         update_key "SHORT_CW_ID_ENABLE" "$new_short_cw_id_enable"
         update_key "SHORT_ANNOUNCE_ENABLE" "$new_short_announce_enable"
-        update_key "SHORT_ANNOUNCE_FILE" "$short_announce_file"
+     #   update_key "SHORT_ANNOUNCE_FILE" "$short_announce_file"
 
         update_key "LONG_IDENT_INTERVAL" "$new_long_ident_interval"
         update_key "LONG_VOICE_ID_ENABLE" "$new_long_voice_id_enable"
         update_key "LONG_CW_ID_ENABLE" "$new_long_cw_id_enable"
         update_key "LONG_ANNOUNCE_ENABLE" "$new_long_announce_enable"
-        update_key "LONG_ANNOUNCE_FILE" "$long_announce_file"
+     #   update_key "LONG_ANNOUNCE_FILE" "$long_announce_file"
 
-        echo -e "${GREEN}Updated identification and CW variables for [$section] in $conf${WHITE}"
+        echo -e "${GREEN}Updated identification and CW variables for [$section] in $conf${WHITE}" | sudo tee -a  /var/log/install.log 
     }
 
     # Call the update function
@@ -175,3 +177,4 @@ function announce {
             ;;
     esac
 }
+
