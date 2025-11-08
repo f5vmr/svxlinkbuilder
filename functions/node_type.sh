@@ -57,7 +57,7 @@ sed -i "/^\[$NOT_LOGIC_MODULE\]/,/^\[/{
 }" "$SVX_CONF"
 
 echo "Logic module [$NOT_LOGIC_MODULE] removed from $SVX_CONF"
-echo "The logic module $NOT_LOGIC_MODULE has been removed from svxlink.conf" | sudo tee -a /var/log/install.log
+echo "The logic module $NOT_LOGIC_MODULE will be removed from svxlink.conf" | sudo tee -a /var/log/install.log
 export LOGIC_MODULE
 echo "Using logic module: $LOGIC_MODULE" | sudo tee -a /var/log/install.log
 

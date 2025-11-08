@@ -174,7 +174,22 @@ echolinksetup
 #	echo -e "$(date)" "${RED} #### Changing ModulePropagationMonitor #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 #	source "${BASH_SOURCE%/*}/functions/propagationmonitor_setup.sh"
 #	propagationmonitor
-	
+	echo "Unused logic module: $NOT_LOGIC_MODULE" | sudo tee -a  /var/log/install.log
+#sudo sed -i '/^\['"$NOT_LOGIC_MODULE"'\]/,/^\[/ { /^\['"$NOT_LOGIC_MODULE"'\]/d; /^\[/!d }' /etc/svxlink/svxlink.conf
+# Trim whitespace and remove CRs from module name
+NOT_LOGIC_MODULE="$(echo -n "$NOT_LOGIC_MODULE" | tr -d '\r' | xargs)"
+
+# Check that the section exists
+if ! grep -q "^\[$NOT_LOGIC_MODULE\]" "$SVX_CONF"; then
+    echo "Module [$NOT_LOGIC_MODULE] no longer found in $SVX_CONF" | sudo tee -a  /var/log/install.log
+    exit 1
+fi
+
+# Remove the section safely
+sed -i "/^\[$NOT_LOGIC_MODULE\]/,/^\[/{
+    /^\[$NOT_LOGIC_MODULE\]/d
+    /^\[/!d
+}" "$SVX_CONF"
 	 # clear
 	echo -e "$(date)" "${RED} #### Reinicie svxlink.service #### ${NORMAL}" | sudo tee -a  /var/log/install.log	
 	
