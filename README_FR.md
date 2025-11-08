@@ -49,7 +49,7 @@
 <p>Une étape supplémentaire consistera à programmer la carte SA818, pendant l'installation.</p>
 <h2>La construction</h2>
 <b>Ne pas mettre à jour/mettre à jour le système à cet étape.</b>
-<p>Ce script installera également une carte son factice pour l'utilisation de Darkice et Icecast2.</p>
+<p>Ce script installera également une carte son factice pour l'utilisation de DWeb socket.</p>
 <p>Étape 1 : <b>sudo apt-get install -y git</b> car sans cela, vous ne pouvez pas télécharger depuis GitHub.</p>
 
 <p>Étape 2 : <b>sudo git clone https://github.com/f5vmr/svxlinkbuilder.git</b> .</p>

@@ -102,7 +102,7 @@ echo "Variable assigned: $sound_card_variable"
     echo "Ok, entonces no haré ningún cambio."           
     fi                    
 fi
-    echo -e "$(date)" "${GREEN}Audio actualizado, tarjeta de sonido ficticia incluida para Darkice completo.${NORMAL}" | sudo tee -a /var/log/install.log
+    echo -e "$(date)" "${GREEN}Audio actualizado, tarjeta de sonido ficticia incluida para Web Socket.${NORMAL}" | sudo tee -a /var/log/install.log
 plughw_setting="0"
 channel_setting="0"
 }
