@@ -47,4 +47,4 @@ echo "Using logic module: $LOGIC_MODULE"
 
 export NODE_OPTION; 
 }
-            
+
