@@ -1,6 +1,6 @@
 #!/bin/bash
 #### WHICH LANGUAGE ####
-## lang_options en_GB or fr_FR or en_US or es_ES ##
+## lang_options en_GB or fr_FR or en_US or es_ES or it_IT##
 
 
 function set_locale() {
@@ -20,7 +20,8 @@ function which_language {
         "1" "English  (United Kingdom)  en_GB" \
         "2" "Français (France)          fr_FR" \
         "3" "English  (USA)             en_US" \
-        "4" "Spanish (Español)         es_ES" \
+        "4" "Spanish  (Español)         es_ES" \
+        "5" "Italian  (Italiano)        it_IT" \
          3>&1 1>&2 2>&3 )
 
     case ${LANG_OPTION} in
@@ -35,6 +36,9 @@ function which_language {
             ;;
         4)
             set_locale "es_ES"
+            ;;
+        5)
+            set_locale "it_IT"
             ;;
         *)
             echo "Invalid choice"
