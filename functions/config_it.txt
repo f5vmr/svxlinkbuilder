@@ -1,0 +1,8 @@
+Ora configureremo SVXLink in base alle specifiche fornite.
+Queste sostituiranno quelle presenti nella configurazione predefinita di SVXLink.
+Per modificarle in futuro, è possibile farlo nella Dashboard Web.
+La prima modifica riguarderà la scheda audio USB in uso.
+Le modifiche successive riguarderanno la configurazione di SVXLink.
+Al termine della configurazione, sarà possibile accedere al pannello di controllo web.
+L'indirizzo IP fisso sarà fornito a breve.
+
