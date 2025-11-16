@@ -4,3 +4,4 @@ GB | svxlink.yorkshire.network | 5310 | 3 | Null
 US | north.america.svxlink.net | 5300 | 3 | Null
 FR | reflector1.f4ipa.fr | 5300 | 1 | 517388
 ES | svxreflector.sytes.net| 5300 | 2 | Demand
+BA | e7svxlink.eu | 5300 | ?
