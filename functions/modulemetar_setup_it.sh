@@ -54,7 +54,7 @@ whiptail --title "Informazioni METAR" --yesno "Vuoi configurare questo modulo?" 
         "LIPK" "Trieste Friuli Venezia Giulia" OFF 3>&1 1>&2 2>&3)
         specific_airport=$(echo "$specific_airport" | sed 's/"//g')
         sed -i "s/\STARTDEFAULT=.*/STARTDEFAULT=$specific_airport/g" /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
-        echo -e "$(date)" "${GREEN} $selected aeroporti inclusi con l’aeroporto predefinito $specific_airport ${NORMAL}" | sudo tee -a /var/log/install.log
+        echo -e "$(date)" "${GREEN} $selected aeroporti inclusi con l'aeroporto predefinito $specific_airport ${NORMAL}" | sudo tee -a /var/log/install.log
    
     else
      sed -i 's/,ModuleMetarInfo//' /etc/svxlink/svxlink.conf

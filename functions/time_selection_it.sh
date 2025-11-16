@@ -1,7 +1,7 @@
 function timeselect {
     # Present the whiptail dialog and capture the user's choice
-    CHOICE=$(whiptail --title "Seleziona il formato dell’ora" --radiolist \
-    "Seleziona il formato dell’ora che preferisci:" 15 50 2 \
+    CHOICE=$(whiptail --title "Seleziona il formato dell'ora" --radiolist \
+    "Seleziona il formato dell'ora che preferisci:" 15 50 2 \
     "12" "formato 12 ore" ON \
     "24" "formato 24 ore" OFF 3>&1 1>&2 2>&3)
     

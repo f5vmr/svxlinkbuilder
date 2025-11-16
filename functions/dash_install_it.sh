@@ -34,7 +34,7 @@ function dash_install {
     if [ $? -eq 0 ]; then
         echo "Il nome utente inserito è: $DASHBOARD_USER"
     else
-        echo "Hai annullato l’inserimento del nome utente."
+        echo "Hai annullato l'inserimento del nome utente."
         exit 1
     fi
 
@@ -109,5 +109,5 @@ EOF
     CRON_JOB="01 00 * * * /home/pi/scripts/cleanup.sh"
     (sudo crontab -l 2>/dev/null; echo "$CRON_JOB") | sort -u | sudo crontab -
 
-    echo "Verificata l’esistenza della voce di crontab per $CLEANUP_SCRIPT."
+    echo "Verificata l'esistenza della voce di crontab per $CLEANUP_SCRIPT."
 }
