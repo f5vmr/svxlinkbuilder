@@ -126,9 +126,10 @@
 
 **Attribution Block** 
 <p>Core Software: SVXLink / SvxReflector — Tobias Blömberg SM0SVX</p>
-<p>Dashboard Framework: SP2ONG & SP0DZ</p>
+<p>Dashboard Framework: G4NAB, SP2ONG & SP0DZ</p>
 <p>Additional Contributors: Adi DL1HRC and the SVXLink community</p>
 <p>Modernisation & Integration (PHP 8.2, config editing, live-control, streaming): Chris G4NAB</p>
+<p>Translations - Italian by Giovanni Scafora IK5TWZ, French and Spanish by G4NAB </p>
 
 **Addendum**
 <p>Talk Groups should be added to the Svxlink Configurator in ReflectorLogic, and ensure the tick is checked alongside. Adding a + or ++ after a Talk-Group number will increase its importance, enabling a higher priority talk group to surplant one in use.</p>
