@@ -1,1 +1,9 @@
+Estamos prestes a configurar o SVXLink de acordo com as especificações fornecidas.
+Estas definições irão substituir as existentes na configuração padrão do SVXLink.
+Se no futuro quiser alterá-las, poderá fazê-lo através do Web Dashboard.
 
+A primeira alteração será relativa à placa de som USB em utilização.
+Depois serão aplicadas outras alterações na configuração do SVXLink.
+
+No final da configuração, poderá aceder ao Web Dashboard.
+O endereço IP fixo será apresentado dentro de momentos.
