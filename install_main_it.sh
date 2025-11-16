@@ -44,13 +44,9 @@ make_groups
 	echo -e "$(date)" "${GREEN} #### Installazione dei file vocali #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
  	cd /usr/share/svxlink/sounds
-	if [[ $lang == "en_US" ]]; then
-	sudo git clone https://github.com/f5vmr/en_US.git
+	
+	sudo git clone https://github.com/ik4nzd/Suoni-in-italiano-per-SvxLink.git it_IT
 
-	else 
-	sudo git clone https://github.com/f5vmr/en_GB.git
- 
-	fi
   	cd /etc/svxlink
    sudo chmod 775 -R *
 
@@ -167,15 +163,11 @@ chmod 0440 "$SUDOERS_FILE"
 	 # clear
  	echo -e "$(date)" "${RED} #### Modifica del collegamento ModuleMetar #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	
-	if [[ $lang == "en_US" ]]; then
-	## geting US Airports
-	source "${BASH_SOURCE%/*}/functions/modulemetar_setup_us.sh"
+	
+	## geting Italian Airports
+	source "${BASH_SOURCE%/*}/functions/modulemetar_setup_it.sh"
 	modulemetar
-	else
-	## getting UK Airports
-	source "${BASH_SOURCE%/*}/functions/modulemetar_setup.sh"
-	modulemetar
-	fi	
+		
 	 # clear
 	 cd /home/pi/
 	echo -e "$(date)" "${RED} #### Modifica del collegamento ModuleEchoLink #### ${NORMAL}" | sudo tee -a  /var/log/install.log
