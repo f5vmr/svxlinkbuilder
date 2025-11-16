@@ -6,24 +6,24 @@ MODULE="/etc/svxlink/svxlink.d"
 OP="/etc/svxlink"
 export HOME
 #### Welcome Message ####
-source "${BASH_SOURCE%/*}/functions/welcome.sh"
+source "${BASH_SOURCE%/*}/functions/welcome_it.sh"
 welcome
-source "${BASH_SOURCE%/*}/functions/configure.sh"
+source "${BASH_SOURCE%/*}/functions/configure_it.sh"
 configure
 #### TEST for SA818 ####
-source "${BASH_SOURCE%/*}/functions/sa818_test.sh"
+source "${BASH_SOURCE%/*}/functions/sa818_test_it.sh"
 sa818_test
 if [[ $sa818 == true ]]; then
-source "${BASH_SOURCE%/*}/functions/sa818_menu.sh"
+source "${BASH_SOURCE%/*}/functions/sa818_menu_it.sh"
 sa818_menu
 else
 echo "Nessun dispositivo SA818" |tee -a  /var/log/install.log
 fi
 #### USB SOUND CARD ####
-source "${BASH_SOURCE%/*}/functions/sound_card.sh"
+source "${BASH_SOURCE%/*}/functions/sound_card_it.sh"
 soundcard
 #### NODE Selection ####
-source "${BASH_SOURCE%/*}/functions/node_type.sh"
+source "${BASH_SOURCE%/*}/functions/node_type_it.sh"
 nodeoption
 echo -e "$(date)" "${YELLOW} #### Tipo di nodo: $NODEOPTION #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
@@ -31,7 +31,7 @@ echo -e "$(date)" "${YELLOW} #### Scheda audio: $HID $GPIOD $card #### ${NORMAL}
 echo -e "$(date)" "${YELLOW} #### Verifica Alsa #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
 #### REQUEST CALLSIGN ####
-source "${BASH_SOURCE%/*}/functions/callsign.sh"
+source "${BASH_SOURCE%/*}/functions/callsign_it.sh"
 callsign
 #### GROUPS AND USERS ####
 # clear
@@ -131,7 +131,7 @@ chmod 0440 "$SUDOERS_FILE"
 	cd /home/pi
 	echo -e "$(date)" "${YELLOW} #### Installazione della dashboard #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
-	source "${BASH_SOURCE%/*}/functions/dash_install.sh"
+	source "${BASH_SOURCE%/*}/functions/dash_install_it.sh"
 	dash_install
  # clear
 	echo -e "$(date)" "${GREEN} #### Dashboard installata #### ${NORMAL}" | sudo tee -a  /var/log/install.log
@@ -142,21 +142,21 @@ chmod 0440 "$SUDOERS_FILE"
 
 	 # clear
 	echo -e "$(date)" "${GREEN} #### Configurazione del nodo #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-	source "${BASH_SOURCE%/*}/functions/node_setup.sh"
+	source "${BASH_SOURCE%/*}/functions/node_setup_it.sh"
 	nodeset
 	#### Removal of unwanted files ####
 	#echo -e "$(date)" "${YELLOW} #### Removing unwanted files #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	#source "${BASH_SOURCE%/*}/functions/deletion.sh"
 	#delete
 	#### TIME SELECTION ####
-    source "${BASH_SOURCE%/*}/functions/time_selection.sh"
+    source "${BASH_SOURCE%/*}/functions/time_selection_it.sh"
     timeselect
 	#### Identification setup ####
 	echo -e "$(date)" "${GREEN} #### Configurazione dell'identificazione  #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-	source "${BASH_SOURCE%/*}/functions/announce.sh"
+	source "${BASH_SOURCE%/*}/functions/announce_it.sh"
 	announce
 	echo -e "$(date)" "${GREEN} #### Configurazione degli annunci completata  #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-	source "${BASH_SOURCE%/*}/functions/tones.sh"
+	source "${BASH_SOURCE%/*}/functions/tones_it.sh"
 	tones
 	echo -e "$(date)" "${GREEN} #### Configurazione dei toni completata  #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	cd /home/pi
@@ -171,7 +171,7 @@ chmod 0440 "$SUDOERS_FILE"
 	 # clear
 	 cd /home/pi/
 	echo -e "$(date)" "${RED} #### Modifica del collegamento ModuleEchoLink #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-	source "${BASH_SOURCE%/*}/functions/echolink_setup.sh"
+	source "${BASH_SOURCE%/*}/functions/echolink_setup_it.sh"
 	echolinksetup
 	
 	 # clear

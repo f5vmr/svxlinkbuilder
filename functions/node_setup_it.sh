@@ -8,18 +8,18 @@ function nodeset {
      sed -i 's/LINKS=/\#LINKS=/g' /etc/svxlink/svxlink.conf
     elif [[ $NODE_OPTION  == "2" ]] 
     then
-    node="Simplex con UK Svxreflector"
+    node="Simplex con Svxreflector"
     auth_key=$(whiptail --passwordbox "Inserisci la password del tuo SvxReflector" 8 78 --title "Inserimento password" 3>&1 1>&2 2>&3)
      sed -i "s/AUTH_KEY=\"Change this key now\"/AUTH_KEY=\"$auth_key\"/g" /etc/svxlink/svxlink.conf 
     elif [[ $NODE_OPTION  == "3" ]] 
     then
-    node="Repeater senza Svxreflector"
+    node="Ripetitore senza Svxreflector"
      sed -i 's/set for SimplexLogic/set for RepeaterLogic/g' /etc/svxlink/svxlink.conf
      sed -i 's/LOGICS=SimplexLogic,ReflectorLogic/LOGICS=RepeaterLogic/g' /etc/svxlink/svxlink.conf
      sed -i 's/LINKS=/\#LINKS=/g' /etc/svxlink/svxlink.conf
     elif [[ $NODE_OPTION  == "4" ]] 
     then
-    node="Repeater con UK Svxreflector"
+    node="Ripetitore con Svxreflector"
     auth_key=$(whiptail --passwordbox "Inserisci la password del tuo SvxReflector" 8 78 --title "Inserimento password" 3>&1 1>&2 2>&3)
     
      sed -i 's/set for SimplexLogic/set for RepeaterLogic/g' /etc/svxlink/svxlink.conf
