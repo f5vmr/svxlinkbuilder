@@ -170,9 +170,9 @@ function announce {
 
     case $selected_option in
         "Beep")
-            frequency=$(whiptail --title "Frequency" --inputbox "Enter frequency (Hz):" 10 50 "$default_frequency" 3>&1 1>&2 2>&3)
-            volume=$(whiptail --title "Volume" --inputbox "Enter volume (0-100):" 10 50 "100" 3>&1 1>&2 2>&3)
-            duration=$(whiptail --title "Duration" --inputbox "Enter duration (ms):" 10 50 "$default_duration" 3>&1 1>&2 2>&3)
+            frequency=$(whiptail --title "Frequenza" --inputbox "Inserisci la frequenza (Hz):" 10 50 "$default_frequency" 3>&1 1>&2 2>&3)
+            volume=$(whiptail --title "Volume" --inputbox "Inserisci il volume (0-100):" 10 50 "100" 3>&1 1>&2 2>&3)
+            duration=$(whiptail --title "Durata" --inputbox "Inserisci la durata (ms):" 10 50 "$default_duration" 3>&1 1>&2 2>&3)
             sed -i "s/playTone [0-9]\+ [0-9]\+ [0-9]\+/playTone $frequency $volume $duration/g" "$logicfile"
             ;;
         "Morse K")
