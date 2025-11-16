@@ -129,7 +129,7 @@
 <p>Dashboard Framework: G4NAB, SP2ONG & SP0DZ</p>
 <p>Additional Contributors: Adi DL1HRC and the SVXLink community</p>
 <p>Modernisation & Integration (PHP 8.2, config editing, live-control, streaming): Chris G4NAB</p>
-<p>Translations - Italian by Giovanni Scafora IK5TWZ, French and Spanish by G4NAB </p>
+<p>Translations - Italian by Giovanni Scafora IK5TWZ, French and Spanish by Chris G4NAB </p>
 <p>Many thanks to our guest translators</p>
 
 **Addendum**
