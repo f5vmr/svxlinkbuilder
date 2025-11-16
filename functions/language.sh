@@ -21,6 +21,7 @@ function which_language {
         "2" "Français (France)          fr_FR" \
         "3" "English  (USA)             en_US" \
         "4" "Spanish (Español)         es_ES" \
+        "5" "Portugues (Portugal)       pt_PT" \
          3>&1 1>&2 2>&3 )
 
     case ${LANG_OPTION} in
@@ -35,6 +36,9 @@ function which_language {
             ;;
         4)
             set_locale "es_ES"
+            ;;
+        5)
+            set_locale "pt_PT"
             ;;
         *)
             echo "Invalid choice"
