@@ -11,7 +11,7 @@ logicfile="$LOGIC_DIR/$RepeaterLogic"
 
 # Define the options for the whiptail menu
 # Display the whiptail menu and store the selected option in a variable
-selected_option=$(whiptail --title "Seleziona l’opzione audio del ripetitore" --menu "Scegli un’opzione audio:" 15 78 4 \
+selected_option=$(whiptail --title "Seleziona l'opzione audio del ripetitore" --menu "Scegli un'opzione audio:" 15 78 4 \
     "Campanello" "Seleziona questa opzione per il campanello predefinito" \
     "Melodia" "Seleziona questa opzione per una melodia delicata " \
     "Pip" "Seleziona questa opzione per il tono Pip" \
@@ -47,7 +47,7 @@ else
     echo "Hai annullato l'operazione. I toni non sono stati modificati."
 fi
 # Repeater Close Sound Option
-            selected_option=$(whiptail --title "Seleziona l’opzione audio di chiusura del ripetitore" --menu "Scegli un’opzione audio:" 15 78 4 \
+            selected_option=$(whiptail --title "Seleziona l'opzione audio di chiusura del ripetitore" --menu "Scegli un'opzione audio:" 15 78 4 \
     "Tono predefinito" "Seleziona questa opzione per il tono predefinito (Bi-Boop)" \
     "Nessun tono" "Solo spegnimento portante" \
     "VA-Barred" "Seleziona questa opzione per il tono CW VA (...-.-)" \
@@ -69,7 +69,7 @@ if [ $? -eq 0 ]; then
             ;;
     esac
 else
-    echo "Selezione annullata dall’utente."
+    echo "Selezione annullata dall'utente."
 fi
 
 

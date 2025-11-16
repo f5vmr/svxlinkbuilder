@@ -19,7 +19,7 @@ function announce {
 
     # Prompt user for new CW values
     new_cw_amp=$(whiptail --title "CW AMP" --inputbox \
-        "Ampiezza CW attuale: $cw_amp dB\nInserisci un nuovo valore negativo per l’ampiezza CW (almeno -10 dB):" \
+        "Ampiezza CW attuale: $cw_amp dB\nInserisci un nuovo valore negativo per l'ampiezza CW (almeno -10 dB):" \
         10 78 -- "$cw_amp" 3>&1 1>&2 2>&3)
         # Ensure CW_AMP is negative
         # If user enters a positive number or zero, convert it to negative
@@ -43,11 +43,11 @@ function announce {
 
     # Prompt for Short/Long Ident Interval
     new_short_ident_interval=$(whiptail --title "Intervallo breve di identificazione" --menu \
-        "Seleziona l’intervallo breve per l’identificazione periodica:" 15 78 5 \
+        "Seleziona l'intervallo breve per l'identificazione periodica:" 15 78 5 \
         0 "Nessuno" 5 "5 minuti" 10 "10 minuti" 15 "15 minuti" 20 "20 minuti" 30 "30 Minuti" \
         3>&1 1>&2 2>&3)
     new_long_ident_interval=$(whiptail --title "Intervallo lungo di identificazione" --menu \
-        "Seleziona l’intervallo lungo per l’identificazione periodica:" 15 78 4 \
+        "Seleziona l'intervallo lungo per l'identificazione periodica:" 15 78 4 \
         0 "Nessuno" 30 "30 minuti" 60 "60 minuti" 120 "120 minuti" \
         3>&1 1>&2 2>&3)
 

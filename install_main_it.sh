@@ -110,7 +110,7 @@ chmod 0440 "$SUDOERS_FILE"
  	sudo sed -i 's/PEAK_METER=1/PEAK_METER=0/g' $CONF
 
  # clear
-	echo -e "$(date)" "${GREEN} #### Aggiornamento dello SplashScreen all’avvio #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${GREEN} #### Aggiornamento dello SplashScreen all'avvio #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
  	sudo sed -i "s/MYCALL/$CALL/g" /etc/update-motd.d/10-uname
  	sudo chmod 0775 /etc/update-motd.d/10-uname
@@ -152,7 +152,7 @@ chmod 0440 "$SUDOERS_FILE"
     source "${BASH_SOURCE%/*}/functions/time_selection.sh"
     timeselect
 	#### Identification setup ####
-	echo -e "$(date)" "${GREEN} #### Configurazione dell’identificazione  #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${GREEN} #### Configurazione dell'identificazione  #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	source "${BASH_SOURCE%/*}/functions/announce.sh"
 	announce
 	echo -e "$(date)" "${GREEN} #### Configurazione degli annunci completata  #### ${NORMAL}" | sudo tee -a  /var/log/install.log

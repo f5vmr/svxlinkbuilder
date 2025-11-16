@@ -50,7 +50,7 @@ if $seeed_sound_card_detected; then
 fi
 
 if $other_sound_card_detected; then
-    echo "Gestione delle specifiche di un’altra scheda audio..." | tee -a /var/log/install.log
+    echo "Gestione delle specifiche di un'altra scheda audio..." | tee -a /var/log/install.log
     other_sound_card_detected
     # Add your specific handling code here for other sound cards
 fi
