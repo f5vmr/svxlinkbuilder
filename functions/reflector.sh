@@ -1,10 +1,98 @@
 #!/bin/sh
 ## Choice of svxlink reflector based on country
-#function reflector {
-# Reflector Name : Reflector Type [1or2or3]:PortNumber:PWD
-# Example: portal.svxlink.uk   : 3 : 5300:Null
-# Example: north.america.svxlink.net : 3 : 5300:Null
-# Example: reflector1.f4ipa.fr : 1 : 5300:517388
+# In this case we are
+# we need to get the $lang variable from the main install script
+configure_lang =${lang}
+# now we get from the github repository the reflector list based on the language
+REFLECTOR_LIST_URL="https://raw.githubusercontent.com/f5vmr/reflector_list.json"
+REFLECTOR_LIST=$(curl -s $REFLECTOR_LIST_URL | jq -r --arg lang "$lang" '.reflectors[] | select(.countries[] | contains($lang)) | "\(.name) : \(.type) : \(.port) : \(.pwd)"')
+# now we can present the user with a whiptail menu to select the reflector
+select_reflector() {
+    local lang="$1"
+    local url="$2"
+
+    # Fetch JSON
+    local json
+    json=$(curl -fsSL "$url") || {
+        whiptail --msgbox "Failed to download reflector list." 10 60
+        return 1
+    }
+
+    # Extract matching reflectors: name|type|port|pwd
+    local list
+    list=$(jq -r --arg lang "$lang" \
+        '.reflectors[]
+         | select(.countries[] == $lang)
+         | "\(.name)|\(.type)|\(.port)|\(.pwd)"' <<< "$json")
+
+    # Load lines into array
+    local REFLECTORS
+    mapfile -t REFLECTORS <<< "$list"
+    local COUNT=${#REFLECTORS[@]}
+
+    if (( COUNT == 0 )); then
+        whiptail --msgbox "No reflectors available for language: $lang" 10 60
+        return 1
+    fi
+
+    # SINGLE REFLECTOR → YES/NO
+    if (( COUNT == 1 )); then
+        IFS='|' read NAME TYPE PORT PWD <<< "${REFLECTORS[0]}"
+
+        whiptail --yesno \
+"Connect to this reflector?
+
+Name: $NAME
+Type: $TYPE
+Port: $PORT
+Password: $PWD" \
+        15 60
+
+        if [[ $? -eq 0 ]]; then
+            # Export selected variables
+            SELECTED_NAME="$NAME"
+            SELECTED_TYPE="$TYPE"
+            SELECTED_PORT="$PORT"
+            SELECTED_PWD="$PWD"
+            return 0
+        else
+            return 1
+        fi
+    fi
+
+    # MULTIPLE REFLECTORS → MENU
+    local MENU_ITEMS=()
+    for ITEM in "${REFLECTORS[@]}"; do
+        IFS='|' read NAME TYPE PORT PWD <<< "$ITEM"
+        MENU_ITEMS+=("$NAME" "$TYPE / Port:$PORT")
+    done
+
+    local choice
+    choice=$(whiptail --menu "Choose a reflector" 20 70 10 \
+              "${MENU_ITEMS[@]}" \
+              3>&1 1>&2 2>&3)
+
+    [[ -z "$choice" ]] && return 1
+
+    # Look up chosen reflector to return full details
+    for ITEM in "${REFLECTORS[@]}"; do
+        IFS='|' read NAME TYPE PORT PWD <<< "$ITEM"
+        if [[ "$NAME" == "$choice" ]]; then
+            SELECTED_NAME="$NAME"
+            SELECTED_TYPE="$TYPE"
+            SELECTED_PORT="$PORT"
+            SELECTED_PWD="$PWD"
+            return 0
+        fi
+    done
+
+    return 1
+} 
+#TYPE is particularly relevant. A type 1 has a passwd that is known
+# so if type 1 we can prefill CALLSIGN = $CALL abd 
+# A type 2 requires the user to obtain a passwd from the reflector sysop
+# A type 3 requires no passwd but the user must register with the reflector to obtain his details
+# 
 # so when the user wishes to register to a reflector we can provide a list based on country
 # so the user has accepted he want to connect to a reflector
 # we can provide a list based on country based upon the language selected during installation

@@ -22,23 +22,26 @@ fi
 #### USB SOUND CARD ####
 source "${BASH_SOURCE%/*}/functions/sound_card_fr.sh"
 soundcard
-#### NODE Selection ####
-source "${BASH_SOURCE%/*}/functions/node_type_fr.sh"
-nodeoption
-echo -e "$(date)" "${YELLOW} #### Type du Noeud: $NODEOPTION #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-
-echo -e "$(date)" "${YELLOW} #### Carte son : $HID $GPIOD $card #### ${NORMAL}" | sudo tee -a  /var/log/install.log	
-echo -e "$(date)" "${YELLOW} #### Verification d'Alsa #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-
-#### REQUEST CALLSIGN ####
-source "${BASH_SOURCE%/*}/functions/callsign_fr.sh"
-callsign
 #### GROUPS AND USERS ####
 # clear
 echo -e "$(date)" "${YELLOW} #### Creation des Groupes and Utilisateurs #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 source "${BASH_SOURCE%/*}/functions/groups.sh"
 make_groups
+#### REQUEST CALLSIGN ####
+source "${BASH_SOURCE%/*}/functions/callsign_fr.sh"
+callsign
+#### NODE Selection ####
+source "${BASH_SOURCE%/*}/functions/node_type_fr.sh"
+nodeoption
+echo -e "$(date)" "${YELLOW} #### Type du Noeud: $NODE_OPTION #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
+echo -e "$(date)" "${YELLOW} #### Carte son : $HID $GPIOD $card #### ${NORMAL}" | sudo tee -a  /var/log/install.log	
+echo -e "$(date)" "${YELLOW} #### Verification d'Alsa #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+#### NODE SVXREFLECTOR URL SELECTION ####
+if [[ $NODE_OPTION == "2" || $NODE_OPTION == "4" ]]; then
+source "${BASH_SOURCE%/*}/functions/reflector.sh"
+reflector
+fi
 #### CONFIGURATION VOICES ####
  # clear
 	echo -e "$(date)" "${GREEN} #### Installation des fichiers sons (Voix)  #### ${NORMAL}" | sudo tee -a  /var/log/install.log
