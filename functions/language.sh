@@ -22,7 +22,7 @@ function which_language {
         "3" "English  (USA)             en_US" \
         "4" "Spanish  (Español)         es_ES" \
         "5" "Italian  (Italiano)        it_IT" \
-        "6" "Portuguese (Português)        pt_PT" \
+        "6" "Portuguese (Português)     pt_PT" \
          3>&1 1>&2 2>&3 )
 
     case ${LANG_OPTION} in
@@ -39,6 +39,9 @@ function which_language {
             set_locale "es_ES"
             ;;
         5)
+            set_locale "pt_PT"
+            ;;
+        6)    
             set_locale "it_IT"
             ;;
         *)
