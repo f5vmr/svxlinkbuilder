@@ -5,12 +5,10 @@
 configure_lang =${lang}
 # now we get from the github repository the reflector list based on the language
 REFLECTOR_LIST_URL="https://raw.githubusercontent.com/f5vmr/reflector_list.json"
-REFLECTOR_LIST=$(curl -s $REFLECTOR_LIST_URL | jq -r --arg lang "$lang" '.reflectors[] | select(.countries[] | contains($lang)) | "\(.name) : \(.type) : \(.port) : \(.pwd)"')
 # now we can present the user with a whiptail menu to select the reflector
 select_reflector() {
     local lang="$1"
     local url="$2"
-
     # Fetch JSON
     local json
     json=$(curl -fsSL "$url") || {
