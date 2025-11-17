@@ -22,14 +22,6 @@ fi
 #### USB SOUND CARD ####
 source "${BASH_SOURCE%/*}/functions/sound_card.sh"
 soundcard
-#### GROUPS AND USERS ####
-# clear
-echo -e "$(date)" "${YELLOW} #### Creating Groups and Users #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-source "${BASH_SOURCE%/*}/functions/groups.sh"
-make_groups
-#### REQUEST CALLSIGN ####
-source "${BASH_SOURCE%/*}/functions/callsign.sh"
-callsign
 #### NODE Selection ####
 source "${BASH_SOURCE%/*}/functions/node_type.sh"
 nodeoption
@@ -42,6 +34,15 @@ if [[ $NODE_OPTION == "2" || $NODE_OPTION == "4" ]]; then
 source "${BASH_SOURCE%/*}/functions/reflector.sh"
 reflector
 fi
+#### REQUEST CALLSIGN ####
+source "${BASH_SOURCE%/*}/functions/callsign.sh"
+callsign
+#### GROUPS AND USERS ####
+# clear
+echo -e "$(date)" "${YELLOW} #### Creating Groups and Users #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+source "${BASH_SOURCE%/*}/functions/groups.sh"
+make_groups
+
 #### CONFIGURATION VOICES ####
  # clear
 	echo -e "$(date)" "${GREEN} #### Installing Voice Files #### ${NORMAL}" | sudo tee -a  /var/log/install.log
