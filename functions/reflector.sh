@@ -88,7 +88,8 @@ Password: $PWD" \
 } 
 #TYPE is particularly relevant. A type 1 has a passwd that is known
 # so if type 1 we can prefill CALLSIGN = $CALL abd 
-# A type 2 requires the user to obtain a passwd from the reflector sysop
+# A type 2 requires the user to obtain a passwd from the reflector sysop but this is now
+# superseded by type 3 eventually so we insert "password" then inform the user to contact the reflector sysop
 # A type 3 requires no passwd but the user must register with the reflector to obtain his details
 # 
 # so when the user wishes to register to a reflector we can provide a list based on country
