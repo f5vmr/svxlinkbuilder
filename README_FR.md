@@ -84,7 +84,7 @@
 
 <h2> Dépannage </h2>
 
-<p>Vous devrez comprendre la structure du fichier svxlink.conf et savoir comment effectuer des ajustements pour le fonctionnement Simplex ou Répéteur. Dans tous les cas, vous devrez peut-être vous référer à la page principale de svxlink.org, ou à la page des utilisateurs de radio amateur svxlink sur Facebook, ou me contacter. Pour plus d’informations, consultez également les pages svxlink sur g4nab.co.uk. Dans le terminal, tapez 'man svxlink.conf' et la documentation intégrée s'affichera.</p>
+<p>Vous devrez comprendre la structure du fichier svxlink.conf et savoir comment effectuer des ajustements pour le fonctionnement Simplex ou Répéteur. Dans tous les cas, vous devrez peut-être vous référer à la page principale de svxlink.org, ou à la page des utilisateurs de radio amateur svxlink sur Facebook, ou me contacter. Pour plus d'informations, consultez également les pages svxlink sur g4nab.co.uk. Dans le terminal, tapez 'man svxlink.conf' et la documentation intégrée s'affichera.</p>
 <p>Pour arrêter l'exécution de svxlink, tapez dans le terminal <b>sudo systemctl stop svxlink.service</b> et pour le redémarrer, tapez <b>sudo systemctl restart svxlink.service</b> Vous pouvez également le faire si vous y êtes autorisé dans le tableau de bord dans le menu POWER. Vous n'avez à aucun moment besoin de redémarrer le système.</p>
 
 <p>Si vous souhaitez modifier les fichiers Svxlink.conf, EchoLink, MetarInfo et NodeInfo, vous pouvez le faire, si autorisé, depuis le tableau de bord. L'enregistrement des modifications redémarre immédiatement le svxlink avec les nouveaux paramètres, les nouvelles modifications s'affichant après un clic sur le bouton dans le tableau de bord.</p>

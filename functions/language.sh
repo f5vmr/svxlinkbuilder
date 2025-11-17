@@ -1,6 +1,6 @@
 #!/bin/bash
 #### WHICH LANGUAGE ####
-## lang_options en_GB or fr_FR or en_US or es_ES ##
+## lang_options en_GB or fr_FR or en_US or es_ES or it_IT##
 
 
 function set_locale() {
@@ -16,12 +16,13 @@ function set_locale() {
 }
 
 function which_language {
-    LANG_OPTION=$(whiptail --title "Language Option" --menu "Select Language" 13 78 5 \
+    LANG_OPTION=$(whiptail --title "Language Option" --menu "Select Language" 13 78 7 \
         "1" "English  (United Kingdom)  en_GB" \
         "2" "Français (France)          fr_FR" \
         "3" "English  (USA)             en_US" \
-        "4" "Spanish (Español)         es_ES" \
-        "5" "Portugues (Portugal)       pt_PT" \
+        "4" "Spanish  (Español)         es_ES" \
+        "5" "Italian  (Italiano)        it_IT" \
+        "6" "Portuguese (Português)     pt_PT" \
          3>&1 1>&2 2>&3 )
 
     case ${LANG_OPTION} in
@@ -39,6 +40,9 @@ function which_language {
             ;;
         5)
             set_locale "pt_PT"
+            ;;
+        6)    
+            set_locale "it_IT"
             ;;
         *)
             echo "Invalid choice"

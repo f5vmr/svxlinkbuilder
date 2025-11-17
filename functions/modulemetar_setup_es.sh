@@ -21,7 +21,7 @@ whiptail --title "Información del medidor" --yesno "¿Desea configurar este mó
         "LEGR"  "Federico Garcia Lorca " OFF \
         "LEHC"  "Aragon " OFF \
         "LEJR"  "Jerez " OFF \
-        "LESU"  "Andorra-La seu d’Urgell " OFF \
+        "LESU"  "Andorra-La seu d'Urgell " OFF \
         "LELN"  "León " OFF \
         "LEMD"  "Madrid-Barajas " OFF \
         "LECU"  "Madrid-Cuatros Vientos " OFF \
@@ -68,7 +68,7 @@ whiptail --title "Información del medidor" --yesno "¿Desea configurar este mó
         "LEGR"  "Federico Garcia Lorca " OFF \
         "LEHC"  "Aragon " OFF \
         "LEJR"  "Jerez " OFF \
-        "LESU"  "Andorra-La seu d’Urgell " OFF \
+        "LESU"  "Andorra-La seu d'Urgell " OFF \
         "LELN"  "León " OFF \
         "LEMD"  "Madrid-Barajas " OFF \
         "LECU"  "Madrid-Cuatros Vientos " OFF \
