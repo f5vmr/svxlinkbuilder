@@ -29,7 +29,11 @@ echo -e "$(date)" "${YELLOW} #### Node Type: $NODEOPTION #### ${NORMAL}" | sudo 
 
 echo -e "$(date)" "${YELLOW} #### Sound Card: $HID $GPIOD $card #### ${NORMAL}" | sudo tee -a  /var/log/install.log	
 echo -e "$(date)" "${YELLOW} #### Checking Alsa #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-
+#### NODE SVXREFLECTOR URL SELECTION ####
+if [[ $NODE_OPTION == "2" || $NODE_OPTION == "4" ]]; then
+source "${BASH_SOURCE%/*}/functions/reflector.sh"
+reflector
+fi
 #### REQUEST CALLSIGN ####
 source "${BASH_SOURCE%/*}/functions/callsign.sh"
 callsign
@@ -148,10 +152,6 @@ chmod 0440 "$SUDOERS_FILE"
 	echo -e "$(date)" "${GREEN} #### Setting up Node #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	source "${BASH_SOURCE%/*}/functions/node_setup.sh"
 	nodeset
-	#### Removal of unwanted files ####
-	#echo -e "$(date)" "${YELLOW} #### Removing unwanted files #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-	#source "${BASH_SOURCE%/*}/functions/deletion.sh"
-	#delete
 	#### TIME SELECTION ####
     source "${BASH_SOURCE%/*}/functions/time_selection.sh"
     timeselect
