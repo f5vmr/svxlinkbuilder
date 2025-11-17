@@ -130,7 +130,8 @@
 <p>Additional Contributors: Adi DL1HRC and the SVXLink community</p>
 <p>Modernisation & Integration (PHP 8.2, config editing, live-control, streaming): Chris G4NAB</p>
 <p>Translations - Italian by Giovanni Scafora IK5TWZ, French and Spanish by Chris G4NAB </p>
-<p>Many thanks to our guest translators</p>
+<p>Translations - Portugese by Luis Silva CR7BUI,
+<p>Many thanks to all our guest translators</p>
 
 **Addendum**
 <p>Talk Groups should be added to the Svxlink Configurator in ReflectorLogic, and ensure the tick is checked alongside. Adding a + or ++ after a Talk-Group number will increase its importance, enabling a higher priority talk group to surplant one in use.</p>
