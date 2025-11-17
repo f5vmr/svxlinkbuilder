@@ -88,6 +88,32 @@ Password: $PWD" \
 } 
 #TYPE is particularly relevant. A type 1 has a passwd that is known
 # so if type 1 we can prefill CALLSIGN = $CALL abd 
+# so we advise the user of the state of his entry to the reflector
+if $TYPE -eq "1" 
+then
+    whiptail --msgbox "You have selected a Type 1 reflector. The password is known and will be prefilled. You can proceed to register with the reflector on completion." 10 60
+    sed -i "s|^AUTH_KEY=.*|AUTH_KEY=\"$PWD\"|" "$CONF"
+
+elif $TYPE -eq "2"
+#parse the [ReflectorLogic] section of svxlink.conf to replace #AUTH_KEY="Change this key now" with AUTH_KEY=$PWD
+
+
+then
+    whiptail --msgbox "You have selected a Type 2 reflector. You will need to contact the reflector sysop to obtain a password before you can register A password 'password' has been entered" 10 60
+sed -i 's|^AUTH_KEY=.*|AUTH_KEY="password"|' "$CONF"
+elif $TYPE -eq "3"
+then
+    whiptail --msgbox "You have selected a Type 3 reflector. No password is required. Your registration will be automatically submitted." 10 60
+    sed -i '/^\[ReflectorLogic\]/,/^\[/{ s|^TYPE=ReflectorV2|TYPE=Reflector| }' "$CONF"
+    sed -i '/^\[ReflectorLogic\]/,/^\[/{ s|^#|| }' "$CONF"
+    sed -i '/^\[ReflectorLogic\]/,/^\[/{ s|^AUTH_KEY=|#AUTH_KEY=| }' "$CONF"
+# here we ask the questions.
+
+else
+    whiptail --msgbox "Unknown reflector type selected." 10 60
+fi
+# we have to incorporate the sed into the whiptail process.
+
 # A type 2 requires the user to obtain a passwd from the reflector sysop but this is now
 # superseded by type 3 eventually so we insert "password" then inform the user to contact the reflector sysop
 # A type 3 requires no passwd but the user must register with the reflector to obtain his details
