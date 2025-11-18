@@ -135,7 +135,7 @@ chmod 0440 "$SUDOERS_FILE"
 	dash_install
  # clear
 	echo -e "$(date)" "${GREEN} #### Dashboard installata #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-	whiptail --title "IP Addresses" --msgbox "La dashboard è stata installata. Il tuo indirizzo IP è $ip_address su $device" 8 78
+	whiptail --title "Indirizzo IP" --msgbox "La dashboard è stata installata. Il tuo indirizzo IP è $ip_address su $device" 8 78
 	IP=$ip_address
 	export IP
 	cd /home/pi/
