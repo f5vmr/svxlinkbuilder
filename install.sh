@@ -25,6 +25,17 @@ elif  [[ "$LANG" == "es_ES.UTF-8" ]]
 then
 ##Spanish
 sudo ./svxlinkbuilder/install_main_es.sh
+
+elif  [[ "$LANG" == "pt_PT.UTF-8" ]] 
+then
+##Portuguese
+sudo ./svxlinkbuilder/install_main_pt.sh
+
+elif  [[ "$LANG" == "it_IT.UTF-8" ]] 
+then
+##Italian
+sudo ./svxlinkbuilder/install_main_it.sh
+
 else
 ##UK English
 sudo ./svxlinkbuilder/install_main.sh
