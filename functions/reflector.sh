@@ -1,14 +1,13 @@
 #!/bin/sh
 # so we have two variable in GLOBAL scope $LANG and $CONF
-reflector() {
 
-select_reflector() {
 
-    local lang="$1"
-    local url="$2"
+function select_reflector() {
+    local lang="$1"        # e.g. en_GB
+    local region="$2"      # e.g. GB, EI, CA-EN, etc.
+    local url="$3"
 
-   REFLECTOR_LIST_URL="https://raw.githubusercontent.com/f5vmr/svxreflector_data/main/reflector_list.json"
-
+    REFLECTOR_LIST_URL="https://raw.githubusercontent.com/f5vmr/svxreflector_data/main/reflector_list.json"
 
     # Fetch JSON
     local json
@@ -17,33 +16,83 @@ select_reflector() {
         return 1
     }
 
-    # Extract relevant reflectors
+    # Extract reflectors matching language + country/region
     local list
-    list=$(jq -r --arg lang "$lang" \
-        '.reflectors[]
-         | select(.countries[] == $lang)
-         | "\(.name)|\(.type)|\(.port)|\(.pwd)"' <<< "$json")
-
+    list=$(jq -r \
+        --arg lang "$lang" \
+        --arg region "$region" \
+        '
+        .reflectors[]
+        | select(.Language == $lang)
+        | select(.countries[] == $region)
+        | "\(.name)|\(.type)|\(.port)|\(.pwd)"
+        ' <<< "$json"
+    )
+    source "${BASH_SOURCE%/*}/iso_resolve.sh"
+    iso_resolver "$lang"
     mapfile -t REFLECTORS <<< "$list"
     local COUNT=${#REFLECTORS[@]}
 
     if [ "$COUNT" -eq 0 ]; then
-        whiptail --msgbox "No reflectors available for language: $lang" 10 60
+        whiptail --msgbox "No reflectors available for language: $lang and region: $region" 10 60
         return 1
     fi
 
-    # One reflector → yes/no
+    # If exactly one reflector, auto-select
     if [ "$COUNT" -eq 1 ]; then
         IFS='|' read NAME TYPE PORT PWD <<< "${REFLECTORS[0]}"
 
-        whiptail --yesno \
-"Connect to this reflector?
+        # Normalise Null → empty
+        if [ "$PWD" = "Null" ]; then PWD=""; fi
+
+        export REF_NAME="$NAME"
+        export REF_TYPE="$TYPE"
+        export REF_PORT="$PORT"
+        export REF_PWD="$PWD"
+        return 0
+    fi
+
+    # Multiple reflectors → build whiptail menu
+    local menu_list=()
+    local idx=0
+
+    for line in "${REFLECTORS[@]}"; do
+        IFS='|' read NAME TYPE PORT PWD <<< "$line"
+        menu_list+=("$idx" "$NAME (Port: $PORT)")
+        idx=$((idx+1))
+    done
+
+    local choice
+    choice=$(whiptail --title "Select Reflector" \
+        --menu "Choose a reflector for region $region" 20 70 10 \
+        "${menu_list[@]}" \
+        3>&1 1>&2 2>&3
+    ) || return 1
+
+    IFS='|' read NAME TYPE PORT PWD <<< "${REFLECTORS[$choice]}"
+
+    if [ "$PWD" = "Null" ]; then PWD=""; fi
+
+    export REF_NAME="$NAME"
+    export REF_TYPE="$TYPE"
+    export REF_PORT="$PORT"
+    export REF_PWD="$PWD"
+
+    return 0
+}
+
+reflector() {
+    # our client has selected reflector mode
+    whiptail --msgbox "You have selected Reflector mode. You will now choose a reflector to connect to." 10 60
+
+select_reflector
+
+whiptail --yesno \"Connect to this reflector? 15 60
 
 Name: $NAME
 Type: $TYPE
-Port: $PORT
-Password: $PWD" \
-        15 60
+Port: $PORT"
+Password: $PWD" 
 
         if [ $? -eq 0 ]; then
             SELECTED_NAME="$NAME"
@@ -54,7 +103,7 @@ Password: $PWD" \
         else
             return 1
         fi
-    fi
+    
 
     # Multiple reflectors → menu
     local MENU_ITEMS=()
@@ -80,7 +129,7 @@ Password: $PWD" \
             return 0
         fi
     done
-}
+
 
 ###########################################
 # AFTER SELECTION — PROCESS TYPE
@@ -128,5 +177,5 @@ elif [ "$TYPE" -eq 3 ]; then
 else
     whiptail --msgbox "Unknown reflector type." 10 60
 fi
-
-}  # end reflector()
+}
+  # end reflector()
