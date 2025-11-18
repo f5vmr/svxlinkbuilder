@@ -28,6 +28,7 @@ function select_reflector() {
         | "\(.name)|\(.type)|\(.port)|\(.pwd)"
         ' <<< "$json"
     )
+    source "${BASH_SOURCE%/*}/iso_lang.sh"
     source "${BASH_SOURCE%/*}/iso_resolve.sh"
     iso_resolver "$lang"
     mapfile -t REFLECTORS <<< "$list"
