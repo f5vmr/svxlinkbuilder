@@ -23,6 +23,7 @@ function which_language {
         "4" "Spanish  (Español)         es_ES" \
         "5" "Portuguese (Português)     pt_PT" \
         "6" "Italian  (Italiano)        it_IT" \
+        
          3>&1 1>&2 2>&3 )
 
     case ${LANG_OPTION} in
