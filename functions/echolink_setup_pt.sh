@@ -20,7 +20,7 @@ then
     sed -i "s/Fq,/$echofreq/g" /etc/svxlink/svxlink.d/ModuleEchoLink.conf
     sed -i "s/MyTown/$echolocation/g" /etc/svxlink/svxlink.d/ModuleEchoLink.conf
     #### The reverse to node_setup.sh where en_US is the default language
-    if [[ "$lang" == "en_GB" ]]; then
+    if [[ "$lang" == "pt_PT" ]]; then
     sed -i "s/#DEFAULT_LANG=en_US/DEFAULT_LANG=$lang/g" /etc/svxlink/svxlink.d/ModuleEchoLink.conf
 fi
     #sed -i 's/DESCRIPTION/\#DESCRIPTION/g' /etc/svxlink/svxlink.d/ModuleEchoLink.conf

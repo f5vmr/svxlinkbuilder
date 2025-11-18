@@ -915,7 +915,7 @@ do_update_port() {
 
     DISPLAY_PORT="$CURRENT_PORT"
     if [[ -z "$CURRENT_PORT" ]]; then
-	DISPLAY_PORT="the \"default\" linux serial port"
+    DISPLAY_PORT="la porta seriale \"predefinita\" di Linux"
     fi
 
     while true; do

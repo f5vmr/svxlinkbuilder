@@ -44,13 +44,8 @@ make_groups
 	echo -e "$(date)" "${GREEN} #### Installing Voice Files #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
  	cd /usr/share/svxlink/sounds
-	if [[ $lang == "en_US" ]]; then
-	sudo git clone https://github.com/f5vmr/en_US.git
-
-	else 
-	sudo git clone https://github.com/f5vmr/en_GB.git
- 
-	fi
+	sudo git clone https://github.com/HamTetra-CT/svxlink-pt_PT.git pt_PT
+	sudo chown -R svxlink:svxlink pt_PT
   	cd /etc/svxlink
    sudo chmod 775 -R *
 

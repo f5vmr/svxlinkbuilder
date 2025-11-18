@@ -168,10 +168,10 @@ else
     echo no action here    
 fi
 #### Need to check the Language in SVXLINK.CONF
-#### The downloaded Model is en_GB, if not then change to en_US
-if [[ $lang  == "en_US" ]]
+#### The downloaded Model is en_GB, if not then change to it_IT
+if [[ $lang  == "it_IT" ]]
 then 
-sed -i 's/en_GB/en_US/g' /etc/svxlink/svxlink.conf
+sed -i 's/en_GB/it_IT/g' /etc/svxlink/svxlink.conf
 else
 echo ## no changes needed
 fi

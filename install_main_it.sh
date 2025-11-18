@@ -35,8 +35,8 @@ source "${BASH_SOURCE%/*}/functions/callsign.sh"
 callsign
 #### GROUPS AND USERS ####
 # clear
-echo -e "$(date)" "${YELLOW} #### Creazione di gruppi e utenti #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-source "${BASH_SOURCE%/*}/functions/groups.sh"
+echo -e "$(date)" "${YELLOW} #### Creazione dei gruppi e degli utenti #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+source "${BASH_SOURCE%/*}/functions/groups_it.sh"
 make_groups
 #### REQUEST CALLSIGN ####
 source "${BASH_SOURCE%/*}/functions/callsign.sh"
@@ -151,7 +151,7 @@ chmod 0440 "$SUDOERS_FILE"
 	dash_install
  # clear
 	echo -e "$(date)" "${GREEN} #### Dashboard installata #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-	whiptail --title "IP Addresses" --msgbox "La dashboard è stata installata. Il tuo indirizzo IP è $ip_address su $device" 8 78
+	whiptail --title "Indirizzo IP" --msgbox "La dashboard è stata installata. Il tuo indirizzo IP è $ip_address su $device" 8 78
 	IP=$ip_address
 	export IP
 	cd /home/pi/
