@@ -1,5 +1,5 @@
 #!/bin/sh
-
+# so we have two variable in GLOBAL scope $LANG and $CONF
 reflector() {
 
 select_reflector() {
