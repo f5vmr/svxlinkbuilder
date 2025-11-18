@@ -35,8 +35,8 @@ source "${BASH_SOURCE%/*}/functions/callsign_it.sh"
 callsign
 #### GROUPS AND USERS ####
 # clear
-echo -e "$(date)" "${YELLOW} #### Creazione di gruppi e utenti #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-source "${BASH_SOURCE%/*}/functions/groups.sh"
+echo -e "$(date)" "${YELLOW} #### Creazione dei gruppi e degli utenti #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+source "${BASH_SOURCE%/*}/functions/groups_it.sh"
 make_groups
 
 #### CONFIGURATION VOICES ####
