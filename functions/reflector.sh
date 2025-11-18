@@ -7,7 +7,8 @@ select_reflector() {
     local lang="$1"
     local url="$2"
 
-    REFLECTOR_LIST_URL="$url"
+   REFLECTOR_LIST_URL="https://raw.githubusercontent.com/f5vmr/svxreflector_data/main/reflector_list.json"
+
 
     # Fetch JSON
     local json
