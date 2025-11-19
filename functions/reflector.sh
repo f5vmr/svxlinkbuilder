@@ -113,19 +113,24 @@ Password: $REF_PWD" 15 60
     # Multiple reflectors → menu handled inside select_reflector
 
     # Apply selections to configuration
-    local TYPE="$REF_TYPE"
-    local PWD="$REF_PWD"
+   
+TYPE="${REF_TYPE:-0}"
+PWD="$REF_PWD"
 
-    if [ "$TYPE" -eq 1 ]; then
-        whiptail --msgbox "Type 1 reflector. Password will be prefilled." 10 60
-        sed -i "s|^AUTH_KEY=.*|AUTH_KEY=\"$PWD\"|" "$CONF"
+if [ "$TYPE" = "1" ]; then
+    whiptail --msgbox "Type 1 reflector. Password will be prefilled." 10 60
+    sed -i "s|^AUTH_KEY=.*|AUTH_KEY=\"$PWD\"|" "$CONF"
 
-    elif [ "$TYPE" -eq 2 ]; then
-        whiptail --msgbox "Type 2 reflector. Sysop-provided password required." 10 60
-        sed -i 's|^AUTH_KEY=.*|AUTH_KEY="password"|' "$CONF"
+elif [ "$TYPE" = "2" ]; then
+    whiptail --msgbox "Type 2 reflector. Sysop-provided password required." 10 60
+    sed -i 's|^AUTH_KEY=.*|AUTH_KEY="password"|' "$CONF"
 
-    elif [ "$TYPE" -eq 3 ]; then
-        whiptail --msgbox "Type 3 reflector. No password required." 10 60
+elif [ "$TYPE" = "3" ]; then
+    whiptail --msgbox "Type 3 reflector. No password required." 10 60
+    ...
+else
+    whiptail --msgbox "Unknown reflector type." 10 60
+fi
         sed -i '/^\[ReflectorLogic\]/,/^\[/{ s|^TYPE=ReflectorV2|TYPE=Reflector| }' "$CONF"
         sed -i '/^\[ReflectorLogic\]/,/^\[/{ s|^#|| }' "$CONF"
         sed -i '/^\[ReflectorLogic\]/,/^\[/{ s|^AUTH_KEY=|#AUTH_KEY=| }' "$CONF"
