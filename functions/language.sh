@@ -17,7 +17,7 @@ function set_locale() {
 
 function which_language {
     echo "Debugging Language Selection Menu"
-    MENU_TEXT="                     Select your preferred language:\n\n"
+    MENU_TEXT="            Select your preferred language:\n\n"
 
 
     LANG_OPTION=$(whiptail --title "Language Option" \
