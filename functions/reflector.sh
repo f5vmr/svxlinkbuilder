@@ -53,6 +53,8 @@ select_reflector() {
         | select(.countries[] == $region)
         | "\(.name)|\(.type)|\(.port)|\(.pwd)"
     ' <<< "$json")
+    list=$(echo "$list" | sed '/^[[:space:]]*$/d')
+
 
     mapfile -t REFLECTORS <<< "$list"
     local COUNT="${#REFLECTORS[@]}"
