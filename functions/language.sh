@@ -58,6 +58,7 @@ function which_language {
         lang=$(echo $LANG | grep -o '^[a-zA-Z]*_[a-zA-Z]*')
 
     fi
+    echo "Exit debugging"
 }
     
 
