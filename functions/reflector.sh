@@ -45,8 +45,8 @@ select_reflector() {
         | "\(.name)|\(.type)|\(.port)|\(.pwd)"
     ' <<< "$json")
     echo "DEBUG: lang='$lang'" >&2
-echo "DEBUG: PRIMARY_REGION='$PRIMARY_REGION'" >&2
-echo "DEBUG: jq output:" >&2
+    echo "DEBUG: PRIMARY_REGION='$PRIMARY_REGION'" >&2
+    echo "DEBUG: jq output:" >&2
 printf "%s\n" "$list" >&2
 
     list=$(echo "$list" | sed '/^[[:space:]]*$/d')
@@ -54,6 +54,7 @@ printf "%s\n" "$list" >&2
 
     mapfile -t REFLECTORS <<< "$list"
     local COUNT="${#REFLECTORS[@]}"
+    echo "DEBUG: Found $COUNT matching reflectors" >&2
 
     if [[ "$COUNT" -eq 0 ]]; then
         whiptail --msgbox "No reflectors match: Language=$lang, Region=$PRIMARY_REGION" 10 65
@@ -98,6 +99,8 @@ reflector() {
         12 60
 
     select_reflector || return 1
+
+    exit
 
     whiptail --yesno \
 "Connect to this reflector?
