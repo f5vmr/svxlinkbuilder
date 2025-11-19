@@ -14,7 +14,7 @@ lang_to_regions() {
     local country="${input#*_}"
 
     case "$lang_code" in
-        en) echo "US GB IE ZA AU NZ CA-EN" ;;
+        en) echo "GB US IE ZA AU NZ CA-EN" ;;  # GB first
         fr) echo "FR CA-FR CH" ;;
         it) echo "IT CH" ;;
         pt) echo "PT BR" ;;
@@ -23,6 +23,7 @@ lang_to_regions() {
         *)  echo "$country" ;;
     esac
 }
+
 
 PRIMARY_REGION=$(lang_to_regions | awk '{print $1}')
 ALL_REGIONS=$(lang_to_regions)
