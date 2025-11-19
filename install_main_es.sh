@@ -46,7 +46,7 @@ fi
  # clear
 	echo -e "$(date)" "${GREEN} #### Installing Voice Files #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
- 	cd /usr/share/svxlink/sounds
+ 	sudo mkdir -p /usr/share/svxlink/sounds && cd /usr/share/svxlink/sounds
 
 	sudo git clone https://github.com/ea5gvk/es_ES.git
 

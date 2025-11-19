@@ -43,7 +43,7 @@ make_groups
  # clear
 	echo -e "$(date)" "${GREEN} #### Installing Voice Files #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
- 	cd /usr/share/svxlink/sounds
+ 	sudo mkdir -p /usr/share/svxlink/sounds && cd /usr/share/svxlink/sounds
 	sudo git clone https://github.com/HamTetra-CT/svxlink-pt_PT.git pt_PT
 	sudo chown -R svxlink:svxlink pt_PT
   	cd /etc/svxlink

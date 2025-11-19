@@ -46,7 +46,7 @@ fi
  # clear
 	echo -e "$(date)" "${GREEN} #### Installation des fichiers sons (Voix)  #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
- 	cd /usr/share/svxlink/sounds
+ 	sudo mkdir -p /usr/share/svxlink/sounds && cd /usr/share/svxlink/sounds
  	sudo git clone https://github.com/f5vmr/fr_FR.git
   	cd /etc/svxlink
    sudo chmod 775 -R *

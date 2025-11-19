@@ -59,7 +59,7 @@ fi
  # clear
 	echo -e "$(date)" "${GREEN} #### Installazione dei file vocali #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
- 	cd /usr/share/svxlink/sounds
+ 	sudo mkdir -p /usr/share/svxlink/sounds && cd /usr/share/svxlink/sounds
 	
 	sudo git clone https://github.com/ik4nzd/Suoni-in-italiano-per-SvxLink.git it_IT
 
