@@ -10,7 +10,8 @@ lang_to_regions() {
     local country="${input#*_}"
 
     case "$lang_code" in
-        en) echo "GB US IE ZA AU NZ CA-EN" ;;  # GB first
+        en) echo "GB US IE ZA AU NZ CA-EN" ;;
+        ie) echo "GB IE" ;;  # GB first
         fr) echo "FR CA-FR CH" ;;
         it) echo "IT CH" ;;
         pt) echo "PT BR" ;;
