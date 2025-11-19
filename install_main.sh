@@ -6,28 +6,35 @@ OP="/etc/svxlink"
 #### Welcome Message ####
 source "${BASH_SOURCE%/*}/functions/welcome.sh"
 welcome
+echo "Welcome Message" | sudo tee -a  /var/log/install.log
 source "${BASH_SOURCE%/*}/functions/configure.sh"
 configure
+echo "Configuration Message" | sudo tee -a  /var/log/install.log
 #### TEST for SA818 ####
 source "${BASH_SOURCE%/*}/functions/sa818_test.sh"
 sa818_test
+echo "SA818 Test complete" | sudo tee -a  /var/log/install.log
 if [[ $sa818 == true ]]; then
 source "${BASH_SOURCE%/*}/functions/sa818_menu.sh"
 sa818_menu
+echo "SA818 Configuration complete" | tee -a  /var/log/install.log
 else
 echo "No SA818 device" |tee -a  /var/log/install.log
 fi
 #### USB SOUND CARD ####
 source "${BASH_SOURCE%/*}/functions/sound_card.sh"
 soundcard
+echo "Sound Card Selection complete" | sudo tee -a  /var/log/install.log
 #### GROUPS AND USERS ####
 # clear
 echo -e "$(date)" "${YELLOW} #### Creating Groups and Users #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 source "${BASH_SOURCE%/*}/functions/groups.sh"
 make_groups
+echo "Groups and Users created" | sudo tee -a  /var/log/install.log
 #### REQUEST CALLSIGN ####
 source "${BASH_SOURCE%/*}/functions/callsign.sh"
 callsign
+echo -e "$(date)" "${YELLOW} #### Callsign set to: $CALL #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 #### NODE Selection ####
 source "${BASH_SOURCE%/*}/functions/node_type.sh"
 nodeoption
@@ -39,6 +46,7 @@ echo -e "$(date)" "${YELLOW} #### Checking Alsa #### ${NORMAL}" | sudo tee -a  /
 if [[ $NODE_OPTION == "2" || $NODE_OPTION == "4" ]]; then
 source "${BASH_SOURCE%/*}/functions/reflector.sh"
 reflector
+echo -e "$(date)" "${YELLOW} #### SvxReflector URL set to: $SVXREFLECTOR_URL #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 fi
 #### CONFIGURATION VOICES ####
  # clear
@@ -54,7 +62,7 @@ fi
 	fi
   	cd /etc/svxlink
    sudo chmod 775 -R *
-
+echo -e "$(date)" "${GREEN} #### Voice Files Installed for $lang #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 #### BACKUP CONFIGURATION ####
  # clear
 	echo -e "$(date)" "${GREEN} #### Backing up configuration to : $CONF.bak #### ${NORMAL}"| sudo tee -a  /var/log/install.log
@@ -87,6 +95,7 @@ fi
 # Read the content from the source file into the sudoers file
 cat "$SOURCE_FILE" > "$SUDOERS_FILE"
 chmod 0440 "$SUDOERS_FILE"
+echo -e "$(date)" "${GREEN} #### Sudoers file created/updated for svxlink #### ${NORMAL}" | sudo tee -a  /var/log/install.log
  	echo -e "$(date)" "${RED} #### Downloading prepared configuration files from the scripts #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	sudo mkdir -p /home/pi/scripts
 	sudo cp -f /home/pi/svxlinkbuilder/addons/10-uname /etc/update-motd.d/
@@ -99,6 +108,7 @@ chmod 0440 "$SUDOERS_FILE"
 	sudo cp /usr/share/svxlink/events.d/RepeaterLogicType.tcl /usr/share/svxlink/events.d/local/
     sudo cp /usr/share/svxlink/events.d/CW.tcl /usr/share/svxlink/events.d/local/
     sudo cp /usr/share/svxlink/events.d/Logic.tcl /usr/share/svxlink/events.d/local/
+	echo -e "$(date)" "${GREEN} #### Configuration files downloaded and in place #### ${NORMAL}" | sudo tee -a  /var/log/install.log
     # clear
 	echo -e "$(date)" "${GREEN} #### Setting Callsign to $CALL #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
@@ -124,7 +134,7 @@ chmod 0440 "$SUDOERS_FILE"
 	echo -e "$(date)" "${YELLOW} #### Changing Log file suffix #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
  	sudo sed -i '/^LOGFILE=/ { /[^.log]$/ s/$/.log/ }' /etc/default/svxlink
-
+echo -e "$(date)" "${GREEN} #### Customisation complete #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	#### INSTALLING DASHBOARD ####
  # clear
 	cd /home/pi
@@ -132,6 +142,7 @@ chmod 0440 "$SUDOERS_FILE"
 	
 	source "${BASH_SOURCE%/*}/functions/get_ip.sh"
 	ipaddress
+	echo -e "$(date)" "${GREEN} #### IP Addresses found: $ip_address on $device #### ${NORMAL}" | sudo tee -a  /var/log/install.log
  # clear
 	cd /home/pi
 	echo -e "$(date)" "${YELLOW} #### Installing Dashboard #### ${NORMAL}" | sudo tee -a  /var/log/install.log
@@ -149,6 +160,8 @@ chmod 0440 "$SUDOERS_FILE"
 	echo -e "$(date)" "${GREEN} #### Setting up Node #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	source "${BASH_SOURCE%/*}/functions/node_setup.sh"
 	nodeset
+	echo -e "$(date)" "${GREEN} #### Node setup complete #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	 # clear
 	#### TIME SELECTION ####
     source "${BASH_SOURCE%/*}/functions/time_selection.sh"
     timeselect
@@ -172,13 +185,14 @@ chmod 0440 "$SUDOERS_FILE"
 	## getting UK Airports
 	source "${BASH_SOURCE%/*}/functions/modulemetar_setup.sh"
 	modulemetar
-	fi	
+	fi
+	echo -e "$(date)" "${RED} #### ModuleMetar setup complete #### ${NORMAL}" | sudo tee -a  /var/log/install.log	
 	 # clear
 	 cd /home/pi/
 	echo -e "$(date)" "${RED} #### Changing ModuleEchoLink Link #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	source "${BASH_SOURCE%/*}/functions/echolink_setup.sh"
 	echolinksetup
-	
+	echo -e "$(date)" "${RED} #### ModuleEchoLink setup as required #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	 # clear
 #	echo -e "$(date)" "${RED} #### Changing ModulePropagationMonitor #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 #	source "${BASH_SOURCE%/*}/functions/propagationmonitor_setup.sh"
@@ -203,9 +217,12 @@ sed -i "/^\[$NOT_LOGIC_MODULE\]/,/^\[/{
 	echo "Failed to remove module [$NOT_LOGIC_MODULE] from $CONF" | sudo tee -a  /var/log/install.log
 	fi
 	 # clear
+	echo -e "$(date)" "${RED} #### Unwanted Module $NOT_LOGIC_MODULE is removed #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	 # clear
 	echo -e "$(date)" "${RED} #### Restarting svxlink.service #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 	
  	sudo systemctl restart svxlink apache2 svxlink-node 
+echo -e "$(date)" "${GREEN} #### Services restarted #### ${NORMAL}" | sudo tee -a  /var/log/install.log
 
 	##.service isn't necessary ##
 echo -e "$(date)" "${GREEN} #### Installation complete #### ${NORMAL}" | sudo tee -a  /var/log/install.log
