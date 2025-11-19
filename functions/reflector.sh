@@ -20,9 +20,6 @@ lang_to_regions() {
         *)  echo "$country" ;;
     esac
 }
-
-
-
 #-------------------------------
 # select_reflector function
 #-------------------------------
