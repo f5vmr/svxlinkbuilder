@@ -42,12 +42,12 @@ echo -e "$(date)" "${YELLOW} #### Node Type: $NODE_OPTION #### ${NORMAL}" | tee 
 
 echo -e "$(date)" "${YELLOW} #### Sound Card: $HID $GPIOD $card #### ${NORMAL}" | tee -a  /var/log/install.log	
 echo -e "$(date)" "${YELLOW} #### Checking Alsa #### ${NORMAL}" | tee -a  /var/log/install.log
-exit
 #### NODE Reflector SELECTION ####
-source "${BASH_SOURCE%/*}/functions/reflector.sh"
 echo -e "$(date)" "${YELLOW} #### set to: $NODE_OPTION #### ${NORMAL}" | tee -a  /var/log/install.log
+source "${BASH_SOURCE%/*}/functions/reflector.sh"
 if [[ $NODE_OPTION == "2" || $NODE_OPTION == "4" ]]; then
 reflector
+exit 
 echo -e "$(date)" "${YELLOW} #### SvxReflector URL set to: $SVXREFLECTOR_URL #### ${NORMAL}" | tee -a  /var/log/install.log
 fi
 #### CONFIGURATION VOICES ####
