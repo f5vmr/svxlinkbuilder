@@ -1,43 +1,36 @@
-#!/bin/sh
-iso_resolver() {
-    # Optional input LANG; defaults to global $LANG
-    local input_lang="${1:-$LANG}"
+lang_to_regions() {
+    # Use override if provided, otherwise fall back to global $lang
+    local input="${1:-$lang}"
+    local lang_code="${input%_*}"   # language part, xx
+    local country="${input#*_}"     # country part, YY
+    local regions
 
-    # Extract language code (first 2 letters)
-    LANGUAGE_CODE=$(echo "$input_lang" | sed 's/^\([a-z][a-z]\).*/\1/')
-
-    # Extract ISO country code (letters after _)
-    COUNTRY_CODE=$(echo "$input_lang" | sed 's/.*_\(..\).*/\1/')
-
-    # Default REGION = COUNTRY_CODE
-    REGION="$COUNTRY_CODE"
-
-    # Map special radio prefixes / dual-language countries
-    case "$COUNTRY_CODE" in
-        US) REGION="US" ;;        # USA
-        GB) REGION="GB" ;;        # UK
-        IE) REGION="EI" ;;        # Ireland
-        GI) REGION="ZB" ;;        # Gibraltar
-        ZA) REGION="ZA" ;;        # South Africa
-        AU) REGION="VK" ;;        # Australia
-        NZ) REGION="ZL" ;;        # New Zealand
-        CA)                         # Canada: English/French
-            if [ "$LANGUAGE_CODE" = "fr" ]; then
-                REGION="CA-FR"
-            else
-                REGION="CA-EN"
-            fi
+    # Map language codes to associated countries / radio prefixes
+    case "$lang_code" in
+        en)
+            regions="US GB IE ZA AU NZ CA-EN"
+            ;;
+        fr)
+            regions="FR CA-FR CH"
+            ;;
+        it)
+            regions="IT CH"
+            ;;
+        pt)
+            regions="PT BR"
+            ;;
+        es)
+            regions="ES MX AR"
+            ;;
+        *)
+            regions="$country"
             ;;
     esac
 
-    # Check if this country is a European Latin ISO code
-    if iso_latin "$COUNTRY_CODE"; then
-        EURO_LATIN=1
-    else
-        EURO_LATIN=0
+    # Ensure original country appears first if it is in the list
+    if echo "$regions" | grep -qw "$country"; then
+        regions="$country $(echo "$regions" | sed "s/\b$country\b//")"
     fi
 
-    # Export results for other functions
-    export LANGUAGE_CODE COUNTRY_CODE REGION EURO_LATIN
+    echo "$regions"
 }
-export -f iso_resolver

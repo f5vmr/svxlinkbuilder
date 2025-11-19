@@ -21,5 +21,4 @@ NORMAL='\033[0m' # normal
 locale=""
 lang=""
 echo -e "$(date)" "${BLUE} #### Commencing initialisation #### ${NORMAL}" | sudo tee -a /var/log/install.log
-export HOME
 }
