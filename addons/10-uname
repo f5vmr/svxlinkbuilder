@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 uname -snrvm
 TERM=linux toilet -F metal MYCALL-SVX
 sudo /usr/bin/vcgencmd measure_temp

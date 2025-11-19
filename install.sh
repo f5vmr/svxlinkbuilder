@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #### INSTALLATION SCRIPT ####
 #### INITIALISE ####
 # clear
@@ -11,6 +11,7 @@ echo -e  "${GREEN} #### OS = $operating_system and Current user = $logname #### 
 source "${BASH_SOURCE%/*}/functions/language.sh"
 which_language
 echo -e "${GREEN} #### Language selected is $lang #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+
 if  [[ "$LANG" == "fr_FR.UTF-8" ]] 
 then
 ##French
