@@ -33,110 +33,60 @@ lang_to_regions() {
 # select_reflector function
 #-------------------------------
 select_reflector() {
-    # Debug toggle: set to 1 to enable verbose log lines to stdout
-    local DEBUG=0
-
-    # Ensure globals are unset before starting
-    unset REF_NAME REF_TYPE REF_PORT REF_PWD
-    REFLECTORS=()
-
-    # Determine primary region and also prepare fallback list (all regions for lang)
     local PRIMARY_REGION
     PRIMARY_REGION=$(lang_to_regions | awk '{print $1}')
-    local ALL_REGIONS
-    ALL_REGIONS=$(lang_to_regions)    # space-separated list
-
-    $DEBUG && echo "DEBUG: lang='$lang' PRIMARY_REGION='$PRIMARY_REGION' ALL_REGIONS='$ALL_REGIONS'"
 
     local REFLECTOR_LIST_URL="https://raw.githubusercontent.com/f5vmr/svxreflector_data/main/reflector_list.json"
+
+    # download JSON list
     local json
     if ! json=$(curl -fsSL "$REFLECTOR_LIST_URL"); then
-        whiptail --msgbox "Failed to download reflector list." 10 60
+        whiptail --msgbox "Unable to fetch reflector list from server." 10 60
         return 1
     fi
 
-    # function to populate REFLECTORS for a given region
-    _populate_for_region() {
-        local region="$1"
-        local list
-        list=$(jq -r --arg lang "$lang" --arg region "$region" '
-            .reflectors[]
-            | select(.Language == $lang)
-            | select(.countries[] == $region)
-            | "\(.name)|\(.type)|\(.port)|\(.pwd)"
-        ' <<< "$json" ) || list=""
+    # extract matching reflectors
+    local list
+    list=$(jq -r --arg lang "$lang" --arg region "$PRIMARY_REGION" '
+        .reflectors[]
+        | select(.Language == $lang)
+        | select(.countries[] == $region)
+        | "\(.name)|\(.type)|\(.port)|\(.pwd)"
+    ' <<< "$json")
 
-        # trim empty lines
-        list=$(printf "%s\n" "$list" | sed '/^[[:space:]]*$/d')
+    mapfile -t REFLECTORS <<< "$list"
+    local COUNT="${#REFLECTORS[@]}"
 
-        if [ -n "$list" ]; then
-            # append entries to REFLECTORS array
-            while IFS= read -r line; do
-                REFLECTORS+=("$line")
-            done <<< "$list"
-        fi
-    }
-
-    # Try primary region first
-    _populate_for_region "$PRIMARY_REGION"
-
-    # If none found for primary, try the other regions in order
-    if [ "${#REFLECTORS[@]}" -eq 0 ]; then
-        for r in $ALL_REGIONS; do
-            [ "$r" = "$PRIMARY_REGION" ] && continue
-            _populate_for_region "$r"
-            [ "${#REFLECTORS[@]}" -gt 0 ] && break
-        done
-    fi
-
-    $DEBUG && printf "DEBUG: FOUND %d reflectors\n" "${#REFLECTORS[@]}"
-    $DEBUG && for i in "${!REFLECTORS[@]}"; do echo "DEBUG: REFLECTORS[$i]=${REFLECTORS[$i]}"; done
-
-    if [ "${#REFLECTORS[@]}" -eq 0 ]; then
-        whiptail --msgbox "No reflectors available for language $lang (regions tried: $ALL_REGIONS)" 10 70
+    if [[ "$COUNT" -eq 0 ]]; then
+        whiptail --msgbox "No reflectors match: Language=$lang, Region=$PRIMARY_REGION" 10 65
         return 1
     fi
 
-    if [ "${#REFLECTORS[@]}" -eq 1 ]; then
+    # auto-select if only one option
+    if [[ "$COUNT" -eq 1 ]]; then
         IFS='|' read -r REF_NAME REF_TYPE REF_PORT REF_PWD <<< "${REFLECTORS[0]}"
-        [ "$REF_PWD" = "Null" ] && REF_PWD=""
-        $DEBUG && echo "DEBUG: Auto-selected single reflector: $REF_NAME | $REF_TYPE | $REF_PORT | $REF_PWD"
+        [[ "$REF_PWD" == "Null" ]] && REF_PWD=""
         return 0
     fi
 
-    # Build menu List
-    local menu_list=()
+    # build whiptail menu
+    local menu=()
     for i in "${!REFLECTORS[@]}"; do
         IFS='|' read -r NAME TYPE PORT PWD <<< "${REFLECTORS[$i]}"
-        menu_list+=("$i" "$NAME (Port: $PORT)")
+        menu+=("$i" "$NAME (Port: $PORT)")
     done
 
-    $DEBUG && printf "DEBUG: menu_list size: %d\n" "${#menu_list[@]}"
-
-    # Show menu and capture choice
     local choice
-    choice=$(whiptail --title "Select Reflector" \
-        --menu "Choose a reflector for region $PRIMARY_REGION" 20 70 10 \
-        "${menu_list[@]}" \
-        3>&1 1>&2 2>&3) || {
-            $DEBUG && echo "DEBUG: User cancelled menu or dialog failed (whiptail exit)"
-            return 1
-        }
-
-    # Validate choice is numeric and within array bounds
-    if ! [[ "$choice" =~ ^[0-9]+$ ]]; then
-        $DEBUG && echo "DEBUG: Non-numeric choice: '$choice'"
-        return 1
-    fi
-    if [ "$choice" -lt 0 ] || [ "$choice" -ge "${#REFLECTORS[@]}" ]; then
-        $DEBUG && echo "DEBUG: Choice out of range: $choice"
-        return 1
-    fi
+    choice=$(whiptail \
+        --title "Select Reflector" \
+        --menu "Available reflectors for region $PRIMARY_REGION:" \
+        20 70 10 \
+        "${menu[@]}" \
+        3>&1 1>&2 2>&3
+    ) || return 1
 
     IFS='|' read -r REF_NAME REF_TYPE REF_PORT REF_PWD <<< "${REFLECTORS[$choice]}"
-    [ "$REF_PWD" = "Null" ] && REF_PWD=""
-    $DEBUG && echo "DEBUG: Selected: $REF_NAME | $REF_TYPE | $REF_PORT | $REF_PWD"
-    return 0
+    [[ "$REF_PWD" == "Null" ]] && REF_PWD=""
 }
 
 
