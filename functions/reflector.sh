@@ -53,6 +53,11 @@ select_reflector() {
         | select(.countries[] == $region)
         | "\(.name)|\(.type)|\(.port)|\(.pwd)"
     ' <<< "$json")
+    echo "DEBUG: lang='$lang'" >&2
+echo "DEBUG: PRIMARY_REGION='$PRIMARY_REGION'" >&2
+echo "DEBUG: jq output:" >&2
+printf "%s\n" "$list" >&2
+
     list=$(echo "$list" | sed '/^[[:space:]]*$/d')
 
 
