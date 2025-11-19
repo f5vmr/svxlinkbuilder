@@ -1,36 +1,14 @@
 #!/bin/bash
 # Reflector selection script using global $lang and $CONF
-
-#-------------------------------
-# lang_to_regions function
-#-------------------------------
-lang_to_regions() {
-    local input="${1:-$lang}"
-    local lang_code="${input%_*}"
-    local country="${input#*_}"
-
-    case "$lang_code" in
-        en) echo "GB US IE ZA AU NZ CA-EN" ;;
-        ie) echo "GB IE" ;;  # GB first
-        fr) echo "FR CA-FR CH" ;;
-        it) echo "IT CH" ;;
-        pt) echo "PT BR" ;;
-        es) echo "ES MX AR" ;;
-        us) echo "US CA MX" ;;
-        *)  echo "$country" ;;
-    esac
-}
-#-------------------------------
-# select_reflector function
-#-------------------------------
 select_reflector() {
-    local PRIMARY_REGION
     PRIMARY_REGION=$(lang_to_regions | awk '{print $1}')
 
     local REFLECTOR_LIST_URL="https://raw.githubusercontent.com/f5vmr/svxreflector_data/main/reflector_list.json"
 
     # download JSON list
+    
     local json
+
     if ! json=$(curl -fsSL "$REFLECTOR_LIST_URL"); then
         whiptail --msgbox "Unable to fetch reflector list from server." 10 60
         return 1
@@ -44,10 +22,6 @@ select_reflector() {
         | select(.countries[] == $region)
         | "\(.name)|\(.type)|\(.port)|\(.pwd)"
     ' <<< "$json")
-    echo "DEBUG: lang='$lang'" >&2
-    echo "DEBUG: PRIMARY_REGION='$PRIMARY_REGION'" >&2
-    echo "DEBUG: jq output:" >&2
-printf "%s\n" "$list" >&2
 
     list=$(echo "$list" | sed '/^[[:space:]]*$/d')
 
@@ -93,15 +67,20 @@ printf "%s\n" "$list" >&2
 # reflector mode
 #-------------------------------
 reflector() {
+    local lang="${1:-en_GB}"
+    local PRIMARY_REGION="${2:-GB}"
 
-    whiptail --msgbox \
-        "Reflector mode selected.\n\nYou will now choose a reflector." \
-        12 60
+    # Call the reflector selector
+    if ! select_reflector "$lang" "$PRIMARY_REGION"; then
+        # No reflector or fetch failure — pass empty values back
+        REF_NAME=""
+        REF_TYPE=""
+        REF_PORT=""
+        REF_PWD=""
+        return 1
+    fi
 
-    select_reflector || return 1
-
-exit
-
+    # Confirm reflector choice
     whiptail --yesno \
 "Connect to this reflector?
 
@@ -109,11 +88,12 @@ Name: $REF_NAME
 Type: $REF_TYPE
 Port: $REF_PORT
 Password: ${REF_PWD:-<none>}" \
-    15 60 || return 1
+        15 60 || return 1
 
     TYPE="$REF_TYPE"
     PWD="$REF_PWD"
 
+    # Handle reflector type logic
     case "$TYPE" in
         1)
             whiptail --msgbox "Type 1 reflector (password supplied)." 10 60
@@ -131,22 +111,29 @@ Password: ${REF_PWD:-<none>}" \
             ;;
     esac
 
-    # enable reflector logic block
+    # Enable reflector block
     sed -i '/^\[ReflectorLogic\]/,/^\[/{ 
         s|^TYPE=.*|TYPE=Reflector|
         s|^#AUTH_KEY=|AUTH_KEY=|
     }' "$CONF"
 
-    # certificate fields
-    local fields=("Given Name" "Surname" "Organizational Unit / Repeater" \
-                  "Organization Name / Group" "Locality" "State / Province" \
-                  "2-Letter Country Code")
+    # Certificate fields to request
+    local fields=(
+        "Given Name"
+        "Surname"
+        "Organizational Unit / Repeater"
+        "Organization Name / Group"
+        "Locality"
+        "State / Province"
+        "2-Letter Country Code"
+    )
 
     local values=()
     for f in "${fields[@]}"; do
         values+=("$(whiptail --inputbox "$f:" 10 60 3>&1 1>&2 2>&3)")
     done
 
+    # Insert certificate values into config
     sed -i '/^\[ReflectorLogic\]/,/^\[/{ 
         s|^CERT_SUBJ_givenName=.*|CERT_SUBJ_givenName='"${values[0]}"'|
         s|^CERT_SUBJ_surname=.*|CERT_SUBJ_surname='"${values[1]}"'|
@@ -157,6 +144,3 @@ Password: ${REF_PWD:-<none>}" \
         s|^CERT_SUBJ_countryName=.*|CERT_SUBJ_countryName='"${values[6]}"'|
     }' "$CONF"
 }
-
-
-  # end reflector()
