@@ -9,24 +9,17 @@ lang_to_regions() {
     local lang_code="${input%_*}"
     local country="${input#*_}"
 
-    local map=""
     case "$lang_code" in
-        en) map="US GB IE ZA AU NZ CA-EN" ;;
-        fr) map="FR CA-FR CH" ;;
-        it) map="IT CH" ;;
-        pt) map="PT BR" ;;
-        es) map="ES MX AR" ;;
-        us) map="US CA MX" ;;
-        *)  map="$country" ;;
+        en) echo "GB US IE ZA AU NZ CA-EN" ;;  # GB first
+        fr) echo "FR CA-FR CH" ;;
+        it) echo "IT CH" ;;
+        pt) echo "PT BR" ;;
+        es) echo "ES MX AR" ;;
+        us) echo "US CA MX" ;;
+        *)  echo "$country" ;;
     esac
-
-    # put original country first if present
-    if echo "$map" | grep -qw "$country"; then
-        echo "$country $(echo "$map" | sed "s/\b$country\b//")"
-    else
-        echo "$map"
-    fi
 }
+
 
 
 #-------------------------------
