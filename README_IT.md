@@ -119,9 +119,12 @@
 
 **Riconoscimenti**
 <p>Software principale: SVXLink / SvxReflector — Tobias Blömberg SM0SVX</p>
-<p>Framework della Dashboard: SP2ONG & SP0DZ</p>
+<p>Framework della Dashboard: G4NAB, SP2ONG e SP0DZ</p>
 <p>Altri contributori: Adi DL1HRC e la comunità SVXLink</p>
 <p>Modernizzazione e integrazione (PHP 8.2, modifica configurazioni, controllo in tempo reale, streaming): Chris G4NAB</p>
+<p>Traduzione in italiano a cura di Giovanni Scafora IK5TWZ, francese e spagnolo di Chris G4NAB </p>
+<p>Traduzione in portoghese a cura di Luis Silva CR7BUI</p>
+<p>Un sentito ringraziamento ai nostri traduttori</p>
 
 **Addendum**
 <p>I Talk Group dovrebbero essere aggiunti al Svxlink Configurator, nella sezione ReflectorLogic, assicurandosi che la casella di spunta sia selezionata. Aggiungere un + o ++ dopo il numero di un Talk Group ne aumenterà l'importanza, permettendo a un talk group di priorità più alta di sostituirne uno già in uso.</p>
