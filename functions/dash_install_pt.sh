@@ -37,7 +37,42 @@ function dash_install {
         echo "Inserção de utilizador cancelada."
         exit 1
     fi
+# Create the systemd service only if it doesn't exist
+SERVICE_FILE="/etc/systemd/system/svxlink-node.service"
+if [ ! -f "$SERVICE_FILE" ]; then
+    show_info "Creating svxlink-node.service..."
+    sudo tee "$SERVICE_FILE" > /dev/null <<EOL
+[Unit]
+Description=SVXLink Node.js Server
+After=network.target
 
+[Service]
+# Send logs directly to journald instead of syslog or files
+StandardOutput=journal
+StandardError=journal
+
+# Ensure service restarts even after journal restarts or SIGHUPs
+Restart=always
+RestartSec=5
+
+# Allow clean reloads (optional, useful if you add reload scripts later)
+ExecReload=/bin/kill -HUP $MAINPID
+
+# Give the process a few seconds to shut down gracefully
+TimeoutStopSec=10
+Type=simple
+User=svxlink
+Group=svxlink
+ExecStart=/usr/bin/node /var/www/html/scripts/server.js
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
+EOL
+
+    show_info "Reloading systemd, enabling, and starting svxlink-node.service..."
+    sudo systemctl daemon-reload
+    sudo systemctl enable --now svxlink-node.service
     while true; do
     DASHBOARD_PASSWORD=$(whiptail --title "Password do Painel" --passwordbox "Introduz a Password para o Painel:" 8 78 3>&1 1>&2 2>&3)
 
@@ -105,7 +140,6 @@ EOF
         echo "Created and made $CLEANUP_SCRIPT executable."
     fi
 
-    ## ensure cleanup.sh is in root crontab
     CRON_JOB="01 00 * * * /home/pi/scripts/cleanup.sh"
     (sudo crontab -l 2>/dev/null; echo "$CRON_JOB") | sort -u | sudo crontab -
 

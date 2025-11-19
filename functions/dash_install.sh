@@ -140,7 +140,6 @@ EOF
         echo "Created and made $CLEANUP_SCRIPT executable."
     fi
 
-    ## ensure cleanup.sh is in root crontab
     CRON_JOB="01 00 * * * /home/pi/scripts/cleanup.sh"
     (sudo crontab -l 2>/dev/null; echo "$CRON_JOB") | sort -u | sudo crontab -
 

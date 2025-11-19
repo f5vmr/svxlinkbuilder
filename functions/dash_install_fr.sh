@@ -2,38 +2,78 @@
 
 # Define the dash_install function
 function dash_install {
+    ## Install the DTMF Controls
+    echo -e "$(date)" "${GREEN} #### Installing DTMF Controls #### ${NORMAL}" | tee -a  /var/log/install.log
+    sudo mkdir -p /var/run/svxlink
+    sudo chown svxlink:svxlink /var/run/svxlink
+    sudo chmod 775 /var/run/svxlink
     ## install the dashboard
     cd /var/www/ || exit 1
-    sudo rm -r html
+    sudo rm -rf html
     sudo git clone https://github.com/f5vmr/SVXLink-Dash-V2 html
-    ## change ownership of the dashboard
+    
+    ## change ownership and permissions
     sudo chown -R svxlink:svxlink html
-    ## change permissions of the dashboard
     sudo chmod -R 775 html
-    ## change Apache2 permissions
+
+    ## adjust Apache2 configuration
     cd /etc/apache2/ || exit 1
     sudo sed -i 's/APACHE_RUN_USER=www-data/APACHE_RUN_USER=svxlink/g' envvars
     sudo sed -i 's/APACHE_RUN_GROUP=www-data/APACHE_RUN_GROUP=svxlink/g' envvars
+
     cd /usr/lib/systemd/system/ || exit 1
     sudo sed -i 's/PrivateTmp=true/PrivateTmp=false/g' apache2.service
+
     ## restart Apache2
     sudo systemctl daemon-reload
     sudo systemctl restart apache2.service
+    
     ## Dashboard Permissions
-
-    # Prompt for the dashboard username using whiptail
     DASHBOARD_USER=$(whiptail --title "Utilisation du Tableau de Bord" --inputbox "Entrez le nom de l'utilsateur:" 8 78 svxlink 3>&1 1>&2 2>&3)
 
-    # Check if the user pressed Cancel or entered an empty input
-    if [ $? -eq 0 ]; then
+       if [ $? -eq 0 ]; then
         echo "Nom d'utiliateur entré: $DASHBOARD_USER"
     else
         echo "Annulation du nom d'utilisateur entré"
         exit 1
     fi
+# Create the systemd service only if it doesn't exist
+SERVICE_FILE="/etc/systemd/system/svxlink-node.service"
+if [ ! -f "$SERVICE_FILE" ]; then
+    show_info "Creating svxlink-node.service..."
+    sudo tee "$SERVICE_FILE" > /dev/null <<EOL
+[Unit]
+Description=SVXLink Node.js Server
+After=network.target
 
-    # Prompt for the dashboard password using whiptail
-        while true; do
+[Service]
+# Send logs directly to journald instead of syslog or files
+StandardOutput=journal
+StandardError=journal
+
+# Ensure service restarts even after journal restarts or SIGHUPs
+Restart=always
+RestartSec=5
+
+# Allow clean reloads (optional, useful if you add reload scripts later)
+ExecReload=/bin/kill -HUP $MAINPID
+
+# Give the process a few seconds to shut down gracefully
+TimeoutStopSec=10
+Type=simple
+User=svxlink
+Group=svxlink
+ExecStart=/usr/bin/node /var/www/html/scripts/server.js
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
+EOL
+
+    show_info "Reloading systemd, enabling, and starting svxlink-node.service..."
+    sudo systemctl daemon-reload
+    sudo systemctl enable --now svxlink-node.service
+    while true; do
     DASHBOARD_PASSWORD=$(whiptail --title "Dashboard Password" --passwordbox "Please enter your dashboard password:" 8 78 3>&1 1>&2 2>&3)
 
     # Check if user cancelled
@@ -59,61 +99,50 @@ function dash_install {
     fi
 done
 
-    # Update the config file with the provided username and password
-    CONFIG_FILE="/var/www/html/include/config.inc.php"
-    if [ -f "$CONFIG_FILE" ]; then
-        sudo sed -i "s/define(\"PHP_AUTH_USER\", \".*\");/define(\"PHP_AUTH_USER\", \"$DASHBOARD_USER\");/" "$CONFIG_FILE"
-        sudo sed -i "s/define(\"PHP_AUTH_PW\", \".*\");/define(\"PHP_AUTH_PW\", \"$DASHBOARD_PASSWORD\");/" "$CONFIG_FILE"
-        echo "The config file $CONFIG_FILE has been updated with the new username and password."
-    else
-        echo "Error: Config file $CONFIG_FILE n'existe pas. Sortir."
-        exit 1
-    fi
+    AUTH_FILE="/etc/svxlink/dashboard.auth.ini"
+    [ -f "$AUTH_FILE" ] && sudo cp "$AUTH_FILE" "${AUTH_FILE}.bak"
 
-    # Change ownership of all files in /var/www/html 
-    sudo find /var/www/html -exec sudo chown svxlink:svxlink {} +
+    sudo install -m 640 -o svxlink -g svxlink /dev/null "$AUTH_FILE"
+    sudo tee "$AUTH_FILE" > /dev/null << EOF
+[dashboard]
+auth_user = "${DASHBOARD_USER:-svxlink}"
+auth_pass = "${DASHBOARD_PASSWORD:-$(openssl rand -base64 12)}"
+EOF
+    echo "The authentication file $AUTH_FILE has been created and configured."
 
-    # Inform the user that the ownership change was successful
-    echo "La propriété des fichiers dans /var/www/html a été modifiée en svxlink:svxlink, à l'exception du script lui-même."
+    ## change ownership of all files
+    sudo find /var/www/html -exec chown svxlink:svxlink {} +
 
-    # New section to create /home/pi/scripts and cleanup.sh
+    echo "Ownership of files in /var/www/html set to svxlink:svxlink"
+
+    # create /home/pi/scripts and cleanup.sh if missing
     SCRIPT_DIR="/home/pi/scripts"
     CLEANUP_SCRIPT="$SCRIPT_DIR/cleanup.sh"
 
-    # Check if the script directory exists, if not, create it
-    if [ ! -d "$SCRIPT_DIR" ]; then
+     if [ ! -d "$SCRIPT_DIR" ]; then
         mkdir -p "$SCRIPT_DIR"
         echo "Creation du reépertoire $SCRIPT_DIR"
     fi
 
-    # Check if the cleanup.sh script does not exist
     if [ ! -f "$CLEANUP_SCRIPT" ]; then
-        # Here document to create the cleanup.sh script with the specified content
-        cat << EOF > "$CLEANUP_SCRIPT"
+       cat << EOF > "$CLEANUP_SCRIPT"
 #!/bin/bash
-
-# Directory to be cleaned (this is redundant here, as it's already set above)
 DIR="/var/www/html/backups"
 
-# Check if directory exists
 if [ -d "\$DIR" ]; then
-    # Find and delete files older than 7 days
     find "\$DIR" -type f -mtime +7 -exec rm -f {} \;
 else
     echo "Le répertoire \$DIR n'existe pas."
 fi
 EOF
 
-        # Make the cleanup.sh script executable
         sudo chmod +x "$CLEANUP_SCRIPT"
         echo "Créer et rendre $CLEANUP_SCRIPT executable."
     fi
 
-    # Check and add the cleanup.sh script to the sudo crontab if not already present
     CRON_JOB="01 00 * * * /home/pi/scripts/cleanup.sh"
     ( sudo crontab -l | grep -q "$CRON_JOB" ) || ( sudo crontab -l; echo "$CRON_JOB" ) | sudo crontab -
 
-    # Inform the user that the crontab entry has been added if it was not present
     echo "Le ficher $CLEANUP_SCRIPT existe et il est présent dans le crontab."
 }
 
