@@ -100,7 +100,7 @@ reflector() {
 
     select_reflector || return 1
 
-    exit
+exit
 
     whiptail --yesno \
 "Connect to this reflector?
