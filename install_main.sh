@@ -47,7 +47,6 @@ echo -e "$(date)" "${YELLOW} #### set to: $NODE_OPTION #### ${NORMAL}" | tee -a 
 source "${BASH_SOURCE%/*}/functions/reflector.sh"
 if [[ $NODE_OPTION == "2" || $NODE_OPTION == "4" ]]; then
 reflector
-exit 
 echo -e "$(date)" "${YELLOW} #### SvxReflector URL set to: $SVXREFLECTOR_URL #### ${NORMAL}" | tee -a  /var/log/install.log
 fi
 #### CONFIGURATION VOICES ####
