@@ -107,7 +107,7 @@ function announce {
 
         # Ensure the section header exists
         if ! grep -q "^\[$section\]" "$conf"; then
-            echo -e "\n[$section]" | sudo tee -a "$conf" > /dev/null
+            echo -e "\n[$section]" | tee -a "$conf" > /dev/null
         fi
 
         # Update or insert key=value inside section

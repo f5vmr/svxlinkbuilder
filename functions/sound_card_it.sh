@@ -102,7 +102,7 @@ echo "Variabile assegnata: $sound_card_variable"
     echo "Ok, allora non apporterò altre modifiche"
     fi 
 fi
-    echo -e "$(date)" "${GREEN}Aggiornamenti audio, inclusa la scheda audio fittizia per un web socket.${NORMAL}" | sudo tee -a /var/log/install.log
+    echo -e "$(date)" "${GREEN}Aggiornamenti audio, inclusa la scheda audio fittizia per un web socket.${NORMAL}" | tee -a /var/log/install.log
 plughw_setting="0"
 channel_setting="0"
 }

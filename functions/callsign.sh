@@ -2,7 +2,7 @@
 function callsign {
 get_CallVar() {
     call=$(whiptail --inputbox "Enter the node callsign:" 8 78 3>&1 1>&2 2>&3)
-    echo -e "${CYAN}$call${WHITE}" | sudo tee -a  /var/log/install.log 
+    echo -e "${CYAN}$call${WHITE}" | tee -a  /var/log/install.log 
 }
 
 while true; do
@@ -20,5 +20,5 @@ done
 CALL=${user_input^^}
 ## Use the non-empty name
 
-	echo -e "$(date)" "${GREEN} #### Creating Node with Callsign " $CALL " #### ${NORMAL}" | sudo tee -a  /var/log/install.log    
+	echo -e "$(date)" "${GREEN} #### Creating Node with Callsign " $CALL " #### ${NORMAL}" | tee -a  /var/log/install.log    
 }

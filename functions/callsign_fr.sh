@@ -20,5 +20,5 @@ done
 CALL=${user_input^^}
 ## Use the non-empty name
 
-	echo -e "$(date)" "${GREEN} #### Creation du point d'accès (Noeud) " $CALL " #### ${NORMAL}" | sudo tee -a  /var/log/install.log  
+	echo -e "$(date)" "${GREEN} #### Creation du point d'accès (Noeud) " $CALL " #### ${NORMAL}" | tee -a  /var/log/install.log  
 }

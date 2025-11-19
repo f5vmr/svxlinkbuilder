@@ -17,14 +17,14 @@ if [[ $sa818 == true ]]; then
 source "${BASH_SOURCE%/*}/functions/sa818_menu_fr.sh"
 sa818_menu_fr
 else
-echo "No SA818 device" |tee -a  /var/log/install.log
+echo "No SA818 device" | tee -a  /var/log/install.log
 fi
 #### USB SOUND CARD ####
 source "${BASH_SOURCE%/*}/functions/sound_card_fr.sh"
 soundcard
 #### GROUPS AND USERS ####
 # clear
-echo -e "$(date)" "${YELLOW} #### Creation des Groupes and Utilisateurs #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+echo -e "$(date)" "${YELLOW} #### Creation des Groupes and Utilisateurs #### ${NORMAL}" | tee -a  /var/log/install.log
 source "${BASH_SOURCE%/*}/functions/groups.sh"
 make_groups
 #### REQUEST CALLSIGN ####
@@ -33,10 +33,10 @@ callsign
 #### NODE Selection ####
 source "${BASH_SOURCE%/*}/functions/node_type_fr.sh"
 nodeoption
-echo -e "$(date)" "${YELLOW} #### Type du Noeud: $NODE_OPTION #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+echo -e "$(date)" "${YELLOW} #### Type du Noeud: $NODE_OPTION #### ${NORMAL}" | tee -a  /var/log/install.log
 
-echo -e "$(date)" "${YELLOW} #### Carte son : $HID $GPIOD $card #### ${NORMAL}" | sudo tee -a  /var/log/install.log	
-echo -e "$(date)" "${YELLOW} #### Verification d'Alsa #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+echo -e "$(date)" "${YELLOW} #### Carte son : $HID $GPIOD $card #### ${NORMAL}" | tee -a  /var/log/install.log	
+echo -e "$(date)" "${YELLOW} #### Verification d'Alsa #### ${NORMAL}" | tee -a  /var/log/install.log
 #### NODE SVXREFLECTOR URL SELECTION ####
 if [[ $NODE_OPTION == "2" || $NODE_OPTION == "4" ]]; then
 source "${BASH_SOURCE%/*}/functions/reflector.sh"
@@ -44,7 +44,7 @@ reflector
 fi
 #### CONFIGURATION VOICES ####
  # clear
-	echo -e "$(date)" "${GREEN} #### Installation des fichiers sons (Voix)  #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${GREEN} #### Installation des fichiers sons (Voix)  #### ${NORMAL}" | tee -a  /var/log/install.log
 
  	sudo mkdir -p /usr/share/svxlink/sounds && cd /usr/share/svxlink/sounds
  	sudo git clone https://github.com/f5vmr/fr_FR.git
@@ -53,7 +53,7 @@ fi
 
 #### BACKUP CONFIGURATION ####
  # clear
-	echo -e "$(date)" "${GREEN} #### Sauvegarder la configuration à : $CONF.bak #### ${NORMAL}"| sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${GREEN} #### Sauvegarder la configuration à : $CONF.bak #### ${NORMAL}"| tee -a  /var/log/install.log
 
  	if [ -f "$CONF" ]; then
     sudo cp -p "$CONF" "$CONF.bak"
@@ -83,7 +83,7 @@ fi
 # Read the content from the source file into the sudoers file
 cat "$SOURCE_FILE" > "$SUDOERS_FILE"
 chmod 0440 "$SUDOERS_FILE"
- 	echo -e "$(date)" "${RED} #### Téléchargement du dossier de configuration #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+ 	echo -e "$(date)" "${RED} #### Téléchargement du dossier de configuration #### ${NORMAL}" | tee -a  /var/log/install.log
  	sudo mkdir -p /home/pi/scripts
 	sudo cp -f /home/pi/svxlinkbuilder/addons/10-uname /etc/update-motd.d/
  	sudo cp -f /home/pi/svxlinkbuilder/configs/svxlink.conf /etc/svxlink/
@@ -96,95 +96,95 @@ chmod 0440 "$SUDOERS_FILE"
     sudo cp /usr/share/svxlink/events.d/CW.tcl /usr/share/svxlink/events.d/local/
     sudo cp /usr/share/svxlink/events.d/Logic.tcl /usr/share/svxlink/events.d/local/
     	# clear
-	echo -e "$(date)" "${GREEN} #### Indicatif à $CALL #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${GREEN} #### Indicatif à $CALL #### ${NORMAL}" | tee -a  /var/log/install.log
 
  	sudo sed -i "s/MYCALL/$CALL/g" $CONF
  	sudo sed -i "s/MYCALL/$CALL/g" /etc/svxlink/node_info.json
 
-	echo -e "$(date)" "${GREEN} ####  Squelch Hangtime à 10 mS ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${GREEN} ####  Squelch Hangtime à 10 mS ${NORMAL}" | tee -a  /var/log/install.log
  	sudo sed -i s/SQL_HANGTIME=2000/SQL_HANGTIME=10/g $CONF
  
  # clear	
-	echo -e "$(date)" "${YELLOW} #### Désactivation des messagess d'alertes de distortion #### ${NORMAL}"| sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${YELLOW} #### Désactivation des messagess d'alertes de distortion #### ${NORMAL}"| tee -a  /var/log/install.log
 
 
  	sudo sed -i 's/PEAK_METER=1/PEAK_METER=0/g' $CONF
 
  # clear
-	echo -e "$(date)" "${GREEN} #### Mise à jour écran au demarrage #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${GREEN} #### Mise à jour écran au demarrage #### ${NORMAL}" | tee -a  /var/log/install.log
 
  	sudo sed -i "s/MYCALL/$CALL/g" /etc/update-motd.d/10-uname
  	sudo chmod 0775 /etc/update-motd.d/10-uname
 
  # clear
-	echo -e "$(date)" "${YELLOW} #### Changement du suffix du Fichier Log ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${YELLOW} #### Changement du suffix du Fichier Log ${NORMAL}" | tee -a  /var/log/install.log
 
 	sudo sed -i '/^LOGFILE=/ { /[^.log]$/ s/$/.log/ }' /etc/default/svxlink
 
 	#### INSTALLING DASHBOARD ####
  # clear
 	cd /home/pi
-	echo -e "$(date)" "${YELLOW} #### Vérification des adresses IP #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${YELLOW} #### Vérification des adresses IP #### ${NORMAL}" | tee -a  /var/log/install.log
 	
 	source "${BASH_SOURCE%/*}/functions/get_ip.sh"
 	ipaddress
  # clear
 	cd /home/pi
-	echo -e "$(date)" "${YELLOW} #### Installation du Tableau de Bord #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${YELLOW} #### Installation du Tableau de Bord #### ${NORMAL}" | tee -a  /var/log/install.log
 
 	source "${BASH_SOURCE%/*}/functions/dash_install_fr.sh"
 	dash_install
  # clear
-	echo -e "$(date)" "${GREEN} #### Tableau installé #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${GREEN} #### Tableau installé #### ${NORMAL}" | tee -a  /var/log/install.log
 	whiptail --title "IP Adresse" --msgbox "Tableau de Bord installé. Noter bien l'adresse IP $ip_address sur $device" 8 78
 	IP=$ip_address
 	export IP
 	cd /home/pi
 
 	 # clear
-	echo -e "$(date)" "${GREEN} #### Définir du Noeud #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${GREEN} #### Définir du Noeud #### ${NORMAL}" | tee -a  /var/log/install.log
 source "${BASH_SOURCE%/*}/functions/node_setup_fr.sh"
 nodeset
 	#### Removal of unwanted files ####
-	#echo -e "$(date)" "${YELLOW} #### Suppression des fichier Removing indésirables #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	#echo -e "$(date)" "${YELLOW} #### Suppression des fichier Removing indésirables #### ${NORMAL}" | tee -a  /var/log/install.log
 	#source "${BASH_SOURCE%/*}/functions/deletion.sh"
 	#delete
 	#### TIME SELECTION ####
     source "${BASH_SOURCE%/*}/functions/time_selection_fr.sh"
     timeselect
 	#### Identification setup ####
-	echo -e "$(date)" "${GREEN} #### Configuration des paramêtres d'identifications #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${GREEN} #### Configuration des paramêtres d'identifications #### ${NORMAL}" | tee -a  /var/log/install.log
 	source "${BASH_SOURCE%/*}/functions/announce_fr.sh"
 	announce
-	echo -e "$(date)" "${GREEN} #### Configuration des paramêtres d'annonces terminés  #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${GREEN} #### Configuration des paramêtres d'annonces terminés  #### ${NORMAL}" | tee -a  /var/log/install.log
 	source "${BASH_SOURCE%/*}/functions/tones_fr.sh"
 	tones
-	echo -e "$(date)" "${GREEN} #### Parametres des tonalités terminées  #### ${NORMAL}" | sudo tee -a  /var/log/install.log	
+	echo -e "$(date)" "${GREEN} #### Parametres des tonalités terminées  #### ${NORMAL}" | tee -a  /var/log/install.log	
 	cd /home/pi	
 	# clear
-	echo -e "$(date)" "${RED} #### Configuration du ModuleMetar (météo) #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${RED} #### Configuration du ModuleMetar (météo) #### ${NORMAL}" | tee -a  /var/log/install.log
 	source "${BASH_SOURCE%/*}/functions/modulemetar_setup_fr.sh"
 	modulemetar
 	
 	 # clear
 	 cd /home/pi
-	echo -e "$(date)" "${RED} #### Configuration du ModuleEchoLink #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${RED} #### Configuration du ModuleEchoLink #### ${NORMAL}" | tee -a  /var/log/install.log
 	source "${BASH_SOURCE%/*}/functions/echolink_setup_fr.sh"
 	echolinksetup
 	
 	 # clear
-#	echo -e "$(date)" "${RED} #### Configuration du ModulePropagationMonitor #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+#	echo -e "$(date)" "${RED} #### Configuration du ModulePropagationMonitor #### ${NORMAL}" | tee -a  /var/log/install.log
 #	source "${BASH_SOURCE%/*}/functions/propagationmonitor_setup.sh"
 #	propagationmonitor
-	echo "Unused logic module: $NOT_LOGIC_MODULE" | sudo tee -a  /var/log/install.log
+	echo "Unused logic module: $NOT_LOGIC_MODULE" | tee -a  /var/log/install.log
 #sudo sed -i '/^\['"$NOT_LOGIC_MODULE"'\]/,/^\[/ { /^\['"$NOT_LOGIC_MODULE"'\]/d; /^\[/!d }' /etc/svxlink/svxlink.conf
 # Trim whitespace and remove CRs from module name
 NOT_LOGIC_MODULE="$(echo -n "$NOT_LOGIC_MODULE" | tr -d '\r' | xargs)"
 
 # Check that the section exists
 if ! grep -q "^\[$NOT_LOGIC_MODULE\]" "$CONF"; then
-    echo "Module [$NOT_LOGIC_MODULE] no longer found in $CONF" | sudo tee -a  /var/log/install.log
-else echo "Module [$NOT_LOGIC_MODULE] found in $CONF, proceeding to remove it." | sudo tee -a  /var/log/install.log	 
+    echo "Module [$NOT_LOGIC_MODULE] no longer found in $CONF" | tee -a  /var/log/install.log
+else echo "Module [$NOT_LOGIC_MODULE] found in $CONF, proceeding to remove it." | tee -a  /var/log/install.log	 
 
 fi
 
@@ -194,16 +194,16 @@ sed -i "/^\[$NOT_LOGIC_MODULE\]/,/^\[/{
     /^\[/!d
 }" "$CONF"
 	 # clear
-	echo -e "$(date)" "${RED} #### Redemmarage du svxlink.service #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${RED} #### Redemmarage du svxlink.service #### ${NORMAL}" | tee -a  /var/log/install.log
 	
  	sudo systemctl restart svxlink apache2 svxlink-node
 
 ##.service isn't necessary ##
 
-echo -e "$(date)" "${GREEN} #### Installation complète #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+echo -e "$(date)" "${GREEN} #### Installation complète #### ${NORMAL}" | tee -a  /var/log/install.log
 whiptail --title "Installation terminée" --msgbox "Installation terminée. Allons-y au Tableau de bord" 8 78
 
-echo -e "$(date)" "${RED} #### SVXLink est prêt  - allez au Tableau de bord (Dashboard)#### ${NORMAL}" | sudo tee -a  /var/log/install.log
+echo -e "$(date)" "${RED} #### SVXLink est prêt  - allez au Tableau de bord (Dashboard)#### ${NORMAL}" | tee -a  /var/log/install.log
 
 #exit
 
