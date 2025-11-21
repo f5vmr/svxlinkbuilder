@@ -43,9 +43,9 @@
     sudo useradd -rG audio,plugdev,gpio,dialout svxlink
     sudo apt update && sudo apt upgrade -y
    
-    sudo wget -O /tmp/svxlink-25.5.2.3.g7bdf09d2-Linux.deb \
-    https://github.com/f5vmr/svxlink/releases/download/V25.5.2/svxlink-25.5.2.3.g7bdf09d2-Linux.deb
-    sudo apt install /tmp/svxlink-25.5.2.3.g7bdf09d2-Linux.deb -y
+    sudo wget -O /tmp/svxlink-25.5.2.7.g3dd59533-Linux.deb \
+    https://github.com/f5vmr/svxlink/releases/download/V25.5.2/svxlink-25.5.2.7.g3dd59533-Linux.deb
+    sudo apt install /tmp/svxlink-25.5.2.7.g3dd59533-Linux.deb -y
 
     echo -e "${BLUE}#### Installing svxlink #### ${WHITE}" | sudo tee -a /var/log/install.log
     sudo apt install -y curl apache2 apache2-bin apache2-data apache2-utils php8.2 python3-serial nodejs npm toilet --fix-missing -y
