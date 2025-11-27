@@ -36,7 +36,7 @@ callsign
 #### GROUPS AND USERS ####
 # clear
 echo -e "$(date)" "${YELLOW} #### Creazione dei gruppi e degli utenti #### ${NORMAL}" | sudo tee -a  /var/log/install.log
-source "${BASH_SOURCE%/*}/functions/groups_it.sh"
+source "${BASH_SOURCE%/*}/functions/groups.sh"
 make_groups
 
 #### CONFIGURATION VOICES ####
