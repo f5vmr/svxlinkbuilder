@@ -3,7 +3,7 @@
 
 function usercheck {
     ## Get the current user
-    current_user=$(logname) | sudo tee -a   /var/log/install.log
+    current_user=$(logname) | sudo tee -a /var/log/install.log > dev/null
     
     ## Check if the current user is 'pi'
    if [[ "$logname" != "pi" ]] 
@@ -12,7 +12,8 @@ function usercheck {
 
     else whiptail --title "OS and user check" --msgbox "OS is $operating_system and User is $logname" 8 78;
 fi
-echo -e "${GREEN} #### User is pi as required #### ${NORMAL}" | tee -a /var/log/install.log > /dev/null# clear
+echo -e "${GREEN} #### User is pi as required #### ${NORMAL}" | sudo tee -a /var/log/install.log > dev/null
+# clear
 
 }
 

@@ -12,7 +12,7 @@ fi
 
 # Use sed to delete lines between [SimplexLogic] and the next section name
 sed -i "/^\[$section_name\]/,/^ *\[/ {/^\[$section_name\]/b; /^\[/b; d}" "$svxconf_file"
-echo "Section $section_name deleted from $svxconf_file" | tee -a /var/log/install.log > /dev/null
+echo "Section $section_name deleted from $svxconf_file" | sudo tee -a /var/log/install.log > dev/null
 
 
 

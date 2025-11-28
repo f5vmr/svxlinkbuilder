@@ -9,14 +9,19 @@ function nodeoption {
 
     if [ "$NODE_OPTION" -eq "1" ] 
     then
-        echo -e "${CYAN}You chose Simplex Node without SvxReflector ${WHITE}" | tee -a /var/log/install.log > /dev/null    elif [ "$NODE_OPTION" -eq "2" ] 
+        echo -e "${CYAN}You chose Simplex Node without SvxReflector ${WHITE}" | sudo tee -a /var/log/install.log > dev/null    
+    elif [ "$NODE_OPTION" -eq "2" ] 
     then
-        echo -e "${CYAN}You chose Simplex Node with UK SvxReflector ${WHITE}" | tee -a /var/log/install.log > /dev/null    elif [ "$NODE_OPTION" -eq "3" ] 
+        echo -e "${CYAN}You chose Simplex Node with UK SvxReflector ${WHITE}" | sudo tee -a /var/log/install.log > dev/null    
+    elif [ "$NODE_OPTION" -eq "3" ] 
     then
-        echo -e "${CYAN}You chose Repeater Node without SvxReflector ${WHITE}" | tee -a /var/log/install.log > /dev/null    elif [ "$NODE_OPTION" -eq "4" ] 
+        echo -e "${CYAN}You chose Repeater Node without SvxReflector ${WHITE}" | sudo tee -a /var/log/install.log > dev/null    
+    elif [ "$NODE_OPTION" -eq "4" ] 
     then
-        echo -e "${CYAN}You chose Repeater Node with UK SvxReflector ${WHITE}" | tee -a /var/log/install.log > /dev/null    else 
-        echo -e "${RED}You did not choose anything${WHITE}" | tee -a /var/log/install.log > /dev/nullfi
+        echo -e "${CYAN}You chose Repeater Node with UK SvxReflector ${WHITE}" | sudo tee -a /var/log/install.log > dev/null    
+    else 
+        echo -e "${RED}You did not choose anything${WHITE}" | sudo tee -a /var/log/install.log > dev/null
+    fi
     echo "${GREEN}Node Option ${WHITE} $NODE_OPTION"
     # Determine the logic module from NODE_OPTION
     if [ "$NODE_OPTION" -eq "1" ] || [ "$NODE_OPTION" -eq "2" ]; then
@@ -36,8 +41,9 @@ function nodeoption {
 export NOT_LOGIC_MODULE
 
 
-echo "The logic module $NOT_LOGIC_MODULE will be removed from svxlink.conf" | tee -a /var/log/install.log > /dev/nullexport LOGIC_MODULE
-echo "Using logic module: $LOGIC_MODULE" | tee -a /var/log/install.log > /dev/null
+echo "The logic module $NOT_LOGIC_MODULE will be removed from svxlink.conf" | sudo tee -a /var/log/install.log > dev/null
+export LOGIC_MODULE
+echo "Using logic module: $LOGIC_MODULE" | sudo tee -a /var/log/install.log > dev/null
 export NODE_OPTION; 
 }
 
