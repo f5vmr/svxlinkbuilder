@@ -13,7 +13,7 @@ logicfile="$LOGIC_DIR/$RepeaterLogic"
 # Display the whiptail menu and store the selected option in a variable
 selected_option=$(whiptail --title "Select Repeater Sound Option" --menu "Choose a sound option:" 15 78 4 \
     "Bell Tone" "Escolhe esta opção para Default Bell Tone" \
-    "Chime" Escolhe esta opção para Mellow Chime " \
+    "Chime" "Escolhe esta opção para Mellow Chime " \
     "Pip" "Escolhe esta opção para Pip Tone" \
     "Silence" "Escolhe esta opção para No Idle Tone" \
     3>&1 1>&2 2>&3)

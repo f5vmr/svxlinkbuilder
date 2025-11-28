@@ -112,7 +112,6 @@ sed -i 's/\#playTone 360 900 50/CW::play \"\-\"\;/' "$logicfile"
 #### 
 else
     # Code to execute if NODE_OPTION is not equal to 3 or 4
-    echo "NODE_OPTION n'est pas 3 ou 4. fermeture du programme..."
-    # Add optional alternative code here
+     # Add optional alternative code here
 fi
 } 
