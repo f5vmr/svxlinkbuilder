@@ -2,12 +2,12 @@
 #### Metar Info ####
 function modulemetar {
  
-whiptail --title "Metar Info" --yesno "Queres configurar este modulo?" 8 78  3>&1 1>&2 2>&3
+whiptail --title "Metar Info" --defaultno --yesno "Queres configurar este modulo?" 8 78  3>&1 1>&2 2>&3
     if [ $? -eq "0" ] 
     then
         sleep 1
     selected=$(whiptail --title "Metar Info" --checklist "Escolhe os Aeroportos: Podes alterar tambem no Painel" 24 78 17 \
-        "LPCO" "Coimbra" OFF \
+        "LPCO" "Coimbra" ON \
         "LPCS" "Cascais" OFF \
         "LPFL" "Flores" OFF \
         "LPGR" "Graciosa" OFF \

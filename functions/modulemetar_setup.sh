@@ -2,12 +2,12 @@
 #### Metar Info ####
 function modulemetar {
  
-whiptail --title "Metar Info" --yesno "Do you wish to configure this module?" 8 78  3>&1 1>&2 2>&3
+whiptail --title "Metar Info" --defaultno --yesno "Do you wish to configure this module?" 8 78  3>&1 1>&2 2>&3
     if [ $? -eq "0" ] 
     then
         sleep 1
     selected=$(whiptail --title "Metar Info" --checklist "Choose which Airports: You can change them in the Dashboard" 24 78 17 \
-        "EGLL" "London Heathrow" OFF \
+        "EGLL" "London Heathrow" ON \
         "EGKK" "London Gatwick" OFF \
         "EGCC" "Manchester" OFF \
         "EGBB" "Birmingham" OFF \

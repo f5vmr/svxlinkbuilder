@@ -2,12 +2,12 @@
 #### Metar Info ####
 function modulemetar {
  
-whiptail --title "Informazioni METAR" --yesno "Vuoi configurare questo modulo?" 8 78  3>&1 1>&2 2>&3
+whiptail --title "Informazioni METAR" --defaultno --yesno "Vuoi configurare questo modulo?" 8 78  3>&1 1>&2 2>&3
     if [ $? -eq "0" ] 
     then
         sleep 1
     selected=$(whiptail --title "Informazioni METAR" --checklist "Seleziona gli aeroporti: puoi cambiarli nella dashboard" 24 78 17 \
-        "LIMC" "Milano Malpensa" OFF \
+        "LIMC" "Milano Malpensa" ON \
         "LIML" "Milano Linate" OFF \
         "LIME" "Bergamo Orio al Serio" OFF \
         "LIRF" "Roma Fiumicino" OFF \

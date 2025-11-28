@@ -2,12 +2,12 @@
 #### Metar Info ####
 function modulemetar {
  
-whiptail --title "Información del medidor" --yesno "¿Desea configurar este módulo?" 8 78  3>&1 1>&2 2>&3
+whiptail --title "Información del medidor" --defaultno --yesno "¿Desea configurar este módulo?" 8 78  3>&1 1>&2 2>&3
     if [ $? -eq "0" ] 
     then
         sleep 1
     selected=$(whiptail --title "Información del medidor" --checklist "Elija qué aeropuertos: Puedes cambiarlos en el tablero." 24 78 13 \
-        "LECO"  "A Coruña " OFF \
+        "LECO"  "A Coruña " ON \
         "LEAB"  "Albacete " OFF \
         "LEAL"  "Alicante-Elche " OFF \
         "LEAM"  "Almeria " OFF \

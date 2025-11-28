@@ -1,6 +1,5 @@
 #!/bin/bash
 function callsign {
-
 get_CallVar() {
     call=$(whiptail --inputbox "Taper l'indicatif du point d'accès:" 8 78 3>&1 1>&2 2>&3)
     call="${call^^}"  # Uppercase

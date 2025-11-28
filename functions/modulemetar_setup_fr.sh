@@ -2,12 +2,12 @@
 #### Metar Info ####
 function modulemetar {
  
-whiptail --title "Metar Info" --yesno "Voulez-vous configurer ce module?" 8 78 3>&1 1>&2 2>&3
+whiptail --title "Metar Info" --defaultno --yesno "Voulez-vous configurer ce module?" 8 78 3>&1 1>&2 2>&3
     if [ $? -eq "0" ] 
     then
         sleep 1
     selected=$(whiptail --title "Metar Info" --scrolltext --checklist "Choisir l'aéroports: Selectionner dans la liste" 24 78 17 \
-        "LFPG" "Paris Charles de Gaulle" OFF \
+        "LFPG" "Paris Charles de Gaulle" ON \
         "LFPO" "Paris Orly" OFF \
         "LFOB" "Paris Beauvais" OFF \
         "LFBL" "Limoges Bellegarde" OFF \
