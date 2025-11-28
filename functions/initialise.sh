@@ -23,7 +23,8 @@ lang=""
 ## Create svxlink-node.service if it doesn't exist
 SERVICE_FILE="/etc/systemd/system/svxlink-node.service"
 if [ ! -f "$SERVICE_FILE" ]; then
-    show_info "Creating svxlink-node.service..."
+    echo -e "$(date)" "${BLUE} #### Creating svxlink-node service #### ${NORMAL}" | sudo tee -a /var/log/install.log > /dev/null
+
     sudo tee "$SERVICE_FILE" > /dev/null <<EOL
 [Unit]
 Description=SVXLink Node.js Server
@@ -53,12 +54,14 @@ Environment=NODE_ENV=production
 WantedBy=multi-user.target
 EOL
 
-    show_info "Reloading systemd, enabling, and starting svxlink-node.service..."
+    echo -e "$(date)" "${BLUE} #### systemd svxlink-node.service #### ${NORMAL}" | sudo tee -a /var/log/install.log > /dev/null
+
     sudo systemctl daemon-reload
     sudo systemctl enable --now svxlink-node.service
     sudo systemctl start svxlink-node.service
 else
-    show_info "svxlink-node.service already exists."
+    echo -e "$(date)" "${BLUE} #### svxlink-node.service already exists #### ${NORMAL}" | sudo tee -a /var/log/install.log > /dev/null
+
     # Optional: restart it to ensure it's running
     sudo systemctl restart svxlink-node.service
 fi
