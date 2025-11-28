@@ -17,7 +17,7 @@ if [[ $sa818 == true ]]; then
 source "${BASH_SOURCE%/*}/functions/sa818_menu_it.sh"
 sa818_menu
 else
-echo "Nessun dispositivo SA818" |tee -a  /var/log/install.log
+echo "Nessun dispositivo SA818" | sudo tee -a  /var/log/install.log
 fi
 #### USB SOUND CARD ####
 source "${BASH_SOURCE%/*}/functions/sound_card_it.sh"

@@ -16,7 +16,7 @@ function timeselect {
     
     if [ -f "$CONFIG_FILE" ]; then
         sed -i "s/^TIME_FORMAT=.*/TIME_FORMAT=\"$CHOICE\"/" "$CONFIG_FILE"
-        echo "${GREEN} TIME_FORMAT aggiornato al $CHOICE in $CONFIG_FILE. ${WHITE}" | tee
+        echo "${GREEN} TIME_FORMAT aggiornato al $CHOICE in $CONFIG_FILE. ${WHITE}" | sudo tee
     else
         echo "Impossibile trovare il file di configurazione: $CONFIG_FILE"
         return 1
