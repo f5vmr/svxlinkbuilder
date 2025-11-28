@@ -29,8 +29,8 @@ function tones {
                 ;;
                 "Pip")
                     echo "You selected Pip."
-                    sudo sed -i '/^proc repeater_idle {/,/^}/ {s/^\(\s*playTone.*\)$/#\1/}' "$logicfile"
-                    sudo sed -i '/^proc repeater_idle {/,/^}/ {/^\}/i\  set iterations 0; set base 0;  CW::play "E";}' "$logicfile"
+                    sudo sed -i '/^proc repeater_idle {}/,/^}/ s/^}/    CW::play "E";\n}/' "$logicfile"
+                    sudo sed -i '/^proc repeater_idle {}/,/^}/ s/^\s*playTone /#&/' "$logicfile";;
                 ;;
                 "Silence")
                     echo "Vous avez désactivé le son."

@@ -26,8 +26,8 @@ function tones {
                 ;;
                 "Pip")
                     echo "Escolheste Pip."
-                    sudo sed -i '/^proc repeater_idle {}/,/^}/ s/^\s*playTone /#&/' "$logicfile"
                     sudo sed -i '/^proc repeater_idle {}/,/^}/ s/^}/    CW::play "E";\n}/' "$logicfile"
+                    sudo sed -i '/^proc repeater_idle {}/,/^}/ s/^\s*playTone /#&/' "$logicfile";;
                 ;;
                 "Silence")
                     echo "Escolheste Silence."
