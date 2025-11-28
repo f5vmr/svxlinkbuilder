@@ -102,8 +102,7 @@ echo "Variable assigned: $sound_card_variable"
     echo "ok, donc, je ne fais pas de changements"           
     fi               
 fi
-    echo -e "$(date)" "${GREEN}Mis à jour audio, carte-son factice incluse pour un Web Socle.${NORMAL}" | sudo tee -a /var/log/install.log
-plughw_setting="0"
+    echo -e "$(date)" "${GREEN}Mis à jour audio, carte-son factice incluse pour un Web Socle.${NORMAL}" | tee -a /var/log/install.log > /dev/nullplughw_setting="0"
 channel_setting="0"
 }
 function seeed_sound_card_detected {

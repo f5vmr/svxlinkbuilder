@@ -56,8 +56,7 @@ function which_language {
         locale=$(echo "$locale" | cut -d'.' -f1)
         lang=$(echo $LANG | grep -o '^[a-zA-Z]*_[a-zA-Z]*')
 
-        echo "${GREEN} #### Language set to $LANG_OPTION $locale #### Wait a moment ${NORMAL}" | sudo tee -a /var/log/install.log
-    fi
+        echo "${GREEN} #### Language set to $LANG_OPTION $locale #### Wait a moment ${NORMAL}" | tee -a /var/log/install.log > /dev/null    fi
 }
     
 

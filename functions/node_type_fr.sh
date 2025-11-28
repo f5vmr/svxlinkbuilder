@@ -9,19 +9,14 @@ function nodeoption {
 
     if [[ "$NODE_OPTION" -eq "1" ]] 
     then
-        echo -e "${CYAN}Choisi Noed Simplex sans SvxReflecteur ${WHITE}" | sudo tee -a /var/log/install.log
-    elif [[ "$NODE_OPTION" -eq "2" ]] 
+        echo -e "${CYAN}Choisi Noed Simplex sans SvxReflecteur ${WHITE}" | tee -a /var/log/install.log > /dev/null    elif [[ "$NODE_OPTION" -eq "2" ]] 
     then
-        echo -e "${CYAN}Choisi Noed Simplex avec SvxReflecteur ${WHITE}" | sudo tee -a /var/log/install.log
-    elif [[ "$NODE_OPTION" -eq "3" ]] 
+        echo -e "${CYAN}Choisi Noed Simplex avec SvxReflecteur ${WHITE}" | tee -a /var/log/install.log > /dev/null    elif [[ "$NODE_OPTION" -eq "3" ]] 
     then
-        echo -e "${CYAN}Choisi Noed Répéteur sans SvxReflecteur ${WHITE}" | sudo tee -a /var/log/install.log
-    elif [[ "$NODE_OPTION" -eq "4" ]] 
+        echo -e "${CYAN}Choisi Noed Répéteur sans SvxReflecteur ${WHITE}" | tee -a /var/log/install.log > /dev/null    elif [[ "$NODE_OPTION" -eq "4" ]] 
     then
-        echo -e "${CYAN}Choisi Noed Répéteur avec SvxReflecteur ${WHITE}" | sudo tee -a /var/log/install.log
-    else 
-        echo -e "${RED}Aucune option choisie ${WHITE}" | sudo tee -a /var/log/install.log
-fi
+        echo -e "${CYAN}Choisi Noed Répéteur avec SvxReflecteur ${WHITE}" | tee -a /var/log/install.log > /dev/null    else 
+        echo -e "${RED}Aucune option choisie ${WHITE}" | tee -a /var/log/install.log > /dev/nullfi
 echo -e "${GREEN}Node Option ${WHITE}" $NODE_OPTION
 # Determine the logic module from NODE_OPTION
 if [ "$NODE_OPTION" -eq "1" ] || [ "$NODE_OPTION" -eq "2" ]; then
@@ -41,10 +36,8 @@ fi
 export NOT_LOGIC_MODULE
 echo "Unused logic module: $NOT_LOGIC_MODULE"
 sudo sed -i '/^\['"$NOT_LOGIC_MODULE"'\]/,/^\[/ { /^\['"$NOT_LOGIC_MODULE"'\]/d; /^\[/!d }' /etc/svxlink/svxlink.conf
-echo "The logic module $NOT_LOGIC_MODULE has been removed from svxlink.conf" | sudo tee -a /var/log/install.log
-export LOGIC_MODULE
-echo "Using logic module: $LOGIC_MODULE" | sudo tee -a /var/log/install.log
-
+echo "The logic module $NOT_LOGIC_MODULE has been removed from svxlink.conf" | tee -a /var/log/install.log > /dev/nullexport LOGIC_MODULE
+echo "Using logic module: $LOGIC_MODULE" | tee -a /var/log/install.log > /dev/null
 export NODE_OPTION; 
 }
             

@@ -9,19 +9,14 @@ function nodeoption {
 
     if [ "$NODE_OPTION" -eq "1" ] 
     then
-        echo -e "${CYAN}Escolheste Simplex Node sem SvxReflector ${WHITE}" | sudo tee -a /var/log/install.log
-    elif [ "$NODE_OPTION" -eq "2" ] 
+        echo -e "${CYAN}Escolheste Simplex Node sem SvxReflector ${WHITE}" | tee -a /var/log/install.log > /dev/null    elif [ "$NODE_OPTION" -eq "2" ] 
     then
-        echo -e "${CYAN}Escolheste Simplex Node com UK SvxReflector ${WHITE}" | sudo tee -a /var/log/install.log
-    elif [ "$NODE_OPTION" -eq "3" ] 
+        echo -e "${CYAN}Escolheste Simplex Node com UK SvxReflector ${WHITE}" | tee -a /var/log/install.log > /dev/null    elif [ "$NODE_OPTION" -eq "3" ] 
     then
-        echo -e "${CYAN}Escolheste Repeater Node sem SvxReflector ${WHITE}" | sudo tee -a /var/log/install.log
-    elif [ "$NODE_OPTION" -eq "4" ] 
+        echo -e "${CYAN}Escolheste Repeater Node sem SvxReflector ${WHITE}" | tee -a /var/log/install.log > /dev/null    elif [ "$NODE_OPTION" -eq "4" ] 
     then
-        echo -e "${CYAN}Escolheste Repeater Node com UK SvxReflector ${WHITE}" | sudo tee -a /var/log/install.log
-    else 
-        echo -e "${RED}Nenhuma opção escolhida${WHITE}" | sudo tee -a /var/log/install.log
-fi
+        echo -e "${CYAN}Escolheste Repeater Node com UK SvxReflector ${WHITE}" | tee -a /var/log/install.log > /dev/null    else 
+        echo -e "${RED}Nenhuma opção escolhida${WHITE}" | tee -a /var/log/install.log > /dev/nullfi
     echo "${GREEN}Opção do node ${WHITE} $NODE_OPTION"
     # Determine the logic module from NODE_OPTION
     if [ "$NODE_OPTION" -eq "1" ] || [ "$NODE_OPTION" -eq "2" ]; then
@@ -41,9 +36,7 @@ fi
 export NOT_LOGIC_MODULE
 
 
-echo "O Modo $NOT_LOGIC_MODULE vai ser removido do svxlink.conf" | sudo tee -a /var/log/install.log
-export LOGIC_MODULE
-echo "A utilizar o node: $LOGIC_MODULE" | sudo tee -a /var/log/install.log
-
+echo "O Modo $NOT_LOGIC_MODULE vai ser removido do svxlink.conf" | tee -a /var/log/install.log > /dev/nullexport LOGIC_MODULE
+echo "A utilizar o node: $LOGIC_MODULE" | tee -a /var/log/install.log > /dev/null
 export NODE_OPTION; 
 }

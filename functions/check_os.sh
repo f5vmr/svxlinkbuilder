@@ -13,6 +13,5 @@ function check_os {
         sudo sh -c 'echo "sudo shutdown now" >> /etc/var/install.log"'
         exit 1  ## Exit the script if the OS is not Bookworm
     fi
-    echo -e "${GREEN} #### OS is $operating_system #### ${NORMAL}" | sudo tee -a /var/log/install.log
-}
+    echo -e "${GREEN} #### OS is $operating_system #### ${NORMAL}" | tee -a /var/log/install.log > /dev/null}
 

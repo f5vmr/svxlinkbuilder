@@ -102,8 +102,7 @@ echo "Variable assigned: $sound_card_variable"
     echo "ok, then I will make no other changes"           
     fi 
 fi
-    echo -e "$(date)" "${GREEN}Audio Updates including Dummy Sound Card for a web socket.${NORMAL}" | sudo tee -a /var/log/install.log
-plughw_setting="0"
+    echo -e "$(date)" "${GREEN}Audio Updates including Dummy Sound Card for a web socket.${NORMAL}" | tee -a /var/log/install.log > /dev/nullplughw_setting="0"
 channel_setting="0"
 }
 function seeed_sound_card_detected {
