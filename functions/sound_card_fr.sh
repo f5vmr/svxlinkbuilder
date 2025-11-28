@@ -120,7 +120,7 @@ card=true
 plughw_setting="0"
 channel_setting="0"
 }
-function no_sound_card_detected{
+function no_sound_card_detected {
 HID=false
 GPIOD=false
 card=false				
