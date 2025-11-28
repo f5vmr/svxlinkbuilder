@@ -54,7 +54,7 @@ whiptail --title "Metar Info" --yesno "Do you wish to configure this module?" 8 
         "EGBD" "Belfast City" OFF 3>&1 1>&2 2>&3)
         specific_airport=$(echo "$specific_airport" | sed 's/"//g')
         sed -i "s/\STARTDEFAULT=.*/STARTDEFAULT=$specific_airport/g" /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
-        echo -e "$(date)" "${GREEN} $selected Airports included with default Airport $specific_airport ${NORMAL}" | sudo tee -a /var/log/install.log > dev/null   
+        echo -e "$(date)" "${GREEN} $selected Airports included with default Airport $specific_airport ${NORMAL}" | sudo tee -a /var/log/install.log > /dev/null   
     else
      sed -i 's/,ModuleMetarInfo//' /etc/svxlink/svxlink.conf
     # removing MetarInfo from the MODULES= line in both Simplex and Duplex

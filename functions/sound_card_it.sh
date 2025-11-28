@@ -11,46 +11,46 @@ other_sound_card_detected=false
 
 # Check for USB sound card
 if echo "$sound_cards" | grep -q 'USB-Audio'; then
-    echo "Scheda audio USB rilevata:" | sudo tee -a /var/log/install.log > dev/null
+    echo "Scheda audio USB rilevata:" | sudo tee -a /var/log/install.log > /dev/null
     echo "$sound_cards" | grep -A 1 'USB-Audio'
     usb_sound_card_detected=true
 fi
 
 # Check for Seeed 2-mic voice card
 if echo "$sound_cards" | grep -q 'seeed-2mic-voicecard'; then
-    echo "Scheda vocale Seeed a 2 microfoni rilevata:" | sudo tee -a /var/log/install.log > dev/null
+    echo "Scheda vocale Seeed a 2 microfoni rilevata:" | sudo tee -a /var/log/install.log > /dev/null
     echo "$sound_cards" | grep -A 1 'seeed-2mic-voicecard'
     seeed_sound_card_detected=true
 fi
 
 # Check for any other sound cards not explicitly identified by name and not Loopback
 if echo "$sound_cards" | grep -q '[0-9] \[' && ! echo "$sound_cards" | grep -q 'Loopback' && ! $usb_sound_card_detected && ! $seeed_sound_card_detected; then
-    echo "Altra scheda audio rilevata:" | sudo tee -a /var/log/install.log > dev/null
+    echo "Altra scheda audio rilevata:" | sudo tee -a /var/log/install.log > /dev/null
     echo "$sound_cards" | grep -v 'Loopback' 
     other_sound_card_detected=true
 fi
 
 # If no sound card is detected or only Loopback card is detected
 if ! $usb_sound_card_detected && ! $seeed_sound_card_detected && ! $other_sound_card_detected; then
-    echo "Nessuna scheda audio rilevata o rilevata solo la scheda Loopback." | sudo tee -a /var/log/install.log > dev/null
+    echo "Nessuna scheda audio rilevata o rilevata solo la scheda Loopback." | sudo tee -a /var/log/install.log > /dev/null
     no_sound_card_detected
 fi
 
 # Handle based on detected sound card type
 if $usb_sound_card_detected; then
-    echo "Gestione delle specifiche della scheda audio USB..." | sudo tee -a /var/log/install.log > dev/null
+    echo "Gestione delle specifiche della scheda audio USB..." | sudo tee -a /var/log/install.log > /dev/null
     usb_sound_card_detected
     # Add your specific handling code here for USB sound card
 fi
 
 if $seeed_sound_card_detected; then
-    echo "Gestione delle specifiche della scheda vocale Seeed a 2 microfoni..." | sudo tee -a /var/log/install.log > dev/null
+    echo "Gestione delle specifiche della scheda vocale Seeed a 2 microfoni..." | sudo tee -a /var/log/install.log > /dev/null
     seeed_sound_card_detected  
     # Add your specific handling code here for Seeed 2-mic voice card
 fi
 
 if $other_sound_card_detected; then
-    echo "Gestione delle specifiche di un'altra scheda audio..." | sudo tee -a /var/log/install.log > dev/null
+    echo "Gestione delle specifiche di un'altra scheda audio..." | sudo tee -a /var/log/install.log > /dev/null
     other_sound_card_detected
     # Add your specific handling code here for other sound cards
 fi
@@ -102,7 +102,7 @@ echo "Variabile assegnata: $sound_card_variable"
     echo "Ok, allora non apporterò altre modifiche"
     fi 
 fi
-    echo -e "$(date)" "${GREEN}Aggiornamenti audio, inclusa la scheda audio fittizia per un web socket.${NORMAL}" | sudo tee -a /var/log/install.log > dev/null
+    echo -e "$(date)" "${GREEN}Aggiornamenti audio, inclusa la scheda audio fittizia per un web socket.${NORMAL}" | sudo tee -a /var/log/install.log > /dev/null
     
     plughw_setting="0"
     channel_setting="0"

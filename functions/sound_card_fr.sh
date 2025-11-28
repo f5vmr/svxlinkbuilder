@@ -32,25 +32,25 @@ fi
 
 # If no sound card is detected or only Loopback card is detected
 if ! $usb_sound_card_detected && ! $seeed_sound_card_detected && ! $other_sound_card_detected; then
-    echo "Aucune carte son detectée ou juste la carte Loopback detectée." | sudo tee -a /var/log/install.log > dev/null
+    echo "Aucune carte son detectée ou juste la carte Loopback detectée." | sudo tee -a /var/log/install.log > /dev/null
     no_sound_card_detected
 fi
 
 # Handle based on detected sound card type
 if $usb_sound_card_detected; then
-    echo "Gestion des spécificités de la carte son USB..." | sudo tee -a /var/log/install.log > dev/null
+    echo "Gestion des spécificités de la carte son USB..." | sudo tee -a /var/log/install.log > /dev/null
     usb_sound_card_detected
     # Add your specific handling code here for USB sound card
 fi
 
 if $seeed_sound_card_detected; then
-    echo "Gestion des spécificités de la carte Seeed 2-mic..." | sudo tee -a /var/log/install.log > dev/null
+    echo "Gestion des spécificités de la carte Seeed 2-mic..." | sudo tee -a /var/log/install.log > /dev/null
     seeed_sound_card_detected  
     # Add your specific handling code here for Seeed 2-mic voice card
 fi
 
 if $other_sound_card_detected; then
-    echo "Gestion des spécificités des autres types de carte son..." | sudo tee -a /var/log/install.log > dev/null
+    echo "Gestion des spécificités des autres types de carte son..." | sudo tee -a /var/log/install.log > /dev/null
     other_sound_card_detected
     # Add your specific handling code here for other sound cards
 fi
@@ -102,7 +102,7 @@ echo "Variable assigned: $sound_card_variable"
     echo "ok, donc, je ne fais pas de changements"           
     fi               
 fi
-    echo -e "$(date)" "${GREEN}Mis à jour audio, carte-son factice incluse pour un Web Socle.${NORMAL}" | sudo tee -a /var/log/install.log > dev/null
+    echo -e "$(date)" "${GREEN}Mis à jour audio, carte-son factice incluse pour un Web Socle.${NORMAL}" | sudo tee -a /var/log/install.log > /dev/null
     plughw_setting="0"
     channel_setting="0"
 }

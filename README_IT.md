@@ -25,7 +25,7 @@
 <p>Nella prima casella <b>Device</b>, seleziona 'No Filtering'.</p>
 <p>Nella seconda casella <b>Choose OS</b>, seleziona 'Raspberry Pi OS (Other)' → 'Raspberry Pi OS 32-bit' → 'Debian Bookworm senza desktop'.</p>
 <p>Seleziona <b>Choose Storage</b> e scegli la SDCard.</p>
-<p>In <b>Next</b>, completa la casella 'edit', ma <b>pi</b> deve essere l'utente. Puoi usare qualsiasi password.</p>
+<p>In <b>Next</b>, completa la casella 'edit', ma <b>pi</b> /deve essere l'utente. Puoi usare qualsiasi password.</p>
 <p>Configura il WiFi, se lo desideri.</p>
 <b>Assicurati di abilitare SSH nella seconda scheda del menu, altrimenti l'installazione fallirà.</b></p>
 

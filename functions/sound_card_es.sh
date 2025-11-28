@@ -32,25 +32,25 @@ fi
 
 # If no sound card is detected or only Loopback card is detected
 if ! $usb_sound_card_detected && ! $seeed_sound_card_detected && ! $other_sound_card_detected; then
-    echo "No sound card detected or only Loopback card detected." | sudo tee -a /var/log/install.log > dev/null
+    echo "No sound card detected or only Loopback card detected." | sudo tee -a /var/log/install.log > /dev/null
     no_sound_card_detected
 fi
 
 # Handle based on detected sound card type
 if $usb_sound_card_detected; then
-    echo "Handling USB sound card specifics..." | sudo tee -a /var/log/install.log > dev/null
+    echo "Handling USB sound card specifics..." | sudo tee -a /var/log/install.log > /dev/null
     usb_sound_card_detected
     # Add your specific handling code here for USB sound card
 fi
 
 if $seeed_sound_card_detected; then
-    echo "Handling Seeed 2-mic voice card specifics..." | sudo tee -a /var/log/install.log > dev/null
+    echo "Handling Seeed 2-mic voice card specifics..." | sudo tee -a /var/log/install.log > /dev/null
     seeed_sound_card_detected  
     # Add your specific handling code here for Seeed 2-mic voice card
 fi
 
 if $other_sound_card_detected; then
-    echo "Handling other sound card specifics..." | sudo tee -a /var/log/install.log > dev/null
+    echo "Handling other sound card specifics..." | sudo tee -a /var/log/install.log > /dev/null
     other_sound_card_detected
     # Add your specific handling code here for other sound cards
 fi
@@ -102,7 +102,7 @@ echo "Variable assigned: $sound_card_variable"
     echo "Ok, entonces no haré ningún cambio."           
     fi                    
 fi
-    echo -e "$(date)" "${GREEN}Audio actualizado, tarjeta de sonido ficticia incluida para Web Socket.${NORMAL}" | sudo tee -a /var/log/install.log > dev/null
+    echo -e "$(date)" "${GREEN}Audio actualizado, tarjeta de sonido ficticia incluida para Web Socket.${NORMAL}" | sudo tee -a /var/log/install.log > /dev/null
 
 plughw_setting="0"
 channel_setting="0"

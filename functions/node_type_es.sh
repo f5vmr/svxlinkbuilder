@@ -9,18 +9,18 @@ function nodeoption {
 
     if [[ "$NODE_OPTION" -eq "1" ]] 
     then
-        echo -e "${CYAN}Elija Nodo Simplex sin SvxReflector ${WHITE}" | sudo tee -a /var/log/install.log > dev/null    
+        echo -e "${CYAN}Elija Nodo Simplex sin SvxReflector ${WHITE}" | sudo tee -a /var/log/install.log > /dev/null    
     elif [[ "$NODE_OPTION" -eq "2" ]] 
     then
-        echo -e "${CYAN}Elija Nodo Simplex con SvxReflector ${WHITE}" | sudo tee -a /var/log/install.log > dev/null    
+        echo -e "${CYAN}Elija Nodo Simplex con SvxReflector ${WHITE}" | sudo tee -a /var/log/install.log > /dev/null    
     elif [[ "$NODE_OPTION" -eq "3" ]] 
     then
-        echo -e "${CYAN}Elija Nodo repetidor sin SvxReflector ${WHITE}" | sudo tee -a /var/log/install.log > dev/null    
+        echo -e "${CYAN}Elija Nodo repetidor sin SvxReflector ${WHITE}" | sudo tee -a /var/log/install.log > /dev/null    
     elif [[ "$NODE_OPTION" -eq "4" ]] 
     then
-        echo -e "${CYAN}Elija Nodo repetidor con SvxReflector ${WHITE}" | sudo tee -a /var/log/install.log > dev/null    
+        echo -e "${CYAN}Elija Nodo repetidor con SvxReflector ${WHITE}" | sudo tee -a /var/log/install.log > /dev/null    
     else 
-        echo -E "${RED}Ninguna opción elegida ${WHITE}" | sudo tee -a /var/log/install.log > dev/null
+        echo -E "${RED}Ninguna opción elegida ${WHITE}" | sudo tee -a /var/log/install.log > /dev/null
     fi
 echo "${GREEN}Node Option ${WHITE} $NODE_OPTION"
 # Determine the logic module from NODE_OPTION
@@ -41,9 +41,9 @@ fi
 export NOT_LOGIC_MODULE
 echo "Unused logic module: $NOT_LOGIC_MODULE"
 sudo sed -i '/^\['"$NOT_LOGIC_MODULE"'\]/,/^\[/ { /^\['"$NOT_LOGIC_MODULE"'\]/d; /^\[/!d }' /etc/svxlink/svxlink.conf
-echo "The logic module $NOT_LOGIC_MODULE has been removed from svxlink.conf" | sudo tee -a /var/log/install.log > dev/null
+echo "The logic module $NOT_LOGIC_MODULE has been removed from svxlink.conf" | sudo tee -a /var/log/install.log > /dev/null
 export LOGIC_MODULE
-echo "Using logic module: $LOGIC_MODULE" | sudo tee -a /var/log/install.log > dev/null
+echo "Using logic module: $LOGIC_MODULE" | sudo tee -a /var/log/install.log > /dev/null
 export NODE_OPTION; 
 }
             

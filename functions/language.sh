@@ -3,7 +3,7 @@
 
 function set_locale() {
     locale="$1.UTF-8"
-    echo -e "${YELLOW}Setting locale to ${locale} - ${RED} Please Wait ${YELLOW} #### ${NORMAL}" | sudo tee -a /var/log/install.log > dev/null
+    echo -e "${YELLOW}Setting locale to ${locale} - ${RED} Please Wait ${YELLOW} #### ${NORMAL}" | sudo tee -a /var/log/install.log > /dev/null
 
     sudo localectl set-locale LANG="$locale"
     if [ $? -eq 0 ]; then
@@ -40,6 +40,6 @@ function which_language() {
     if [ -n "$locale" ]; then
         locale_short=$(echo "$locale" | cut -d'.' -f1)
         lang_short=$(echo "$LANG" | grep -o '^[a-zA-Z]*_[a-zA-Z]*')
-        echo -e "${GREEN} #### Language set to $LANG_OPTION ($locale_short) #### Wait a moment ${NORMAL}" | sudo tee -a /var/log/install.log > dev/null
+        echo -e "${GREEN} #### Language set to $LANG_OPTION ($locale_short) #### Wait a moment ${NORMAL}" | sudo tee -a /var/log/install.log > /dev/null
     fi
 }

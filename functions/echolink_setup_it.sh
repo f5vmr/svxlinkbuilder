@@ -25,11 +25,11 @@ then
 fi
     #sed -i 's/DESCRIPTION/\#DESCRIPTION/g' /etc/svxlink/svxlink.d/ModuleEchoLink.conf
     sed -i 's/\#STATUS_SERVER_LIST/STATUS_SERVER_LIST/g' /etc/svxlink/svxlink.conf
-echo -e "$(date)" "${GREEN} EchoLink è stato configurato ${NORMAL}" | sudo tee -a /var/log/install.log > dev/null
+echo -e "$(date)" "${GREEN} EchoLink è stato configurato ${NORMAL}" | sudo tee -a /var/log/install.log > /dev/null
     else
      sed -i 's/,ModuleEchoLink//' /etc/svxlink/svxlink.conf
     # removing Echolink from the MODULES= line in both Simplex and Duplex
-echo -e "$(date)" "${CYAN} EchoLink non è stato configurato ${NORMAL}" | sudo tee -a /var/log/install.log > dev/null    
+echo -e "$(date)" "${CYAN} EchoLink non è stato configurato ${NORMAL}" | sudo tee -a /var/log/install.log > /dev/null    
 
 ##nothing to do
     fi

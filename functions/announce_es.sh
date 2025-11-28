@@ -5,7 +5,7 @@ function announce {
     LOGIC_DIR="/usr/share/svxlink/events.d/local"
     logicfile="$LOGIC_DIR/Logic.tcl"
     svxconf_file="$CONF_DIR/svxlink.conf"
-    echo "Using logic module: $LOGIC_MODULE" | sudo tee -a /var/log/install.log > dev/null 
+    echo "Using logic module: $LOGIC_MODULE" | sudo tee -a /var/log/install.log > /dev/null 
 
     #### CW TONE VARIABLES ####
     # Extract current values from the correct section
@@ -15,7 +15,7 @@ function announce {
     short_ident_interval=$(sed -n "/^\[$LOGIC_MODULE\]/,/^\[/{s/^SHORT_IDENT_INTERVAL *= *//p}" "$svxconf_file" | head -n 1)
     long_ident_interval=$(sed -n "/^\[$LOGIC_MODULE\]/,/^\[/{s/^LONG_IDENT_INTERVAL *= *//p}" "$svxconf_file" | head -n 1)
 
-    echo -e "${CYAN}Current CW_AMP:${WHITE} $cw_amp" | sudo tee -a /var/log/install.log > dev/null 
+    echo -e "${CYAN}Current CW_AMP:${WHITE} $cw_amp" | sudo tee -a /var/log/install.log > /dev/null 
 
     # Prompt user for new CW values
     new_cw_amp=$(whiptail --title "CW AMP" --inputbox \
@@ -49,13 +49,13 @@ function announce {
         "Select LONG Periodic Ident Interval:" 15 78 4 \
         0 "None" 30 "30 minutes" 60 "60 minutes" 120 "120 minutes" \
         3>&1 1>&2 2>&3)
-    echo "Short Ident Interval selected: $new_short_ident_interval" | sudo tee -a /var/log/install.log > dev/null 
-    echo "Long Ident Interval selected: $new_long_ident_interval" | sudo tee -a /var/log/install.log > dev/null
+    echo "Short Ident Interval selected: $new_short_ident_interval" | sudo tee -a /var/log/install.log > /dev/null 
+    echo "Long Ident Interval selected: $new_long_ident_interval" | sudo tee -a /var/log/install.log > /dev/null
 
-    echo -e "${YELLOW}Standby for logic changes${WHITE}" | sudo tee -a /var/log/install.log > dev/null 
+    echo -e "${YELLOW}Standby for logic changes${WHITE}" | sudo tee -a /var/log/install.log > /dev/null 
 
     #### LOGIC ID / ANNOUNCE FLAGS ####
-    echo -e "${YELLOW}Reading logic enable flags for [$LOGIC_MODULE]...${WHITE}" | sudo tee -a /var/log/install.log > dev/null 
+    echo -e "${YELLOW}Reading logic enable flags for [$LOGIC_MODULE]...${WHITE}" | sudo tee -a /var/log/install.log > /dev/null 
 
     # Helper to read values safely from the current section
     get_value_from_section() {
@@ -95,12 +95,12 @@ function announce {
     #new_long_announce_enable=$(echo "$new_values" | grep -q "Long Announce Enable" && echo 1 || echo 0)
 
     # Display confirmation
-    echo -e "${CYAN}Short Voice ID Enable:${WHITE} $new_short_voice_id_enable" | sudo tee -a /var/log/install.log > dev/null 
-    echo -e "${CYAN}Short CW ID Enable:${WHITE} $new_short_cw_id_enable" | sudo tee -a /var/log/install.log > dev/null 
-    echo -e "${CYAN}Short Announce Enable:${WHITE} $new_short_announce_enable" | sudo tee -a /var/log/install.log > dev/null 
-    echo -e "${CYAN}Long Voice ID Enable:${WHITE} $new_long_voice_id_enable" | sudo tee -a /var/log/install.log > dev/null 
-    echo -e "${CYAN}Long CW ID Enable:${WHITE} $new_long_cw_id_enable" | sudo tee -a /var/log/install.log > dev/null 
-    echo -e "${CYAN}Long Announce Enable:${WHITE} $new_long_announce_enable" | sudo tee -a /var/log/install.log > dev/null 
+    echo -e "${CYAN}Short Voice ID Enable:${WHITE} $new_short_voice_id_enable" | sudo tee -a /var/log/install.log > /dev/null 
+    echo -e "${CYAN}Short CW ID Enable:${WHITE} $new_short_cw_id_enable" | sudo tee -a /var/log/install.log > /dev/null 
+    echo -e "${CYAN}Short Announce Enable:${WHITE} $new_short_announce_enable" | sudo tee -a /var/log/install.log > /dev/null 
+    echo -e "${CYAN}Long Voice ID Enable:${WHITE} $new_long_voice_id_enable" | sudo tee -a /var/log/install.log > /dev/null 
+    echo -e "${CYAN}Long CW ID Enable:${WHITE} $new_long_cw_id_enable" | sudo tee -a /var/log/install.log > /dev/null 
+    echo -e "${CYAN}Long Announce Enable:${WHITE} $new_long_announce_enable" | sudo tee -a /var/log/install.log > /dev/null 
 
     #### UPDATE SVXLINK.CONF FUNCTION ####
     update_svxlink_conf() {
@@ -140,7 +140,7 @@ function announce {
         update_key "LONG_ANNOUNCE_ENABLE" "$new_long_announce_enable"
      #   update_key "LONG_ANNOUNCE_FILE" "$long_announce_file"
 
-        echo -e "${GREEN}Updated identification and CW variables for [$section] in $conf${WHITE}" | sudo tee -a /var/log/install.log > dev/null 
+        echo -e "${GREEN}Updated identification and CW variables for [$section] in $conf${WHITE}" | sudo tee -a /var/log/install.log > /dev/null 
     }
 
     # Call the update function
