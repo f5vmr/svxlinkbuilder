@@ -4,8 +4,8 @@ function callsign {
 get_CallVar() {
     call=$(whiptail --inputbox "Ingrese el indicativo del nodo:" 8 78 3>&1 1>&2 2>&3)
     call="${call^^}"  # Uppercase
-    echo -e "${CYAN}$call${WHITE}" | sudo tee -a /var/log/install.log > /dev/null
-    echo-e "$call" | sudo tee -a /var/log/install.log  
+    echo -e "${CYAN}$call${WHITE}" | sudo tee -a /var/log/install.log 
+    
 }
 while true; do
     user_input=$(get_CallVar)
