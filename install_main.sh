@@ -25,23 +25,23 @@ soundcard
 #### NODE Selection ####
 source "${BASH_SOURCE%/*}/functions/node_type.sh"
 nodeoption
-echo -e "$(date)" "${YELLOW} #### Node Type: $NODEOPTION #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+echo -e "$(date)" "${YELLOW} #### Node Type: $NODEOPTION #### ${NORMAL}" >> /var/log/install.log > /dev/null
 
-echo -e "$(date)" "${YELLOW} #### Sound Card: $HID $GPIOD $card #### ${NORMAL}" | sudo tee -a  /var/log/install.log	
-echo -e "$(date)" "${YELLOW} #### Checking Alsa #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+echo -e "$(date)" "${YELLOW} #### Sound Card: $HID $GPIOD $card #### ${NORMAL}" >> /var/log/install.log > /dev/null	
+echo -e "$(date)" "${YELLOW} #### Checking Alsa #### ${NORMAL}" >> /var/log/install.log > /dev/null
 
 #### REQUEST CALLSIGN ####
 source "${BASH_SOURCE%/*}/functions/callsign.sh"
 callsign
 #### GROUPS AND USERS ####
 # clear
-echo -e "$(date)" "${YELLOW} #### Creating Groups and Users #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+echo -e "$(date)" "${YELLOW} #### Creating Groups and Users #### ${NORMAL}" >> /var/log/install.log > /dev/null
 source "${BASH_SOURCE%/*}/functions/groups.sh"
 make_groups
 
 #### CONFIGURATION VOICES ####
  # clear
-	echo -e "$(date)" "${GREEN} #### Installing Voice Files #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${GREEN} #### Installing Voice Files #### ${NORMAL}" >> /var/log/install.log > /dev/null
 
  	cd /usr/share/svxlink/sounds
 	if [[ $lang == "en_US" ]]; then
@@ -56,7 +56,7 @@ make_groups
 
 #### BACKUP CONFIGURATION ####
  # clear
-	echo -e "$(date)" "${GREEN} #### Backing up configuration to : $CONF.bak #### ${NORMAL}"| sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${GREEN} #### Backing up configuration to : $CONF.bak #### ${NORMAL}">> /var/log/install.log > /dev/null
 
  	if [ -f "$CONF" ]; then
     sudo cp -p "$CONF" "$CONF.bak"
@@ -86,7 +86,7 @@ fi
 # Read the content from the source file into the sudoers file
 cat "$SOURCE_FILE" > "$SUDOERS_FILE"
 chmod 0440 "$SUDOERS_FILE"
- 	echo -e "$(date)" "${RED} #### Downloading prepared configuration files from the scripts #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+ 	echo -e "$(date)" "${RED} #### Downloading prepared configuration files from the scripts #### ${NORMAL}" >> /var/log/install.log > /dev/null
 	sudo mkdir -p /home/pi/scripts
 	sudo cp -f /home/pi/svxlinkbuilder/addons/10-uname /etc/update-motd.d/
  	sudo cp -f /home/pi/svxlinkbuilder/configs/svxlink.conf /etc/svxlink/
@@ -99,73 +99,73 @@ chmod 0440 "$SUDOERS_FILE"
     sudo cp /usr/share/svxlink/events.d/CW.tcl /usr/share/svxlink/events.d/local/
     sudo cp /usr/share/svxlink/events.d/Logic.tcl /usr/share/svxlink/events.d/local/
     # clear
-	echo -e "$(date)" "${GREEN} #### Setting Callsign to $CALL #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${GREEN} #### Setting Callsign to $CALL #### ${NORMAL}" >> /var/log/install.log > /dev/null
 
  	sudo sed -i "s/MYCALL/$CALL/g" $CONF
  	sudo sed -i "s/MYCALL/$CALL/g" /etc/svxlink/node_info.json
 
-	echo -e "$(date)" "${GREEN} #### Setting Squelch Hangtime to 10 mS #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${GREEN} #### Setting Squelch Hangtime to 10 mS #### ${NORMAL}" >> /var/log/install.log > /dev/null
  	sudo sed -i s/SQL_HANGTIME=2000/SQL_HANGTIME=10/g $CONF
  
  # clear	
-	echo -e "$(date)" "${YELLOW} #### Disabling audio distortion warning messages #### ${NORMAL}"| sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${YELLOW} #### Disabling audio distortion warning messages #### ${NORMAL}">> /var/log/install.log > /dev/null
 
 
  	sudo sed -i 's/PEAK_METER=1/PEAK_METER=0/g' $CONF
 
  # clear
-	echo -e "$(date)" "${GREEN} #### Updating SplashScreen on startup #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${GREEN} #### Updating SplashScreen on startup #### ${NORMAL}" >> /var/log/install.log > /dev/null
 
  	sudo sed -i "s/MYCALL/$CALL/g" /etc/update-motd.d/10-uname
  	sudo chmod 0775 /etc/update-motd.d/10-uname
 
  # clear
-	echo -e "$(date)" "${YELLOW} #### Changing Log file suffix #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${YELLOW} #### Changing Log file suffix #### ${NORMAL}" >> /var/log/install.log > /dev/null
 
  	sudo sed -i '/^LOGFILE=/ { /[^.log]$/ s/$/.log/ }' /etc/default/svxlink
 
 	#### INSTALLING DASHBOARD ####
  # clear
 	cd /home/pi
-	echo -e "$(date)" "${YELLOW} #### Checking IP Addresses #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${YELLOW} #### Checking IP Addresses #### ${NORMAL}" >> /var/log/install.log > /dev/null
 	
 	source "${BASH_SOURCE%/*}/functions/get_ip.sh"
 	ipaddress
  # clear
 	cd /home/pi
-	echo -e "$(date)" "${YELLOW} #### Installing Dashboard #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${YELLOW} #### Installing Dashboard #### ${NORMAL}" >> /var/log/install.log > /dev/null
 
 	source "${BASH_SOURCE%/*}/functions/dash_install.sh"
 	dash_install
  # clear
-	echo -e "$(date)" "${GREEN} #### Dashboard installed #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${GREEN} #### Dashboard installed #### ${NORMAL}" >> /var/log/install.log > /dev/null
 	whiptail --title "IP Addresses" --msgbox "Dashboard installed. Please note your IP address is $ip_address on $device" 8 78
 	IP=$ip_address
 	export IP
 	cd /home/pi/
 
 	 # clear
-	echo -e "$(date)" "${GREEN} #### Setting up Node #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${GREEN} #### Setting up Node #### ${NORMAL}" >> /var/log/install.log > /dev/null
 	source "${BASH_SOURCE%/*}/functions/node_setup.sh"
 	nodeset
 	#### Removal of unwanted files ####
-	#echo -e "$(date)" "${YELLOW} #### Removing unwanted files #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	#echo -e "$(date)" "${YELLOW} #### Removing unwanted files #### ${NORMAL}" >> /var/log/install.log > /dev/null
 	#source "${BASH_SOURCE%/*}/functions/deletion.sh"
 	#delete
 	#### TIME SELECTION ####
     source "${BASH_SOURCE%/*}/functions/time_selection.sh"
     timeselect
 	#### Identification setup ####
-	echo -e "$(date)" "${GREEN} #### Identification setup  #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${GREEN} #### Identification setup  #### ${NORMAL}" >> /var/log/install.log > /dev/null
 	source "${BASH_SOURCE%/*}/functions/announce.sh"
 	announce
-	echo -e "$(date)" "${GREEN} #### Announcement setup complete  #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${GREEN} #### Announcement setup complete  #### ${NORMAL}" >> /var/log/install.log > /dev/null
 	source "${BASH_SOURCE%/*}/functions/tones.sh"
 	tones
-	echo -e "$(date)" "${GREEN} #### Tones setup complete  #### ${NORMAL}" | sudo tee -a  /var/log/install.log	
+	echo -e "$(date)" "${GREEN} #### Tones setup complete  #### ${NORMAL}" >> /var/log/install.log > /dev/null	
 	cd /home/pi
 	 # clear
- 	echo -e "$(date)" "${RED} #### Changing ModuleMetar Link #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+ 	echo -e "$(date)" "${RED} #### Changing ModuleMetar Link #### ${NORMAL}" >> /var/log/install.log > /dev/null
 	
 	if [[ $lang == "en_US" ]]; then
 	## geting US Airports
@@ -178,15 +178,15 @@ chmod 0440 "$SUDOERS_FILE"
 	fi	
 	 # clear
 	 cd /home/pi/
-	echo -e "$(date)" "${RED} #### Changing ModuleEchoLink Link #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${RED} #### Changing ModuleEchoLink Link #### ${NORMAL}" >> /var/log/install.log > /dev/null
 	source "${BASH_SOURCE%/*}/functions/echolink_setup.sh"
 	echolinksetup
 	
 	 # clear
-#	echo -e "$(date)" "${RED} #### Changing ModulePropagationMonitor #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+#	echo -e "$(date)" "${RED} #### Changing ModulePropagationMonitor #### ${NORMAL}" >> /var/log/install.log > /dev/null
 #	source "${BASH_SOURCE%/*}/functions/propagationmonitor_setup.sh"
 #	propagationmonitor
-	echo "Unused logic module: $NOT_LOGIC_MODULE" | sudo tee -a  /var/log/install.log
+	echo "Unused logic module: $NOT_LOGIC_MODULE" >> /var/log/install.log > /dev/null
 #sudo sed -i '/^\['"$NOT_LOGIC_MODULE"'\]/,/^\[/ { /^\['"$NOT_LOGIC_MODULE"'\]/d; /^\[/!d }' /etc/svxlink/svxlink.conf
 # Trim whitespace and remove CRs from module name
 NOT_LOGIC_MODULE="$(echo -n "$NOT_LOGIC_MODULE" | tr -d '\r' | xargs)"
@@ -194,7 +194,7 @@ NOT_LOGIC_MODULE="$(echo -n "$NOT_LOGIC_MODULE" | tr -d '\r' | xargs)"
 # Check that the section exists
 if ! grep -q "^\[$NOT_LOGIC_MODULE\]" "$CONF"; then
     echo "Module [$NOT_LOGIC_MODULE] not found in $CONF"
-else echo "Module [$NOT_LOGIC_MODULE] found in $CONF, proceeding to remove it." | sudo tee -a  /var/log/install.log	 
+else echo "Module [$NOT_LOGIC_MODULE] found in $CONF, proceeding to remove it." >> /var/log/install.log > /dev/null	 
 fi
 
 # Remove the section safely
@@ -203,17 +203,17 @@ sed -i "/^\[$NOT_LOGIC_MODULE\]/,/^\[/{
     /^\[/!d
 }" "$CONF"
 	if grep -q "^\[$NOT_LOGIC_MODULE\]" "$CONF"; then
-	echo "Failed to remove module [$NOT_LOGIC_MODULE] from $CONF" | sudo tee -a  /var/log/install.log
+	echo "Failed to remove module [$NOT_LOGIC_MODULE] from $CONF" >> /var/log/install.log > /dev/null
 	fi
 	 # clear
-	echo -e "$(date)" "${RED} #### Restarting svxlink.service #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+	echo -e "$(date)" "${RED} #### Restarting svxlink.service #### ${NORMAL}" >> /var/log/install.log > /dev/null
 	
  	sudo systemctl restart svxlink apache2 svxlink-node 
 
 	##.service isn't necessary ##
-echo -e "$(date)" "${GREEN} #### Installation complete #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+echo -e "$(date)" "${GREEN} #### Installation complete #### ${NORMAL}" >> /var/log/install.log > /dev/null
 whiptail --title "Installation Complete" --msgbox "Installation complete. Go to the Dashboard, Your IP address $IP has been placed in the dhcpcd.conf" 8 78
-echo -e "$(date)" "${RED} #### Complete #### ${NORMAL}" | sudo tee -a  /var/log/install.log
+echo -e "$(date)" "${RED} #### Complete #### ${NORMAL}" >> /var/log/install.log > /dev/null
 
 #exit
 

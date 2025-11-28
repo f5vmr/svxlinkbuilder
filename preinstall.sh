@@ -46,7 +46,7 @@
     # Must enable the service.service to avoid a problem later ##
     
     sudo systemctl enable svxlink.service
-    echo -e "${RED} #### svxlink.service enabled for next reboot #### ${NORMAL}" | sudo tee -a  /var/log/install.log 
+    echo -e "${RED} #### svxlink.service enabled for next reboot #### ${NORMAL}" >> /var/log/install.log > /dev/null 
     ## installing locales.##
     ## Set en_GB.UTF-8 as the default locale to begin with.##
     sudo localectl set-locale LANG=en_GB.UTF-8
