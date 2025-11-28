@@ -4,8 +4,8 @@ function callsign {
 get_CallVar() {
     call=$(whiptail --inputbox "Taper l'indicatif du point d'accès:" 8 78 3>&1 1>&2 2>&3)
     call="${call^^}"  # Uppercase
-    echo -e "${CYAN}$call${WHITE}" | sudo tee -a /var/log/install.log > /dev/null
-    echo "$call"
+    echo -e "${CYAN}$call${WHITE}" | sudo tee -a /var/log/install.log 
+    
 }
 while true; do
     user_input=$(get_CallVar)
@@ -22,5 +22,5 @@ done
 CALL=${user_input^^}
 ## Use the non-empty name
 
-	echo -e "$(date)" "${GREEN} #### Creation du point d'accès (Noeud) " $CALL " #### ${NORMAL}" | sudo tee -a /var/log/install.log > /dev/null  
+	echo -e "$(date)" "${GREEN} #### Creation du point d'accès (Noeud) " $CALL " #### ${NORMAL}" | sudo tee -a /var/log/install.log 
 }

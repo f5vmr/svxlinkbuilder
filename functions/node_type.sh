@@ -9,18 +9,18 @@ function nodeoption {
 
     if [ "$NODE_OPTION" -eq "1" ] 
     then
-        echo -e "${CYAN}You chose Simplex Node without SvxReflector ${WHITE}" | sudo tee -a /var/log/install.log > /dev/null    
+        echo -e "${CYAN}You chose Simplex Node without SvxReflector ${WHITE}" | sudo tee -a /var/log/install.log    
     elif [ "$NODE_OPTION" -eq "2" ] 
     then
-        echo -e "${CYAN}You chose Simplex Node with UK SvxReflector ${WHITE}" | sudo tee -a /var/log/install.log > /dev/null    
+        echo -e "${CYAN}You chose Simplex Node with UK SvxReflector ${WHITE}" | sudo tee -a /var/log/install.log    
     elif [ "$NODE_OPTION" -eq "3" ] 
     then
-        echo -e "${CYAN}You chose Repeater Node without SvxReflector ${WHITE}" | sudo tee -a /var/log/install.log > /dev/null    
+        echo -e "${CYAN}You chose Repeater Node without SvxReflector ${WHITE}" | sudo tee -a /var/log/install.log    
     elif [ "$NODE_OPTION" -eq "4" ] 
     then
-        echo -e "${CYAN}You chose Repeater Node with UK SvxReflector ${WHITE}" | sudo tee -a /var/log/install.log > /dev/null    
+        echo -e "${CYAN}You chose Repeater Node with UK SvxReflector ${WHITE}" | sudo tee -a /var/log/install.log   
     else 
-        echo -e "${RED}You did not choose anything${WHITE}" | sudo tee -a /var/log/install.log > /dev/null
+        echo -e "${RED}You did not choose anything${WHITE}" | sudo tee -a /var/log/install.log 
     fi
     echo "${GREEN}Node Option ${WHITE} $NODE_OPTION"
     # Determine the logic module from NODE_OPTION

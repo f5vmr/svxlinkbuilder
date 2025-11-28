@@ -23,7 +23,7 @@ lang=""
 ## Create svxlink-node.service if it doesn't exist
 SERVICE_FILE="/etc/systemd/system/svxlink-node.service"
 if [ ! -f "$SERVICE_FILE" ]; then
-    echo -e "$(date)" "${BLUE} #### Creating svxlink-node service #### ${NORMAL}" | sudo tee -a /var/log/install.log > /dev/null
+    echo -e "$(date)" "${BLUE} #### Creating svxlink-node service #### ${NORMAL}" | sudo tee -a /var/log/install.log 
 
     sudo tee "$SERVICE_FILE" > /dev/null <<EOL
 [Unit]
@@ -54,18 +54,18 @@ Environment=NODE_ENV=production
 WantedBy=multi-user.target
 EOL
 
-    echo -e "$(date)" "${BLUE} #### systemd svxlink-node.service #### ${NORMAL}" | sudo tee -a /var/log/install.log > /dev/null
+    echo -e "$(date)" "${BLUE} #### systemd svxlink-node.service #### ${NORMAL}" | sudo tee -a /var/log/install.log 
 
     sudo systemctl daemon-reload
     sudo systemctl enable --now svxlink-node.service
     sudo systemctl start svxlink-node.service
 else
-    echo -e "$(date)" "${BLUE} #### svxlink-node.service already exists #### ${NORMAL}" | sudo tee -a /var/log/install.log > /dev/null
+     "$(date)" "${BLUE} #### svxlink-node.service already exists #### ${NORMAL}" | sudo tee -a /var/log/install.log 
 
     # Optional: restart it to ensure it's running
     sudo systemctl restart svxlink-node.service
 fi
 ## Log initialisation
-echo -e "$(date)" "${BLUE} #### Commencing initialisation #### ${NORMAL}" | sudo tee -a /var/log/install.log > /dev/null
+echo -e "$(date)" "${BLUE} #### Commencing initialisation #### ${NORMAL}" | sudo tee -a /var/log/install.log 
 export HOME
 }

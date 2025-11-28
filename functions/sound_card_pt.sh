@@ -102,7 +102,7 @@ echo "Variable assigned: $sound_card_variable"
     echo "ok, não foram feitas alterações"           
     fi 
 fi
-    echo -e "$(date)" "${GREEN}Audio Updates inclui placa de som Dummy para web socket.${NORMAL}" | sudo tee -a /var/log/install.log > /dev/null
+    echo -e "$(date)" "${GREEN}Audio Updates inclui placa de som Dummy para web socket.${NORMAL}" | sudo tee -a /var/log/install.log 
     plughw_setting="0"
     channel_setting="0"
 }

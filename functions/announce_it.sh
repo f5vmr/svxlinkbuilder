@@ -5,7 +5,7 @@ function announce {
     LOGIC_DIR="/usr/share/svxlink/events.d/local"
     logicfile="$LOGIC_DIR/Logic.tcl"
     svxconf_file="$CONF_DIR/svxlink.conf"
-    echo "Utilizzo del modulo logico: $LOGIC_MODULE"
+    echo -e "Utilizzo del modulo logico: $LOGIC_MODULE" | sudo tee -a /var/log/install.log
 
     #### CW TONE VARIABLES ####
     # Extract current values from the correct section

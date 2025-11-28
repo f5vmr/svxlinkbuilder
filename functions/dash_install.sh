@@ -3,7 +3,7 @@
 # Define the dash_install function
 function dash_install {
     ## Install the DTMF Controls
-    echo -e "$(date)" "${GREEN} #### Installing DTMF Controls #### ${NORMAL}" | sudo tee -a /var/log/install.log > /dev/null
+    echo -e "$(date)" "${GREEN} #### Installing DTMF Controls #### ${NORMAL}" | sudo tee -a /var/log/install.log 
     sudo mkdir -p /var/run/svxlink
     sudo chown svxlink:svxlink /var/run/svxlink
     sudo chmod 775 /var/run/svxlink

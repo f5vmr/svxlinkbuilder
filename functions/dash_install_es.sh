@@ -26,7 +26,7 @@ function dash_install {
 
     # Check if the user pressed Cancel or entered an empty input
     if [ $? -eq 0 ]; then
-        echo "Usuarior del Panel: $DASHBOARD_USER"
+        echo -e "Usuarior del Panel: $DASHBOARD_USER" | sudo tee -a /var/log/install.log
     else
         echo "User cancelled the username input."
         exit 1
@@ -64,7 +64,7 @@ done
     if [ -f "$CONFIG_FILE" ]; then
         sudo sed -i "s/define(\"PHP_AUTH_USER\", \".*\");/define(\"PHP_AUTH_USER\", \"$DASHBOARD_USER\");/" "$CONFIG_FILE"
         sudo sed -i "s/define(\"PHP_AUTH_PW\", \".*\");/define(\"PHP_AUTH_PW\", \"$DASHBOARD_PASSWORD\");/" "$CONFIG_FILE"
-        echo "The config file $CONFIG_FILE has been updated with the new username and password."
+        echo -e "The config file $CONFIG_FILE has been updated with the new username and password." | sudo tee -a /var/log/install.log
     else
         echo "Error: Config file $CONFIG_FILE does not exist. Exiting."
         exit 1
@@ -74,7 +74,7 @@ done
     sudo find /var/www/html -exec sudo chown svxlink:svxlink {} +
 
     # Inform the user that the ownership change was successful
-    echo "Ownership of files in /var/www/html has been changed to svxlink:svxlink, except for the script itself."
+    echo -e "Ownership of files in /var/www/html has been changed to svxlink:svxlink, except for the script itself." | sudo tee -a /var/log/install.log
 
     # New section to create /home/pi/scripts and cleanup.sh
     SCRIPT_DIR="/home/pi/scripts"

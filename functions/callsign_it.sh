@@ -4,8 +4,8 @@ function callsign {
 get_CallVar() {
     call=$(whiptail --inputbox "Inserisci il moniativo del node" 8 78 3>&1 1>&2 2>&3)
     call="${call^^}"  # Uppercase
-    echo -e "${CYAN}$call${WHITE}" | sudo tee -a /var/log/install.log > /dev/null
-    echo "$call"
+    echo -e "${CYAN}$call${WHITE}" | sudo tee -a /var/log/install.log 
+    
 }
 while true; do
     user_input=$(get_CallVar)
@@ -22,5 +22,5 @@ done
 CALL=${user_input^^}
 ## Use the non-empty name
 
-	echo -e "$(date)" "${GREEN} #### Creazione di un nodo con il nominativo " $CALL " #### ${NORMAL}" | sudo tee -a /var/log/install.log > /dev/null
+	echo -e "$(date)" "${GREEN} #### Creazione di un nodo con il nominativo " $CALL " #### ${NORMAL}" | sudo tee -a /var/log/install.log
 }

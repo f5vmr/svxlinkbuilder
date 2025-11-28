@@ -25,11 +25,11 @@ then
 fi
     #sed -i 's/DESCRIPTION/\#DESCRIPTION/g' /etc/svxlink/svxlink.d/ModuleEchoLink.conf
     sed -i 's/\#STATUS_SERVER_LIST/STATUS_SERVER_LIST/g' /etc/svxlink/svxlink.conf
-echo -e "$(date)" "${GREEN} Echolink esta ativo ${NORMAL}" | sudo tee -a /var/log/install.log > /dev/null
+echo -e "$(date)" "${GREEN} Echolink esta ativo ${NORMAL}" | sudo tee -a /var/log/install.log 
     else
      sed -i 's/,ModuleEchoLink//' /etc/svxlink/svxlink.conf
     # removing Echolink from the MODULES= line in both Simplex and Duplex
-echo -e "$(date)" "${CYAN} EchoLink esta inativo ${NORMAL}" | sudo tee -a /var/log/install.log > /dev/null    
+echo -e "$(date)" "${CYAN} EchoLink esta inativo ${NORMAL}" | sudo tee -a /var/log/install.log   
 ##nothing to do
     fi
 }
