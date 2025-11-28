@@ -85,4 +85,30 @@ function tones {
         current_idle_timeout=$(get_idle_timeout)
 
         new_idle_timeout=$(whiptail --title "Change IDLE_TIMEOUT (End of QSO)" \
-            --inputbox "Current IDLE_TIMEOUT in secs : $current_
+            --inputbox "Current IDLE_TIMEOUT in secs : $current_idle_timeout\nEnter new IDLE_TIMEOUT:" \
+            10 78 "$current_idle_timeout" 3>&1 1>&2 2>&3)
+
+        if [ $? -eq 0 ]; then
+            update_idle_timeout "$new_idle_timeout"
+            whiptail --title "Success" --msgbox "IDLE_TIMEOUT updated successfully to $new_idle_timeout." 8 78
+        else
+            whiptail --title "Canceled" --msgbox "No changes were made to IDLE_TIMEOUT." 8 78
+        fi
+
+        #
+        # -------------------- CW.tcl PATCH SECTION --------------------
+        #
+
+        CWLogic="CW.tcl"
+        cwfile="$LOGIC_DIR/$CWLogic"
+
+        sudo sed -i '72a "-" "...-.-"' "$cwfile"
+
+        sed -i 's/playTone 400 900 50/\#playTone 400 900 50/g' "$logicfile"
+        sed -i 's/playTone 360 900 50/\#playTone 360 900 50/g' "$logicfile"
+        sed -i 's/\#playTone 360 900 50/CW::play \"\-\"\;/' "$logicfile"
+
+    else
+        echo "NODE_OPTION n'est pas 3 ou 4. Aucune modification appliquée."
+    fi
+}
