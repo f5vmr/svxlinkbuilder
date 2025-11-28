@@ -2,9 +2,10 @@
 function callsign {
 get_CallVar() {
     call=$(whiptail --inputbox "Insere o callsign do node:" 8 78 3>&1 1>&2 2>&3)
-    echo -e "${CYAN}$call${WHITE}" | sudo tee -a /var/log/install.log > /dev/null 
+    call="${call^^}"  # Uppercase
+    echo -e "${CYAN}$call${WHITE}" | sudo tee -a /var/log/install.log > /dev/null
+    echo "$call"
 }
-
 while true; do
     user_input=$(get_CallVar)
     
