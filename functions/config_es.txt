@@ -6,7 +6,7 @@ A continuación, otros cambios afectarán a la configuración de SVXLink.
 Al finalizar la configuración, podrá acceder al Panel Web.
 La dirección IP fija se proporcionará pronto.
 
-El SvxReflector integrado, si decide conectarse, es el Reflector Uk-Wide.
+El SvxReflector integrado, si decide conectarse, es el Reflector North America-Wide.
 Deberá solicitar una contraseña escribiendo a g4nab.ne63@gmail.com.
 Si necesita otro reflector, contacte con su administrador de reflectores.
 En cualquier caso, puede agregar cualquier contraseña y cambiarla cuando la haya confirmado, 

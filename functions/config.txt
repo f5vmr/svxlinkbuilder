@@ -6,7 +6,7 @@ Then further changes will be to the SVXLink configuration.
 At the end of the configuration, you can access the Web Dashboard. 
 The fixed IP address will be provided shortly.
 
-The built-in SvxReflector if you choose to connect is the Uk-Wide Reflector.
+The built-in SvxReflector if you choose to connect is the North America-Wide Reflector.
 You will need to ask for a password by writing to g4nab.ne63@gmail.com
 If you require another reflector then contact your Reflector Manager.
 In any case you may add any password and change it when you have the the password confirmed,

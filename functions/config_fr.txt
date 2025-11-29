@@ -6,7 +6,7 @@ Ensuite, d'autres modifications concerneront la configuration SVXLink.
 A la fin de la configuration, vous pouvez accéder au Web Dashboard.
 L'adresse IP fixe sera fournie prochainement.
 
-Le réflecteur SVX intégré, si vous choisissez de vous connecter, est le réflecteur couvrant tout le Royaume-Uni.
+Le réflecteur SVX intégré, si vous choisissez de vous connecter, est le réflecteur couvrant tout l'Amérique de Nord'.
 Vous devrez demander un mot de passe en écrivant à g4nab.ne63@gmail.com.
 Si vous avez besoin d'un autre réflecteur, contactez votre gestionnaire de réflecteurs.
 Dans tous les cas, vous pouvez ajouter n'importe quel mot de passe et le modifier une fois confirmé,

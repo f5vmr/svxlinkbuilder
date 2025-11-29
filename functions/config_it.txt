@@ -6,7 +6,7 @@ Le modifiche successive riguarderanno la configurazione di SVXLink.
 Al termine della configurazione, sarà possibile accedere al pannello di controllo web.
 L'indirizzo IP fisso sarà fornito a breve.
 
-Il SvxReflector integrato, se si sceglie di connettersi, è il riflettore Uk-Wide. Sarà necessario richiedere una password scrivendo a g4nab.ne63@gmail.com.
+Il SvxReflector integrato, se si sceglie di connettersi, è il riflettore North America-Wide. Sarà necessario richiedere una password scrivendo a g4nab.ne63@gmail.com.
 Se si necessita di un altro riflettore, contattare il proprio responsabile del riflettore.
 In ogni caso, è possibile aggiungere una password e modificarla una volta confermata, 
 oppure modificare le informazioni per un altro riflettore HOSTS, 

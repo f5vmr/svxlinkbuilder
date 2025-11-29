@@ -8,7 +8,7 @@ Depois serão aplicadas outras alterações na configuração do SVXLink.
 No final da configuração, poderá aceder ao Web Dashboard.
 O endereço IP fixo será apresentado dentro de momentos.
 
-O SvxReflector integrado, caso opte por ligar, é o Reflector para todo o Reino Unido. 
+O SvxReflector integrado, caso opte por ligar, é o Reflector para todo o América do Norte. 
 Terá de solicitar uma palavra-passe escrevendo para g4nab.ne63@gmail.com.
 Se precisar de outro refletor, contacte o seu Gestor de Refletores.
 Em qualquer caso, pode adicionar qualquer palavra-passe e alterá-la quando a palavra-passe for confirmada, 
