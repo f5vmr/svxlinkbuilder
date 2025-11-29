@@ -28,13 +28,39 @@ if [ -f "$SERVICE_FILE" ]; then
 fi
 sudo tee "$SERVICE_FILE" > /dev/null <<EOL
 [Unit]
-Description=SvxLink repeater control (Universal CM108 / Any Node)
+Description=SvxLink repeater control software (Universal CM108 / Any Node)
 After=network.target sound.target systemd-udev-settle.service
 Wants=systemd-udev-settle.service
+Documentation=man:svxlink(1) man:svxlink.conf(5)
+
 [Service]
 Type=simple
-# Universal: wait only for real audio device presence
-# (HID is OPTIONAL, so we do NOT block for it.)
+
+# Environment variables for paths and user
+Environment=RUNASUSER=svxlink
+Environment=STATEDIR=/var/lib/svxlink
+Environment=CFGFILE=/etc/svxlink/svxlink.conf
+Environment=LOGFILE=/var/log/svxlink.log
+EnvironmentFile=/etc/default/svxlink
+UMask=0002
+
+# Ensure log file exists and has correct permissions
+ExecStartPre=/bin/bash -c ' \
+    if [[ "${LOGFILE}" = /* ]]; then \
+        touch "${LOGFILE}"; \
+        chmod u+w "${LOGFILE}"; \
+        chown ${RUNASUSER}:$(id -gn ${RUNASUSER}) "${LOGFILE}"; \
+    fi \
+'
+
+# Ensure state directory exists and has correct permissions
+ExecStartPre=/bin/bash -c ' \
+    mkdir -m0775 -p "${STATEDIR}"; \
+    chmod -R u+rwX "${STATEDIR}"; \
+    chown -R ${RUNASUSER}:$(id -gn ${RUNASUSER}) "${STATEDIR}"; \
+'
+
+# Universal pre-check for any USB audio device
 ExecStartPre=/bin/bash -c ' \
     echo "Waiting for audio device..."; \
     for i in {1..10}; do \
@@ -43,18 +69,22 @@ ExecStartPre=/bin/bash -c ' \
     done; \
     echo "Warning: No USB audio detected; continuing anyway."; \
 '
-# No HID dependencies, no TTY, no blocking
-StandardInput=null
-ExecStart=/usr/bin/svxlink \
-    --config=/etc/svxlink/svxlink.conf \
-    --logfile=/var/log/svxlink.log \
-    --runasuser=svxlink
+
+# Main SvxLink execution
+ExecStart=/usr/bin/svxlink --logfile=${LOGFILE} --config=${CFGFILE} --runasuser=${RUNASUSER}
+
+# Optional stop/reload commands
+ExecStopPost=/usr/bin/svxlink --config=${CFGFILE} --runasuser=${RUNASUSER} --reset
+ExecReload=/bin/kill -s HUP $MAINPID
+
+# General service settings
 Restart=on-failure
-RestartSec=3
-WorkingDirectory=/etc/svxlink
-# Safe timeout - not too long, not too short
+Nice=-10
 TimeoutStartSec=90
 TimeoutStopSec=10
+LimitCORE=infinity
+WorkingDirectory=/etc/svxlink
+
 [Install]
 WantedBy=multi-user.target
 EOL
