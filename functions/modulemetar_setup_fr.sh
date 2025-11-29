@@ -7,6 +7,17 @@ whiptail --title "Metar Info" --defaultno --yesno "Voulez-vous configurer ce mod
     then
         sleep 1
     selected=$(whiptail --title "Metar Info" --scrolltext --checklist "Choisir l'aéroports: Selectionner dans la liste" 24 78 17 \
+        "CYYZ" "Toronto Pearson" OFF \
+        "CYVR" "Vancouver International" OFF \
+        "CYUL" "Montreal-Trudeau" OFF \
+        "CYEG" "Edmonton International" OFF \
+        "CYYC" "Calgary International" OFF \
+        "CYHZ" "Halifax Stanfield" OFF \
+        "CYOW" "Ottawa Macdonald-Cartier" OFF \
+        "CYQB" "Quebec City Jean Lesage" OFF \
+        "CYYT" "St. John's International" OFF \
+        "CYWG" "Winnipeg James Armstrong Richardson" OFF \
+        "CYXU" "London International" OFF \
         "LFPG" "Paris Charles de Gaulle" ON \
         "LFPO" "Paris Orly" OFF \
         "LFOB" "Paris Beauvais" OFF \
@@ -33,6 +44,17 @@ whiptail --title "Metar Info" --defaultno --yesno "Voulez-vous configurer ce mod
         sed -i "s/AIRPORTS=.*/AIRPORTS=$selected/g"  /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
         sleep 5
     specific_airport=$(whiptail --title "Metar Info" --radiolist "SVP un code ICAO unique pour un aéroport par défaut: " 24 78 17 \
+        "CYYZ" "Toronto Pearson" OFF \
+        "CYVR" "Vancouver International" OFF \
+        "CYUL" "Montreal-Trudeau" OFF \
+        "CYEG" "Edmonton International" OFF \
+        "CYYC" "Calgary International" OFF \
+        "CYHZ" "Halifax Stanfield" OFF \
+        "CYOW" "Ottawa Macdonald-Cartier" OFF \
+        "CYQB" "Quebec City Jean Lesage" OFF \
+        "CYYT" "St. John's International" OFF \
+        "CYWG" "Winnipeg James Armstrong Richardson" OFF \
+        "CYXU" "London International" OFF \
         "LFPG" "Paris Charles de Gaulle" OFF \
         "LFPO" "Paris Orly" OFF \
         "LFOB" "Paris Beauvais" OFF \

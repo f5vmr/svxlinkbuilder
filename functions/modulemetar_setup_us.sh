@@ -7,7 +7,18 @@ whiptail --title "Metar Info" --defaultno --yesno "Do you wish to configure this
     then
         sleep 1
     selected=$(whiptail --title "Metar Info" --checklist "Choose which Airports: You can change them in the Dashboard" 24 78 17 \
-        "KAIH" "Washington Dulles" ON \
+        "CYYZ" "Toronto Pearson" OFF \
+        "CYVR" "Vancouver International" OFF \
+        "CYUL" "Montreal-Trudeau" OFF \
+        "CYEG" "Edmonton International" OFF \
+        "CYYC" "Calgary International" OFF \
+        "CYHZ" "Halifax Stanfield" OFF \
+        "CYOW" "Ottawa Macdonald-Cartier" OFF \
+        "CYQB" "Quebec City Jean Lesage" OFF \
+        "CYYT" "St. John's International" OFF \
+        "CYWG" "Winnipeg James Armstrong Richardson" OFF \
+        "CYXU" "London International" OFF \
+        "KAIH" "Washington Dulles" OFF \
         "KATL" "Hartsfield-Jackson Atlanta" OFF \
         "KAUS" "Austin-Bergstrom" OFF \
         "KBNA" "Nashville International" OFF \
@@ -45,6 +56,17 @@ whiptail --title "Metar Info" --defaultno --yesno "Do you wish to configure this
         sed -i "s/AIRPORTS=.*/AIRPORTS=$selected/g"  /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
     sleep 5    
     specific_airport=$(whiptail --title "Metar Info" --radiolist "Please specify an ICAO code for a default airport: " 24 78 17 \
+        "CYYZ" "Toronto Pearson" OFF \
+        "CYVR" "Vancouver International" OFF \
+        "CYUL" "Montreal-Trudeau" OFF \
+        "CYEG" "Edmonton International" OFF \
+        "CYYC" "Calgary International" OFF \
+        "CYHZ" "Halifax Stanfield" OFF \
+        "CYOW" "Ottawa Macdonald-Cartier" OFF \
+        "CYQB" "Quebec City Jean Lesage" OFF \
+        "CYYT" "St. John's International" OFF \
+        "CYWG" "Winnipeg James Armstrong Richardson" OFF \
+        "CYXU" "London International" OFF \
         "KAIH" "Washington Dulles" OFF \
         "KATL" "Hartsfield-Jackson Atlanta" OFF \
         "KAUS" "Austin-Bergstrom" OFF \
