@@ -27,7 +27,18 @@ whiptail --title "Metar Info" --defaultno --yesno "Voulez-vous configurer ce mod
         "LFST" "Strasbourg" OFF \
         "LFOT" "Tours Val de Loire" OFF \
         "LFSL" "Brive Souillac" OFF \
-        "LFBE" "Bergerac" OFF 3>&1 1>&2 2>&3)
+        "LFBE" "Bergerac" OFF \
+        "CYYZ" "Toronto Pearson" OFF \
+        "CYVR" "Vancouver International" OFF \
+        "CYUL" "Montreal-Trudeau" OFF \
+        "CYEG" "Edmonton International" OFF \
+        "CYYC" "Calgary International" OFF \
+        "CYHZ" "Halifax Stanfield" OFF \
+        "CYOW" "Ottawa Macdonald-Cartier" OFF \
+        "CYQB" "Quebec City Jean Lesage" OFF \
+        "CYYT" "St. John's International" OFF \
+        "CYWG" "Winnipeg James Armstrong Richardson" OFF \
+        "CYXU" "London International" OFF 3>&1 1>&2 2>&3)
         selected=$(echo "$selected" | sed 's/"//g')
         selected=$(echo "$selected" | tr ' ' ',')
         sed -i "s/AIRPORTS=.*/AIRPORTS=$selected/g"  /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
@@ -53,7 +64,18 @@ whiptail --title "Metar Info" --defaultno --yesno "Voulez-vous configurer ce mod
         "LFST" "Strasbourg" OFF \
         "LFOT" "Tours Val de Loire" OFF \
         "LFSL" "Brive Souillac" OFF \
-        "LFBE" "Bergerac" OFF 3>&1 1>&2 2>&3)
+        "LFBE" "Bergerac" OFF \
+        "CYYZ" "Toronto Pearson" OFF \
+        "CYVR" "Vancouver International" OFF \
+        "CYUL" "Montreal-Trudeau" OFF \
+        "CYEG" "Edmonton International" OFF \
+        "CYYC" "Calgary International" OFF \
+        "CYHZ" "Halifax Stanfield" OFF \
+        "CYOW" "Ottawa Macdonald-Cartier" OFF \
+        "CYQB" "Quebec City Jean Lesage" OFF \
+        "CYYT" "St. John's International" OFF \
+        "CYWG" "Winnipeg James Armstrong Richardson" OFF \
+        "CYXU" "London International" OFF 3>&1 1>&2 2>&3)
         specific_airport=$(echo "$specific_airport" | sed 's/"//g')
         sed -i "s/\STARTDEFAULT=.*/STARTDEFAULT=$specific_airport/g" /etc/svxlink/svxlink.d/ModuleMetarInfo.conf
         echo -e "$(date)" "${GREEN} $selected Aèroport inclus par défaut $specific_airport ${NORMAL}" | sudo tee -a /var/log/install.log  
