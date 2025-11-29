@@ -1,7 +1,7 @@
 #!/bin/bash
 function callsign {
 get_CallVar() {
-    call=$(whiptail --inputbox "Inserisci il moniativo del node" 8 78 3>&1 1>&2 2>&3)
+    call=$(whiptail --inputbox "Inserisci il nominativo del nodo" 8 78 3>&1 1>&2 2>&3)
     call="${call^^}"  # Uppercase
     echo -e "${CYAN}$call${WHITE}" | sudo tee -a /var/log/install.log 
     
@@ -12,7 +12,7 @@ while true; do
     ## Check if input is empty
     if [ -z "$user_input" ]
     then
-        whiptail --msgbox "Il nominativo del nodo non può essere vuoto. Prova di nuovo." 8 78
+        whiptail --msgbox "Il nominativo del nodo non può essere vuoto. Riprova." 8 78
     else
         ## If input is not empty, break the loop
         break
