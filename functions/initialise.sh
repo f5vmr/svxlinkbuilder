@@ -20,6 +20,44 @@ WHITE='\033[0;37m' # normal
 NORMAL='\033[0m' # normal
 locale=""
 lang=""
+## Replace default svxlink.service everytime with our modified version
+echo -e "$(date)" "${BLUE} #### Replacing svxlink.service with modified version #### ${NORMAL}" | sudo tee -a /var/log/install.log
+SERVICE_FILE="/usr/lib/systemd/system/svxlink.service"
+if [ -f "$SERVICE_FILE" ]; then
+    sudo rm -f "$SERVICE_FILE"
+fi
+sudo tee "$SERVICE_FILE" > /dev/null <<EOL
+[Unit]
+Description=SvxLink repeater control (Universal CM108 / Any Node)
+After=network.target sound.target systemd-udev-settle.service
+Wants=systemd-udev-settle.service
+[Service]
+Type=simple
+# Universal: wait only for real audio device presence
+# (HID is OPTIONAL, so we do NOT block for it.)
+ExecStartPre=/bin/bash -c ' \
+    echo "Waiting for audio device..."; \
+    for i in {1..10}; do \
+        if aplay -l 2>/dev/null | grep -qi "USB Audio"; then exit 0; fi; \
+        sleep 1; \
+    done; \
+    echo "Warning: No USB audio detected; continuing anyway."; \
+'
+# No HID dependencies, no TTY, no blocking
+StandardInput=null
+ExecStart=/usr/bin/svxlink \
+    --config=/etc/svxlink/svxlink.conf \
+    --logfile=/var/log/svxlink.log \
+    --runasuser=svxlink
+Restart=on-failure
+RestartSec=3
+WorkingDirectory=/etc/svxlink
+# Safe timeout - not too long, not too short
+TimeoutStartSec=90
+TimeoutStopSec=10
+[Install]
+WantedBy=multi-user.target
+EOL
 ## Create svxlink-node.service if it doesn't exist
 SERVICE_FILE="/etc/systemd/system/svxlink-node.service"
 if [ ! -f "$SERVICE_FILE" ]; then
@@ -53,14 +91,13 @@ Environment=NODE_ENV=production
 [Install]
 WantedBy=multi-user.target
 EOL
-
     echo -e "$(date)" "${BLUE} #### systemd svxlink-node.service #### ${NORMAL}" | sudo tee -a /var/log/install.log 
 
     sudo systemctl daemon-reload
     sudo systemctl enable --now svxlink-node.service
     sudo systemctl start svxlink-node.service
 else
-     "$(date)" "${BLUE} #### svxlink-node.service already exists #### ${NORMAL}" | sudo tee -a /var/log/install.log 
+    echo -e "$(date)" "${BLUE} #### svxlink-node.service already exists #### ${NORMAL}" | sudo tee -a /var/log/install.log 
 
     # Optional: restart it to ensure it's running
     sudo systemctl restart svxlink-node.service
