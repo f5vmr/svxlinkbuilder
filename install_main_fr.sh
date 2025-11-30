@@ -87,6 +87,9 @@ chmod 0440 "$SUDOERS_FILE"
     sudo cp -f /home/pi/svxlinkbuilder/addons/node_info.json /etc/svxlink/node_info.json
  	sudo cp -f /home/pi/svxlinkbuilder/resetlog.sh /home/pi/scripts/resetlog.sh
 	sudo cp -f /home/pi/svxlinkbuilder/dtmf_setup.sh /home/pi/scripts/dtmf_setup.sh
+	echo -e "Fixing ownership and permissions on /etc/svxlink..." | sudo tee -a /var/log/install.log
+	sudo chown -R svxlink:svxlink /etc/svxlink
+	sudo chmod -R 775 /etc/svxlink
  	(sudo crontab -l 2>/dev/null; echo "59 23 * * * /home/pi/scripts/resetlog.sh " ; echo "@reboot /home/pi/scripts/dtmf_setup.sh") | sudo crontab -
 	sudo mkdir -p /usr/share/svxlink/events.d/local
 	sudo cp /usr/share/svxlink/events.d/RepeaterLogicType.tcl /usr/share/svxlink/events.d/local/
