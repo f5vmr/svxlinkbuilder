@@ -48,28 +48,6 @@ Environment=STATEDIR=/var/lib/svxlink
 UMask=0002
 WorkingDirectory=/etc/svxlink
 
-# ---- Clean/safe variable fallback ----
-ExecStartPre=/bin/bash -c '
-    : "${RUNASUSER:=svxlink}";
-    : "${CFGFILE:=/etc/svxlink/svxlink.conf}";
-    : "${LOGFILE:=/var/log/svxlink.log}";
-    : "${STATEDIR:=/var/lib/svxlink}";
-'
-
-# ---- Ensure log file exists ----
-ExecStartPre=/bin/bash -c '
-    touch "$LOGFILE"
-    chmod 664 "$LOGFILE"
-    chown "$RUNASUSER":"$(id -gn "$RUNASUSER")" "$LOGFILE"
-'
-
-# ---- Ensure state dir exists ----
-ExecStartPre=/bin/bash -c '
-    mkdir -p "$STATEDIR"
-    chmod 775 "$STATEDIR"
-    chown -R "$RUNASUSER":"$(id -gn "$RUNASUSER")" "$STATEDIR"
-'
-
 # ---- Main program ----
 ExecStart=/usr/bin/svxlink --logfile="$LOGFILE" --config="$CFGFILE" --runasuser="$RUNASUSER"
 
@@ -86,6 +64,8 @@ LimitCORE=infinity
 WantedBy=multi-user.target
 
 EOL
+sudo touch /var/log/svxlink.log
+sudo chown svxlink:svxlink /var/log/svxlink.log
 ## Create svxlink-node.service if it doesn't exist
 SERVICE_FILE="/etc/systemd/system/svxlink-node.service"
 if [ ! -f "$SERVICE_FILE" ]; then
