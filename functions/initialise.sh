@@ -28,7 +28,7 @@ if [ -f "$SERVICE_FILE" ]; then
 fi
 sudo tee "$SERVICE_FILE" > /dev/null <<EOL
 [Unit]
-Description=SvxLink repeater control software (Universal CM108 / Any Node)
+Description=SvxLink repeater control software (Universal)
 After=network.target sound.target systemd-udev-settle.service
 Wants=systemd-udev-settle.service
 Documentation=man:svxlink(1) man:svxlink.conf(5)
@@ -36,57 +36,55 @@ Documentation=man:svxlink(1) man:svxlink.conf(5)
 [Service]
 Type=simple
 
-# Environment variables for paths and user
+# Load admin overrides if present
+EnvironmentFile=-/etc/default/svxlink
+
+# Hard defaults — used if the file above is missing or empty
 Environment=RUNASUSER=svxlink
-Environment=STATEDIR=/var/lib/svxlink
 Environment=CFGFILE=/etc/svxlink/svxlink.conf
 Environment=LOGFILE=/var/log/svxlink.log
-EnvironmentFile=/etc/default/svxlink
+Environment=STATEDIR=/var/lib/svxlink
+
 UMask=0002
+WorkingDirectory=/etc/svxlink
 
-# Ensure log file exists and has correct permissions
-ExecStartPre=/bin/bash -c ' \
-    if [[ "${LOGFILE}" = /* ]]; then \
-        touch "${LOGFILE}"; \
-        chmod u+w "${LOGFILE}"; \
-        chown ${RUNASUSER}:$(id -gn ${RUNASUSER}) "${LOGFILE}"; \
-    fi \
+# ---- Clean/safe variable fallback ----
+ExecStartPre=/bin/bash -c '
+    : "${RUNASUSER:=svxlink}";
+    : "${CFGFILE:=/etc/svxlink/svxlink.conf}";
+    : "${LOGFILE:=/var/log/svxlink.log}";
+    : "${STATEDIR:=/var/lib/svxlink}";
 '
 
-# Ensure state directory exists and has correct permissions
-ExecStartPre=/bin/bash -c ' \
-    mkdir -m0775 -p "${STATEDIR}"; \
-    chmod -R u+rwX "${STATEDIR}"; \
-    chown -R ${RUNASUSER}:$(id -gn ${RUNASUSER}) "${STATEDIR}"; \
+# ---- Ensure log file exists ----
+ExecStartPre=/bin/bash -c '
+    touch "$LOGFILE"
+    chmod 664 "$LOGFILE"
+    chown "$RUNASUSER":"$(id -gn "$RUNASUSER")" "$LOGFILE"
 '
 
-# Universal pre-check for any USB audio device
-ExecStartPre=/bin/bash -c ' \
-    echo "Waiting for audio device..."; \
-    for i in {1..10}; do \
-        if aplay -l 2>/dev/null | grep -qi "USB Audio"; then exit 0; fi; \
-        sleep 1; \
-    done; \
-    echo "Warning: No USB audio detected; continuing anyway."; \
+# ---- Ensure state dir exists ----
+ExecStartPre=/bin/bash -c '
+    mkdir -p "$STATEDIR"
+    chmod 775 "$STATEDIR"
+    chown -R "$RUNASUSER":"$(id -gn "$RUNASUSER")" "$STATEDIR"
 '
 
-# Main SvxLink execution
-ExecStart=/usr/bin/svxlink --logfile=${LOGFILE} --config=${CFGFILE} --runasuser=${RUNASUSER}
+# ---- Main program ----
+ExecStart=/usr/bin/svxlink --logfile="$LOGFILE" --config="$CFGFILE" --runasuser="$RUNASUSER"
 
-# Optional stop/reload commands
-ExecStopPost=/usr/bin/svxlink --config=${CFGFILE} --runasuser=${RUNASUSER} --reset
+ExecStopPost=/usr/bin/svxlink --config="$CFGFILE" --runasuser="$RUNASUSER" --reset
 ExecReload=/bin/kill -s HUP $MAINPID
 
-# General service settings
 Restart=on-failure
 Nice=-10
-TimeoutStartSec=90
+TimeoutStartSec=60
 TimeoutStopSec=10
 LimitCORE=infinity
-WorkingDirectory=/etc/svxlink
 
 [Install]
 WantedBy=multi-user.target
+
 EOL
 ## Create svxlink-node.service if it doesn't exist
 SERVICE_FILE="/etc/systemd/system/svxlink-node.service"
