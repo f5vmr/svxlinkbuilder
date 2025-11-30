@@ -49,9 +49,9 @@ UMask=0002
 WorkingDirectory=/etc/svxlink
 
 # ---- Main program ----
-ExecStart=/usr/bin/svxlink --logfile="$LOGFILE" --config="$CFGFILE" --runasuser="$RUNASUSER"
+ExecStart=/usr/bin/svxlink --logfile=${LOGFILE} --config=${CFGFILE} --runasuser=${RUNASUSER}
 
-ExecStopPost=/usr/bin/svxlink --config="$CFGFILE" --runasuser="$RUNASUSER" --reset
+ExecStopPost=/usr/bin/svxlink --config=${CFGFILE} --runasuser=${RUNASUSER} --reset
 ExecReload=/bin/kill -s HUP $MAINPID
 
 Restart=on-failure
@@ -62,8 +62,8 @@ LimitCORE=infinity
 
 [Install]
 WantedBy=multi-user.target
-
 EOL
+## Ensure svxlink.log exists and has correct ownership
 sudo touch /var/log/svxlink.log
 sudo chown svxlink:svxlink /var/log/svxlink.log
 
