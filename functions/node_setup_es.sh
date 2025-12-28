@@ -64,6 +64,7 @@ sed -i "s/AUDIO_CHANNEL=0/AUDIO_CHANNEL=$channel_setting/g" /etc/svxlink/svxlink
         "gpio 17" "usvxcard PTT" OFF \
         "gpio 16" "rf-guru PTT" OFF \
         "gpio 12" "special case PTT" OFF \
+        "gpio GPIO506" "ICS / Fe-Pi PTT" OFF \
         "Personalizado" "Especifique su propio puerto GPIO" OFF 3>&1 1>&2 2>&3)
 
     if [[ "$ptt_pin" == "Custom" ]]; then
@@ -95,6 +96,7 @@ sed -i "s/AUDIO_CHANNEL=0/AUDIO_CHANNEL=$channel_setting/g" /etc/svxlink/svxlink
         "gpio 8" "as COS Pin" OFF \
         "gpio 10" "spotnik COS Pin" OFF \
         "gpio 12" "rf-guru COS" OFF \
+        "gpio 26" "ICS / Fe-Pi COS" OFF \
         "Personalizado" "Especifique su propio puerto GPIO" OFF 3>&1 1>&2 2>&3)
 
     if [[ "$cos_pin" == "Custom" ]]; then

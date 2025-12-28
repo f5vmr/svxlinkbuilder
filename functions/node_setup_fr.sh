@@ -65,6 +65,7 @@ if [[ "$HID" == "false" ]] && [[ "$GPIOD" == "true" ]] && [[ "$card" == "false" 
         "gpio 17" "usvxcard Pin PTT" OFF \
         "gpio 16" "rf-guru Pin PTT" OFF \
         "gpio 12" "specifique PTT" OFF \
+        "gpio GPIO506" "ICS / Fe-Pi PTT" OFF \
         "Personnalisé" "Spécifiez votre propre Port GPIO" OFF 3>&1 1>&2 2>&3)
 
     if [[ "$ptt_pin" == "Custom" ]]; then
@@ -96,6 +97,7 @@ if [[ "$HID" == "false" ]] && [[ "$GPIOD" == "true" ]] && [[ "$card" == "false" 
         "gpio 8" "comme COS Pin" OFF \
         "gpio 10" "spotnik COS Pin" OFF \
         "gpio 12" "rf-guru COS" OFF \
+        "gpio 26" "ICS / Fe-Pi COS" OFF \
         "Personnalisé" "Spécifiez votre propre port GPIO" OFF 3>&1 1>&2 2>&3)
 
     if [[ "$cos_pin" == "Custom" ]]; then

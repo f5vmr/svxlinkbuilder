@@ -8,6 +8,7 @@ sound_cards=$(cat /proc/asound/cards)
 usb_sound_card_detected=false
 seeed_sound_card_detected=false
 other_sound_card_detected=false
+fepi_sound_card_detected=false
 
 # Check for USB sound card
 if echo "$sound_cards" | grep -q 'USB-Audio'; then
@@ -22,7 +23,11 @@ if echo "$sound_cards" | grep -q 'seeed-2mic-voicecard'; then
     echo "$sound_cards" | grep -A 1 'seeed-2mic-voicecard'
     seeed_sound_card_detected=true
 fi
-
+# Check for Fe-Pi / ICS repeater sound card
+if echo "$sound_cards" | grep -Eq 'Fe-Pi|FePi|sndrpihifiberry|HifiBerry'; then
+    echo "Placa Fe-Pi / ICS detetada:" | sudo tee -a /var/log/install.log > . /dev/null
+    echo "$sound_cards" | grep -E 'Fe-Pi|FePi|sndrpihifiberry|HifiBerry'
+    fepi_sound_card_detected=true
 # Check for any other sound cards not explicitly identified by name and not Loopback
 if echo "$sound_cards" | grep -q '[0-9] \[' && ! echo "$sound_cards" | grep -q 'Loopback' && ! $usb_sound_card_detected && ! $seeed_sound_card_detected; then
     echo "Placa Generica detetada:" | sudo tee -a /var/log/install.log > /dev/null
@@ -112,6 +117,13 @@ GPIOD=true
 card=true
 plughw_setting="seeed2micvoicecard,0"
 channel_setting="1"
+}
+function fepi_sound_card_detected {
+HID=false
+GPIOD=true
+card=true
+plughw_setting="FePi,0"
+channel_setting="0"
 }
 function  other_sound_card_detected {
 HID=false
