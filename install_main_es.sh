@@ -118,11 +118,7 @@ chmod 0440 "$SUDOERS_FILE"
  	sudo sed -i "s/MYCALL/$CALL/g" /etc/update-motd.d/10-uname
  	sudo chmod 0775 /etc/update-motd.d/10-uname
 
- # clear
-	echo -e "$(date)" "${YELLOW} #### Cambiar el sufijo del archivo de registro ${NORMAL}" | sudo tee -a /var/log/install.log 
-
- 		sudo sed -i '/^LOGFILE=/ { /[^.log]$/ s/$/.log/ }' /etc/default/svxlink
-
+ 
 	#### INSTALLING DASHBOARD ####
  # clear
 	cd /home/pi

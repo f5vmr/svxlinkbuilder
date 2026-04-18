@@ -118,12 +118,7 @@ chmod 0440 "$SUDOERS_FILE"
  	sudo sed -i "s/MYCALL/$CALL/g" /etc/update-motd.d/10-uname
  	sudo chmod 0775 /etc/update-motd.d/10-uname
 
- # clear
-	echo -e "$(date)" "${YELLOW} #### Modifica del suffisso del file di log #### ${NORMAL}" | sudo tee -a /var/log/install.log 
-
- 	sudo sed -i '/^LOGFILE=/ { /[^.log]$/ s/$/.log/ }' /etc/default/svxlink
-
-	#### INSTALLING DASHBOARD ####
+ 	#### INSTALLING DASHBOARD ####
  # clear
 	cd /home/pi
 	echo -e "$(date)" "${YELLOW} #### Verifica degli indirizzi IP #### ${NORMAL}" | sudo tee -a /var/log/install.log 
