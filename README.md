@@ -1,4 +1,4 @@
-# SvxlinkBuilder
+# SvxlinkBuilder - soon to be deprecated - 
 <h1>Menu build for Raspberry Pi - Repeater or Hotspot node. EchoLink MetarInfo and SVXReflector Options</h1>
 <h2> Pour l'instruction en Français, README_FR.md. Para instrucción en español README_ES.md. Per le istruzioni in Italiano README_IT.md.</h2>
 <h3>Introduction</h3>
